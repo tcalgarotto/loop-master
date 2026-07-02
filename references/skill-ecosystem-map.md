@@ -188,29 +188,19 @@ Entrega truncada pelo model?
 
 ---
 
-## O que o init instala (importante)
+## O que o init instala (v2.4 — tudo por padrão)
 
-| Componente | Vem no download do loop-master? | Instalado no init? |
-|------------|--------------------------------|--------------------|
-| **loop-master** (este pacote) | Sim — clone/copy | Sim |
-| **impeccable** | Não — repo separado | **Padrão** em `init.sh` (se ausente) |
-| **ui-ux-pro-max** | Não | **Padrão** em `init.sh` (se ausente) |
-| **taste-skill, caveman, claude-mem, motion** | Não | Só com `--skills` ou quiz no `/loop-master init` |
-| **security-review, bugbot** | Não — nativos Cursor | Já disponíveis; orchestrator spawna |
-| **Scripts red team do projeto** | Não — cada repo define | Detectados em runtime se existirem |
+| Componente | Instalado no init? |
+|------------|-------------------|
+| **loop-master** | Sim |
+| **impeccable, ui-ux-pro-max** | Sim (se ausente) |
+| **taste-skill, caveman, claude-mem, motion** | **Sim (padrão v2.4)** |
+| **design, design-system, ui-styling, brand, slides, banner-design** | Symlink se presentes em `.agents/skills/` |
+| **security-review, bugbot** | Nativos Cursor |
 
-**Orquestração:** loop-master **não embute** o código das skills externas. Ele **lê** o `SKILL.md` instalado e **ordena** invocações por `minor_cycle.step` (ver matriz abaixo).
+Design routing completo: `references/design-skills-routing-table.md`
 
-## Dependências opcionais (init instala se ausente e selecionadas)
-
-| Skill | Comando init | Verificação |
-|-------|--------------|-------------|
-| impeccable | `npx impeccable install --providers=cursor --scope=project` | `.cursor/skills/impeccable/SKILL.md` |
-| ui-ux-pro-max | `npx ui-ux-pro-max-cli init --ai cursor` | `.cursor/skills/ui-ux-pro-max/SKILL.md` |
-| taste-skill | `npx skills add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend` | skill em skills path |
-| caveman | `curl -fsSL .../install.sh \| bash -- --only cursor` | `.cursor/skills/caveman` ou rules |
-| claude-mem | `npx claude-mem install` + `npx claude-mem start` | plugin em `~/.claude/plugins/.../thedotmack` |
-| motion | `npm install motion` (no frontend) | `frontend/package.json` + `.cursor/skills/design-taste-frontend` ou project |
+Override: `init.sh --skip-skills` ou `--skills a,b` (subset)
 
 **Paths verificados (exemplo multi-skill repo):**
 

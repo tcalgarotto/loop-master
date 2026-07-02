@@ -78,9 +78,27 @@
         }
       }
     },
+    "quiz_round": { "type": "integer", "minimum": 0, "maximum": 6 },
+    "quiz_complete": { "type": "boolean", "default": false },
+    "index_doc": { "type": "string", "default": "docs/LOOP-MASTER-INDEX.md" },
+    "memory_sync": {
+      "type": "object",
+      "properties": {
+        "claude_mem": { "enum": ["pending", "installed", "running", "failed"] },
+        "last_sync_at": { "type": ["string", "null"], "format": "date-time" },
+        "last_search_query": { "type": "string" },
+        "observations_captured": { "type": "integer" }
+      }
+    },
     "quiz_answers": {
       "type": "object",
       "properties": {
+        "round_1": { "type": "object" },
+        "round_2": { "type": "object" },
+        "round_3": { "type": "object" },
+        "round_4": { "type": "object" },
+        "round_5": { "type": "object" },
+        "round_6": { "type": "object" },
         "goal": { "type": "string" },
         "scope": { "enum": ["backend", "frontend", "fullstack", "infra", "docs"] },
         "delivery_bar": { "enum": ["mvp", "production_100", "go_live"] },

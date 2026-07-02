@@ -227,3 +227,39 @@ Agente novo sem chat history:
 2. Executar **um** minor step
 3. Re-arm
 4. Não perguntar ao usuário o que já está no JSON (exceto `blocked_human`)
+
+---
+
+## Dynamic workflows (AGI-style)
+
+Equivalente operacional ao loop dinâmico do Claude Code: o orchestrator **decide o próximo passo** com base em estado, não em cron fixo.
+
+### Princípios
+
+| Princípio | Implementação |
+|-----------|---------------|
+| **Self-pacing** | Após cada tick, re-arm 45–90s OU watcher de evento (CI, git push, file change) |
+| **Branching** | `minor_cycle.step` transiciona por findings — audit→fix sem humano |
+| **Parallel fan-out** | Até 4 workers + 2 verifiers por tick |
+| **Skill routing** | design-skills-routing-table + skill-ecosystem-map |
+| **Memory hydrate** | L1 JSON + claude-mem search antes de agir |
+| **Handoff** | `next_prompt` copiável — nova sessão retoma sem contexto chat |
+
+### Watcher opcional (event-driven)
+
+Se CI/deploy/file-change relevante:
+
+```bash
+# Exemplo: acordar quando CI termina (projeto define script)
+watch-ci-and-echo-sentinel.sh AGENT_LOOP_WAKE_<NAME> '{"prompt":"..."}'
+```
+
+Fallback sempre: `arm-dynamic-loop.sh --seconds 45`.
+
+### Fluxo contínuo até 100%
+
+```
+tick N → update L1/L2/INDEX → next_prompt → arm-dynamic-loop → tick N+1
+         ↑___________________________|
+              até overall_pct === 100
+```

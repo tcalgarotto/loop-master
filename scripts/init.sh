@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
-# loop-master v2 — project bootstrap installer
-# Usage: ./scripts/init.sh [--skills impeccable,ui-ux-pro-max] [--skip-skills]
+# loop-master v2.4 — full project bootstrap (zero-config default)
+# Usage: ./scripts/init.sh [--skip-skills] [--skills a,b,c] [--preserve-context]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_ROOT="$(cd "$SKILL_ROOT/../../.." 2>/dev/null && pwd || pwd)"
 
-# If run from ~/.cursor/skills/loop-master, project root is cwd
 if [[ -f "$(pwd)/package.json" ]] || [[ -f "$(pwd)/Makefile" ]] || [[ -d "$(pwd)/.git" ]]; then
   PROJECT_ROOT="$(pwd)"
 fi
 
+# Full ecosystem — installed by default unless --skip-skills or custom --skills
+DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion"
 SKILLS_CSV=""
 SKIP_SKILLS=false
 PRESERVE_CONTEXT=false
@@ -23,26 +24,39 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --skills) SKILLS_CSV="$2"; shift 2 ;;
     --skip-skills) SKIP_SKILLS=true; shift ;;
+    --full) shift ;; # legacy alias — full is now default
     --preserve-context|--update-mode) PRESERVE_CONTEXT=true; shift ;;
     --goal) GOAL="$2"; shift 2 ;;
     --plan) PLAN_DOC="$2"; shift 2 ;;
     --progress-file) PROGRESS_FILE="$2"; shift 2 ;;
     -h|--help)
-      echo "Usage: init.sh [--skills a,b,c] [--skip-skills] [--goal \"...\"] [--plan docs/PLAN.md] [--progress-file path]"
+      cat <<'HELP'
+Usage: init.sh [options]
+
+Default (zero-config): install full skill ecosystem + claude-mem + symlinks + INDEX stub.
+
+Options:
+  --skills a,b,c     Install only listed skills (overrides default full set)
+  --skip-skills      Skip all optional skill installs
+  --preserve-context Keep existing progress JSON (used by update.sh)
+  --goal "..."       Pre-fill north-star goal
+  --plan path        Pre-fill plan_doc path
+  --progress-file    Custom progress JSON path
+HELP
       exit 0
       ;;
     *) echo "Unknown arg: $1"; exit 1 ;;
   esac
 done
 
-echo "==> loop-master init"
+echo "==> loop-master init (v2.4 full bootstrap)"
 echo "    Project: $PROJECT_ROOT"
 echo "    Skill pack: $SKILL_ROOT"
 
 mkdir -p "$PROJECT_ROOT/.cursor"
 mkdir -p "$PROJECT_ROOT/docs"
 
-# Link or copy loop-master into project .cursor/skills if not already there
+# Link loop-master into project .cursor/skills if running from global clone
 if [[ "$SKILL_ROOT" != *"/.cursor/skills/loop-master"* ]] && [[ "$SKILL_ROOT" != *"/.agents/skills/loop-master"* ]]; then
   mkdir -p "$PROJECT_ROOT/.cursor/skills"
   if [[ ! -e "$PROJECT_ROOT/.cursor/skills/loop-master" ]]; then
@@ -50,9 +64,12 @@ if [[ "$SKILL_ROOT" != *"/.cursor/skills/loop-master"* ]] && [[ "$SKILL_ROOT" !=
       cp -r "$SKILL_ROOT" "$PROJECT_ROOT/.cursor/skills/loop-master"
     echo "    Linked loop-master → .cursor/skills/loop-master"
   fi
+elif [[ -d "$PROJECT_ROOT/.agents/skills/loop-master" ]] && [[ ! -e "$PROJECT_ROOT/.cursor/skills/loop-master" ]]; then
+  mkdir -p "$PROJECT_ROOT/.cursor/skills"
+  ln -sfn ../../.agents/skills/loop-master "$PROJECT_ROOT/.cursor/skills/loop-master" 2>/dev/null || true
+  echo "    Linked .agents/skills/loop-master → .cursor/skills/loop-master"
 fi
 
-# Optional skills
 install_skill() {
   local name="$1"
   if $SKIP_SKILLS; then return 0; fi
@@ -61,7 +78,9 @@ install_skill() {
       if [[ ! -f "$PROJECT_ROOT/.cursor/skills/impeccable/SKILL.md" ]]; then
         echo "    Installing impeccable..."
         (cd "$PROJECT_ROOT" && npx --yes impeccable install --providers=cursor --scope=project 2>/dev/null) || \
-          echo "    WARN: impeccable install failed — run manually: npx impeccable install"
+          echo "    WARN: impeccable install failed — run: npx impeccable install"
+      else
+        echo "    ok impeccable"
       fi
       ;;
     ui-ux-pro-max)
@@ -69,28 +88,57 @@ install_skill() {
         echo "    Installing ui-ux-pro-max..."
         (cd "$PROJECT_ROOT" && npx --yes ui-ux-pro-max-cli init --ai cursor 2>/dev/null) || \
           echo "    WARN: uipro init failed — run: npx ui-ux-pro-max-cli init --ai cursor"
+      else
+        echo "    ok ui-ux-pro-max"
       fi
       ;;
     taste-skill)
-      if ! command -v npx &>/dev/null; then return 0; fi
-      echo "    Installing taste-skill (design-taste-frontend)..."
-      npx --yes skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend" 2>/dev/null || \
-        echo "    WARN: taste-skill install failed"
+      if [[ ! -f "$PROJECT_ROOT/.cursor/skills/design-taste-frontend/SKILL.md" ]] && \
+         [[ ! -f "$PROJECT_ROOT/.agents/skills/design-taste-frontend/SKILL.md" ]]; then
+        echo "    Installing taste-skill (design-taste-frontend)..."
+        (cd "$PROJECT_ROOT" && npx --yes skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend" 2>/dev/null) || \
+          echo "    WARN: taste-skill install failed"
+      else
+        echo "    ok taste-skill"
+      fi
       ;;
     caveman)
-      echo "    Installing caveman (cursor)..."
-      curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh 2>/dev/null | bash -s -- --only cursor 2>/dev/null || \
-        echo "    WARN: caveman install failed"
+      if [[ ! -f "$PROJECT_ROOT/.cursor/skills/caveman/SKILL.md" ]] && \
+         [[ ! -f "$PROJECT_ROOT/.agents/skills/caveman/SKILL.md" ]]; then
+        echo "    Installing caveman..."
+        curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh 2>/dev/null | bash -s -- --only cursor 2>/dev/null || \
+          echo "    WARN: caveman install failed"
+      else
+        echo "    ok caveman"
+      fi
       ;;
     claude-mem)
       echo "    Installing claude-mem..."
       (cd "$PROJECT_ROOT" && npx --yes claude-mem install 2>/dev/null) || \
-        echo "    WARN: claude-mem install failed"
+        echo "    WARN: claude-mem install failed — run: npx claude-mem install"
+      if command -v npx &>/dev/null; then
+        echo "    Starting claude-mem worker..."
+        (cd "$PROJECT_ROOT" && npx --yes claude-mem start 2>/dev/null) || \
+          echo "    WARN: claude-mem start failed — run: npx claude-mem start"
+      fi
       ;;
     motion)
       if [[ -f "$PROJECT_ROOT/frontend/package.json" ]]; then
-        echo "    Adding motion to frontend..."
-        (cd "$PROJECT_ROOT/frontend" && npm install motion 2>/dev/null) || true
+        if ! grep -q '"motion"' "$PROJECT_ROOT/frontend/package.json" 2>/dev/null; then
+          echo "    Adding motion to frontend..."
+          (cd "$PROJECT_ROOT/frontend" && npm install motion 2>/dev/null) || true
+        else
+          echo "    ok motion (frontend)"
+        fi
+      elif [[ -f "$PROJECT_ROOT/package.json" ]]; then
+        if ! grep -q '"motion"' "$PROJECT_ROOT/package.json" 2>/dev/null; then
+          echo "    Adding motion to project..."
+          (cd "$PROJECT_ROOT" && npm install motion 2>/dev/null) || true
+        else
+          echo "    ok motion"
+        fi
+      else
+        echo "    skip motion (no package.json)"
       fi
       ;;
   esac
@@ -100,17 +148,22 @@ if [[ -n "$SKILLS_CSV" ]]; then
   IFS=',' read -ra SKILL_ARR <<< "$SKILLS_CSV"
   for s in "${SKILL_ARR[@]}"; do install_skill "$(echo "$s" | tr -d ' ')"; done
 else
-  install_skill impeccable
-  install_skill ui-ux-pro-max
+  IFS=',' read -ra SKILL_ARR <<< "$DEFAULT_SKILLS"
+  for s in "${SKILL_ARR[@]}"; do install_skill "$s"; done
 fi
 
-# Progress JSON stub if missing (skip create when preserving context on update)
+# Symlinks for ecosystem skills
+if [[ -x "$SCRIPT_DIR/link-ecosystem-skills.sh" ]]; then
+  bash "$SCRIPT_DIR/link-ecosystem-skills.sh" || true
+fi
+
 PROGRESS="${PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
-# Relative progress paths → under project root
 [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
+INDEX_DOC="$PROJECT_ROOT/docs/LOOP-MASTER-INDEX.md"
+
 if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   SENTINEL="AGENT_LOOP_TICK_$(basename "$PROJECT_ROOT" | tr '[:lower:]' '[:upper:]' | tr -cd 'A-Z0-9_')_$(date +%s | tail -c 5)"
-  TARGET="${GOAL:-Define goal via /loop-master init in Cursor}"
+  TARGET="${GOAL:-Define goal via /loop-master init quiz (Round 1)}"
   PLAN="${PLAN_DOC:-docs/LOOP-MASTER-PLAN.md}"
   rel_pf="${PROGRESS#$PROJECT_ROOT/}"
   cat > "$PROGRESS" <<EOF
@@ -118,15 +171,20 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   "updated_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
   "tick_count": 0,
   "overall_pct": 0,
-  "skill_pack_version": "2.3.0",
+  "skill_pack_version": "2.4.0",
   "progress_file": "$rel_pf",
+  "index_doc": "docs/LOOP-MASTER-INDEX.md",
   "skills_installed": [],
+  "quiz_round": 0,
+  "quiz_complete": false,
+  "memory_sync": { "claude_mem": "pending", "last_sync_at": null },
   "current_phase": "phase-1",
   "target": "$TARGET",
   "plan_doc": "$PLAN",
   "loop_sentinel": "$SENTINEL",
-  "loop_interval_seconds": 240,
+  "loop_interval_seconds": 45,
   "loop_status": "pending_arm",
+  "loop_arm": { "mode": "dynamic", "chain_on_complete": true, "next_wake_seconds": 45 },
   "quiz_answers": {},
   "delivery_contract": {
     "status": "in_progress",
@@ -138,10 +196,10 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   },
   "phases": {
     "phase-1": {
-      "name": "First phase — define in LOOP-MASTER-PLAN.md",
-      "status": "in_progress",
+      "name": "First phase — define in quiz Round 6 + LOOP-MASTER-PLAN.md",
+      "status": "pending",
       "pct": 0,
-      "acceptance_criteria": ["Complete via /loop-master init quiz"]
+      "acceptance_criteria": ["Complete /loop-master init quiz (6 rounds)"]
     }
   },
   "minor_cycle": {
@@ -151,10 +209,11 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
     "gate": "pending",
     "tasks": []
   },
-  "last_iteration": { "agent_summary": "Init script created JSON stub. Run /loop-master init in Cursor for quiz + phases." },
-  "next_actions": ["Run /loop-master init in Cursor Agent", "Complete quiz (AskQuestion)", "Define phases in docs/LOOP-MASTER-PLAN.md"],
-  "context_files": ["docs/LOOP-MASTER-PLAN.md"],
-  "human_blockers": []
+  "last_iteration": { "agent_summary": "Full bootstrap ran. Awaiting /loop-master init quiz (6 rounds)." },
+  "next_actions": ["Complete quiz Round 1 (produto)", "Run verify-pack.sh", "Arm dynamic loop after quiz"],
+  "context_files": ["docs/LOOP-MASTER-PLAN.md", "docs/LOOP-MASTER-INDEX.md"],
+  "human_blockers": [],
+  "archive_summaries": []
 }
 EOF
   echo "    Created $PROGRESS"
@@ -162,51 +221,67 @@ elif $PRESERVE_CONTEXT && [[ -f "$PROGRESS" ]]; then
   echo "    Preserving existing progress JSON (update/preserve mode)"
 fi
 
-# LOOP-MASTER-PLAN stub (only if missing)
 PLAN_PATH="$PROJECT_ROOT/docs/LOOP-MASTER-PLAN.md"
 if [[ ! -f "$PLAN_PATH" ]] && ! $PRESERVE_CONTEXT; then
   cat > "$PLAN_PATH" <<'EOF'
 # Loop Master Plan
 
-> Gerado por `loop-master init`. Edite fases e critérios de aceite.
+> Gerado por `loop-master init`. Fases definidas após quiz (Round 6).
 
 ## North star
 
-_Definir via quiz `/loop-master init`._
+_Definir via quiz Round 1._
 
 ## Fases
 
-| ID | Nome | % | Status | Critérios de aceite |
-|----|------|---|--------|---------------------|
-| phase-1 | Primeira entrega | 0 | in_progress | A definir |
+| ID | Nome | % | Status | Critérios |
+|----|------|---|--------|-----------|
+| phase-1 | Primeira entrega | 0 | ⏳ Pendente | A definir no quiz |
 
 ## Gates
 
 - Cada fase: 100% + audit sem critical/high abertos
 - Entrega final: `overall_pct === 100` + `delivery_contract.complete`
 
-## Skills design (se FE)
+## Design pipeline
 
-- ui-ux-pro-max → design-system/MASTER.md
-- impeccable → shape → craft → critique → polish
-- motion → animate step only
+ui-ux-pro-max → impeccable shape/craft → taste (marketing) → motion → critique → polish
 EOF
   echo "    Created $PLAN_PATH"
 fi
 
-# PRODUCT.md stub (only on fresh init)
+if [[ ! -f "$INDEX_DOC" ]] && ! $PRESERVE_CONTEXT; then
+  cat > "$INDEX_DOC" <<'EOF'
+# Loop Master Index
+
+Legenda: ✅ OK | ⏳ Pendente | 🔮 Futuro | 👤 Human
+
+| Artefato | Status | Path | Notas |
+|----------|--------|------|-------|
+| Progress JSON | ⏳ | `.cursor/loop-master-progress.json` | Handoff L1 entre ticks |
+| Master Plan | ⏳ | `docs/LOOP-MASTER-PLAN.md` | Fases e gates |
+| Product brief | 🔮 | `PRODUCT.md` | Se escopo FE |
+| Design brief | 🔮 | `DESIGN.md` | Se design_surface ≠ none |
+| claude-mem | ⏳ | worker + MCP | Memória L2 cross-session |
+| Skills ecosystem | ⏳ | `.cursor/skills/` | Scan a cada tick |
+| Dynamic loop | 🔮 | `arm-dynamic-loop.sh` | Após quiz + tick 1 |
+
+> Atualizar status a cada tick. Orchestrator mantém este índice sincronizado.
+EOF
+  echo "    Created $INDEX_DOC"
+fi
+
 if ! $PRESERVE_CONTEXT && [[ ! -f "$PROJECT_ROOT/PRODUCT.md" ]] && [[ -d "$PROJECT_ROOT/frontend" || -d "$PROJECT_ROOT/src" ]]; then
   cat > "$PROJECT_ROOT/PRODUCT.md" <<'EOF'
 # Product
 
-- **Audience:** End users of this application (define in /loop-master init quiz)
+- **Audience:** End users (define in quiz Round 1)
 - **Register:** Product UI — restrained, professional
-- **Voice:** Clear, operational (match your locale)
+- **Voice:** Clear, operational
 EOF
   echo "    Created PRODUCT.md stub"
 fi
 
-# Scan and record installed skills in JSON
 scan_skills() {
   local json='[]'
   local paths=(
@@ -216,6 +291,12 @@ scan_skills() {
     "taste-skill:.agents/skills/design-taste-frontend/SKILL.md"
     "caveman:.cursor/skills/caveman/SKILL.md"
     "caveman:.agents/skills/caveman/SKILL.md"
+    "design:.cursor/skills/design/SKILL.md"
+    "design-system:.cursor/skills/design-system/SKILL.md"
+    "ui-styling:.cursor/skills/ui-styling/SKILL.md"
+    "brand:.cursor/skills/brand/SKILL.md"
+    "banner-design:.cursor/skills/banner-design/SKILL.md"
+    "slides:.cursor/skills/slides/SKILL.md"
     "claude-mem:.cursor/plugins/claude-mem"
     "claude-mem:/root/.claude/plugins/marketplaces/thedotmack"
   )
@@ -225,7 +306,10 @@ scan_skills() {
     local path="${entry#*:}"
     [[ " ${seen[*]} " == *" $name "* ]] && continue
     if [[ "$path" == /* ]]; then
-      [[ -f "$path/SKILL.md" || -d "$path" ]] && { json=$(echo "$json" | jq -c ". + [\"$name\"]" 2>/dev/null || echo "$json"); seen+=("$name"); }
+      if [[ -f "$path/SKILL.md" || -d "$path" ]]; then
+        json=$(echo "$json" | jq -c ". + [\"$name\"]" 2>/dev/null || echo "$json")
+        seen+=("$name")
+      fi
     elif [[ -f "$PROJECT_ROOT/$path" || -d "$PROJECT_ROOT/$path" ]]; then
       json=$(echo "$json" | jq -c ". + [\"$name\"]" 2>/dev/null || echo "$json")
       seen+=("$name")
@@ -239,24 +323,19 @@ scan_skills() {
 
 if command -v jq &>/dev/null && [[ -f "$PROGRESS" ]]; then
   SKILLS_JSON=$(scan_skills)
-  PACK_VER=$(grep -E '^version:' "$SKILL_ROOT/SKILL.md" | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "2.3.0")
+  PACK_VER=$(grep -E '^version:' "$SKILL_ROOT/SKILL.md" | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "2.4.0")
+  MEM_STATUS="pending"
+  if echo "$SKILLS_JSON" | jq -e 'index("claude-mem")' &>/dev/null; then MEM_STATUS="installed"; fi
   tmp=$(mktemp)
   rel_progress="${PROGRESS#$PROJECT_ROOT/}"
-  jq --argjson sk "$SKILLS_JSON" --arg v "$PACK_VER" --arg pf "$rel_progress" \
-    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf' "$PROGRESS" > "$tmp" && mv "$tmp" "$PROGRESS"
+  jq --argjson sk "$SKILLS_JSON" --arg v "$PACK_VER" --arg pf "$rel_progress" --arg ms "$MEM_STATUS" \
+    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf | .memory_sync.claude_mem = $ms | .memory_sync.last_sync_at = now | .index_doc = "docs/LOOP-MASTER-INDEX.md"' \
+    "$PROGRESS" > "$tmp" && mv "$tmp" "$PROGRESS"
   echo "    skills_installed: $SKILLS_JSON"
-  echo "    progress_file: $rel_progress"
-fi
-
-# Symlinks for optional skills under .cursor/skills/
-if [[ -x "$SCRIPT_DIR/link-ecosystem-skills.sh" ]]; then
-  bash "$SCRIPT_DIR/link-ecosystem-skills.sh" || true
 fi
 
 echo ""
-echo "==> Done. Next steps in Cursor:"
-echo "    1. /loop-master init   (quiz + arm loop)"
-echo "    2. Enable Agent Skills in Cursor Settings"
-echo "    3. Optional skills: --skills taste-skill,caveman,claude-mem,motion"
-echo "    4. Security: add scripts/security/ in your project OR use security-review subagent"
+echo "==> Full bootstrap done. Next in Cursor Agent:"
+echo "    /loop-master init"
+echo "    (Agent runs quiz 6 rounds — no extra shell steps needed)"
 echo ""

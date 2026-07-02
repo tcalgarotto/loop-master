@@ -24,7 +24,8 @@ for f in SKILL.md README.md scripts/init.sh scripts/update.sh scripts/link-ecosy
   scripts/arm-dynamic-loop.sh \
   references/autonomous-orchestrator-protocol.md references/skill-ecosystem-map.md \
   references/init-protocol.md references/setup-prompt.md references/git-publish-checklist.md \
-  references/getting-started.md references/skills-you-can-use.md; do
+  references/getting-started.md references/skills-you-can-use.md references/quiz-protocol.md \
+  references/design-skills-routing-table.md references/init-protocol.md; do
   [[ -f "$SKILL_ROOT/$f" ]] && pass "$f" || fail "missing $f"
 done
 

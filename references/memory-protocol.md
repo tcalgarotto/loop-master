@@ -7,8 +7,8 @@ Loop-master usa **três camadas** de memória. Nenhuma substitui outra.
 | Camada | Storage | Escopo | Obrigatório |
 |--------|---------|--------|-------------|
 | **L1 Handoff** | `.cursor/loop-master-progress.json` | Este loop / projeto | Sim |
-| **L2 Semantic** | claude-mem (SQLite + Chroma) | Cross-session, cross-agent | Opcional |
-| **L3 Human** | `docs/LOOP-MASTER-PLAN.md`, plan_doc | Legível por humanos | Sim |
+| **L2 Semantic** | claude-mem (SQLite + Chroma) | Cross-session, cross-agent | **Sim (init v2.4+)** |
+| **L3 Human** | `docs/LOOP-MASTER-PLAN.md`, `docs/LOOP-MASTER-INDEX.md` | Legível por humanos | Sim |
 
 ## L1 — JSON handoff (fonte da verdade)
 
@@ -34,9 +34,30 @@ Todo tick **termina** atualizando L1. Campos críticos:
 - `archive_summaries`: manter últimos 10 ticks
 - Sem transcripts, sem secrets
 
-## L2 — claude-mem (opcional)
+## L2 — claude-mem (obrigatório desde v2.4)
 
-Instalação: `npx claude-mem install` — ver [claude-mem](https://github.com/thedotmack/claude-mem)
+Instalado automaticamente em `init.sh`. Ver [claude-mem](https://github.com/thedotmack/claude-mem).
+
+### Init + cada sessão
+
+| Momento | Ação |
+|---------|------|
+| `init.sh` | `npx claude-mem install` + `npx claude-mem start` |
+| Início de tick | `search(query="<target> <current_phase>", limit=5)` |
+| Fim de tick | capture compacto (paths, findings, decisões quiz) |
+| Nova sessão Cursor | Re-hydrate L1 + claude-mem search antes de agir |
+| `memory_sync` JSON | Atualizar `last_sync_at`, status ✅/⏳ |
+
+Registrar em JSON:
+
+```json
+"memory_sync": {
+  "claude_mem": "running",
+  "last_sync_at": "2026-07-03T00:00:00Z",
+  "last_search_query": "premium-ui phase-2",
+  "observations_captured": 3
+}
+```
 
 ### Worker (obrigatório para L2 ativo)
 
@@ -71,13 +92,25 @@ Registrar observação compacta (se hook disponível):
 - Nunca gravar `.env`, tokens, PII em memória
 - JSON `quiz_answers` sem dados pessoais identificáveis
 
-## L3 — Documentos humanos
+## L3 — Documentos humanos + INDEX
 
 | Evento | Atualizar |
 |--------|-----------|
-| Fase concluída (gate passed) | Seção status no plan_doc |
-| Finding waived | `last_audit.waivers` + nota no plan_doc |
-| Loop completo | `docs/LOOP-MASTER-COMPLETE.md` |
+| Fase concluída (gate passed) | `plan_doc` + INDEX ✅ |
+| Finding waived | `last_audit.waivers` + INDEX 👤 |
+| Skill instalada | INDEX ✅ em skills ecosystem |
+| Loop completo | `docs/LOOP-MASTER-COMPLETE.md` + INDEX ✅ |
+| Todo tick | `docs/LOOP-MASTER-INDEX.md` — emojis ✅ ⏳ 🔮 👤 |
+
+### INDEX (`docs/LOOP-MASTER-INDEX.md`)
+
+Legenda obrigatória:
+- ✅ OK — pronto / concluído
+- ⏳ Pendente — em andamento
+- 🔮 Futuro — próxima fase
+- 👤 Human — blocker ou decisão humana
+
+Orchestrator **sincroniza INDEX a cada tick** junto com L1 JSON.
 
 ## caveman — compressão
 

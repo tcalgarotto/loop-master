@@ -1,162 +1,77 @@
-# Loop Master v2.3
+# Loop Master v2.4
 
-> **Pacote standalone** — este README descreve apenas o orchestrator Cursor para qualquer projeto.
+> **Zero-config autonomous orchestrator** for Cursor Agent.
 
-**Orquestrador autônomo para Cursor** — planeja, executa e entrega até **100%**, com autocorreção e integração com skills de UI, design, memória e segurança.
-
-[Guia rápido (PT)](references/getting-started.md) · [Skills disponíveis](references/skills-you-can-use.md) · [Prompt inicial](references/setup-prompt.md)
+[Guia rápido (PT)](references/getting-started.md) · [Quiz 6 rodadas](references/quiz-protocol.md) · [Design routing](references/design-skills-routing-table.md)
 
 ---
 
-## Está funcionando?
-
-Sim, se estes passos passarem no seu ambiente:
-
-```bash
-bash scripts/verify-pack.sh          # → PASSED
-bash scripts/init.sh --preserve-context  # → exit 0
-```
-
-No Cursor: `/loop-master init` → cria `.cursor/loop-master-progress.json` e `docs/LOOP-MASTER-PLAN.md`.
-
----
-
-## Para quem está começando
-
-### 1. Clone ou copie
+## Quick start
 
 ```bash
 git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/loop-master
 cd seu-projeto
-ln -sf ~/.cursor/skills/loop-master .cursor/skills/loop-master   # opcional, in-repo
 ```
 
-### 2. Instale dependências opcionais
-
-```bash
-bash .cursor/skills/loop-master/scripts/init.sh \
-  --skills impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion
-bash .cursor/skills/loop-master/scripts/link-ecosystem-skills.sh
-```
-
-### 3. No Cursor Agent
+No Cursor Agent:
 
 ```
 /loop-master init
 ```
 
-Depois, para continuar o trabalho:
-
-```
-/loop-master
-```
+**That's it.** Bootstrap installs all skills, runs 6-round quiz, creates plan + INDEX, arms dynamic loop.
 
 ---
 
-## O que você pode invocar?
+## What init installs (automatic)
 
-| Tipo | Skills / ferramentas |
-|------|----------------------|
-| **UI produto** | impeccable |
-| **Design system** | ui-ux-pro-max |
-| **Landing / marketing** | taste-skill |
-| **Animação** | motion (npm) |
-| **Memória** | claude-mem |
-| **Handoff** | caveman |
-| **Segurança** | security-review (Cursor) |
-| **Bugs** | bugbot (Cursor) |
-| **Agendamento** | loop + `arm-dynamic-loop.sh` |
+| Skill | Purpose |
+|-------|---------|
+| impeccable | Product UI refinement |
+| ui-ux-pro-max | Design system |
+| taste-skill | Marketing / anti-slop |
+| caveman | Handoff compression |
+| claude-mem | Cross-session memory |
+| motion | React animations |
 
-Tabela completa: **[references/skills-you-can-use.md](references/skills-you-can-use.md)**
+Plus: symlinks for design, design-system, ui-styling, brand, slides, banner-design if present.
 
 ---
 
-## Comandos
+## Commands
 
-| Comando | Descrição |
-|---------|-----------|
-| `/loop-master init` | Primeira configuração (quiz + plano) |
-| `/loop-master` | Executa **um tick** (um passo do plano) |
-| `/loop-master update` | Atualiza o pacote sem perder progresso |
-| `pare o loop` | Para o loop automático |
-
-### Loop dinâmico (padrão)
-
-Encadeia o próximo tick ~45s após o atual terminar:
-
-```bash
-./scripts/arm-dynamic-loop.sh --progress-file .cursor/loop-master-progress.json --seconds 45
-```
+| Command | Action |
+|---------|--------|
+| `/loop-master init` | Full bootstrap + 6-round quiz + arm loop |
+| `/loop-master` | One autonomous tick |
+| `/loop-master update` | Update pack preserving progress |
+| `pare o loop` | Stop loop |
 
 ---
 
-## Scripts incluídos
+## Autonomous mode
 
-| Script | Função |
-|--------|--------|
-| `init.sh` | Bootstrap + skills + progress JSON |
-| `update.sh` | Atualizar pack preservando contexto |
-| `link-ecosystem-skills.sh` | Symlinks para Cursor achar taste/caveman |
-| `arm-dynamic-loop.sh` | Re-arm do próximo tick (chain) |
-| `verify-pack.sh` | Teste antes de publicar no GitHub |
+- **Dynamic loop:** re-arm 45s after each tick until 100%
+- **Self-correction:** implement → verify → audit → fix ↺ → gate
+- **Design director:** routes all design skills automatically
+- **Memory:** L1 JSON + L2 claude-mem + L3 PLAN/INDEX (✅⏳🔮👤)
 
 ---
 
-## Publicar no GitHub
+## Scripts
 
-1. Rode `verify-pack.sh` → **PASSED**
-2. Siga **[references/git-publish-checklist.md](references/git-publish-checklist.md)**
-
-```bash
-cd loop-master   # raiz do clone standalone
-git init
-git add SKILL.md README.md .gitignore scripts/ references/
-git commit -m "loop-master v2.3 — autonomous orchestrator for Cursor"
-git remote add origin https://github.com/tcalgarotto/loop-master.git
-git push -u origin main
-```
-
-**Não inclua** no repo publicado: `.env`, `loop-master-progress.json` de projetos reais, credenciais.
+| Script | Function |
+|--------|----------|
+| `init.sh` | Full zero-config bootstrap (default) |
+| `update.sh` | Update preserving context |
+| `link-ecosystem-skills.sh` | Symlinks |
+| `arm-dynamic-loop.sh` | Chain next tick |
+| `verify-pack.sh` | Pre-publish smoke test |
 
 ---
 
-## Estrutura do pacote
+## Version
 
-```
-loop-master/
-├── SKILL.md              ← instruções para o Cursor Agent
-├── README.md             ← este arquivo
-├── .gitignore
-├── scripts/
-│   ├── init.sh
-│   ├── update.sh
-│   ├── link-ecosystem-skills.sh
-│   ├── arm-dynamic-loop.sh
-│   └── verify-pack.sh
-└── references/
-    ├── getting-started.md       ← guia amigável (PT)
-    ├── skills-you-can-use.md    ← o que o loop pode chamar
-    ├── setup-prompt.md          ← prompt copiável
-    ├── git-publish-checklist.md
-    ├── skill-ecosystem-map.md   ← roteamento técnico
-    └── autonomous-orchestrator-protocol.md
-```
+**2.4.0** — zero-config init, 6-round quiz, mandatory claude-mem, design routing map, INDEX emojis.
 
----
-
-## Multi-projeto (mesmo repo)
-
-| Loop | Arquivo de progresso |
-|------|----------------------|
-| App principal | `.cursor/loop-master-progress.json` |
-| Segundo loop | `.cursor/loop-master-progress.<nome>.json` |
-
-Ver `references/multi-project-protocol.md`.
-
----
-
-## Versão
-
-**2.3.1** — pacote funcional; docs amigáveis para distribuição pública/privada.
-
-Licença: MIT
+MIT License

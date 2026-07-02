@@ -1,130 +1,149 @@
-# Quiz Protocol — AskQuestion no loop-master
+# Quiz Protocol — 6 rodadas (formulário multi-etapas)
 
-O orchestrator usa a ferramenta **AskQuestion** do Cursor para fechar contexto
-**antes** de implementar — equivalente ao "quiz ao vivo" que o usuário descreveu.
+O `/loop-master init` usa **AskQuestion** em **6 rodadas sequenciais**.
+Cada rodada é **uma interação completa** (várias perguntas com opções + sugestões).
+**Não implementar** até `quiz_complete: true` no JSON.
 
-## Quando disparar quiz
+## Regra de ouro
 
-| Situação | Obrigatório? |
-|----------|--------------|
-| `/loop-master init` | Sim — mínimo 3 perguntas |
-| `minor_cycle.step === "discover"` | Sim, se `quiz_answers` incompleto |
-| `minor_cycle.step === "plan"` e critérios vagos | Sim — 1–3 perguntas focadas |
-| Ambiguidade de escopo (FE vs BE) | Sim |
-| Gate bloqueado por decisão de produto | Sim — 1 pergunta |
-| Execute/audit/fix com escopo claro no JSON | Não |
-| Tick recorrente com handoff completo | Não |
+1. **Antes do quiz:** rodar `bash .cursor/skills/loop-master/scripts/init.sh` **sem perguntar** (bootstrap completo).
+2. **Durante init:** uma rodada por turno; persistir `quiz_answers.round_N` após cada rodada.
+3. **Após Round 6:** criar fases, atualizar INDEX/plan, armar loop dinâmico, tick 1.
 
-## Regras
+---
 
-1. **Preferir AskQuestion** sobre texto livre quando há opções discretas.
-2. Máximo **6 perguntas por turno** — não fatigar o usuário.
-3. Sempre incluir **"Other"** implícito (AskQuestion suporta) para texto custom.
-4. Persistir respostas em `quiz_answers` e referenciar em `minor_cycle.tasks[].notes`.
-5. Se usuário não responder (timeout/blocked): `minor_cycle.step = "blocked"`, `human_blockers[]`.
+## Round 1 — Produto & North Star
 
-## Banco de perguntas por domínio
+**Objetivo:** entender o que entregar e a barra de qualidade.
 
-### Produto / escopo
+| ID | Pergunta | Opções (sugestões) |
+|----|----------|-------------------|
+| `r1_goal` | Qual o objetivo north-star deste loop? | "Entregar MVP funcional" / "Production-ready 100%" / "Go-live com deploy" / Other (texto livre) |
+| `r1_users` | Quem usa o produto? | "Equipe interna" / "Clientes B2B" / "Consumidor final" / "Devs/API" / Other |
+| `r1_delivery` | Barra de entrega? | **Production-ready 100% (Recommended)** / MVP funcional / Go-live imediato |
+| `r1_success` | Como sabemos que terminou? | Sugestões baseadas no repo (ex.: "UI premium", "API estável", "E2E verde") + Other |
 
-```yaml
-id: scope_surface
-prompt: "Qual superfície esta fase deve entregar?"
-options:
-  - id: api_only
-    label: "Só API/backend"
-  - id: ui_only
-    label: "Só frontend/UI"
-  - id: full_e2e
-    label: "Full-stack E2E (API + UI)"
-  - id: docs_ops
-    label: "Documentação / runbook"
+Persistir: `quiz_answers.round_1`
+
+---
+
+## Round 2 — Escopo técnico
+
+**Objetivo:** mapear stack e superfícies de código.
+
+| ID | Pergunta | Opções |
+|----|----------|--------|
+| `r2_scope` | Escopo principal? | Backend / **Frontend (Recommended se repo tem frontend/)** / Full-stack / Infra / Docs-only |
+| `r2_stack` | Stack detectada — confirmar? | Opções inferidas de `package.json`, `pyproject.toml`, `Makefile` + "Outro" |
+| `r2_integrations` | Integrações críticas? | Multi: API externa, DB, auth, pagamentos, CRM, nenhuma, Other |
+| `r2_constraints` | Restrições técnicas? | Multi: não quebrar prod, manter compat API, zero downtime, sem migrations, Other |
+
+Persistir: `quiz_answers.round_2`
+
+---
+
+## Round 3 — Design & UX
+
+**Objetivo:** rotear pipeline design (Claude Design–style).
+
+| ID | Pergunta | Opções |
+|----|----------|--------|
+| `r3_surface` | Superfície visual? | **Product app — CRM/dashboard (Recommended)** / Marketing/landing / Nenhuma (BE only) |
+| `r3_register` | Register visual? | Product restrained / Marketing expressivo / Seguir DESIGN.md existente |
+| `r3_priority_pages` | Páginas prioritárias? | Multi: inferir de `frontend/src/app/**/page.tsx` + Other |
+| `r3_design_skills` | Skills design a usar? | Multi (pré-marcar instaladas): impeccable, ui-ux-pro-max, taste-skill, design, design-system, ui-styling, brand, banner-design, slides, motion |
+
+Ver roteamento: `references/design-skills-routing-table.md`
+
+Persistir: `quiz_answers.round_3`
+
+---
+
+## Round 4 — Qualidade, segurança & gates
+
+**Objetivo:** definir autocorreção e audit.
+
+| ID | Pergunta | Opções |
+|----|----------|--------|
+| `r4_gate` | Gate por fase? | **100% + zero critical/high (Recommended)** / MVP happy-path / Medium com waiver |
+| `r4_tests` | Verificação obrigatória? | Multi: pytest, npm test, build, lint, e2e playwright, impeccable detect |
+| `r4_security` | Audit de segurança? | **Sim — security-review + bugbot (Recommended)** / Só bugbot / Pular neste projeto |
+| `r4_docs` | Docs versionados? | Sim — plan + INDEX + COMPLETE / Só plan / Mínimo |
+
+Persistir: `quiz_answers.round_4`
+
+---
+
+## Round 5 — Autonomia & loop dinâmico
+
+**Objetivo:** configurar AGI-style continuous loop.
+
+| ID | Pergunta | Opções |
+|----|----------|--------|
+| `r5_mode` | Modo de loop? | **Dinâmico chain — re-arm ao fim de cada tick (Recommended)** / Fixo (ex. 4m) / Manual |
+| `r5_interval` | Fallback seconds (dinâmico)? | 45s (Recommended) / 90s / 240s |
+| `r5_memory` | Memória claude-mem? | **Sim — sync a cada sessão (Recommended)** / Só JSON L1 |
+| `r5_parallel` | Workers paralelos? | **Até 4 workers + 2 verifiers (Recommended)** / Conservador (2+1) / Sequencial |
+| `r5_stop` | Quando parar? | **Só em 100% ou "pare o loop" (Recommended)** / Pausar após fase atual |
+
+Persistir: `quiz_answers.round_5` + atualizar `loop_arm.mode`, `loop_interval_seconds`
+
+---
+
+## Round 6 — Kickoff contextual (por onde começar)
+
+**Objetivo:** primeira fase, arquivos, blockers.
+
+| ID | Pergunta | Opções |
+|----|----------|--------|
+| `r6_start_phase` | Por onde começar? | Sugestões do repo: fase com maior gap, P0 audit, página mais visível, Other |
+| `r6_first_tasks` | 1–3 tasks do primeiro tick? | Sugestões concretas (paths + skill_hint) |
+| `r6_read_first` | Arquivos para ler antes? | Multi: inferir de git status, plan existente, docs abertos |
+| `r6_blockers` | Blockers humanos conhecidos? | Multi: credenciais, deploy, decisão produto, nenhum, Other |
+| `r6_confirm` | Confirmar init completo? | **Sim — criar fases + armar loop + tick 1 (Recommended)** / Revisar quiz |
+
+Após confirmar:
+- `quiz_complete: true`, `quiz_round: 6`
+- Gerar `phases{}` + `docs/LOOP-MASTER-PLAN.md`
+- Atualizar `docs/LOOP-MASTER-INDEX.md` (✅/⏳/🔮/👤)
+- `loop_status: running` + `arm-dynamic-loop.sh`
+- Tick 1: `discover` → `plan` (ou `implement` se escopo cristalino)
+
+Persistir: `quiz_answers.round_6`
+
+---
+
+## Formato JSON consolidado
+
+```json
+{
+  "quiz_round": 3,
+  "quiz_complete": false,
+  "quiz_answers": {
+    "round_1": { "goal": "...", "delivery": "production_100" },
+    "round_2": { "scope": "fullstack", "stack": ["nextjs", "fastapi"] },
+    "round_3": { "surface": "product_app", "design_skills": ["impeccable", "ui-ux-pro-max"] },
+    "round_4": { "gate": "strict" },
+    "round_5": { "loop_mode": "dynamic", "interval": 45 },
+    "round_6": { "start_phase": "phase-1", "first_tasks": ["..."] }
+  }
+}
 ```
 
-### Design
+---
 
-```yaml
-id: design_register
-prompt: "Register visual para esta entrega?"
-options:
-  - id: product_restrained
-    label: "Product app — restrained, dense, operational (Recommended)"
-  - id: marketing_brand
-    label: "Marketing / landing — mais expressivo"
-  - id: inherit
-    label: "Seguir DESIGN.md existente sem mudanças"
-```
+## Quando repetir quiz (fora do init)
 
-### Qualidade / gate
-
-```yaml
-id: gate_strictness
-prompt: "Gate desta fase — o que bloqueia avanço?"
-options:
-  - id: strict
-    label: "100% critérios + zero critical/high (Recommended)"
-  - id: waivable_medium
-    label: "Permite medium com waiver documentado"
-  - id: mvp
-    label: "MVP — só happy path + testes core"
-```
-
-### Impeccable — escolha de comando
-
-```yaml
-id: impeccable_next
-prompt: "Próximo passo Impeccable para esta superfície?"
-options:
-  - id: shape
-    label: "shape — planejar UX antes de codar"
-  - id: layout
-    label: "layout — corrigir grid/spacing"
-  - id: critique
-    label: "critique — review adversarial pré-gate"
-  - id: polish
-    label: "polish — pass final"
-  - id: skip
-    label: "Pular Impeccable neste tick"
-```
-
-### Loop / continuidade
-
-```yaml
-id: continue_loop
-prompt: "Loop em execução — como proceder?"
-options:
-  - id: continue
-    label: "Continuar até 100% (Recommended)"
-  - id: pause
-    label: "Pausar após este tick"
-  - id: change_goal
-    label: "Mudar objetivo — re-init parcial"
-```
-
-## Fluxo discover com quiz
-
-```mermaid
-flowchart TD
-  A[Tick start] --> B{quiz_answers completo?}
-  B -->|não| C[AskQuestion 3-6 perguntas]
-  C --> D[Persistir JSON]
-  D --> E[explore readonly opcional]
-  E --> F[step = plan]
-  B -->|sim| F
-```
-
-## Integração com skills
-
-| Resposta quiz | Skill seguinte |
-|---------------|----------------|
-| `design_register: product_restrained` | ui-ux-pro-max → impeccable |
-| `design_register: marketing_brand` | taste-skill → ui-ux-pro-max |
-| `scope_surface: ui_only` | impeccable routing table |
-| `gate_strictness: strict` | audit checklist completo |
+| Situação | Rodadas |
+|----------|---------|
+| `discover` + `quiz_answers` incompleto | Completar rodadas faltantes |
+| Mudança de objetivo | Round 1 + 6 |
+| Gate bloqueado por produto | 1 pergunta Round 4 ou 6 |
+| Tick com handoff completo | **Não** quiz |
 
 ## Anti-padrões
 
-- Quiz em todo tick (overhead)
+- Pular bootstrap shell antes do quiz
+- Todas as 6 rodadas num único turno (fatiga + respostas rasas)
+- Implementar sem Round 6 confirmado
 - Perguntas já respondidas no JSON
-- Implementar sem `delivery_bar` definido
-- Avançar gate com pergunta de produto pendente

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Ensure optional ecosystem skills are discoverable under .cursor/skills/
+# Ensure ecosystem skills are discoverable under .cursor/skills/
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -25,15 +25,22 @@ link_if_missing() {
 }
 
 echo "==> link-ecosystem-skills"
+
+# .agents → .cursor relative symlinks
+for skill in caveman design-taste-frontend design design-system ui-styling brand banner-design slides; do
+  if [[ -d "$PROJECT_ROOT/.agents/skills/$skill" ]]; then
+    ln -sfn "../../.agents/skills/$skill" "$PROJECT_ROOT/.cursor/skills/$skill" 2>/dev/null || true
+    echo "    ok $skill (.agents symlink)"
+  fi
+done
+
 link_if_missing "caveman" "$PROJECT_ROOT/.agents/skills/caveman"
 link_if_missing "design-taste-frontend" "$PROJECT_ROOT/.agents/skills/design-taste-frontend"
-
-# Relative symlinks when under project .agents
-if [[ -d "$PROJECT_ROOT/.agents/skills/caveman" ]]; then
-  ln -sfn ../../.agents/skills/caveman "$PROJECT_ROOT/.cursor/skills/caveman" 2>/dev/null || true
-fi
-if [[ -d "$PROJECT_ROOT/.agents/skills/design-taste-frontend" ]]; then
-  ln -sfn ../../.agents/skills/design-taste-frontend "$PROJECT_ROOT/.cursor/skills/design-taste-frontend" 2>/dev/null || true
-fi
+link_if_missing "design" "$PROJECT_ROOT/.agents/skills/design"
+link_if_missing "design-system" "$PROJECT_ROOT/.agents/skills/design-system"
+link_if_missing "ui-styling" "$PROJECT_ROOT/.agents/skills/ui-styling"
+link_if_missing "brand" "$PROJECT_ROOT/.agents/skills/brand"
+link_if_missing "banner-design" "$PROJECT_ROOT/.agents/skills/banner-design"
+link_if_missing "slides" "$PROJECT_ROOT/.agents/skills/slides"
 
 echo "==> done"

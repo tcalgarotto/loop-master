@@ -1,153 +1,93 @@
-# Guia rápido — Loop Master
+# Guia rápido — Loop Master v2.4
 
-> **Para quem baixou o repositório e quer começar em 5 minutos.**
+> **Zero-config:** digite `/loop-master init` — o resto é automático.
 
 ## O que é?
 
-**Loop Master** é uma skill para o **Cursor Agent** que orquestra trabalho longo até **100% de entrega**: planeja em fases, executa em ticks, corrige erros (audit → fix), e chama outras skills automaticamente (UI, design, memória, segurança).
-
-Você não precisa repetir contexto a cada mensagem — o progresso fica em `.cursor/loop-master-progress.json`.
+Orquestrador autônomo para Cursor Agent:
+- Instala **todas** as skills no init
+- Quiz em **6 rodadas** (formulário multi-etapas)
+- Loop dinâmico encadeado (AGI-style)
+- Design director com mapa completo de skills
+- Memória claude-mem + JSON + INDEX com emojis
 
 ---
 
 ## Pré-requisitos
 
-1. **Cursor** com **Agent Skills** habilitado (Settings → Rules → Agent Skills)
-2. **Git** e **Node.js** (para instalar skills opcionais via `npx`)
-3. Um projeto com código (ou repo novo)
+1. Cursor com **Agent Skills** ON
+2. Git + Node.js + jq
 
 ---
 
-## Instalação (3 passos)
+## Instalação (2 passos)
 
-### 1. Baixar o pacote
+### 1. Clone
 
 ```bash
 git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/loop-master
 cd seu-projeto
 ```
 
-Ou copie a pasta `loop-master/` para `.cursor/skills/loop-master` no seu repo.
-
-### 2. Rodar o instalador
-
-```bash
-bash .cursor/skills/loop-master/scripts/init.sh \
-  --skills impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion
-bash .cursor/skills/loop-master/scripts/link-ecosystem-skills.sh
-bash .cursor/skills/loop-master/scripts/verify-pack.sh
-```
-
-O último comando deve terminar com **`verify-pack PASSED`**.
-
-### 3. Iniciar no Cursor
-
-Abra o **Agent** e cole:
+### 2. Init no Cursor
 
 ```
 /loop-master init
 ```
 
-O agente fará um quiz curto (objetivo, escopo, skills, tipo de loop) e criará o plano em `docs/LOOP-MASTER-PLAN.md`.
-
-**Prompt completo:** veja `references/setup-prompt.md`.
+Isso roda bootstrap completo + quiz. **Não precisa** rodar scripts manualmente.
 
 ---
 
-## Comandos no chat
+## Quiz — 6 rodadas
 
-| Você digita | O que acontece |
-|-------------|----------------|
-| `/loop-master init` | Primeira vez: quiz + instala deps + plano + loop |
-| `/loop-master` | Um tick de trabalho (um passo do plano) |
-| `/loop-master update` | Atualiza o pacote **sem apagar** seu progresso |
-| `pare o loop` | Para o agendamento automático |
+| Rodada | Tema |
+|--------|------|
+| 1 | Produto & North Star |
+| 2 | Escopo técnico |
+| 3 | Design & UX |
+| 4 | Qualidade & gates |
+| 5 | Autonomia & loop |
+| 6 | Kickoff — por onde começar |
+
+Detalhe: [quiz-protocol.md](quiz-protocol.md)
 
 ---
 
-## Loop automático (padrão)
+## Comandos
 
-Depois de cada tick, o agente pode encadear o próximo (~45s):
+| Comando | Uso |
+|---------|-----|
+| `/loop-master init` | Bootstrap + quiz + arm loop |
+| `/loop-master` | Um tick |
+| `/loop-master update` | Atualizar pack |
+| `pare o loop` | Parar |
+
+---
+
+## Memória & INDEX
+
+| Artefato | Função |
+|----------|--------|
+| `.cursor/loop-master-progress.json` | Handoff L1 |
+| claude-mem | Memória L2 cross-session |
+| `docs/LOOP-MASTER-PLAN.md` | Fases |
+| `docs/LOOP-MASTER-INDEX.md` | Status ✅ ⏳ 🔮 👤 |
+
+---
+
+## Design skills
+
+Mapa completo: [design-skills-routing-table.md](design-skills-routing-table.md)
+
+impeccable · ui-ux-pro-max · taste-skill · design · design-system · ui-styling · brand · slides · banner-design · motion
+
+---
+
+## Verificar
 
 ```bash
-bash .cursor/skills/loop-master/scripts/arm-dynamic-loop.sh \
-  --progress-file .cursor/loop-master-progress.json --seconds 45
+bash .cursor/skills/loop-master/scripts/verify-pack.sh
 ```
 
-Ou peça no chat: *"mantenha loop dinâmico"*.
-
----
-
-## Skills que o Loop Master pode usar por você
-
-O orchestrator **não substitui** essas skills — ele **decide quando** chamá-las conforme a fase do trabalho.
-
-### Instaladas pelo `init.sh` (opcionais)
-
-| Skill | Para quê | Quando o loop usa |
-|-------|----------|-------------------|
-| **impeccable** | Refinar telas (layout, cores, polish, a11y) | Frontend product UI |
-| **ui-ux-pro-max** | Design system, regras UX por indústria | Discover, plan |
-| **taste-skill** | Anti-slop, landing/marketing premium | UI nova / marketing |
-| **caveman** | Resumos densos, commits, compressão de contexto | Fim de tick / handoff |
-| **claude-mem** | Memória entre sessões | Discover, hydrate (`npx claude-mem start`) |
-| **motion** | Animações React (`motion/react`) | Implement em frontend |
-
-### Já no Cursor (sem instalar)
-
-| Ferramenta | Para quê |
-|------------|----------|
-| **security-review** | Auditoria de segurança no código |
-| **bugbot** | Revisão de bugs e regressões |
-| **loop** | Agendar ticks (`/loop 5m …`) |
-| Subagents **explore**, **shell**, **deployment-expert**, etc. | Tarefas paralelas |
-
-Detalhes: `references/skills-you-can-use.md` e `references/skill-ecosystem-map.md`.
-
----
-
-## Dois projetos no mesmo repositório?
-
-Use **arquivos de progresso separados**:
-
-| Projeto | Arquivo |
-|---------|---------|
-| Seu app | `.cursor/loop-master-progress.json` |
-| Outro loop (ex. meta) | `.cursor/loop-master-progress.skill-pack.json` |
-
-```bash
-bash scripts/init.sh --progress-file .cursor/loop-master-progress.meu-loop.json
-```
-
-Ver `references/multi-project-protocol.md`.
-
----
-
-## Publicar este pacote no GitHub
-
-Só depois de `verify-pack.sh` PASSED. Checklist passo a passo: `references/git-publish-checklist.md`.
-
----
-
-## Problemas comuns
-
-| Sintoma | Solução |
-|---------|---------|
-| Skill não encontrada | Confirme `.cursor/skills/loop-master/SKILL.md` e Agent Skills ON |
-| Loop não continua | `loop_status` no JSON deve ser `running`; rode `arm-dynamic-loop.sh` |
-| Perdeu contexto | Leia `.cursor/loop-master-progress.json` e `next_prompt` |
-| Init falhou em skill | Rode `init.sh --skills …` de novo; veja WARN no terminal |
-
----
-
-## Documentação completa
-
-| Doc | Conteúdo |
-|-----|----------|
-| `README.md` | Visão geral (EN/PT) |
-| `SKILL.md` | Instruções do Agent |
-| `references/getting-started.md` | Este guia (EN) |
-| `references/setup-prompt.md` | Prompt copiável |
-| `references/skill-ecosystem-map.md` | Árvore de decisão técnica |
-
-**Versão do pacote:** 2.3.1 (docs)
+Deve retornar **PASSED**.

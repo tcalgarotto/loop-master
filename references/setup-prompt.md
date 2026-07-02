@@ -1,68 +1,51 @@
-# Prompt inicial — configurar loop-master + ecossistema
+# Prompt inicial — `/loop-master init` (zero-config v2.4)
 
-Cole no **Cursor Agent** após instalar o pacote. Troque `<SEU_OBJETIVO>` pelo que você quer entregar.
-
----
-
-## Instalação CLI (antes do prompt)
-
-```bash
-git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/loop-master
-cd seu-projeto
-bash .cursor/skills/loop-master/scripts/init.sh \
-  --skills impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion
-bash .cursor/skills/loop-master/scripts/link-ecosystem-skills.sh
-bash .cursor/skills/loop-master/scripts/verify-pack.sh
-```
+**Uma linha basta.** O agente roda bootstrap + quiz + loop sozinho.
 
 ---
 
-## Prompt — projeto novo (copiar)
+## Comando único (copiar no Cursor Agent)
 
 ```
-/loop-master init — skill loop-master
+/loop-master init
+```
 
-Objetivo: <SEU_OBJETIVO>
-Progress file: .cursor/loop-master-progress.json
+O orchestrator deve:
 
-1. AskQuestion: goal, scope, delivery_bar, design_surface, loop_mode (dinâmico chain), skills
-2. Confirmar skills_installed: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem, motion
-3. Criar docs/LOOP-MASTER-PLAN.md com fases até 100%
-4. Primeiro tick discover → plan
-5. Ao fim: arm-dynamic-loop.sh --seconds 45 (loop dinâmico encadeado)
+1. Rodar `bash .cursor/skills/loop-master/scripts/init.sh` **sem perguntar**
+2. Iniciar quiz Round 1 (AskQuestion) — 6 rodadas total
+3. Criar fases, INDEX, armar loop dinâmico, tick 1
 
-Regras: implement → verify → audit → fix → gate; nunca commitar .env
+---
+
+## Com objetivo pré-definido
+
+```
+/loop-master init — objetivo: Premium UI 100% production-ready
 ```
 
 ---
 
-## Prompt — continuar trabalho
+## Continuar trabalho
 
 ```
-/loop-master — skill loop-master
+/loop-master
+```
 
-Leia .cursor/loop-master-progress.json e execute o next_prompt.
-Mantenha loop dinâmico (arm-dynamic-loop.sh --seconds 45) até overall_pct === 100.
+Ou ler `next_prompt` do JSON e executar.
+
+---
+
+## Segundo loop no mesmo repo
+
+```
+/loop-master init — progress-file: .cursor/loop-master-progress.<NOME>.json
 ```
 
 ---
 
-## Prompt — segundo loop no mesmo repo
+## Docs
 
-```
-/loop-master init — skill loop-master
-
-Progress file: .cursor/loop-master-progress.<NOME>.json
-NÃO alterar .cursor/loop-master-progress.json do outro loop.
-
-Objetivo: <SEU_OBJETIVO>
-```
-
-Ver `references/multi-project-protocol.md`.
-
----
-
-## Documentação
-
-- Guia amigável: `references/getting-started.md`
-- Skills disponíveis: `references/skills-you-can-use.md`
+- [getting-started.md](getting-started.md)
+- [quiz-protocol.md](quiz-protocol.md) — 6 rodadas
+- [design-skills-routing-table.md](design-skills-routing-table.md)
