@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LoopMasterProgress",
+  "description": "Handoff context between loop-master v2 agent iterations",
+  "type": "object",
+  "required": [
+    "updated_at",
+    "overall_pct",
+    "current_phase",
+    "target",
+    "phases",
+    "minor_cycle",
+    "last_iteration",
+    "next_actions",
+    "delivery_contract"
+  ],
+  "properties": {
+    "updated_at": { "type": "string", "format": "date-time" },
+    "tick_count": { "type": "integer", "minimum": 0 },
+    "overall_pct": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "current_phase": { "type": "string", "description": "e.g. phase-1, api-v2, ui-polish" },
+    "target": { "type": "string", "description": "North-star goal in one line" },
+    "plan_doc": { "type": "string", "description": "Path to master plan markdown" },
+    "loop_sentinel": { "type": "string", "example": "AGENT_LOOP_TICK_SCALE_PLAN" },
+    "loop_interval_seconds": { "type": "integer" },
+    "loop_status": {
+      "type": "string",
+      "enum": ["pending_arm", "running", "stopped", "blocked_human", "complete"]
+    },
+    "skill_pack_version": { "type": "string", "default": "2.3.0" },
+    "skill_pack_updated_at": { "type": "string", "format": "date-time" },
+    "progress_file": {
+      "type": "string",
+      "description": "Path to this JSON (for multi-project repos)",
+      "example": ".cursor/loop-master-progress.skill-pack.json"
+    },
+    "app_progress_file": {
+      "type": "string",
+      "description": "Sibling loop progress file when multiple loops share a repo"
+    },
+    "skill_pack_progress_file": {
+      "type": "string",
+      "description": "Alias used from app JSON to point at skill-pack progress"
+    },
+    "skills_installed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "e.g. impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem"
+    },
+    "skills_inventory": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Last scan of available skills — same as skills_installed after scan"
+    },
+    "next_prompt": {
+      "type": "string",
+      "description": "Full prompt for the next autonomous tick — generated every tick"
+    },
+    "loop_arm": {
+      "type": "object",
+      "properties": {
+        "last_armed_at": { "type": "string", "format": "date-time" },
+        "mode": { "enum": ["fixed", "dynamic", "manual"] },
+        "sentinel": { "type": "string" },
+        "pid": { "type": ["integer", "null"] },
+        "next_wake_seconds": { "type": "integer" }
+      }
+    },
+    "doc_versions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "version": { "type": "string" },
+          "tick": { "type": "integer" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "quiz_answers": {
+      "type": "object",
+      "properties": {
+        "goal": { "type": "string" },
+        "scope": { "enum": ["backend", "frontend", "fullstack", "infra", "docs"] },
+        "delivery_bar": { "enum": ["mvp", "production_100", "go_live"] },
+        "design_surface": { "enum": ["product_app", "marketing", "none"] },
+        "loop_mode": { "enum": ["fixed", "dynamic", "manual"] },
+        "loop_interval_seconds": { "type": "integer" },
+        "skills_requested": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "delivery_contract": {
+      "type": "object",
+      "required": ["status", "target_pct"],
+      "properties": {
+        "status": { "enum": ["in_progress", "complete", "blocked_human"] },
+        "target_pct": { "type": "integer", "const": 100 },
+        "acceptance_summary": { "type": "string" },
+        "phases_required": { "type": "array", "items": { "type": "string" } },
+        "completed_phases": { "type": "array", "items": { "type": "string" } },
+        "blocked_on_human": { "type": "boolean" },
+        "blocked_reason": { "type": "string" }
+      }
+    },
+    "phases": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "status", "pct"],
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "enum": ["pending", "in_progress", "completed", "blocked_human"] },
+          "pct": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "acceptance_criteria": { "type": "array", "items": { "type": "string" } },
+          "blocked_reason": { "type": "string" },
+          "design_skills_used": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "minor_cycle": {
+      "type": "object",
+      "required": ["phase_id", "step", "iteration"],
+      "properties": {
+        "phase_id": { "type": "string" },
+        "step": {
+          "enum": [
+            "discover",
+            "plan",
+            "implement",
+            "execute",
+            "verify",
+            "audit",
+            "fix",
+            "gate",
+            "blocked"
+          ],
+          "description": "execute is alias of implement (legacy)"
+        },
+        "iteration": { "type": "integer", "minimum": 1 },
+        "gate": { "enum": ["pending", "passed", "failed"] },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "status"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "status": {
+                "enum": ["pending", "in_progress", "done", "skipped", "blocked", "failed"]
+              },
+              "files_scope": { "type": "array", "items": { "type": "string" } },
+              "depends_on": { "type": "array", "items": { "type": "string" } },
+              "agent_hint": { "type": "string" },
+              "skill_hint": {
+                "type": "string",
+                "description": "impeccable:layout, ui-ux-pro-max, taste-skill, motion"
+              },
+              "acceptance_criteria": { "type": "array", "items": { "type": "string" } },
+              "files_touched": { "type": "array", "items": { "type": "string" } },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "orchestrator": {
+      "type": "object",
+      "properties": {
+        "role": { "const": "orchestrator" },
+        "max_parallel_workers": { "type": "integer", "default": 4 },
+        "last_fan_out_count": { "type": "integer" }
+      }
+    },
+    "file_locks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "holder": { "type": "string" },
+          "mode": { "enum": ["read", "write"] },
+          "until": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "parallel_runs": {
+      "type": "object",
+      "properties": {
+        "tick": { "type": "integer" },
+        "step": { "type": "string" },
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "task_id": { "type": "string" },
+              "subagent_type": { "type": "string" },
+              "skill_used": { "type": "string" },
+              "readonly": { "type": "boolean" },
+              "status": { "enum": ["running", "done", "failed", "cancelled"] },
+              "summary": { "type": "string" },
+              "findings_count": { "type": "integer" }
+            }
+          }
+        },
+        "conflicts_avoided": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "memory_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": { "enum": ["claude-mem", "plan_doc", "archive"] },
+          "id": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "human_blockers": { "type": "array", "items": { "type": "string" } },
+    "last_iteration": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "tick_label": { "type": "string" },
+            "minor_step": { "type": "string" },
+            "agent_summary": { "type": "string" },
+            "state_snapshot": { "type": "string", "description": "Project state at tick start" },
+            "duration_hint": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "last_audit": {
+      "type": "object",
+      "properties": {
+        "at": { "type": "string", "format": "date-time" },
+        "phase_id": { "type": "string" },
+        "tests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "command": { "type": "string" },
+              "result": { "enum": ["pass", "fail", "skip"] },
+              "summary": { "type": "string" }
+            }
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "severity": { "enum": ["critical", "high", "medium", "low"] },
+              "category": {
+                "enum": [
+                  "security",
+                  "bug",
+                  "regression",
+                  "product",
+                  "quality",
+                  "context",
+                  "credentials",
+                  "design",
+                  "ux"
+                ]
+              },
+              "status": { "enum": ["open", "fixed", "wontfix"] },
+              "note": { "type": "string" },
+              "file": { "type": "string" },
+              "source_agent": { "type": "string" },
+              "task_id": { "type": "string" }
+            }
+          }
+        },
+        "waivers": { "type": "array", "items": { "type": "string" } },
+        "gate_passed": { "type": "boolean" },
+        "design_checks": {
+          "type": "object",
+          "properties": {
+            "impeccable_detect": { "enum": ["pass", "fail", "skip"] },
+            "ui_ux_checklist": { "enum": ["pass", "fail", "skip"] },
+            "critique_p0_open": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 5
+    },
+    "context_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "archive_summaries": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "properties": {
+          "tick": { "type": "integer" },
+          "summary": { "type": "string" }
+        }
+      }
+    }
+  }
+}
