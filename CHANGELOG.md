@@ -2,6 +2,10 @@
 
 ## [2.9.1] — 2026-07-03
 
+### Documentação
+
+- `README.md`, `MANUAL.md`, `getting-started.md`, `references/README.md` sincronizados com v2.9.1
+
 ### `/lucy refazer-frontend` — design premium (sem mudar rotas)
 
 - Foco em **design only**: impeccable critique → craft → polish; **URLs preservadas**

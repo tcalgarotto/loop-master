@@ -1,11 +1,11 @@
-# Guia rápido — Loop Master
+# Guia rápido — Lucy
 
-> Instalação em 2 passos. **Manual completo:** [MANUAL.md](../MANUAL.md)
+> Instalação em 2 passos. **Manual completo:** [MANUAL.md](../MANUAL.md) · **Changelog:** [CHANGELOG.md](../CHANGELOG.md)
 
 ## 1. Clone
 
 ```bash
-git clone https://github.com/tcalgarotto/lucy.git ~/.cursor/skills/lucy
+git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/lucy
 cd seu-projeto
 ```
 
@@ -15,15 +15,24 @@ cd seu-projeto
 /lucy init
 ```
 
-Pronto. Bootstrap + brain + hooks + quiz rodam automaticamente.
+## 3. Update (quando sair versão nova)
 
-## Comandos
+```
+/lucy update
+```
+
+## Comandos essenciais
 
 | Comando | Uso |
 |---------|-----|
-| `/lucy init` | Configurar |
-| `/lucy` | Um tick |
-| `pare o loop` | Parar |
+| `/lucy init` | Configurar projeto |
+| `/lucy` | Um tick autônomo |
+| `/lucy update` | Atualizar skill sem perder contexto |
+| `/lucy refazer-frontend` | Redesign visual (slop, órfãs) — mantém URLs |
+| `/lucy nova-pagina X --tipo landing` | Landing do zero |
+| `/lucy aprenda` | Evoluir Lucy global (GitHub) |
+| `/lucy regra` | Regra imutável do projeto |
+| `pare o loop` | Parar loop |
 
 ## Docs
 

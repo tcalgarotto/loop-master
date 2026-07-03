@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.8.0-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.1-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -172,6 +172,24 @@ pare o loop         → Para o loop autônomo
 /lucy docs --changelog → Atualiza CHANGELOG.md
 ```
 
+### Frontend premium
+
+```
+/lucy refazer-frontend              → Audit slop/órfãs/duplicatas + quiz design + polish (mantém URLs)
+/lucy refazer-frontend --escopo todo
+/lucy refazer-frontend --escopo /crm,/inbox
+/lucy refazer-frontend --audit-only → Só diagnóstico
+/lucy nova-pagina pricing --tipo landing
+/lucy nova-pagina crm-reports --tipo app
+```
+
+### Aprendizado e regras
+
+```
+/lucy aprenda <texto>   → Evolui a Lucy global (GitHub — todos recebem no update)
+/lucy regra <pedido>    → Regra P0 do projeto (imutável após update)
+```
+
 ---
 
 ## Como funciona o Loop
@@ -249,13 +267,20 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/competitive-intelligence.md` | Protocolo completo de gap analysis |
 | `references/design-skills-routing-table.md` | Qual skill de design usar por superfície |
 | `references/second-brain-protocol.md` | Como a memória funciona |
-| `references/autonomous-orchestrator-protocol.md` | Os 7 mandamentos do loop autônomo |
+| `references/autonomous-orchestrator-protocol.md` | Loop autônomo |
 | `MANUAL.md` | Manual completo em português |
+| `references/html-native-light-protocol.md` | UI leve: dialog, HTMX, view-transition, scroll scrub |
+| `references/gsap-premium-protocol.md` | GSAP timelines, ScrollTrigger |
+| `references/lucy-refazer-frontend-protocol.md` | Redesign visual page-by-page |
+| `references/lucy-nova-pagina-protocol.md` | Landing e páginas app do zero |
+| `references/lucy-aprenda-protocol.md` | `/lucy aprenda` global |
+| `references/lucy-regra-protocol.md` | `/lucy regra` por projeto |
+| `CHANGELOG.md` | Histórico de versões |
 
 ---
 
 ## Versão
 
-**v2.8.0** — rebranding completo: caminhos `lucy-*` (progress, brain, plan, hooks), script `migrate-loop-master-to-lucy.sh`, `/lucy update` migra legado automaticamente.
+**v2.9.1** — redesign frontend (`/lucy refazer-frontend`), páginas novas (`/lucy nova-pagina`), aprendizado dual (`/lucy aprenda` + `/lucy regra`), UI leve + GSAP. Ver [CHANGELOG.md](CHANGELOG.md) e [release v2.9.1](https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.1).
 
 MIT License — feito com 100% do cérebro.

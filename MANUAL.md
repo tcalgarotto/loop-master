@@ -2,12 +2,12 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.8.0** · *Mascote:* **Nano Banana** 🍌 · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.9.1** · *Autor:* **Thales Calgarotto**
 
 ---
 
 <div align="center">
-  <img src="assets/nanobanana.png" alt="Lucy Mascot" width="220" style="border-radius: 20px; margin-bottom: 10px;" />
+  <img src="assets/lucy-hero-18x9-4k.png" alt="Lucy" width="480" style="border-radius: 12px; margin-bottom: 10px;" />
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i></p>
 </div>
 
@@ -118,13 +118,34 @@ O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de dese
 | `/lucy docs` | Gera documentação de APIs, componentes e changelogs. |
 | `/lucy docs --adr` | Cria e registra um Architecture Decision Record (ADR) para o projeto. |
 
+### 4.5 Frontend premium
+
+| Comando | Descrição |
+|---------|-----------|
+| `/lucy refazer-frontend` | Audita todo o frontend (slop, órfãs, duplicatas), quiz de design (4 rodadas), refina visual com impeccable — **sem mudar URLs**. |
+| `/lucy refazer-frontend --escopo /crm` | Mesmo fluxo, só nas rotas indicadas ou mencionadas no prompt. |
+| `/lucy refazer-frontend --audit-only` | Inventário + relatório — não altera código. |
+| `/lucy nova-pagina <nome> --tipo landing` | Cria landing page do zero (taste-skill + template gallery). |
+| `/lucy nova-pagina <nome> --tipo app` | Cria página de produto dentro do shell existente. |
+
+Ver: `references/lucy-refazer-frontend-protocol.md`, `references/lucy-nova-pagina-protocol.md`
+
+### 4.6 Aprendizado e regras do projeto
+
+| Comando | Escopo | Descrição |
+|---------|--------|-----------|
+| `/lucy aprenda` + conteúdo | **Global (GitHub)** | Transforma tema em habilidade/regra de produção — todos recebem no `/lucy update`. |
+| `/lucy regra` + pedido | **Só este projeto** | Regra P0 imutável em `.cursor/lucy-brain/rules/` — sobrevive ao update. |
+
+Ver: `references/lucy-aprenda-protocol.md`, `references/lucy-regra-protocol.md`
+
 ---
 
 ## 5. Second Brain (Estrutura de Memória)
 
 O Lucy gerencia sua própria persistência de memória em quatro camadas:
 
-1. **L0 (Brain Local)**: `.cursor/lucy-brain/` — Guarda suas preferências em `dev-profile.json` e decisões arquiteturais em `project-mind.json`.
+1. **L0 (Brain Local)**: `.cursor/lucy-brain/` — preferências, decisões, `rules/` (regras P0), `learned/`.
 2. **L1 (Progress)**: `.cursor/lucy-progress.json` — Handoff do estado atual entre os ticks do loop.
 3. **L2 (claude-mem)**: Busca semântica local baseada em banco de dados SQLite.
 4. **L3 (Documentação)**: `docs/LUCY-PLAN.md` e `docs/LUCY-INDEX.md` legíveis por humanos.

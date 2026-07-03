@@ -120,3 +120,18 @@ Re-arma sentinel após update com `next_prompt` atualizado. Útil se loop morreu
 | `init` (primeira vez) | Cria stub |
 | `init` (JSON existe) | AskQuestion: Continuar / Reset fases / Novo objetivo |
 | `update` | **Sempre preserva** contexto |
+
+---
+
+## Comandos novos (v2.9+)
+
+Após `git pull`, o `update.sh` entrega protocolos para:
+
+| Comando | Doc |
+|---------|-----|
+| `/lucy refazer-frontend` | `lucy-refazer-frontend-protocol.md` |
+| `/lucy nova-pagina` | `lucy-nova-pagina-protocol.md` |
+| `/lucy aprenda` | `lucy-aprenda-protocol.md` |
+| `/lucy regra` | `lucy-regra-protocol.md` |
+
+**Preservado no update:** `.cursor/lucy-brain/rules/` (regras P0 do projeto) — nunca sobrescrito pelo pull.
