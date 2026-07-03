@@ -69,6 +69,14 @@ def scan_file(path: Path) -> dict:
         text = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return {"error": "unreadable"}
+    slop_patterns = [
+        (r"gradient-to-", "gradient"),
+        (r"\b(purple|violet|blue)-(4|5|6)00\b", "generic_color"),
+        (r"shadow-(lg|xl|2xl)", "heavy_shadow"),
+        (r"Welcome to|Get started|Lorem ipsum", "generic_copy"),
+        (r"rounded-(2xl|3xl)", "rounded_spam"),
+    ]
+    slop_hits = [name for pat, name in slop_patterns if re.search(pat, text, re.I)]
     return {
         "lines": text.count("\n") + 1,
         "use_client": text.lstrip().startswith('"use client"') or "'use client'" in text[:200],
@@ -76,6 +84,8 @@ def scan_file(path: Path) -> dict:
         "has_gsap": "gsap" in text,
         "transition_tailwind": bool(re.search(r"transition(-[a-z]+)?", text)),
         "imports_shadcn": "/ui/" in text or "@/components/ui" in text,
+        "slop_signals": slop_hits,
+        "slop_score": len(slop_hits),
     }
 
 pages = sorted(app_root.rglob("page.tsx")) + sorted(app_root.rglob("page.jsx"))
@@ -122,11 +132,58 @@ for p in css_files[:80]:
     })
 
 client_pages = sum(1 for x in inventory["pages"] if x.get("use_client"))
+
+# Nav links heuristic — scan components for href="/..."
+nav_text = ""
+for comp_dir in [project / "src" / "components", project / "components", project / "frontend" / "src" / "components"]:
+    if comp_dir.is_dir():
+        for f in comp_dir.rglob("*.tsx"):
+            try:
+                nav_text += f.read_text(encoding="utf-8", errors="replace") + "\n"
+            except OSError:
+                pass
+nav_routes = set(re.findall(r'href=["\'](/[^"\']*)["\']', nav_text))
+nav_routes |= set(re.findall(r'pathname:\s*["\'](/[^"\']*)["\']', nav_text))
+
+for x in inventory["pages"]:
+    route = x["route"]
+    x["orphan"] = route not in nav_routes and route not in ("/", "/login", "/signup")
+    if route in nav_routes:
+        x["nav_linked"] = True
+
+# Duplicate heuristic — same last segment or high slop + similar lines
+from collections import defaultdict
+by_segment = defaultdict(list)
+for x in inventory["pages"]:
+    seg = x["route"].rstrip("/").split("/")[-1] or "root"
+    by_segment[seg].append(x["route"])
+
+duplicates = []
+for seg, routes in by_segment.items():
+    if len(routes) > 1 and seg not in ("page", "index", ""):
+        duplicates.append({"segment": seg, "routes": routes})
+
+orphans = [x["route"] for x in inventory["pages"] if x.get("orphan")]
+high_slop = sorted(
+    [x for x in inventory["pages"] if x.get("slop_score", 0) >= 2],
+    key=lambda x: -x.get("slop_score", 0),
+)
+
+inventory["issues"] = {
+    "duplicate_route_groups": duplicates,
+    "orphan_routes": orphans,
+    "high_slop_routes": [{"route": x["route"], "signals": x.get("slop_signals", [])} for x in high_slop[:20]],
+    "nav_routes_found": sorted(nav_routes)[:40],
+}
+
 inventory["summary"] = {
     "client_pages": client_pages,
     "server_pages": len(pages) - client_pages,
     "motion_pages": sum(1 for x in inventory["pages"] if x.get("has_motion")),
     "gsap_pages": sum(1 for x in inventory["pages"] if x.get("has_gsap")),
+    "orphan_count": len(orphans),
+    "duplicate_groups": len(duplicates),
+    "high_slop_count": len(high_slop),
 }
 
 as_json = "$AS_JSON" == "true"
@@ -140,18 +197,37 @@ else:
         f"App root: `{rel_app}`",
         f"Pages: **{len(pages)}** | Layouts: **{len(layouts)}** | CSS: **{len(css_files)}**",
         f"Client pages: **{client_pages}** | Server: **{len(pages) - client_pages}**",
+        f"Órfãs: **{inventory['summary']['orphan_count']}** | Grupos duplicados: **{inventory['summary']['duplicate_groups']}** | Alto slop: **{inventory['summary']['high_slop_count']}**",
         "",
+        "## Issues (design focus — não mover URLs)",
+        "",
+    ]
+    if duplicates:
+        lines.append("### Rotas possivelmente duplicadas (mesmo segmento)")
+        for d in duplicates:
+            lines.append(f"- `{d['segment']}`: {', '.join('`'+r+'`' for r in d['routes'])}")
+        lines.append("")
+    if orphans:
+        lines.append("### Órfãs (sem link na nav/sidebar)")
+        for r in orphans[:25]:
+            lines.append(f"- `{r}`")
+        lines.append("")
+    if high_slop:
+        lines.append("### Alto sinal AI slop")
+        for x in high_slop[:15]:
+            lines.append(f"- `{x['route']}` — {', '.join(x.get('slop_signals', []))}")
+        lines.append("")
+    lines += [
         "## Pages (read order for /lucy refazer-frontend)",
         "",
-        "| Route | File | Lines | Client | Motion | GSAP |",
-        "|-------|------|-------|--------|--------|------|",
+        "| Route | File | Slop | Órfã | Client |",
+        "|-------|------|------|------|--------|",
     ]
     for x in inventory["pages"]:
         lines.append(
-            f"| `{x['route']}` | `{x['path']}` | {x.get('lines','?')} | "
-            f"{'yes' if x.get('use_client') else 'no'} | "
-            f"{'yes' if x.get('has_motion') else 'no'} | "
-            f"{'yes' if x.get('has_gsap') else 'no'} |"
+            f"| `{x['route']}` | `{x['path']}` | {x.get('slop_score', 0)} | "
+            f"{'yes' if x.get('orphan') else 'no'} | "
+            f"{'yes' if x.get('use_client') else 'no'} |"
         )
     lines += ["", "## Layouts", ""]
     for x in inventory["layouts"]:

@@ -4,7 +4,7 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.0"
+version: "2.9.1"
 ---
 # Lucy v2.8.0 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
@@ -86,18 +86,19 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | `/lucy audit` | Auditar fase atual |
 | `/lucy continuar` | Retomar sessão anterior |
 
-### Frontend (redesign + páginas novas)
+### Frontend (design premium + páginas novas)
 
 | Comando | Ação |
 |---------|------|
-| `/lucy refazer-frontend` | Inventário page-by-page + plano + refatoração com todas as skills |
-| `/lucy refazer-frontend --audit-only` | Só inventário + gap report (não codar) |
-| `/lucy refazer-frontend --rota /x` | Refazer uma rota e filhos |
-| `/lucy refazer-frontend --auto` | Implementa sem checkpoint |
-| `/lucy nova-pagina <nome> --tipo landing` | Cria landing do zero |
-| `/lucy nova-pagina <nome> --tipo app` | Cria página de produto do zero |
+| `/lucy refazer-frontend` | Audit design (slop, órfãs, duplicatas) + quiz 4 rodadas + polish impeccable — **mantém URLs** |
+| `/lucy refazer-frontend --escopo todo` | Todo o frontend |
+| `/lucy refazer-frontend --escopo /crm` | Só rotas indicadas (ou as mencionadas no prompt) |
+| `/lucy refazer-frontend --audit-only` | Inventário + audit + quiz — não codar |
+| `/lucy refazer-frontend --sem-quiz` | Pula quiz (só se já completo no JSON) |
+| `/lucy nova-pagina <nome> --tipo landing` | Landing do zero |
+| `/lucy nova-pagina <nome> --tipo app` | Página app do zero |
 
-Ver: `lucy-refazer-frontend-protocol.md` · `lucy-nova-pagina-protocol.md`
+Ver: `lucy-refazer-frontend-protocol.md` · `design-quiz-next.sh` · `lucy-nova-pagina-protocol.md`
 
 ### Aprendizado e regras (dois escopos)
 

@@ -1,6 +1,8 @@
-# Protocolo `/lucy refazer-frontend` — redesign completo page-by-page
+# Protocolo `/lucy refazer-frontend` — premium design (sem mudar rotas)
 
-**Objetivo:** ler **todo** o frontend atual (`page.tsx`, `layout.tsx`, CSS), mapear estado real, e refazer com **todas** as skills instaladas + protocolos Lucy (premium stack, html-native, GSAP, regras P0 do projeto).
+**Objetivo:** auditar e **elevar o design** do frontend existente — duplicatas visuais, órfãos, cara de IA (slop) — estilo **impeccable critique → craft → polish**, com **quiz de design** antes de codar.
+
+**Não é:** reorganizar App Router, renomear URLs, ou reescrever backend.
 
 ---
 
@@ -8,109 +10,160 @@
 
 ```
 /lucy refazer-frontend
-/lucy refazer-frontend --audit-only     # inventário + gap report, não codar
-/lucy refazer-frontend --rota /crm      # só uma rota e filhos
-/lucy refazer-frontend --auto           # sem checkpoint entre fases
+/lucy refazer-frontend --escopo todo
+/lucy refazer-frontend --escopo /crm,/inbox
+/lucy refazer-frontend --audit-only
+/lucy refazer-frontend --sem-quiz
+/lucy refazer-frontend --auto
 ```
+
+**Escopo inteligente (default):**
+
+| Situação | Escopo |
+|----------|--------|
+| Owner menciona rotas no prompt | **Só essas rotas** |
+| `--escopo /a,/b` | Rotas listadas |
+| `--escopo todo` ou sem menção | **Todo o frontend** |
+| Quiz `d1_scope` | Confirma / corrige o inferido |
+
+---
+
+## Princípio: design only
+
+| ✅ Permitido | ❌ Proibido (salvo ordem explícita) |
+|-------------|-------------------------------------|
+| Tokens, tipografia, espaçamento, hierarquia | Mover `page.tsx` entre pastas |
+| Unificar **visual** de páginas duplicadas | Renomear URLs / deletar rotas |
+| Integrar órfã na sidebar (link) | Mudar lógica de negócio / API |
+| impeccable critique, layout, polish | Refactor arquitetural de rotas |
+| Reduzir `use client` onde slop | Novo módulo backend no mesmo tick |
 
 ---
 
 ## Pipeline obrigatório (agente)
 
-### Fase 0 — HYDRATE + regras P0
+### Fase 0 — HYDRATE
 
-1. `brain-sync.sh hydrate`
-2. Ler `.cursor/lucy-brain/rules/*.md` (prevalecem sobre tudo)
-3. Ler `DESIGN_SYSTEM.md`, `docs/LUCY-INDEX.md`, `lucy-progress.json`
+1. `brain-sync.sh hydrate` + regras P0 (`lucy-brain/rules/`)
+2. `DESIGN_SYSTEM.md`, `premium-ui-stack.md`, regras P0
 
-### Fase 1 — Inventário automático
+### Fase 1 — Inventário + diagnóstico design
 
 ```bash
 bash .cursor/skills/lucy/scripts/frontend-inventory.sh \
-  --project . \
-  --out .lucy/frontend-inventory.md
+  --project . --out .lucy/frontend-inventory.md
+bash .cursor/skills/lucy/scripts/frontend-inventory.sh \
+  --project . --json --out .lucy/frontend-inventory.json
 ```
 
-Agente **lê cada `page.tsx`** na ordem do inventário (rotas de menor para maior complexidade: `/` → auth → dashboard → módulos).
+Inventário detecta:
 
-Por página, registrar em `.lucy/frontend-refactor-plan.md`:
+- **Duplicatas** — mesmo segmento de URL (`/deals` vs `/negocios`)
+- **Órfãs** — rota sem `href` na nav/sidebar
+- **AI slop** — gradiente genérico, azul/roxo, sombras pesadas, copy "Welcome to…"
 
-| Campo | Conteúdo |
-|-------|----------|
+Gerar `.lucy/frontend-design-audit.md`:
+
+- Top slop por rota
+- Lista órfãs + sugestão (link nav vs polish só)
+- Duplicatas + plano **visual** (não merge de rotas)
+
+Rodar mentalmente / via CLI:
+
+```bash
+npx impeccable critique <frontend-path>   # quando disponível
+```
+
+### Fase 2 — Quiz de design (4 rodadas) — OBRIGATÓRIO
+
+**Exceto** `--sem-quiz` ou `design_refactor_quiz.complete === true`.
+
+Antes de **cada** rodada:
+
+```bash
+bash .cursor/skills/lucy/scripts/design-quiz-next.sh
+```
+
+Usar **AskQuestion** só com IDs `d1_*` … `d4_*`. **Uma rodada por turno.**
+
+Persistir em `lucy-progress.json`:
+
+```json
+"design_refactor_quiz": {
+  "round": 4,
+  "complete": true,
+  "round_1": { "d1_scope": "...", "d1_preserve_routes": "..." },
+  ...
+}
+```
+
+| Round | Tema |
+|-------|------|
+| 1 | Escopo (todo vs mencionado), manter URLs, profundidade impeccable |
+| 2 | Register zinc/slate, anti-slop priorities, motion |
+| 3 | Duplicatas, órfãs, rotas prioritárias (do inventário) |
+| 4 | Pipeline impeccable, gate visual, páginas por tick |
+
+Ver IDs completos: `scripts/design-quiz-next.sh`
+
+### Fase 3 — Plano de refactor visual
+
+`.lucy/frontend-refactor-plan.md` — **ordem de páginas** filtrada por:
+
+- `d1_scope` + rotas mencionadas pelo owner
+- `d3_priority_routes`
+- Slop score desc, depois órfãs, depois resto
+
+Por página:
+
+| Campo | Exemplo |
+|-------|---------|
 | Rota | `/crm/deals` |
-| Arquivo | `src/app/(app)/crm/deals/page.tsx` |
-| Superfície | dashboard / inbox / settings / marketing |
-| Problemas | anti-slop, `use client` desnecessário, cores fora zinc, sem skeleton |
-| Template | `template-gallery.md` #N mais próximo |
-| Skills | routing table — lista explícita |
-| Motion | CSS scrub / GSAP / Framer / nativo dialog |
-| Prioridade | P0 / P1 / P2 |
+| Problemas | slop: gradient, hierarquia fraca |
+| impeccable | critique → layout → typeset → colorize → polish |
+| Skills | ui-ux-pro-max, taste-skill, shadcn, GSAP? |
+| **Não fazer** | renomear rota, mover pasta |
 
-### Fase 2 — Gap + plano master
+### Fase 4 — Checkpoint
 
-Consolidar:
+Resumo: N páginas no escopo, top 5 slop, órfãs, duplicatas.  
+Pedir **sim** para implementar — exceto `--auto`.
 
-- `impeccable critique` (ou taste `redesign-existing-projects`) no frontend path
-- `ui-ux-pro-max` design system persist se tokens inconsistentes
-- Matriz vs `premium-ui-stack.md`, `ux-design-intelligence.md`, `html-native-light-protocol.md`, `gsap-premium-protocol.md`
-
-Saída: `.lucy/frontend-refactor-plan.md` com **fases ordenadas** (1 página ou 1 superfície por tick).
-
-### Fase 3 — Checkpoint (padrão)
-
-Mostrar ao owner:
-
-- Total de páginas
-- Top 5 gaps críticos
-- Ordem de refatoração proposta
-- Estimativa de ticks
-
-Perguntar **sim** para iniciar Fase 1 de implementação — exceto `--auto`.
-
-### Fase 4 — Loop de implementação (1 superfície / tick)
-
-Por tick, **uma** rota ou grupo coeso:
+### Fase 5 — Loop (1 página / tick default)
 
 ```
-discover (página atual) → plan → implement → verify (build/lint) → impeccable critique → fix → gate
+impeccable critique (página) → implement visual fixes → verify build
+→ impeccable polish → taste anti-slop check → gate
 ```
 
-**Skills por superfície** — consultar `design-skills-routing-table.md`:
+**Por página refeita:**
 
-| Superfície | Stack |
-|------------|-------|
-| Dashboard CRM | shadcn double sidebar + tremor + tanstack-query + GSAP stagger entrada |
-| Inbox/chat | shadcn + html-native partial se lista pesada |
-| Settings | dialog nativo + forms |
-| Auth | shape + craft impeccable, motion mínimo |
-
-**Obrigatório em cada página refeita:**
-
-- [ ] Tokens zinc/slate (`premium-ui-stack.md`)
+- [ ] Hierarquia tipográfica (opacidade zinc, não 5 cinzas)
+- [ ] Tokens `premium-ui-stack.md`
+- [ ] Sem slop signals do inventário
 - [ ] `prefers-reduced-motion`
-- [ ] Sem `transition-*` em elemento com GSAP
-- [ ] Skeleton + loading states
-- [ ] Regras P0 do projeto respeitadas
-- [ ] `npx impeccable detect <frontend-path>` — zero critical na rota
+- [ ] URLs **inalteradas**
 
-### Fase 5 — Handoff
+### Fase 6 — Handoff
 
-- Atualizar `lucy-progress.json`: `frontend_refactor_phase`, `next_route`
+- `design_refactor_log.md` — rota ✅ + o que mudou visualmente
 - `brain-sync capture`
-- `next_prompt` com rota exata do próximo tick
-- Re-arm loop se < 100%
+- `next_prompt` = próxima rota no escopo
+- Re-arm se ciclo incompleto
 
 ---
 
-## Ordem de leitura das páginas (padrão)
+## Escopo: todo vs mencionado
 
-1. `layout.tsx` raiz + `globals.css`
-2. Layouts de grupo `(app)`, `(auth)`, `(marketing)`
-3. `/` e landing se existir
-4. Auth (`/login`, `/signup`)
-5. Dashboard home
-6. Módulos por tráfego de negócio (CRM → inbox → settings)
-7. Páginas órfãs / legado
+```
+Owner: "/lucy refazer-frontend foca em /crm e /inbox"
+→ escopo = [/crm, /inbox] (+ filhos se layout compartilhado)
+→ quiz d1 confirma
+
+Owner: "/lucy refazer-frontend"
+→ escopo = todas as pages do inventário
+→ quiz d1 "Todo o frontend"
+```
 
 ---
 
@@ -118,10 +171,11 @@ discover (página atual) → plan → implement → verify (build/lint) → impe
 
 ```
 .lucy/
-├── frontend-inventory.md
+├── frontend-inventory.md / .json
+├── frontend-design-audit.md
 ├── frontend-refactor-plan.md
-├── frontend-refactor-log.md      # uma linha por rota concluída
-└── session-state.json            # retomada via /lucy continuar
+├── frontend-refactor-log.md
+└── session-state.json
 ```
 
 ---
@@ -130,16 +184,17 @@ discover (página atual) → plan → implement → verify (build/lint) → impe
 
 | Comando | Uso |
 |---------|-----|
-| `/lucy nova-pagina` | Criar rota nova (landing ou app) do zero |
-| `/lucy perf` | Após cada 3–5 rotas refeitas |
-| `/lucy regra` | Fixar constraint do projeto antes do refactor |
-| `/lucy continuar` | Retomar plano em `.lucy/` |
+| `/lucy nova-pagina` | Página nova (não confundir com refazer) |
+| `/lucy regra` | Fixar "nunca mudar URL de X" |
+| `/lucy perf` | Após 3–5 páginas |
+| `/lucy continuar` | Retomar plano |
 
 ---
 
 ## Anti-padrões
 
-- Refatorar todas as páginas num único tick
-- Ignorar inventário shell — pular `frontend-inventory.sh`
-- Adicionar `use client` sem passar pela matriz html-native
-- Quebrar rotas API/backend no mesmo tick que UI
+- Pular inventário ou quiz de design
+- Renomear rotas para "organizar"
+- Deletar órfã sem decisão humana (quiz d3)
+- Um tick refatorar 10 páginas
+- Ignorar impeccable critique antes de polish
