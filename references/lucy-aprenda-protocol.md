@@ -27,6 +27,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 |------|----------------------|
 | Animação / perf UI | `html-native-light-protocol.md`, `gsap-premium-protocol.md` |
 | QA visual / screenshots | `visual-gate-protocol.md` |
+| Browser scrape + fotos (externo) | `browser-ai-scrape-protocol.md` |
 | Design / UX | `ux-design-intelligence.md`, `premium-ui-stack.md` |
 | Deploy / test / i18n | protocolo correspondente em `references/` |
 | Novo domínio | `references/learned/<slug>.md` |

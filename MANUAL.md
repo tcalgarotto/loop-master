@@ -2,7 +2,7 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.9.4** · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.9.5** · *Autor:* **Thales Calgarotto**
 
 ---
 
@@ -91,7 +91,7 @@ O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de dese
 
 | Comando | Descrição |
 |---------|-----------|
-| `/lucy @url` | Analisa a URL de referência, mapeia gaps e cria um plano de implementação. |
+| `/lucy @url` | Analisa URL: Firecrawl scrape + **screenshot** + gap (ver `browser-ai-scrape-protocol.md`). |
 | `/lucy --auto @url` | Executa a análise competitiva e a implementação sem pausas para aprovação. |
 | `/lucy analise @url` | Realiza apenas o mapeamento de gaps (análise pura, sem alterar código). |
 | `/lucy build` | Executa o plano competitivo gerado. |

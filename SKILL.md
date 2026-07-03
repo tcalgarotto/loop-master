@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.4"
+version: "2.9.5"
 ---
-# Lucy v2.9.4 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.5 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -81,7 +81,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 ### Análise competitiva
 | Comando | Ação |
 |---------|------|
-| `/lucy @url [prints]` | Análise competitiva + implementação faseada |
+| `/lucy @url [prints]` | Análise competitiva + implementação faseada (browser-ai: scrape + screenshot) |
 | `/lucy --auto @url` | Id. sem checkpoint |
 | `/lucy analise @url` | Só gap analysis (não codar) |
 | `/lucy build` | Implementar plano existente |
@@ -230,6 +230,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 
 ### Análise competitiva
 - `references/competitive-intelligence.md` — **protocolo /lucy analise**
+- `references/browser-ai-scrape-protocol.md` — **headless scrape + screenshots (Firecrawl, Playwright, Obscura)**
 
 ### Qualidade e entrega
 - `references/test-protocol.md` — **geração de testes /lucy test**

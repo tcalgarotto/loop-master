@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.5] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`references/browser-ai-scrape-protocol.md`** — pipeline 3 passos: browser → screenshot + markdown → LLM/vision
+- Roteamento: Playwright (app), Firecrawl scrape/map/Browser Sandbox, Browserbase, Bright Data, Obscura, Crawl4AI
+- `competitive-intelligence.md` — fallback URLs + `.lucy/browser/` obrigatório screenshot em `@url`
+
+---
+
 ## [2.9.4] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)
@@ -102,6 +112,7 @@
 
 ---
 
+[2.9.5]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.5
 [2.9.4]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.4
 [2.9.3]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.3
 [2.9.2]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.2

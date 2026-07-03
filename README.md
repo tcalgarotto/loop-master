@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.4-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.5-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -277,6 +277,7 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/lucy-refazer-frontend-protocol.md` | Redesign visual page-by-page |
 | `references/lucy-nova-pagina-protocol.md` | Landing e páginas app do zero |
 | `references/visual-gate-protocol.md` | Screenshots + vision QA antes do gate |
+| `references/browser-ai-scrape-protocol.md` | Headless scrape + fotos para IA (Firecrawl, etc.) |
 | `references/lucy-aprenda-protocol.md` | `/lucy aprenda` global |
 | `references/lucy-regra-protocol.md` | `/lucy regra` por projeto |
 | `references/docs-sync-discipline.md` | Sync docs obrigatória após mudanças (P0) |
@@ -286,6 +287,6 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 
 ## Versão
 
-**v2.9.4** — visual gate automático no init/update, update incremental. Ver [CHANGELOG.md](CHANGELOG.md).
+**v2.9.5** — browser AI scrape + screenshots, visual gate auto, update incremental. Ver [CHANGELOG.md](CHANGELOG.md).
 
 MIT License — feito com 100% do cérebro.

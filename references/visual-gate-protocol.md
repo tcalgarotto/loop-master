@@ -26,6 +26,8 @@ Desde **v2.9.4**, visual gate é **ligado por padrão** — não precisa configu
 
 Desligar (raro): editar JSON → `"visual_gate_on_fe_phase": false`.
 
+**Não confundir com:** `browser-ai-scrape-protocol.md` — scrape de **sites externos** (Firecrawl, Browser Sandbox). Visual-gate = **nosso** app via Playwright local.
+
 ---
 
 ## Comando

@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.4 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.5 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -55,6 +55,7 @@
 | [agent-routing-table.md](agent-routing-table.md) | Subagents Cursor |
 | [prompt-template.md](prompt-template.md) | Templates next_prompt |
 | [competitive-intelligence.md](competitive-intelligence.md) | `/lucy @url`, analise, build |
+| [browser-ai-scrape-protocol.md](browser-ai-scrape-protocol.md) | Headless scrape + screenshots para IA |
 
 ## Memória
 

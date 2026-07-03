@@ -69,7 +69,11 @@ command -v firecrawl > /dev/null 2>&1 && firecrawl --status 2>/dev/null
 ├── implementation-plan.md
 ├── audit-log.md
 ├── final-report.md
-└── firecrawl/               # se usado
+└── firecrawl/               # scrape/map markdown
+└── browser/                 # screenshots + manifest (browser-ai-scrape-protocol.md)
+    ├── screenshots/
+    ├── markdown/
+    └── manifest.json
 ```
 
 Adicionar `.lucy/` ao `.gitignore` (inteligência competitiva).
@@ -85,9 +89,15 @@ Item a item, sem resumir demais.
 
 ### De URLs — ordem de fallback
 
-1. **Firecrawl** (se autenticado) — scrape, map, agent para SPAs complexas
-2. **Browser MCP** — navegar páginas de funcionalidades/pricing/integrações, snapshot em cada seção relevante
-3. **WebFetch** — último recurso para páginas estáticas
+Ver **`browser-ai-scrape-protocol.md`** — roteamento completo scrape + screenshots.
+
+1. **Firecrawl scrape/map** (se autenticado) — Markdown LLM-ready
+2. **Firecrawl Browser Sandbox** — SPA, auth, paginação, multi-step → `snapshot` + screenshot
+3. **Playwright** (script local) — se sandbox indisponível e URL pública simples
+4. **Browser MCP** — navegar seções, snapshot por área
+5. **WebFetch** — último recurso páginas estáticas
+
+**Obrigatório para `@url` sem prints do usuário:** salvar ≥1 screenshot em `.lucy/browser/screenshots/` além do markdown.
 
 ### Comandos Firecrawl
 
