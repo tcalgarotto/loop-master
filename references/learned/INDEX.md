@@ -5,7 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
-| 2026-07-03 | `integration-cards-patterns` | 3 modelos integração (carousel pills, marketplace sidebar, grid denso); logos reais; QA seção a seção | `integration-cards-patterns.md` |
+| 2026-07-03 | `html-preview-regressions-v8` | Anti-padrões JS: reduced TDZ, paginação 9/página, logo fallback chain, hero/tab P0 checklist | `html-preview-interactive-mocks-protocol.md` |
 | 2026-07-03 | `html-interactive-mocks` | Mocks HTML reais: nav troca view, kanban funcional, integrações carousel, contraste dark, section gate | `html-preview-interactive-mocks-protocol.md` |
 | 2026-07-03 | `mcp-quiz-setup-guide` | Quiz Round 3 MCP; mcp-setup-status/guide; guia cadastro integrações | `mcp-integrations-setup-guide.md` |
 | 2026-07-03 | `design-editable-hybrid` | Caminho C: HTML até aprovar, Penpot MCP, port Next, Puck opcional | `design-editable-hybrid-protocol.md` |

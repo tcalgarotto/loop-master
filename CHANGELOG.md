@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.12] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`html-preview-interactive-mocks-protocol.md`** — anti-padrões JS preview: TDZ/`reduced`, paginação marketplace 9/página, logo fallback chain, hero/tab P0 regression checklist, feature kanban minmax
+- HubFU `preview/hubfu-landing-premium.html` **v8**: hero nav + tabs fix, marketplace search/filter/pagination, carousel 90s, logos simple-icons v13
+- **`scripts/build-hubfu-integrations-data.py`** — slugs pagseguro, n8n, googleshopping→google; mercadolibre sem ícone
+
+---
+
 ## [2.9.11] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)

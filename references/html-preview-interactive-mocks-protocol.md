@@ -134,6 +134,23 @@ Na view **Pipeline** do hero device: kanban **full width**, sem gráfico de linh
 - [ ] Barras financeiras = crescimento exponencial
 - [ ] Kanban organizado (headers, totais, seleção)
 - [ ] Motion equilibrado (≤2 GSAP por viewport)
+- [ ] **P0 regressão:** hero nav + tabs produto — smoke manual após qualquer JS novo
+- [ ] Marketplace ≥20 itens: paginação 9/página + busca re-renderiza grid
+- [ ] Carousel ≥80s; logos com fallback `simpleicons.org` → jsdelivr SVG
+
+---
+
+## Anti-padrões (HTML preview interativo)
+
+| Anti-padrão | Correção |
+|-------------|----------|
+| `initIntegrations()` ou JS novo referencia variável declarada depois (`reduced`) | Declarar deps no topo do `<script>`; `try/catch` no init; não bloquear handlers P0 |
+| Marketplace renderiza 54 cards de uma vez | Paginar 9/página; contador `N de total` |
+| Busca/filtro só atualiza contador | Re-renderizar grid (slice ou `.hidden`); reset `page=0` ao filtrar |
+| Carousel rápido + logos sem fallback | Animação ≥80s; `onerror`: CDN colorido → jsdelivr SVG → iniciais |
+| GSAP opacity em hero/tab deixa view invisível | `killTweensOf`; limpar `opacity` inline; toggle `.active` antes de animar |
+| Feature kanban com wrap feio | `minmax(112px,1fr)` colunas; `white-space: nowrap` + ellipsis em `.deal-name` |
+| Tab/hero view switch quebrado após edit | Checklist P0 acima — smoke obrigatório antes de gate |
 
 ---
 
