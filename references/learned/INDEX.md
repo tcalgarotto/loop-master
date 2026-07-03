@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-03 | `html-interactive-mocks` | Mocks HTML reais: nav troca view, kanban funcional, integrações grid, barras exponenciais, motion equilibrado | `html-preview-interactive-mocks-protocol.md` |
 | 2026-07-03 | `mcp-quiz-setup-guide` | Quiz Round 3 MCP; mcp-setup-status/guide; guia cadastro integrações | `mcp-integrations-setup-guide.md` |
 | 2026-07-03 | `design-editable-hybrid` | Caminho C: HTML até aprovar, Penpot MCP, port Next, Puck opcional | `design-editable-hybrid-protocol.md` |
 | 2026-07-03 | `html-first-design` | HTML preview local antes de Next; shadcn/Atlassian/Figma/M3 como refs | `html-first-design-protocol.md` |

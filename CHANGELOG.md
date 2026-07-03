@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.10] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`html-preview-interactive-mocks-protocol.md`** — mocks HTML com interatividade real, motion equilibrado, grid integrações, barras exponenciais, kanban funcional
+- HubFU `preview/hubfu-landing-premium.html` v5 implementa o protocolo
+- Cross-links: `html-first-design-protocol.md`, `premium-tool-orchestration.md`, `lucy-aprenda-protocol.md`
+
+---
+
 ## [2.9.9] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)

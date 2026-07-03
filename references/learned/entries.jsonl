@@ -6,3 +6,4 @@
 {"ts":"2026-07-03T16:38:26Z","slug":"html-first-design","summary":"HTML preview local antes de Next; refs shadcn/Atlassian/Figma/M3; html-preview-serve.sh","scope":"global"}
 {"ts":"2026-07-03T17:14:54Z","slug":"design-editable-hybrid","summary":"Caminho C: HTML ate aprovar, Penpot MCP tokens, port Next, penpot-mcp-configure.sh","scope":"global"}
 {"ts":"2026-07-03T17:19:30Z","slug":"mcp-quiz-setup-guide","summary":"Quiz 7 rodadas Round 3 MCP; mcp-setup-status/guide; guia cadastro integracoes","scope":"global"}
+{"ts":"2026-07-03T17:34:35Z","slug":"html-interactive-mocks","summary":"Mocks HTML reais: nav troca view, kanban funcional, integracoes grid, barras exponenciais, motion equilibrado","scope":"global"}

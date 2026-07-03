@@ -20,6 +20,7 @@
 |---------|--------------------------------------|-----------|
 | **Init / update** | init.sh incremental — skills + Playwright + Firecrawl* | `init-protocol.md` |
 | **Landing nova (design incerto)** | **HTML-first** `preview/*.html` → owner valida → port Next | `html-first-design-protocol.md` |
+| **Mocks interativos na landing** | Nav/tabs/filtros trocam view real; kanban funcional; barras exponenciais | `html-preview-interactive-mocks-protocol.md` |
 | **Design editável híbrido (C)** | HTML loop até aprovar → Penpot MCP tokens → port Next → Puck opcional | `design-editable-hybrid-protocol.md` |
 | **Landing nova (aprovada)** | taste-skill → ui-ux-pro-max → template-gallery → GSAP/view() → shadcn → impeccable polish | `lucy-nova-pagina-protocol.md` |
 | **Landing sem vida** | impeccable `critique` → GSAP stagger → `/lucy refazer-frontend --escopo /rota` | `gsap-premium-protocol.md` |
