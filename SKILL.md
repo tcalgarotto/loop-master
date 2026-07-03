@@ -209,6 +209,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/html-native-light-protocol.md` — **UI leve: dialog, HTMX, view-transition, scroll scrub**
 - `references/gsap-premium-protocol.md` — **GSAP: timelines, ScrollTrigger, stagger premium**
 - `references/lucy-aprenda-protocol.md` — **`/lucy aprenda` global → GitHub**
+- `references/lucy-regra-protocol.md` — **`/lucy regra` local imutável**
 - `references/lucy-refazer-frontend-protocol.md` — **`/lucy refazer-frontend`**
 - `references/lucy-nova-pagina-protocol.md` — **`/lucy nova-pagina`**
 - `references/learned/INDEX.md` — catálogo do que o owner ensinou
