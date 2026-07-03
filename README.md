@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.3-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.4-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -135,7 +135,7 @@ git clone https://github.com/tcalgarotto/lucy.git ~/.cursor/skills/lucy
 ```
 /lucy init          → Bootstrap completo: skills + quiz + plano + loop
 /lucy               → Próximo tick autônomo (continua de onde parou)
-/lucy update        → Atualiza sem perder progresso
+/lucy update        → Atualiza sem perder progresso (incremental — só instala o que falta)
 pare o loop         → Para o loop autônomo
 ```
 
@@ -286,6 +286,6 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 
 ## Versão
 
-**v2.9.3** — visual gate (Playwright + vision QA), docs-sync, redesign frontend. Ver [CHANGELOG.md](CHANGELOG.md).
+**v2.9.4** — visual gate automático no init/update, update incremental. Ver [CHANGELOG.md](CHANGELOG.md).
 
 MIT License — feito com 100% do cérebro.

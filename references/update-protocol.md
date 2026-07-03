@@ -64,19 +64,33 @@ Ler `SKILL.md` frontmatter `version` → gravar em JSON:
 "skill_pack_updated_at": "ISO8601"
 ```
 
-### 4. Re-run init em modo preserve
+### 4. Re-run init em modo preserve + incremental
 
 ```bash
-scripts/init.sh --preserve-context --skills <skills_installed from JSON>
+scripts/init.sh --preserve-context --update-mode --skills <skills_installed from JSON>
 ```
+
+**v2.9.4+:** `--update-mode` instala **somente o que falta** — não re-baixa skills, não reinstala claude-mem/hooks/playwright se já OK.
 
 Flags init em update:
 
 | Flag | Efeito |
 |------|--------|
 | `--preserve-context` | Não recriar JSON; não resetar fases/tick_count |
-| `--update-mode` | Alias de preserve-context |
-| `--skills` | Reinstalar/atualizar deps opcionais |
+| `--update-mode` | Skip deps já instalados; fast path |
+| `--skills` | Lista de skills a verificar (só instala ausentes) |
+
+O que o update **pula** quando já presente:
+
+| Componente | Check |
+|------------|-------|
+| impeccable, uipro, taste, caveman | `SKILL.md` existe |
+| claude-mem | plugin instalado + worker running |
+| Playwright | `@playwright/test` + chromium cache |
+| brain | `.cursor/lucy-brain/STATE.json` |
+| hooks | hash igual ao skill pack |
+
+`git pull` só baixa commits novos; init incremental evita reinstalar tudo.
 
 ### 5. Re-scan skills instaladas
 
@@ -133,5 +147,6 @@ Após `git pull`, o `update.sh` entrega protocolos para:
 | `/lucy nova-pagina` | `lucy-nova-pagina-protocol.md` |
 | `/lucy aprenda` | `lucy-aprenda-protocol.md` |
 | `/lucy regra` | `lucy-regra-protocol.md` |
+| `/lucy visual-gate` | `visual-gate-protocol.md` (auto em init/update) |
 
 **Preservado no update:** `.cursor/lucy-brain/rules/` (regras P0 do projeto) — nunca sobrescrito pelo pull.

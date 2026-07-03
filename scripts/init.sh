@@ -6,14 +6,17 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=lib/lucy-paths.sh
 source "$SCRIPT_DIR/lib/lucy-paths.sh"
+# shellcheck source=lib/install-idempotent.sh
+source "$SCRIPT_DIR/lib/install-idempotent.sh"
 SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
 # Full ecosystem — installed by default unless --skip-skills or custom --skills
-DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion,nextjs-premium-stack"
+DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion,nextjs-premium-stack,visual-gate"
 SKILLS_CSV=""
 SKIP_SKILLS=false
 PRESERVE_CONTEXT=false
+UPDATE_MODE=false
 GOAL=""
 PLAN_DOC=""
 PROGRESS_FILE="${LUCY_PROGRESS_FILE:-}"
@@ -23,7 +26,8 @@ while [[ $# -gt 0 ]]; do
     --skills) SKILLS_CSV="$2"; shift 2 ;;
     --skip-skills) SKIP_SKILLS=true; shift ;;
     --full) shift ;; # legacy alias — full is now default
-    --preserve-context|--update-mode) PRESERVE_CONTEXT=true; shift ;;
+    --preserve-context) PRESERVE_CONTEXT=true; shift ;;
+    --update-mode) PRESERVE_CONTEXT=true; UPDATE_MODE=true; shift ;;
     --goal) GOAL="$2"; shift 2 ;;
     --plan) PLAN_DOC="$2"; shift 2 ;;
     --progress-file) PROGRESS_FILE="$2"; shift 2 ;;
@@ -37,6 +41,7 @@ Options:
   --skills a,b,c     Install only listed skills (overrides default full set)
   --skip-skills      Skip all optional skill installs
   --preserve-context Keep existing progress JSON (used by update.sh)
+  --update-mode      Preserve context + incremental deps (skip what is installed)
   --goal "..."       Pre-fill north-star goal
   --plan path        Pre-fill plan_doc path
   --progress-file    Custom progress JSON path
@@ -75,6 +80,10 @@ lucy_cleanup_skill_duplicates "$HOME/.cursor/skills"
 install_skill() {
   local name="$1"
   if $SKIP_SKILLS; then return 0; fi
+  if $UPDATE_MODE && lucy_skill_present "$PROJECT_ROOT" "$name"; then
+    echo "    ok $name (skip — already installed)"
+    return 0
+  fi
   case "$name" in
     impeccable)
       if [[ ! -f "$PROJECT_ROOT/.cursor/skills/impeccable/SKILL.md" ]]; then
@@ -115,10 +124,16 @@ install_skill() {
       fi
       ;;
     claude-mem)
-      echo "    Installing claude-mem..."
-      (cd "$PROJECT_ROOT" && npx --yes claude-mem install 2>/dev/null) || \
-        echo "    WARN: claude-mem install failed — run: npx claude-mem install"
-      if command -v npx &>/dev/null; then
+      if lucy_skill_present "$PROJECT_ROOT" "claude-mem"; then
+        echo "    ok claude-mem (skip install)"
+      else
+        echo "    Installing claude-mem..."
+        (cd "$PROJECT_ROOT" && npx --yes claude-mem install 2>/dev/null) || \
+          echo "    WARN: claude-mem install failed — run: npx claude-mem install"
+      fi
+      if lucy_claude_mem_worker_running; then
+        echo "    ok claude-mem worker (running)"
+      elif command -v npx &>/dev/null; then
         echo "    Starting claude-mem worker..."
         (cd "$PROJECT_ROOT" && npx --yes claude-mem start 2>/dev/null) || \
           echo "    WARN: claude-mem start failed — run: npx claude-mem start"
@@ -196,6 +211,9 @@ install_skill() {
       fi
       echo "    Premium UI stack ready. See: .cursor/skills/lucy/references/premium-ui-stack.md"
       ;;
+    visual-gate)
+      lucy_ensure_playwright "$PROJECT_ROOT" "$UPDATE_MODE"
+      ;;
   esac
 }
 
@@ -214,12 +232,20 @@ fi
 
 # Second Brain (L0) — local memory directory
 if [[ -x "$SCRIPT_DIR/brain-sync.sh" ]]; then
-  bash "$SCRIPT_DIR/brain-sync.sh" init || true
+  if lucy_brain_initialized "$PROJECT_ROOT"; then
+    echo "    ok brain (skip init)"
+  else
+    bash "$SCRIPT_DIR/brain-sync.sh" init || true
+  fi
 fi
 
 # Cursor hooks — sessionStart hydrate + stop capture (Option B)
 if [[ -x "$SCRIPT_DIR/install-hooks.sh" ]]; then
-  bash "$SCRIPT_DIR/install-hooks.sh" || true
+  if $UPDATE_MODE && lucy_hooks_up_to_date "$SKILL_ROOT" "$PROJECT_ROOT"; then
+    echo "    ok hooks (skip — up to date)"
+  else
+    bash "$SCRIPT_DIR/install-hooks.sh" || true
+  fi
 fi
 
 PROGRESS="${PROGRESS_FILE:-$(lucy_progress_file "$PROJECT_ROOT")}"
@@ -245,6 +271,11 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   "quiz_round": 0,
   "quiz_complete": false,
   "memory_sync": { "claude_mem": "pending", "last_sync_at": null },
+  "quality_gates": {
+    "visual_gate_auto": true,
+    "visual_gate_on_fe_phase": true,
+    "require_vision_before_gate": true
+  },
   "current_phase": "phase-1",
   "target": "$TARGET",
   "plan_doc": "$PLAN",
@@ -460,6 +491,11 @@ scan_skills() {
   if [[ -f "$PROJECT_ROOT/frontend/package.json" ]] && grep -q '"motion"' "$PROJECT_ROOT/frontend/package.json" 2>/dev/null; then
     json=$(echo "$json" | jq -c '. + ["motion"]' 2>/dev/null || echo "$json")
   fi
+  if lucy_is_nextjs "$PROJECT_ROOT" 2>/dev/null; then
+    if lucy_playwright_in_pkg "$PROJECT_ROOT" 2>/dev/null || [[ -f "$PROJECT_ROOT/.lucy/visual-gate-ready" ]]; then
+      json=$(echo "$json" | jq -c '. + ["visual-gate"]' 2>/dev/null || echo "$json")
+    fi
+  fi
   echo "$json"
 }
 
@@ -471,9 +507,10 @@ if command -v jq &>/dev/null && [[ -f "$PROGRESS" ]]; then
   tmp=$(mktemp)
   rel_progress="${PROGRESS#$PROJECT_ROOT/}"
   jq --argjson sk "$SKILLS_JSON" --arg v "$PACK_VER" --arg pf "$rel_progress" --arg ms "$MEM_STATUS" \
-    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf | .memory_sync.claude_mem = $ms | .memory_sync.last_sync_at = now | .index_doc = "docs/LUCY-INDEX.md"' \
+    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf | .memory_sync.claude_mem = $ms | .memory_sync.last_sync_at = now | .index_doc = "docs/LUCY-INDEX.md" | .quality_gates = ((.quality_gates // {}) + {"visual_gate_auto": true, "visual_gate_on_fe_phase": true, "require_vision_before_gate": true})' \
     "$PROGRESS" > "$tmp" && mv "$tmp" "$PROGRESS"
   echo "    skills_installed: $SKILLS_JSON"
+  echo "    quality_gates: visual_gate_auto=true (default)"
 fi
 
 echo ""

@@ -90,6 +90,15 @@
         "observations_captured": { "type": "integer" }
       }
     },
+    "quality_gates": {
+      "type": "object",
+      "description": "Default on init/update v2.9.4+ — visual gate auto before FE phase gate",
+      "properties": {
+        "visual_gate_auto": { "type": "boolean", "default": true },
+        "visual_gate_on_fe_phase": { "type": "boolean", "default": true },
+        "require_vision_before_gate": { "type": "boolean", "default": true }
+      }
+    },
     "quiz_answers": {
       "type": "object",
       "properties": {

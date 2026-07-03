@@ -21,8 +21,9 @@ Isso instala e configura **tudo**:
 | ui-ux-pro-max | `uipro init --ai cursor` se ausente |
 | taste-skill | `npx skills add … design-taste-frontend` |
 | caveman | installer curl |
-| claude-mem | install + **start worker** |
+| claude-mem | install + **start worker** (skip se já instalado/rodando) |
 | motion | npm install no frontend |
+| **visual-gate** | Playwright + chromium se Next.js (**skip se já ok**) |
 | Symlinks | `link-ecosystem-skills.sh` |
 | JSON L1 | `.cursor/lucy-progress.json` |
 | Plan stub | `docs/LUCY-PLAN.md` |

@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-04 | `visual-gate-auto-incremental-update` | Visual gate default on init/update; update só instala deps faltantes | `visual-gate-protocol.md`, `install-idempotent.sh` |
 | 2026-07-03 | `visual-gate` | Playwright desktop+mobile + vision checklist V1–V8 antes do gate FE | `references/visual-gate-protocol.md` |
 | 2026-07-03 | `docs-sync-discipline` | Grep docs + sync README/MANUAL/SKILL/CHANGELOG + bump patch após mudança | `references/docs-sync-discipline.md` |
 | 2026-07-03 | `gsap-premium` | GSAP para timelines/ScrollTrigger/stagger; CSS só hover; sem `transition-*` com GSAP | `references/gsap-premium-protocol.md` |

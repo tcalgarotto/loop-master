@@ -6,6 +6,28 @@
 
 ---
 
+## Padrão automático (init + update)
+
+Desde **v2.9.4**, visual gate é **ligado por padrão** — não precisa configurar manualmente.
+
+| Momento | O que acontece |
+|---------|----------------|
+| `/lucy init` | `init.sh` instala Playwright + chromium **só se faltar**; grava `quality_gates` no JSON |
+| `/lucy update` | Modo **incremental** — pula skills/deps já instalados; garante `quality_gates` ativos |
+| Loop autônomo | Se `quality_gates.visual_gate_on_fe_phase === true` → capture + vision **antes** do gate |
+
+```json
+"quality_gates": {
+  "visual_gate_auto": true,
+  "visual_gate_on_fe_phase": true,
+  "require_vision_before_gate": true
+}
+```
+
+Desligar (raro): editar JSON → `"visual_gate_on_fe_phase": false`.
+
+---
+
 ## Comando
 
 ```

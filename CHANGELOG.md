@@ -1,5 +1,16 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.4] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **Visual gate automático** em `/lucy init` e `/lucy update` — `quality_gates` no JSON (default on)
+- **`init.sh --update-mode` incremental** — instala só o que falta (skills, claude-mem, playwright, hooks, brain)
+- **`scripts/lib/install-idempotent.sh`** — helpers de checagem
+- Update reporta `git: already up to date` quando não há commits novos
+
+---
+
 ## [2.9.3] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`) — Visual gate
@@ -91,6 +102,7 @@
 
 ---
 
+[2.9.4]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.4
 [2.9.3]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.3
 [2.9.2]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.2
 [2.9.1]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.1

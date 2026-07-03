@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.3"
+version: "2.9.4"
 ---
-# Lucy v2.9.3 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.4 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -74,7 +74,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | Comando | Ação |
 |---------|------|
 | `/lucy init` | Bootstrap shell + quiz 6 rodadas + plano + arm loop |
-| `/lucy update` | git pull + re-init preservando contexto |
+| `/lucy update` | git pull + re-init **incremental** (só instala o que falta) |
 | `/lucy` | Um tick autônomo |
 | `pare o loop` | Stop + `loop_status: stopped` |
 
@@ -99,7 +99,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | `/lucy refazer-frontend --sem-quiz` | Pula quiz (só se já completo no JSON) |
 | `/lucy nova-pagina <nome> --tipo landing` | Landing do zero |
 | `/lucy nova-pagina <nome> --tipo app` | Página app do zero |
-| `/lucy visual-gate` | Playwright screenshots (desktop+mobile) + vision QA antes do gate FE |
+| `/lucy visual-gate` | Playwright screenshots + vision QA — **automático** em fases FE (`quality_gates`) |
 | `/lucy visual-gate --capture-only` | Só captura PNGs — agente julga depois |
 | `/lucy visual-gate --escopo /crm` | Só rotas indicadas |
 
@@ -150,6 +150,8 @@ Ver: `lucy-aprenda-protocol.md` · `lucy-regra-protocol.md`
 Design: rotear via `design-skills-routing-table.md` (design director–style)
 
 **UI leve + motion premium (v2.8.4+):** aplicar `references/html-native-light-protocol.md` (nativo/CSS scrub) e `references/gsap-premium-protocol.md` (timelines, ScrollTrigger, stagger) antes de `use client` / Framer. CSS `transition-*` só em hover — nunca no mesmo elemento que GSAP anima.
+
+**Visual gate (v2.9.4+):** se `quality_gates.visual_gate_on_fe_phase` e fase tem UI → `visual-gate-capture.sh` + vision checklist **antes** do gate (automático no loop; comando manual opcional).
 
 ### Depois (handoff)
 1. **Docs sync** — se mudou comando/script/protocolo: `references/docs-sync-discipline.md` (grep → README/MANUAL/SKILL/CHANGELOG → bump patch)

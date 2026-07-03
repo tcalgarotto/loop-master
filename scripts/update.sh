@@ -57,9 +57,14 @@ fi
 
 if [[ -d "$SKILL_ROOT/.git" ]]; then
   echo "    git pull in $SKILL_ROOT"
+  BEFORE_HEAD=$(cd "$SKILL_ROOT" && git rev-parse HEAD 2>/dev/null || echo "")
   (cd "$SKILL_ROOT" && git pull --ff-only) || {
     echo "    WARN: git pull failed — continuing with local files"
   }
+  AFTER_HEAD=$(cd "$SKILL_ROOT" && git rev-parse HEAD 2>/dev/null || echo "")
+  if [[ -n "$BEFORE_HEAD" && "$BEFORE_HEAD" == "$AFTER_HEAD" ]]; then
+    echo "    git: already up to date (no new commits)"
+  fi
 elif [[ -f "$PROJECT_ROOT/.gitmodules" ]] && grep -qE 'loop-master|skills/lucy' "$PROJECT_ROOT/.gitmodules" 2>/dev/null; then
   echo "    git submodule update --remote"
   (cd "$PROJECT_ROOT" && git submodule update --remote --merge .agents/skills/lucy 2>/dev/null) || true
@@ -70,8 +75,9 @@ fi
 NEW_VER=$(grep -E '^version:' "$SKILL_ROOT/SKILL.md" | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "?")
 echo "    Skill pack: $OLD_VER → $NEW_VER"
 
-# 3. Re-run init preserving context
+# 3. Re-run init preserving context (incremental — skip installed deps)
 INIT_ARGS=(--preserve-context --update-mode --progress-file "$PROGRESS")
+echo "    Init mode: incremental (install only missing deps)"
 if [[ -n "$SKILLS_CSV" ]]; then
   INIT_ARGS+=(--skills "$SKILLS_CSV")
 elif [[ -f "$PROGRESS" ]] && command -v jq &>/dev/null; then
