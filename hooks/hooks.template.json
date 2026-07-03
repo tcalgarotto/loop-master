@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": ".cursor/hooks/loop-master/brain-hydrate.sh"
+      }
+    ],
+    "stop": [
+      {
+        "command": ".cursor/hooks/loop-master/brain-capture.sh"
+      }
+    ]
+  }
+}

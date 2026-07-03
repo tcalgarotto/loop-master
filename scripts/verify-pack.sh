@@ -26,7 +26,8 @@ for f in SKILL.md README.md scripts/init.sh scripts/update.sh scripts/link-ecosy
   references/init-protocol.md references/setup-prompt.md references/git-publish-checklist.md \
   references/getting-started.md references/skills-you-can-use.md references/quiz-protocol.md \
   references/design-skills-routing-table.md references/init-protocol.md \
-  references/second-brain-protocol.md scripts/brain-sync.sh; do
+  references/second-brain-protocol.md scripts/brain-sync.sh scripts/install-hooks.sh \
+  hooks/brain-hydrate.sh hooks/brain-capture.sh hooks/hooks.template.json MANUAL.md references/README.md; do
   [[ -f "$SKILL_ROOT/$f" ]] && pass "$f" || fail "missing $f"
 done
 
@@ -34,7 +35,10 @@ done
 bash -n "$SKILL_ROOT/scripts/init.sh" && pass "init.sh syntax" || fail "init.sh syntax"
 bash -n "$SKILL_ROOT/scripts/update.sh" && pass "update.sh syntax" || fail "update.sh syntax"
 bash -n "$SKILL_ROOT/scripts/link-ecosystem-skills.sh" && pass "link-ecosystem-skills.sh syntax" || fail "link syntax"
-bash -n "$SKILL_ROOT/scripts/brain-sync.sh" && pass "brain-sync.sh syntax" || fail "brain-sync syntax"
+bash -n "$SKILL_ROOT/scripts/install-hooks.sh" && pass "install-hooks.sh syntax" || fail "install-hooks syntax"
+bash -n "$SKILL_ROOT/hooks/brain-hydrate.sh" && pass "brain-hydrate.sh syntax" || fail "brain-hydrate syntax"
+bash -n "$SKILL_ROOT/hooks/brain-capture.sh" && pass "brain-capture.sh syntax" || fail "brain-capture syntax"
+[[ -x "$SKILL_ROOT/hooks/brain-hydrate.sh" ]] || chmod +x "$SKILL_ROOT/hooks/"*.sh "$SKILL_ROOT/scripts/install-hooks.sh" 2>/dev/null || true
 
 # Version in SKILL.md
 VER=$(grep -E '^version:' "$SKILL_ROOT/SKILL.md" | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "")

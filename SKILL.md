@@ -4,13 +4,13 @@ description: >-
   Zero-config autonomous orchestrator with Second Brain memory: learns project and
   dev on every interaction via brain-sync + claude-mem. Full skill install on init,
   6-round quiz, dynamic AGI workflows, design routing. Commands: /loop-master init, update, tick.
-version: "2.5.0"
+version: "2.5.1"
 ---
-# Loop Master v2.5.0 — orquestrador + segundo cérebro
+# Loop Master v2.5.1 — orquestrador + segundo cérebro
 
+**Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
-**Doc mestre:** `references/autonomous-orchestrator-protocol.md`  
-**Init:** `references/init-protocol.md` · **Quiz:** `references/quiz-protocol.md`
+**Hooks Cursor:** `hooks/` + `scripts/install-hooks.sh`
 
 ---
 

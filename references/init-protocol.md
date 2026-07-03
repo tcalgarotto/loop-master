@@ -1,4 +1,4 @@
-# `/loop-master init` — Protocolo zero-config v2.4
+# `/loop-master init` — Protocolo zero-config v2.5.1
 
 Quando o usuário invoca `/loop-master init`, o orchestrator executa **nesta ordem exata**.
 **Sem rodeios. Sem pedir permissão para rodar scripts.**
@@ -27,6 +27,8 @@ Isso instala e configura **tudo**:
 | JSON L1 | `.cursor/loop-master-progress.json` |
 | Plan stub | `docs/LOOP-MASTER-PLAN.md` |
 | Index | `docs/LOOP-MASTER-INDEX.md` (✅⏳🔮👤) |
+| Second Brain | `brain-sync.sh init` → `.cursor/loop-master-brain/` |
+| **Cursor hooks** | `install-hooks.sh` → sessionStart + stop |
 | PRODUCT.md | stub se FE |
 
 **Não** perguntar ao usuário nesta fase. Reportar resumo em 3 linhas após concluir.

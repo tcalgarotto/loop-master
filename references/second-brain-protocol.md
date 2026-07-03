@@ -152,9 +152,23 @@ No autonomous-orchestrator-protocol, substituir "se claude-mem ativo" por:
 | `brain-sync.sh capture --summary "..."` | Gravar interação |
 | `brain-sync.sh status` | Health check |
 
-Init v2.5 roda `brain-sync.sh init` automaticamente.
+Init v2.5 roda `brain-sync.sh init` + `install-hooks.sh` automaticamente.
 
 ---
+
+## Hooks Cursor (Opção B — memória em todo chat Agent)
+
+Instalados em `.cursor/hooks/loop-master/` pelo `install-hooks.sh`:
+
+| Evento | Script | Comportamento |
+|--------|--------|---------------|
+| `sessionStart` | `brain-hydrate.sh` | Hidrata brain → `additional_context` |
+| `stop` | `brain-capture.sh` | Captura resumo do turno (sem followup) |
+
+Fonte na skill: `hooks/hooks.template.json`  
+Reinstalar: `bash .cursor/skills/loop-master/scripts/install-hooks.sh`
+
+**Nota:** hooks só aplicam ao **Agent Chat**, não ao Tab inline.
 
 ## Anti-padrões
 

@@ -162,6 +162,11 @@ if [[ -x "$SCRIPT_DIR/brain-sync.sh" ]]; then
   bash "$SCRIPT_DIR/brain-sync.sh" init || true
 fi
 
+# Cursor hooks — sessionStart hydrate + stop capture (Option B)
+if [[ -x "$SCRIPT_DIR/install-hooks.sh" ]]; then
+  bash "$SCRIPT_DIR/install-hooks.sh" || true
+fi
+
 PROGRESS="${PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
 [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
 INDEX_DOC="$PROJECT_ROOT/docs/LOOP-MASTER-INDEX.md"
