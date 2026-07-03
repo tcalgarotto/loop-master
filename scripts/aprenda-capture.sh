@@ -34,10 +34,29 @@ BRAIN="$(lucy_brain_dir "$PROJECT_ROOT")"
 LEARNED_DIR="$BRAIN/learned"
 mkdir -p "$LEARNED_DIR"
 
+# Project-local index (survives /lucy update)
+INDEX="$LEARNED_DIR/INDEX.md"
+if [[ ! -f "$INDEX" ]]; then
+  cat > "$INDEX" <<'IDX'
+# Aprendizados do projeto (`/lucy aprenda`)
+
+Conhecimento local — **não é apagado** por `git pull` no skill pack.
+
+| Data | Slug | Resumo |
+|------|------|--------|
+IDX
+fi
+
 TS="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+DATE="${TS%T*}"
 ENTRY="$LEARNED_DIR/entries.jsonl"
 
 printf '%s\n' "{\"ts\":\"$TS\",\"slug\":\"$SLUG\",\"summary\":$(python3 -c "import json,sys; print(json.dumps(sys.argv[1]))" "$SUMMARY")}" >> "$ENTRY"
+
+# Append to project INDEX if slug not already listed
+if ! grep -q "| \`$SLUG\`" "$INDEX" 2>/dev/null && ! grep -q "| $SLUG |" "$INDEX" 2>/dev/null; then
+  echo "| $DATE | \`$SLUG\` | $SUMMARY |" >> "$INDEX"
+fi
 
 echo "==> aprenda capture"
 echo "    slug: $SLUG"

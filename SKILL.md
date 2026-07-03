@@ -18,7 +18,7 @@ version: "2.8.4"
 
 A cada `/lucy` (tick ou chat):
 
-1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search
+1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search + ler `.cursor/lucy-brain/learned/*.md` (aprendizados locais)
 2. **TRABALHAR** — com contexto acumulado
 3. **CAPTURE** — `brain-sync.sh capture` + claude-mem observation_add
 
