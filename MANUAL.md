@@ -125,12 +125,12 @@ O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de dese
 | `/lucy refazer-frontend` | Audita todo o frontend (slop, órfãs, duplicatas), quiz de design (4 rodadas), refina visual com impeccable — **sem mudar URLs**. |
 | `/lucy refazer-frontend --escopo /crm` | Mesmo fluxo, só nas rotas indicadas ou mencionadas no prompt. |
 | `/lucy refazer-frontend --audit-only` | Inventário + relatório — não altera código. |
-| `/lucy nova-pagina <nome> --tipo landing` | Cria landing page do zero (taste-skill + template gallery). |
+| `/lucy nova-pagina <nome> --tipo landing` | Cria landing (HTML-first em `preview/` quando design incerto, depois Next). |
 | `/lucy nova-pagina <nome> --tipo app` | Cria página de produto dentro do shell existente. |
 | `/lucy visual-gate` | Automático em fases FE (`quality_gates`); manual: captura prints + vision QA. |
 | `/lucy visual-gate --capture-only` | Só gera PNGs em `.lucy/visual-gates/tick-N/`. |
 
-Ver: `references/lucy-refazer-frontend-protocol.md`, `references/visual-gate-protocol.md`, `references/lucy-nova-pagina-protocol.md`
+Ver: `references/lucy-refazer-frontend-protocol.md`, `references/visual-gate-protocol.md`, `references/html-first-design-protocol.md`, `references/lucy-nova-pagina-protocol.md`
 
 ### 4.6 Aprendizado e regras do projeto
 

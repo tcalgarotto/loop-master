@@ -1,5 +1,16 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.7] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`html-first-design-protocol.md`** — prototipar landing em `preview/*.html` antes de Next; loop de edição live com owner
+- **`scripts/html-preview-serve.sh`** — servidor local porta 8765 para iterar HTML
+- **Biblioteca canônica de referências:** shadcn/ui, Atlassian Design, Figma Community, Material 3
+- `premium-tool-orchestration.md` R3 HTML-first · `lucy-nova-pagina-protocol.md` Fase 1.5 · `design-system-intake.md` links
+
+---
+
 ## [2.9.6] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)

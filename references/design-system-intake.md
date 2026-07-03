@@ -18,6 +18,17 @@
 
 **Não precisa** encher de referências — **2–3 referências fortes** > 20 fracas.
 
+### Biblioteca canônica (global `/lucy aprenda`)
+
+| Superfície | URL | Uso |
+|------------|-----|-----|
+| Web / Next | [shadcn/ui docs](https://ui.shadcn.com/docs) | Componentes, blocks, theming — **port principal** |
+| Web motion | [Atlassian Design](https://atlassian.design/whats-new) | Tipografia, motion de componentes |
+| Web layouts | [Figma Community](https://www.figma.com/pt-br/comunidade) | UI kits, design systems |
+| Android | [Material 3](https://m3.material.io/) | Guidelines mobile nativo |
+
+Detalhe do fluxo HTML-first: `html-first-design-protocol.md`.
+
 ---
 
 ## Pipeline (ordem)

@@ -19,7 +19,8 @@
 | Momento | Ferramentas (usar todas que aplicam) | Protocolo |
 |---------|--------------------------------------|-----------|
 | **Init / update** | init.sh incremental — skills + Playwright + Firecrawl* | `init-protocol.md` |
-| **Landing nova** | taste-skill → ui-ux-pro-max → template-gallery → GSAP/view() → shadcn → impeccable polish | `lucy-nova-pagina-protocol.md` |
+| **Landing nova (design incerto)** | **HTML-first** `preview/*.html` → owner valida → port Next | `html-first-design-protocol.md` |
+| **Landing nova (aprovada)** | taste-skill → ui-ux-pro-max → template-gallery → GSAP/view() → shadcn → impeccable polish | `lucy-nova-pagina-protocol.md` |
 | **Landing sem vida** | impeccable `critique` → GSAP stagger → `/lucy refazer-frontend --escopo /rota` | `gsap-premium-protocol.md` |
 | **App page nova** | ui-ux-pro-max → shadcn → tremor → tanstack-query → impeccable | `design-stack-protocol.md` |
 | **QA visual nosso app** | Playwright `visual-gate-capture.sh` + vision V1–V8 | `visual-gate-protocol.md` |
@@ -48,7 +49,15 @@ Antes de implementar UI, **scan** `skills_installed[]` + protocolos. Se taste-sk
 
 **Nunca** declarar landing/pricing “pronta” sem screenshot em `.lucy/visual-gates/` ou `.lucy/browser/screenshots/`.
 
-### R3 — Pipeline landing premium (mínimo)
+### R3 — HTML-first quando design incerto
+
+Se owner pede preview local, falta contexto do produto ou landing atual está “plana”:
+
+1. Criar `preview/<slug>.html` com seções completas + GSAP (`html-first-design-protocol.md`)
+2. Servir com `html-preview-serve.sh` ou `xdg-open`; iterar com owner
+3. Só então port para Next (`lucy-nova-pagina-protocol.md`)
+
+### R4 — Pipeline landing premium (mínimo)
 
 Toda `--tipo landing` passa por:
 
@@ -58,7 +67,7 @@ Toda `--tipo landing` passa por:
 4. Hero SSR — **proibido** flash “Carregando flags…” na primeira pintura (defer i18n/hydration blocking)
 5. visual-gate na URL final (`localhost` ou Vercel)
 
-### R4 — Design systems tagados pelo owner
+### R5 — Design systems tagados pelo owner
 
 Se o owner envia `@DESIGN.md`, prints, links Figma, ou “design system do X”:
 
@@ -68,7 +77,7 @@ Se o owner envia `@DESIGN.md`, prints, links Figma, ou “design system do X”:
 
 **Sim — tagar design systems ajuda.** Formato ideal: link + 2–3 prints + “o que copiar” (sidebar, hero, cards).
 
-### R5 — Qualidade código + design juntos
+### R6 — Qualidade código + design juntos
 
 Gate bloqueado se:
 
@@ -77,7 +86,7 @@ Gate bloqueado se:
 - landing sem motion checklist (R3)
 - `last_visual_audit.gate_passed !== true` (fases FE)
 
-### R6 — Init entrega stack; agente entrega craft
+### R7 — Init entrega stack; agente entrega craft
 
 `init.sh` garante deps. **Não** substitui impeccable critique nem visual-gate no fim.
 

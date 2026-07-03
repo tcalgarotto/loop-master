@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-03 | `html-first-design` | HTML preview local antes de Next; shadcn/Atlassian/Figma/M3 como refs | `html-first-design-protocol.md` |
 | 2026-07-03 | `premium-tool-orchestration` | P0: taste+GSAP+browser+Firecrawl por momento; landing com motion | `premium-tool-orchestration.md` |
 | 2026-07-03 | `browser-ai-scrape` | Pipeline browser→screenshot+markdown→LLM/vision | `browser-ai-scrape-protocol.md` |
 | 2026-07-04 | `visual-gate-auto-incremental-update` | Visual gate default on init/update; update só instala deps faltantes | `visual-gate-protocol.md`, `install-idempotent.sh` |

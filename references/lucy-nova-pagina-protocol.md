@@ -37,7 +37,16 @@
 
 Usar **AskQuestion** só se rota ou tipo forem ambíguos.
 
-### Fase 1 — HYDRATE + design system
+### Fase 1.5 — HTML-first (recomendado para landing)
+
+**Antes** do scaffold Next, quando design incerto ou owner quer preview local:
+
+1. Criar `preview/<slug>.html` — ver `html-first-design-protocol.md`
+2. `bash .cursor/skills/lucy/scripts/html-preview-serve.sh` → http://127.0.0.1:8765/
+3. Iterar copy, motion, mocks com owner (2–4 rodadas)
+4. Após aprovação → Fase 3 (scaffold Next) reutilizando hierarquia aprovada
+
+### Fase 2 — HYDRATE + design system
 
 1. `brain-sync.sh hydrate` + regras P0
 2. Confirmar stack instalada (`skills_installed` no JSON):
@@ -45,7 +54,7 @@ Usar **AskQuestion** só se rota ou tipo forem ambíguos.
 3. `ui-ux-pro-max` — persist design system se projeto sem tokens estáveis
 4. Ler `premium-ui-stack.md` + `template-gallery.md`
 
-### Fase 2 — Shape (impeccable + taste)
+### Fase 3 — Shape (impeccable + taste)
 
 | Tipo | Skills |
 |------|--------|
@@ -54,7 +63,7 @@ Usar **AskQuestion** só se rota ou tipo forem ambíguos.
 
 Documentar wireframe em `.lucy/pages/<slug>-shape.md` (seções, hierarquia, CTA).
 
-### Fase 3 — Scaffold arquivos
+### Fase 4 — Scaffold arquivos
 
 **Landing** (`--tipo landing`):
 
@@ -78,7 +87,7 @@ src/components/<slug>/                 # superfície isolada
 - `loading.tsx` + `error.tsx` em rotas app
 - `globals.css` / tokens — não duplicar; usar design-system existente
 
-### Fase 4 — Craft + implement
+### Fase 5 — Craft + implement
 
 **Landing premium (checklist) — mínimo “com vida”:**
 
@@ -100,7 +109,7 @@ src/components/<slug>/                 # superfície isolada
 - [ ] Empty state projetado
 - [ ] Dialog nativo para ações CRUD simples
 
-### Fase 5 — Verify + gate (obrigatório)
+### Fase 6 — Verify + gate (obrigatório)
 
 ```bash
 npm run build
