@@ -100,7 +100,7 @@ Detalhe Impeccable: `references/impeccable-routing-table.md`
 Ao usar skill design, atualizar:
 - `phases[id].design_skills_used[]`
 - `minor_cycle.tasks[].skill_hint`
-- `docs/LOOP-MASTER-INDEX.md` — marcar skill ✅
+- `docs/LUCY-INDEX.md` — marcar skill ✅
 
 ---
 

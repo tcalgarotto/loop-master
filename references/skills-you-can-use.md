@@ -1,13 +1,13 @@
 # Skills que você pode usar com Loop Master v2.4
 
-O Loop Master instala e roteia **automaticamente** no `/loop-master init`.
+O Loop Master instala e roteia **automaticamente** no `/lucy init`.
 
 ---
 
 ## Zero-config — você não instala manualmente
 
 ```
-/loop-master init
+/lucy init
 ```
 
 Bootstrap shell instala tudo. Ver [init-protocol.md](init-protocol.md).
@@ -65,6 +65,6 @@ gate      → polish, INDEX ✅, docs
 ## Verificar
 
 ```bash
-bash .cursor/skills/loop-master/scripts/verify-pack.sh
-cat .cursor/loop-master-progress.json | jq '.skills_installed, .memory_sync'
+bash .cursor/skills/lucy/scripts/verify-pack.sh
+cat .cursor/lucy-progress.json | jq '.skills_installed, .memory_sync'
 ```

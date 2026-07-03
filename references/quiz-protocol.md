@@ -1,13 +1,13 @@
 # Quiz Protocol — 6 rodadas (formulário multi-etapas)
 
-O `/loop-master init` usa **AskQuestion** em **6 rodadas sequenciais**.
+O `/lucy init` usa **AskQuestion** em **6 rodadas sequenciais**.
 Cada rodada é **uma interação completa** (várias perguntas com opções + sugestões).
 **Não implementar** até `quiz_complete: true` no JSON.
 
 ## Regra de ouro
 
-1. **Antes do quiz:** rodar `bash .cursor/skills/loop-master/scripts/init.sh` **sem perguntar** (bootstrap completo).
-2. **Antes de cada rodada:** rodar `bash .cursor/skills/loop-master/scripts/quiz-next.sh` e usar **só** os IDs impressos.
+1. **Antes do quiz:** rodar `bash .cursor/skills/lucy/scripts/init.sh` **sem perguntar** (bootstrap completo).
+2. **Antes de cada rodada:** rodar `bash .cursor/skills/lucy/scripts/quiz-next.sh` e usar **só** os IDs impressos.
 3. **Durante init:** uma rodada por turno; persistir `quiz_answers.round_N` após cada rodada.
 4. **Após Round 6:** criar fases, atualizar INDEX/plan, armar loop dinâmico, tick 1.
 
@@ -113,8 +113,8 @@ Persistir: `quiz_answers.round_5` + atualizar `loop_arm.mode`, `loop_interval_se
 
 Após confirmar:
 - `quiz_complete: true`, `quiz_round: 6`
-- Gerar `phases{}` + `docs/LOOP-MASTER-PLAN.md`
-- Atualizar `docs/LOOP-MASTER-INDEX.md` (✅/⏳/🔮/👤)
+- Gerar `phases{}` + `docs/LUCY-PLAN.md`
+- Atualizar `docs/LUCY-INDEX.md` (✅/⏳/🔮/👤)
 - `loop_status: running` + `arm-dynamic-loop.sh`
 - Tick 1: `discover` → `plan` (ou `implement` se escopo cristalino)
 

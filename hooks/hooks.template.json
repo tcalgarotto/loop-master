@@ -3,12 +3,12 @@
   "hooks": {
     "sessionStart": [
       {
-        "command": ".cursor/hooks/loop-master/brain-hydrate.sh"
+        "command": ".cursor/hooks/lucy/brain-hydrate.sh"
       }
     ],
     "stop": [
       {
-        "command": ".cursor/hooks/loop-master/brain-capture.sh"
+        "command": ".cursor/hooks/lucy/brain-capture.sh"
       }
     ]
   }

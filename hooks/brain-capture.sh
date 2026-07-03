@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# loop-master hook — stop: capture session summary into Second Brain
+# Lucy hook — stop: capture session summary into Second Brain
 set -euo pipefail
 
 input=$(cat)
@@ -8,6 +8,8 @@ PROJECT_ROOT="${CURSOR_PROJECT_DIR:-${PWD}}"
 find_brain_sync() {
   local p
   for p in \
+    "$PROJECT_ROOT/.cursor/skills/lucy/scripts/brain-sync.sh" \
+    "$PROJECT_ROOT/.agents/skills/lucy/scripts/brain-sync.sh" \
     "$PROJECT_ROOT/.cursor/skills/loop-master/scripts/brain-sync.sh" \
     "$PROJECT_ROOT/.agents/skills/loop-master/scripts/brain-sync.sh"; do
     [[ -x "$p" ]] && { echo "$p"; return 0; }

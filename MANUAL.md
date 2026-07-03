@@ -2,7 +2,7 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.7.0** · *Mascote:* **Nano Banana** 🍌 · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.8.0** · *Mascote:* **Nano Banana** 🍌 · *Autor:* **Thales Calgarotto**
 
 ---
 
@@ -43,7 +43,22 @@ git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/lucy
 cd seu-projeto
 ```
 
-### 3.2 Inicialização Automática
+> **Já tinha a Lucy v1 instalada?** Faça backup e substitua:
+> `mv ~/.cursor/skills/lucy ~/.cursor/skills/lucy-v1-backup && git clone ...`
+
+### 3.2 Migração loop-master → Lucy (projetos existentes)
+
+Se o projeto ainda usa caminhos legados (`loop-master-progress.json`, `loop-master-brain/`), rode **uma vez**:
+
+```bash
+bash ~/.cursor/skills/lucy/scripts/migrate-loop-master-to-lucy.sh
+```
+
+Ou no Cursor: `/lucy update` (a migração roda automaticamente antes do pull).
+
+O script renomeia arquivos, cria backup em `.cursor/lucy-migration-backup-*` e **não apaga dados**.
+
+### 3.3 Inicialização Automática
 
 No chat do Cursor Agent, execute o seguinte comando:
 
@@ -109,10 +124,10 @@ O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de dese
 
 O Lucy gerencia sua própria persistência de memória em quatro camadas:
 
-1. **L0 (Brain Local)**: `.cursor/loop-master-brain/` — Guarda suas preferências em `dev-profile.json` e decisões arquiteturais em `project-mind.json`.
-2. **L1 (Progress)**: `.cursor/loop-master-progress.json` — Handoff do estado atual entre os ticks do loop.
+1. **L0 (Brain Local)**: `.cursor/lucy-brain/` — Guarda suas preferências em `dev-profile.json` e decisões arquiteturais em `project-mind.json`.
+2. **L1 (Progress)**: `.cursor/lucy-progress.json` — Handoff do estado atual entre os ticks do loop.
 3. **L2 (claude-mem)**: Busca semântica local baseada em banco de dados SQLite.
-4. **L3 (Documentação)**: `docs/LOOP-MASTER-PLAN.md` e `docs/LOOP-MASTER-INDEX.md` legíveis por humanos.
+4. **L3 (Documentação)**: `docs/LUCY-PLAN.md` e `docs/LUCY-INDEX.md` legíveis por humanos.
 
 ---
 

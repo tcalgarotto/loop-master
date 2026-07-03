@@ -11,13 +11,13 @@ Equivalente operacional ao chat Hermes que grava contexto a cada mensagem — ma
 
 | Camada | Storage | O que guarda | Quando |
 |--------|---------|--------------|--------|
-| **L0 Brain** | `.cursor/loop-master-brain/` | Perfil dev, decisões, log | **Toda interação** |
-| **L1 Handoff** | `loop-master-progress.json` | Tick, fases, next_prompt | Todo tick |
+| **L0 Brain** | `.cursor/lucy-brain/` | Perfil dev, decisões, log | **Toda interação** |
+| **L1 Handoff** | `lucy-progress.json` | Tick, fases, next_prompt | Todo tick |
 | **L2 Semantic** | claude-mem MCP | Busca semântica cross-session | Hydrate + capture |
 | **L3 Human** | PLAN + INDEX + brain/INDEX.md | Legível por humanos | Sync contínuo |
 
 ```
-Usuário → /loop-master
+Usuário → /lucy
             │
             ├─ HYDRATE (início)
             │    ├─ brain-sync.sh hydrate
@@ -33,7 +33,7 @@ Usuário → /loop-master
 
 ---
 
-## Diretório `.cursor/loop-master-brain/`
+## Diretório `.cursor/lucy-brain/`
 
 | Arquivo | Conteúdo |
 |---------|----------|
@@ -47,12 +47,12 @@ Usuário → /loop-master
 
 ---
 
-## Ciclo obrigatório — TODA invocação `/loop-master`
+## Ciclo obrigatório — TODA invocação `/lucy`
 
 ### 1. HYDRATE (antes de agir)
 
 ```bash
-bash .cursor/skills/loop-master/scripts/brain-sync.sh hydrate
+bash .cursor/skills/lucy/scripts/brain-sync.sh hydrate
 ```
 
 Agente **também** chama MCP claude-mem (3-layer workflow):
@@ -69,7 +69,7 @@ Merge em `memory_refs[]` no progress JSON. **Não agir** sem hydrate.
 ### 2. CAPTURE (antes de encerrar turno)
 
 ```bash
-bash .cursor/skills/loop-master/scripts/brain-sync.sh capture \
+bash .cursor/skills/lucy/scripts/brain-sync.sh capture \
   --kind tick \
   --summary "3-8 frases: o que mudou, decisões, findings" \
   --paths "src/foo.tsx,docs/bar.md" \
@@ -82,7 +82,7 @@ Agente **também** chama:
 ```
 observation_add(
   content="<narrativa compacta>",
-  kind="loop-master-tick",
+  kind="lucy-tick",
   metadata={tick, phase, paths, consciousness_level}
 )
 ```
@@ -90,7 +90,7 @@ observation_add(
 Para chat casual (não tick):
 
 ```
-observation_add(kind="loop-master-chat", ...)
+observation_add(kind="lucy-chat", ...)
 brain-sync.sh capture --kind chat --summary "..."
 ```
 
@@ -158,7 +158,7 @@ Init v2.5 roda `brain-sync.sh init` + `install-hooks.sh` automaticamente.
 
 ## Hooks Cursor (Opção B — memória em todo chat Agent)
 
-Instalados em `.cursor/hooks/loop-master/` pelo `install-hooks.sh`:
+Instalados em `.cursor/hooks/lucy/` pelo `install-hooks.sh`:
 
 | Evento | Script | Comportamento |
 |--------|--------|---------------|
@@ -166,7 +166,7 @@ Instalados em `.cursor/hooks/loop-master/` pelo `install-hooks.sh`:
 | `stop` | `brain-capture.sh` | Captura resumo do turno (sem followup) |
 
 Fonte na skill: `hooks/hooks.template.json`  
-Reinstalar: `bash .cursor/skills/loop-master/scripts/install-hooks.sh`
+Reinstalar: `bash .cursor/skills/lucy/scripts/install-hooks.sh`
 
 **Nota:** hooks só aplicam ao **Agent Chat**, não ao Tab inline.
 

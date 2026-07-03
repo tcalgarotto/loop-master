@@ -8,8 +8,8 @@ Ver protocolo completo: `references/second-brain-protocol.md`
 
 | Camada | Storage | Escopo | Obrigatório |
 |--------|---------|--------|-------------|
-| **L0 Brain** | `.cursor/loop-master-brain/` | Perfil dev, ADRs, log interações | **Sim — toda interação** |
-| **L1 Handoff** | `.cursor/loop-master-progress.json` | Este loop / projeto | Sim |
+| **L0 Brain** | `.cursor/lucy-brain/` | Perfil dev, ADRs, log interações | **Sim — toda interação** |
+| **L1 Handoff** | `.cursor/lucy-progress.json` | Este loop / projeto | Sim |
 | **L2 Semantic** | claude-mem MCP | Cross-session, busca semântica | Sim |
 | **L3 Human** | PLAN + INDEX + brain/INDEX.md | Legível por humanos | Sim |
 
@@ -21,12 +21,12 @@ Todo tick **termina** atualizando L1. Campos críticos:
 {
   "tick_count": 42,
   "overall_pct": 65,
-  "next_prompt": "/loop-master tick #43 — ...",
+  "next_prompt": "/lucy tick #43 — ...",
   "skills_installed": ["impeccable", "ui-ux-pro-max"],
   "loop_arm": { "mode": "fixed", "sentinel": "AGENT_LOOP_TICK_...", "next_wake_seconds": 240 },
   "minor_cycle": { "step": "audit", "iteration": 2 },
   "archive_summaries": [{ "tick": 41, "summary": "...", "phase": "...", "step": "fix" }],
-  "doc_versions": [{ "path": "docs/LOOP-MASTER-PLAN.md", "version": "tick-41", "tick": 41 }]
+  "doc_versions": [{ "path": "docs/LUCY-PLAN.md", "version": "tick-41", "tick": 41 }]
 }
 ```
 
@@ -103,9 +103,9 @@ Registrar observação compacta (se hook disponível):
 | Finding waived | `last_audit.waivers` + INDEX 👤 |
 | Skill instalada | INDEX ✅ em skills ecosystem |
 | Loop completo | `docs/LOOP-MASTER-COMPLETE.md` + INDEX ✅ |
-| Todo tick | `docs/LOOP-MASTER-INDEX.md` — emojis ✅ ⏳ 🔮 👤 |
+| Todo tick | `docs/LUCY-INDEX.md` — emojis ✅ ⏳ 🔮 👤 |
 
-### INDEX (`docs/LOOP-MASTER-INDEX.md`)
+### INDEX (`docs/LUCY-INDEX.md`)
 
 Legenda obrigatória:
 - ✅ OK — pronto / concluído

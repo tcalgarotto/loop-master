@@ -105,7 +105,7 @@ Invocar via ferramenta **Task**; múltiplos Tasks na **mesma mensagem** quando p
 ```text
 loop-master worker — task <task_id> — phase <phase_id> — step <step>
 
-Read: .cursor/loop-master-progress.json (phase + task only)
+Read: .cursor/lucy-progress.json (phase + task only)
 Scope ONLY: <files_scope glob list>
 Do NOT touch: <excluded paths>
 Acceptance: <1-3 bullets from acceptance_criteria>

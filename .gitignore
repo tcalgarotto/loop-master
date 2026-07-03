@@ -1,4 +1,4 @@
-# Standalone loop-master repo — do not commit secrets or project progress
+# Standalone Lucy repo — do not commit secrets or project progress
 .env
 .env.*
 !.env.example

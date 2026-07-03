@@ -5,14 +5,14 @@
 ## 1. Clone
 
 ```bash
-git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/loop-master
+git clone https://github.com/tcalgarotto/lucy.git ~/.cursor/skills/lucy
 cd seu-projeto
 ```
 
 ## 2. Init no Cursor
 
 ```
-/loop-master init
+/lucy init
 ```
 
 Pronto. Bootstrap + brain + hooks + quiz rodam automaticamente.
@@ -21,8 +21,8 @@ Pronto. Bootstrap + brain + hooks + quiz rodam automaticamente.
 
 | Comando | Uso |
 |---------|-----|
-| `/loop-master init` | Configurar |
-| `/loop-master` | Um tick |
+| `/lucy init` | Configurar |
+| `/lucy` | Um tick |
 | `pare o loop` | Parar |
 
 ## Docs

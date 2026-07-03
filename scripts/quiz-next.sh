@@ -4,10 +4,11 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(pwd)"
-[[ -d "$PROJECT_ROOT/.git" ]] || PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+# shellcheck source=lib/lucy-paths.sh
+source "$SCRIPT_DIR/lib/lucy-paths.sh"
+PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
-PROGRESS="${LOOP_MASTER_PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
+PROGRESS="$(lucy_progress_file "$PROJECT_ROOT")"
 [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
 AS_JSON=false
 [[ "${1:-}" == "--json" ]] && AS_JSON=true

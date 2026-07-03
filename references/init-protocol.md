@@ -1,6 +1,6 @@
-# `/loop-master init` — Protocolo zero-config v2.5.2
+# `/lucy init` — Protocolo zero-config v2.5.2
 
-Quando o usuário invoca `/loop-master init`, o orchestrator executa **nesta ordem exata**.
+Quando o usuário invoca `/lucy init`, o orchestrator executa **nesta ordem exata**.
 **Sem rodeios. Sem pedir permissão para rodar scripts.**
 
 ---
@@ -10,7 +10,7 @@ Quando o usuário invoca `/loop-master init`, o orchestrator executa **nesta ord
 **Imediatamente**, antes de qualquer AskQuestion:
 
 ```bash
-bash .cursor/skills/loop-master/scripts/init.sh
+bash .cursor/skills/lucy/scripts/init.sh
 ```
 
 Isso instala e configura **tudo**:
@@ -24,10 +24,10 @@ Isso instala e configura **tudo**:
 | claude-mem | install + **start worker** |
 | motion | npm install no frontend |
 | Symlinks | `link-ecosystem-skills.sh` |
-| JSON L1 | `.cursor/loop-master-progress.json` |
-| Plan stub | `docs/LOOP-MASTER-PLAN.md` |
-| Index | `docs/LOOP-MASTER-INDEX.md` (✅⏳🔮👤) |
-| Second Brain | `brain-sync.sh init` → `.cursor/loop-master-brain/` |
+| JSON L1 | `.cursor/lucy-progress.json` |
+| Plan stub | `docs/LUCY-PLAN.md` |
+| Index | `docs/LUCY-INDEX.md` (✅⏳🔮👤) |
+| Second Brain | `brain-sync.sh init` → `.cursor/lucy-brain/` |
 | **Cursor hooks** | `install-hooks.sh` → sessionStart + stop |
 | PRODUCT.md | stub se FE |
 
@@ -42,7 +42,7 @@ Se script falhar parcialmente: registrar WARN em `human_blockers[]`, continuar q
 **Antes de cada rodada**, executar:
 
 ```bash
-bash .cursor/skills/loop-master/scripts/quiz-next.sh
+bash .cursor/skills/lucy/scripts/quiz-next.sh
 ```
 
 Usar **somente** os question IDs impressos. **Não** improvisar perguntas legadas.
@@ -60,7 +60,7 @@ Seguir `references/quiz-protocol.md`:
 
 Após cada rodada:
 - Persistir `quiz_answers.round_N` + incrementar `quiz_round`
-- Atualizar `docs/LOOP-MASTER-INDEX.md`
+- Atualizar `docs/LUCY-INDEX.md`
 
 ---
 
@@ -68,15 +68,15 @@ Após cada rodada:
 
 Quando `quiz_complete: true`:
 
-1. **Fases** — criar `phases{}` + tabela em `docs/LOOP-MASTER-PLAN.md`
+1. **Fases** — criar `phases{}` + tabela em `docs/LUCY-PLAN.md`
 2. **Memória L2** — claude-mem capture: objetivo, fases, quiz summary
 3. **INDEX** — marcar ✅ skills instaladas, ⏳ fase atual, 👤 blockers
 4. **Delivery contract** — `acceptance_summary` do Round 1
 5. **Armar loop dinâmico:**
 
 ```bash
-bash .cursor/skills/loop-master/scripts/arm-dynamic-loop.sh \
-  --progress-file .cursor/loop-master-progress.json \
+bash .cursor/skills/lucy/scripts/arm-dynamic-loop.sh \
+  --progress-file .cursor/lucy-progress.json \
   --seconds 45
 ```
 
@@ -90,11 +90,11 @@ bash .cursor/skills/loop-master/scripts/arm-dynamic-loop.sh \
 Gravar em JSON campo `next_prompt`:
 
 ```text
-/loop-master tick #1 — skill loop-master
+/lucy tick #1 — skill lucy
 
-Context: .cursor/loop-master-progress.json (quiz_complete=true)
-Plan: docs/LOOP-MASTER-PLAN.md
-Index: docs/LOOP-MASTER-INDEX.md
+Context: .cursor/lucy-progress.json (quiz_complete=true)
+Plan: docs/LUCY-PLAN.md
+Index: docs/LUCY-INDEX.md
 Phase: <current_phase> at 0%
 Memory: claude-mem search + L1 hydrate
 
@@ -110,8 +110,8 @@ Do NOT stop until overall_pct === 100 unless user says stop.
 ## Entrada do usuário
 
 ```
-/loop-master init
-/loop-master init --goal "Premium UI 100%"
+/lucy init
+/lucy init --goal "Premium UI 100%"
 ```
 
 Flags CLI (via agente rodando init.sh):

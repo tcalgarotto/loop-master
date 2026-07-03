@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install loop-master Cursor hooks into project .cursor/hooks.json (merge, no clobber)
+# Install Lucy Cursor hooks into project .cursor/hooks.json (merge, no clobber)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -12,11 +12,11 @@ elif [[ -d "$SKILL_ROOT/../../.." ]]; then
 fi
 
 HOOKS_SRC="$SKILL_ROOT/hooks"
-HOOKS_DST="$PROJECT_ROOT/.cursor/hooks/loop-master"
+HOOKS_DST="$PROJECT_ROOT/.cursor/hooks/lucy"
 HOOKS_JSON="$PROJECT_ROOT/.cursor/hooks.json"
 TEMPLATE="$HOOKS_SRC/hooks.template.json"
 
-echo "==> install-hooks (loop-master)"
+echo "==> install-hooks (lucy)"
 echo "    project: $PROJECT_ROOT"
 
 mkdir -p "$HOOKS_DST" "$PROJECT_ROOT/.cursor"

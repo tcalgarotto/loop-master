@@ -5,7 +5,7 @@
 | Arquivo | O que é |
 |---------|---------|
 | **`/README.md`** (raiz do monorepo) | Produto host — app, API, deploy |
-| **`.agents/skills/loop-master/README.md`** | Pacote **loop-master** — skill Cursor genérica |
+| **`.agents/skills/lucy/README.md`** | Pacote **loop-master** — skill Cursor genérica |
 
 **Não estão misturados.** São arquivos diferentes. A confusão costuma vir do monorepo: os dois vivem no mesmo clone.
 
@@ -21,7 +21,7 @@ SKILL.md  README.md  .gitignore  scripts/  references/
 
 ## O que fica no repositório host (monorepo)
 
-Tudo do produto + opcionalmente o skill pack como submodule ou pasta `.agents/skills/loop-master/`.
+Tudo do produto + opcionalmente o skill pack como submodule ou pasta `.agents/skills/lucy/`.
 
 Docs de índice no host (não vão no clone standalone):
 
@@ -31,7 +31,7 @@ Docs de índice no host (não vão no clone standalone):
 ## Clone standalone (outras pessoas)
 
 ```bash
-git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/loop-master
+git clone https://github.com/tcalgarotto/lucy.git ~/.cursor/skills/lucy
 ```
 
 Elas leem **apenas** `README.md` desta pasta e `references/getting-started.md`.

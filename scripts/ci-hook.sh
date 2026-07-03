@@ -6,7 +6,7 @@
 set -euo pipefail
 
 SKILL_ROOT="${SKILL_ROOT:-$(dirname "$0")/..}"
-PROGRESS_FILE="${PROGRESS_FILE:-.cursor/loop-master-progress.json}"
+PROGRESS_FILE="${PROGRESS_FILE:-.cursor/lucy-progress.json}"
 HOOK_LOG=".lucy/ci-hook.log"
 SENTINEL_PREFIX="LUCY_CI_WAKE"
 

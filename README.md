@@ -1,49 +1,111 @@
 # Lucy — 100% do Cérebro para Desenvolver Software
 
 <div align="center">
-  <img src="assets/nanobanana.png" alt="Lucy Nano Banana Mascot" width="320" style="border-radius: 24px; margin-bottom: 20px;" />
+  <img src="assets/lucy-hero-18x9-4k.png" alt="Lucy — orquestrador que usa 100% da capacidade do agente" width="100%" style="border-radius: 12px; margin-bottom: 24px; max-width: 720px;" />
 
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.7.0-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.8.0-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
 </div>
 
-**Lucy é o orquestrador de IA que usa 100% da capacidade do seu agente** — memória cross-session, design premium autônomo, análise competitiva profunda, loop de autocorreção até 100% de conclusão. Uma skill sob medida para levar seu ambiente de desenvolvimento ao nível máximo com a ajuda da nossa mascote **Nano Banana**! 🍌⚡
+**Lucy transforma o Cursor Agent em um time de desenvolvimento inteiro** — memória cross-session, design premium autônomo, análise competitiva profunda e loop de autocorreção até 100% de conclusão. Não é magia: é processo rígido que o agente é obrigado a seguir.
+
+> **Cursor Auto sozinho** = bom assistente que esquece, degrada e entrega UI genérica.  
+> **Cursor + Lucy** = orquestrador com memória, gates de qualidade e estética premium embutida.
 
 ---
 
-## O Problema
+## O Problema — o "Slop" do modo Auto
 
 Todo desenvolvedor já viveu isso:
 
-- IA esquece o contexto a cada nova sessão
-- Design começa premium e vai degradando com cada iteração
-- Não sabe o que o sistema de referência de mercado faz que o seu ainda não faz
-- Perde horas coordenando o que a IA fez, o que falta fazer, e onde parou
-- Código entregue sem auditoria de segurança, sem gate de qualidade
+| Sintoma | O que acontece |
+|---------|----------------|
+| **Amnésia de sessão** | IA esquece o contexto a cada nova abertura |
+| **Degradação visual** | Design começa ok e vira template Bootstrap em 3 iterações |
+| **Cegueira competitiva** | Não sabe o que o Linear/Notion/Stripe faz que o seu ainda não faz |
+| **Coordenação manual** | Você vira PM do agente — "deixe mais bonito" 50 vezes |
+| **Entrega sem gate** | Código sem auditoria de segurança, sem testes, sem DoD |
 
 **Resultado:** 2 meses de trabalho que poderiam ser 1 semana.
 
 ---
 
-## A Solução — Lucy
+## 1. Anti-Slop — fim do visual de template genérico
 
-Como no filme, **Lucy não tem limites artificiais**.
+O maior problema do modo Auto (e de qualquer IA) é gerar código "preguiçoso" e interfaces com cara de template gratuito.
 
-Enquanto outros agentes param no fim da janela de contexto, Lucy:
+**Lucy resolve isso** instalando `taste-skill` + `impeccable` e forçando um pipeline invisível em toda superfície visual:
 
-| Capacidade | Como funciona |
-|-----------|---------------|
-| 🧠 **Memória persistente** | Second Brain de 4 camadas — lembra de tudo entre sessões |
-| 🎨 **Design premium autônomo** | 12+ skills de design encadeadas: audit → refina → aprova |
-| 🔍 **Inteligência competitiva** | Lê sistemas de referência, mapeia gaps e implementa automaticamente |
-| 🔄 **Loop até 100%** | Autocorrição contínua: implement → audit → fix → gate |
-| ⚡ **Zero-config** | Um comando inicia tudo — quiz, plano, stack, hooks |
-| 🛡️ **Auditoria obrigatória** | `review-security` + `bugbot` em todo gate de fase |
+```
+shape → craft → layout → colorize → critique → polish → gate
+```
+
+Você não precisa pedir "deixe mais bonito" de novo. O agente critica e refina até passar no gate — ou reentra no loop.
+
+---
+
+## 2. Leis de UX no piloto automático
+
+IAs comuns não sabem o que é usabilidade. Lucy injeta **15 Laws of UX**, **12 padrões de sidebar** e a regra dos **8px** direto na inteligência de design (`references/ux-design-intelligence.md`).
+
+Exemplos que o agente aplica sem você pedir:
+
+| Lei | O que Lucy faz |
+|-----|----------------|
+| **Doherty Threshold** | Skeleton Screen antes do dado — elimina spinners feios |
+| **Fitts's Law** | CTAs e botões de CRM/ERP com mínimo **44px** de alvo |
+| **Miller's Law** | Máximo **7 itens** por grupo de menu, lista ou bloco de KPI |
+| **Von Restorff** | **1 CTA de destaque** por tela — nunca três botões primários |
+| **Jakob's Law** | Sidebar esquerda, header top, modal centro — padrões que o usuário já conhece |
+
+---
+
+## 3. Stack frontend — o padrão de ouro
+
+O `/lucy init` detecta **Next.js** e instala o ecossistema de altíssimo nível automaticamente:
+
+```
+shadcn/ui              → componentes limpos e acessíveis
+framer-motion          → Spring Physics (proíbe animações duras com duration fixo)
+@tanstack/react-query  → cache SWR — dados instantâneos, sem tela branca
+@tremor/react          → gráficos financeiros elegantes
+lucide-react           → ícones vetoriais consistentes
+```
+
+Mais a stack de orquestração:
+
+```
+impeccable          → 23 comandos de design (shape, craft, critique, polish...)
+ui-ux-pro-max       → design system por indústria
+taste-skill         → anti-slop visual
+caveman             → compressão de contexto (~70% menos tokens)
+claude-mem          → memória MCP cross-session
+```
+
+---
+
+## 4. O recurso mais apelão — Inteligência Competitiva
+
+```bash
+/lucy @https://linear.app
+```
+
+Lucy lê a interface de referência, mapeia o que eles fazem de melhor em design e usabilidade, gera um plano de gaps com evidência `path:line` e implementa — de forma autônoma ou com checkpoint, você escolhe.
+
+```
+INTAKE → EXTRAÇÃO → GAP ANALYSIS → PLANO → [CHECKPOINT] → BUILD LOOP → RELATÓRIO
+```
+
+| Modo | Comando | Comportamento |
+|------|---------|---------------|
+| Padrão | `/lucy @url` | Plano + confirmação antes de codar |
+| Auto | `/lucy --auto @url` | Implementa direto após o plano |
+| Só análise | `/lucy analise @url` | Gap report sem alterar código |
 
 ---
 
@@ -51,7 +113,7 @@ Enquanto outros agentes param no fim da janela de contexto, Lucy:
 
 ```bash
 # 1. Instalar
-git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/lucy
+git clone https://github.com/tcalgarotto/lucy.git ~/.cursor/skills/lucy
 
 # 2. No seu projeto, dentro do Cursor Agent:
 /lucy init
@@ -74,6 +136,7 @@ git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/lucy
 /lucy init          → Bootstrap completo: skills + quiz + plano + loop
 /lucy               → Próximo tick autônomo (continua de onde parou)
 /lucy update        → Atualiza sem perder progresso
+pare o loop         → Para o loop autônomo
 ```
 
 ### Análise Competitiva
@@ -109,37 +172,6 @@ git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/lucy
 /lucy docs --changelog → Atualiza CHANGELOG.md
 ```
 
-### Controle
-
-```
-pare o loop         → Para o loop autônomo
-```
-
----
-
-## O que o `/lucy init` instala
-
-```
-Stack de desenvolvimento:
-├── impeccable          → 23 comandos de design (shape, craft, critique, polish...)
-├── ui-ux-pro-max       → Design system por indústria
-├── taste-skill         → Anti-slop: interfaces que não parecem template
-├── caveman             → Compressão de contexto (70% menos tokens)
-└── claude-mem          → Memória MCP cross-session
-
-Stack frontend (detecta Next.js automaticamente):
-├── shadcn/ui           → Componentes premium acessíveis
-├── framer-motion       → Spring physics, AnimatePresence, layoutId
-├── @tremor/react       → Gráficos financeiros limpos
-├── @tanstack/react-query → Cache SWR, dados assíncronos sem spinner
-└── lucide-react        → Ícones vetoriais consistentes
-
-Inteligência:
-├── Second Brain        → .cursor/loop-master-brain/ (perfil dev + projeto)
-├── competitive-intel   → Pipeline /lucy para análise de gaps
-└── design-intelligence → Laws of UX + Refactoring UI + 12 padrões sidebar
-```
-
 ---
 
 ## Como funciona o Loop
@@ -164,87 +196,57 @@ Inteligência:
            └─────────────────────────────┘
 ```
 
-**Nenhuma intervenção manual necessária.** Lucy só para quando:
-- Atinge 100% com gate de produção aprovado
-- Você digita `pare o loop`
-- Encontra um bloqueio que exige decisão humana (e avisa)
-
----
-
-## Inteligência Competitiva — `/lucy @url`
-
-> *"Você já tem os dados. Agora veja o que o mercado tem que você não tem."*
-
-```
-/lucy @https://sistema-de-referencia.com [prints]
-```
-
-Lucy executa automaticamente:
-
-```
-1. INTAKE        → identifica o sistema e o seu projeto
-2. EXTRAÇÃO      → lê todas as funcionalidades (Firecrawl / Browser MCP / fetch)
-3. GAP ANALYSIS  → compara item a item com seu código (path:line como evidência)
-4. PLANO         → prioriza por P0/P1 + confiança Alta/Média
-5. CHECKPOINT    → mostra o plano, pede confirmação
-6. BUILD LOOP    → implement → audit → fix → gate por fase
-7. RELATÓRIO     → gaps fechados, débito aceito, veredito de produção
-```
-
-Cada feature implementada é versionada:
-- `0.x.x` — Beta (implementado, não maduro)
-- `1.x.x` — Alpha (DoD 6/6 atendido, pronto para produção)
-
----
-
-## Design Premium — Automático
-
-Lucy não entrega interfaces medianas. Cada tick de UI passa por:
-
-```
-ui-ux-pro-max  → design system por indústria
-     ↓
-impeccable     → shape → craft → layout → colorize → critique
-     ↓
-shadcn/ui      → componentes acessíveis e consistentes
-     ↓
-framer-motion  → spring physics (nunca duration fixo)
-     ↓
-impeccable     → polish → optimize → gate
-```
-
-**Leis de UX aplicadas automaticamente:** Miller's Law (7 itens max por grupo), Fitts's Law (44px targets), Doherty Threshold (skeleton antes de spinner), Von Restorff (1 CTA de destaque por tela).
+Lucy só para quando atinge 100% com gate aprovado, você digita `pare o loop`, ou encontra bloqueio que exige decisão humana.
 
 ---
 
 ## Second Brain — Memória que Cresce
 
 ```
-L0  .cursor/loop-master-brain/
+L0  .cursor/lucy-brain/
     ├── dev-profile.json      → suas preferências, stack, decisões
     ├── project-mind.json     → arquitetura, glossário, convenções
     └── interaction-log.jsonl → histórico de cada interação
 
-L1  .cursor/loop-master-progress.json  → handoff entre ticks
+L1  .cursor/lucy-progress.json  → handoff entre ticks
 L2  claude-mem (MCP SQLite)            → busca semântica cross-session
-L3  docs/LOOP-MASTER-PLAN.md          → plano humano-legível
+L3  docs/LUCY-PLAN.md          → plano humano-legível
 ```
 
-Na próxima sessão, Lucy lembra:
-- O que foi implementado e o que falta
-- Suas preferências de código
-- As decisões de arquitetura tomadas
-- Os blockers pendentes
+---
+
+## Veredito honesto
+
+O elogio do Gemini não é exagero total — **a arquitetura está lá**: protocolos documentados, skills encadeadas, gates de qualidade, stack premium e pipeline competitivo. O que Lucy *não* faz sozinha:
+
+- **Substituir julgamento humano** em decisões de produto ou credenciais
+- **Garantir 100% de aderência** se o agente ignorar a skill (depende do Cursor seguir o SKILL.md)
+- **Funcionar sem setup** em projetos que não são Next.js (a stack frontend é condicional)
+
+O diferencial real: **forçar o modo Auto a seguir processos** em vez de improvisar. Menos slop, menos amnésia, menos "template vibes".
+
+---
+
+## Migração loop-master → Lucy
+
+Projetos com caminhos legados (`loop-master-progress.json`, `loop-master-brain/`):
+
+```bash
+bash ~/.cursor/skills/lucy/scripts/migrate-loop-master-to-lucy.sh
+# ou: /lucy update  (migra automaticamente)
+```
+
+Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 
 ---
 
 ## Referências internas
 
 | Arquivo | Conteúdo |
-|---------|---------|
+|---------|----------|
 | `references/premium-ui-stack.md` | Stack Next.js completa + paletas + prompts-mestre |
 | `references/ux-design-intelligence.md` | 15 Laws of UX + 12 padrões sidebar + Refactoring UI |
-| `references/competitive-intelligence.md` | Protocolo completo de gap analysis (/lucy analise) |
+| `references/competitive-intelligence.md` | Protocolo completo de gap analysis |
 | `references/design-skills-routing-table.md` | Qual skill de design usar por superfície |
 | `references/second-brain-protocol.md` | Como a memória funciona |
 | `references/autonomous-orchestrator-protocol.md` | Os 7 mandamentos do loop autônomo |
@@ -254,6 +256,6 @@ Na próxima sessão, Lucy lembra:
 
 ## Versão
 
-**v2.7.0** — Lucy completa: design intelligence v2.7 (15 Laws of UX + 12 padrões sidebar), inteligência competitiva (/lucy analise), testes autônomos (/lucy test), audit de performance (/lucy perf), deploy com rollback (/lucy deploy), i18n (/lucy i18n), documentação (/lucy docs), CI hook, template gallery e Second Brain 4 camadas.
+**v2.8.0** — rebranding completo: caminhos `lucy-*` (progress, brain, plan, hooks), script `migrate-loop-master-to-lucy.sh`, `/lucy update` migra legado automaticamente.
 
 MIT License — feito com 100% do cérebro.

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# loop-master Second Brain — local memory + claude-mem sync
+# Lucy Second Brain — local memory + claude-mem sync
 # Usage:
 #   brain-sync.sh init
 #   brain-sync.sh hydrate [--json]
@@ -8,11 +8,12 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(pwd)"
-[[ -d "$PROJECT_ROOT/.git" ]] || PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+# shellcheck source=lib/lucy-paths.sh
+source "$SCRIPT_DIR/lib/lucy-paths.sh"
+PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
-BRAIN_DIR="$PROJECT_ROOT/.cursor/loop-master-brain"
-PROGRESS="${LOOP_MASTER_PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
+BRAIN_DIR="$(lucy_brain_dir "$PROJECT_ROOT")"
+PROGRESS="$(lucy_progress_file "$PROJECT_ROOT")"
 [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
 
 STATE="$BRAIN_DIR/STATE.json"
@@ -72,19 +73,19 @@ EOF
 
   if [[ ! -f "$INDEX" ]]; then
     cat > "$INDEX" <<'EOF'
-# Loop Master — Second Brain
+# Lucy — Second Brain
 
 Legenda: ✅ consolidado | ⏳ aprendendo | 🔮 inferido | 👤 confirmado pelo dev
 
 | Camada | Status | Arquivo |
 |--------|--------|---------|
-| Estado vivo | ⏳ | `.cursor/loop-master-brain/STATE.json` |
-| Perfil dev | ⏳ | `.cursor/loop-master-brain/dev-profile.json` |
-| Mente projeto | ⏳ | `.cursor/loop-master-brain/project-mind.json` |
-| Log interações | ⏳ | `.cursor/loop-master-brain/interaction-log.jsonl` |
+| Estado vivo | ⏳ | `.cursor/lucy-brain/STATE.json` |
+| Perfil dev | ⏳ | `.cursor/lucy-brain/dev-profile.json` |
+| Mente projeto | ⏳ | `.cursor/lucy-brain/project-mind.json` |
+| Log interações | ⏳ | `.cursor/lucy-brain/interaction-log.jsonl` |
 | claude-mem L2 | ⏳ | MCP search + observation_add |
 
-> Atualizado automaticamente a cada `/loop-master` (hydrate → trabalho → capture).
+> Atualizado automaticamente a cada `/lucy` (hydrate → trabalho → capture).
 EOF
   fi
 
@@ -219,7 +220,7 @@ PY
   echo ""
   echo ">>> Agent: também chamar claude-mem MCP observation_add:"
   echo "    content: compact narrative of this interaction"
-  echo "    kind: loop-master-$kind"
+  echo "    kind: lucy-$kind"
   echo "    metadata: {paths, phase, tick}"
 }
 

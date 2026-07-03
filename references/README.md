@@ -14,9 +14,9 @@
 
 | Doc | Conteúdo |
 |-----|----------|
-| [init-protocol.md](init-protocol.md) | Fluxo `/loop-master init` zero-config |
+| [init-protocol.md](init-protocol.md) | Fluxo `/lucy init` zero-config |
 | [quiz-protocol.md](quiz-protocol.md) | Quiz 6 rodadas |
-| [update-protocol.md](update-protocol.md) | `/loop-master update` |
+| [update-protocol.md](update-protocol.md) | `/lucy update` |
 | [multi-project-protocol.md](multi-project-protocol.md) | Vários loops no mesmo repo |
 
 ## Autonomia & loop

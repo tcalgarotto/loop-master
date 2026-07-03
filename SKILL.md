@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.7.0"
+version: "2.8.0"
 ---
-# Lucy v2.7.0 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.8.0 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -23,7 +23,7 @@ A cada `/lucy` (tick ou chat):
 3. **CAPTURE** — `brain-sync.sh capture` + claude-mem observation_add
 
 Armazena: perfil dev, decisões de arquitetura, log de interações, consciência crescente.
-Diretório: `.cursor/loop-master-brain/`
+Diretório: `.cursor/lucy-brain/`
 
 **Nunca encerrar turno sem CAPTURE.**
 
@@ -58,9 +58,9 @@ Diretório: `.cursor/loop-master-brain/`
 
 | Contexto | Arquivo |
 |----------|---------|
-| App | `.cursor/loop-master-progress.json` |
-| Skill pack | `.cursor/loop-master-progress.skill-pack.json` |
-| Index | `docs/LOOP-MASTER-INDEX.md` |
+| App | `.cursor/lucy-progress.json` |
+| Skill pack | `.cursor/lucy-progress.skill-pack.json` |
+| Index | `docs/LUCY-INDEX.md` |
 
 Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 
@@ -132,7 +132,7 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 
 | Skill | Init v2.6 |
 |-------|-----------|
-| loop-master | sim |
+| lucy (legado loop-master) | sim — use `migrate-loop-master-to-lucy.sh` |
 | impeccable, ui-ux-pro-max | sim |
 | taste-skill, caveman, claude-mem, motion | sim |
 | **nextjs-premium-stack** | **sim (auto-detecta Next.js e instala: shadcn/ui, framer-motion, tremor, tanstack-query, lucide-react)** |
@@ -145,7 +145,7 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 
 | Camada | Obrigatório |
 |--------|-------------|
-| L0 Brain | `.cursor/loop-master-brain/` — **toda interação** |
+| L0 Brain | `.cursor/lucy-brain/` — **toda interação** |
 | L1 JSON | progress handoff |
 | L2 claude-mem | MCP search + observation_add |
 | L3 PLAN/INDEX | docs humanos |

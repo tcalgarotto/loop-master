@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# loop-master hook — sessionStart: hydrate Second Brain into agent context
+# Lucy hook — sessionStart: hydrate Second Brain into agent context
 set -euo pipefail
 
 input=$(cat)
@@ -8,6 +8,8 @@ PROJECT_ROOT="${CURSOR_PROJECT_DIR:-${PWD}}"
 find_brain_sync() {
   local p
   for p in \
+    "$PROJECT_ROOT/.cursor/skills/lucy/scripts/brain-sync.sh" \
+    "$PROJECT_ROOT/.agents/skills/lucy/scripts/brain-sync.sh" \
     "$PROJECT_ROOT/.cursor/skills/loop-master/scripts/brain-sync.sh" \
     "$PROJECT_ROOT/.agents/skills/loop-master/scripts/brain-sync.sh"; do
     [[ -x "$p" ]] && { echo "$p"; return 0; }
@@ -30,10 +32,10 @@ import json, os, pathlib
 tmp = os.environ["BRAIN_TMP"]
 body = pathlib.Path(tmp).read_text(encoding="utf-8", errors="replace")[:8000]
 out = {
-    "env": {"LOOP_MASTER_BRAIN": "active"},
+    "env": {"LUCY_BRAIN": "active"},
     "additional_context": (
-        "[Loop Master — Second Brain hydrated]\n"
-        "Memory protocol: .cursor/skills/loop-master/references/second-brain-protocol.md\n\n"
+        "[Lucy — Second Brain hydrated]\n"
+        "Memory protocol: .cursor/skills/lucy/references/second-brain-protocol.md\n\n"
         + body
     ),
 }

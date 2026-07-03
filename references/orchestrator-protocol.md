@@ -7,7 +7,7 @@ Modelo espelhado do [Claude Code Workflows](https://code.claude.com/docs/en/work
 | **Orchestrator** | Agente pai (este tick) | JSON + plano mestre | Próximo passo, quem spawnar, merge de resultados |
 | **Worker** | Subagent via `Task` | Janela isolada | Uma unidade de trabalho com output estruturado |
 | **Verifier** | Subagent readonly | Janela isolada | Ataca achados do worker (adversarial) |
-| **State** | `.cursor/loop-master-progress.json` | Fora do chat | Plano, locks, runs paralelos, findings |
+| **State** | `.cursor/lucy-progress.json` | Fora do chat | Plano, locks, runs paralelos, findings |
 
 Subagents **não conversam entre si**. Só o orchestrator vê tudo.
 

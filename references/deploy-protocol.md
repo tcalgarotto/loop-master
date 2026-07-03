@@ -29,7 +29,7 @@ Lucy detecta automaticamente o destino de deploy com base no projeto:
 
 ```bash
 # Ordem de detecção
-1. Ler .cursor/loop-master-progress.json → delivery_contract.deploy_target
+1. Ler .cursor/lucy-progress.json → delivery_contract.deploy_target
 2. Verificar: Dockerfile, docker-compose.yml → VPS/container
 3. Verificar: vercel.json, next.config.js → plataforma serverless
 4. Verificar: package.json scripts (build, start) → inferir destino

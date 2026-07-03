@@ -1,31 +1,41 @@
-# `/loop-master update` — atualizar skill pack sem perder contexto
+# `/lucy update` — atualizar skill pack sem perder contexto
 
-Atualiza o **pacote loop-master** (git pull) e re-sincroniza deps/skills
-**sem apagar** `.cursor/loop-master-progress.json` nem `quiz_answers`.
+Atualiza o **pacote Lucy** (git pull), **migra caminhos legados loop-master** se necessário,
+e re-sincroniza deps/skills **sem apagar** `.cursor/lucy-progress.json` nem `quiz_answers`.
 
 ---
 
 ## Trigger
 
 ```
-/loop-master update
+/lucy update
 ```
 
 Equivalente CLI:
 
 ```bash
-.cursor/skills/loop-master/scripts/update.sh
+.cursor/skills/lucy/scripts/update.sh
 # ou
-~/.cursor/skills/loop-master/scripts/update.sh
+~/.cursor/skills/lucy/scripts/update.sh
 ```
 
 ---
 
 ## Fluxo (ordem obrigatória)
 
+### 0. Migrar legado (se existir)
+
+Se o projeto ainda tiver `loop-master-progress.json` ou `loop-master-brain/`:
+
+```bash
+bash .cursor/skills/lucy/scripts/migrate-loop-master-to-lucy.sh
+```
+
+O `/lucy update` executa este passo **automaticamente**.
+
 ### 1. Backup do contexto do projeto
 
-Copiar para `.cursor/loop-master-progress.json.bak` (timestamp no nome se já existir bak recente).
+Copiar para `.cursor/lucy-progress.json.bak` (timestamp no nome se já existir bak recente).
 
 **Nunca** sobrescrever o JSON de progresso no update.
 
@@ -40,7 +50,7 @@ cd <skill-root> && git pull --ff-only
 Se submodule no projeto:
 
 ```bash
-git submodule update --remote .agents/skills/loop-master
+git submodule update --remote .agents/skills/lucy
 ```
 
 Se cópia sem git: avisar usuário — re-copy manual ou clone.
@@ -84,7 +94,7 @@ Se não major: **não** quiz — continuar com `next_prompt` existente.
 
 - Versão antiga → nova
 - `tick_count`, `current_phase`, `overall_pct` preservados
-- Próximo tick: usar `next_prompt` ou `/loop-master`
+- Próximo tick: usar `next_prompt` ou `/lucy`
 
 ---
 
@@ -103,7 +113,7 @@ Re-arma sentinel após update com `next_prompt` atualizado. Útil se loop morreu
 
 ---
 
-## Integração com `/loop-master init`
+## Integração com `/lucy init`
 
 | Comando | JSON existente |
 |---------|----------------|

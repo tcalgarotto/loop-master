@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
-# loop-master v2.4 — full project bootstrap (zero-config default)
+# Lucy v2.8 — full project bootstrap (zero-config default)
 # Usage: ./scripts/init.sh [--skip-skills] [--skills a,b,c] [--preserve-context]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/lucy-paths.sh
+source "$SCRIPT_DIR/lib/lucy-paths.sh"
 SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-PROJECT_ROOT="$(cd "$SKILL_ROOT/../../.." 2>/dev/null && pwd || pwd)"
-
-if [[ -f "$(pwd)/package.json" ]] || [[ -f "$(pwd)/Makefile" ]] || [[ -d "$(pwd)/.git" ]]; then
-  PROJECT_ROOT="$(pwd)"
-fi
+PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
 # Full ecosystem — installed by default unless --skip-skills or custom --skills
 DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion,nextjs-premium-stack"
@@ -18,7 +16,7 @@ SKIP_SKILLS=false
 PRESERVE_CONTEXT=false
 GOAL=""
 PLAN_DOC=""
-PROGRESS_FILE="${LOOP_MASTER_PROGRESS_FILE:-}"
+PROGRESS_FILE="${LUCY_PROGRESS_FILE:-}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -49,25 +47,25 @@ HELP
   esac
 done
 
-echo "==> loop-master init (v2.4 full bootstrap)"
+echo "==> lucy init (v2.4 full bootstrap)"
 echo "    Project: $PROJECT_ROOT"
 echo "    Skill pack: $SKILL_ROOT"
 
 mkdir -p "$PROJECT_ROOT/.cursor"
 mkdir -p "$PROJECT_ROOT/docs"
 
-# Link loop-master into project .cursor/skills if running from global clone
-if [[ "$SKILL_ROOT" != *"/.cursor/skills/loop-master"* ]] && [[ "$SKILL_ROOT" != *"/.agents/skills/loop-master"* ]]; then
+# Link lucy skill pack into project .cursor/skills
+if [[ "$SKILL_ROOT" != *"/.cursor/skills/lucy"* ]] && [[ "$SKILL_ROOT" != *"/.agents/skills/lucy"* ]]; then
   mkdir -p "$PROJECT_ROOT/.cursor/skills"
-  if [[ ! -e "$PROJECT_ROOT/.cursor/skills/loop-master" ]]; then
-    ln -sf "$SKILL_ROOT" "$PROJECT_ROOT/.cursor/skills/loop-master" 2>/dev/null || \
-      cp -r "$SKILL_ROOT" "$PROJECT_ROOT/.cursor/skills/loop-master"
-    echo "    Linked loop-master → .cursor/skills/loop-master"
+  if [[ ! -e "$PROJECT_ROOT/.cursor/skills/lucy" ]]; then
+    ln -sf "$SKILL_ROOT" "$PROJECT_ROOT/.cursor/skills/lucy" 2>/dev/null || \
+      cp -r "$SKILL_ROOT" "$PROJECT_ROOT/.cursor/skills/lucy"
+    echo "    Linked skill pack → .cursor/skills/lucy"
   fi
-elif [[ -d "$PROJECT_ROOT/.agents/skills/loop-master" ]] && [[ ! -e "$PROJECT_ROOT/.cursor/skills/loop-master" ]]; then
+elif [[ -d "$PROJECT_ROOT/.agents/skills/lucy" ]] && [[ ! -e "$PROJECT_ROOT/.cursor/skills/lucy" ]]; then
   mkdir -p "$PROJECT_ROOT/.cursor/skills"
-  ln -sfn ../../.agents/skills/loop-master "$PROJECT_ROOT/.cursor/skills/loop-master" 2>/dev/null || true
-  echo "    Linked .agents/skills/loop-master → .cursor/skills/loop-master"
+  ln -sfn ../../.agents/skills/lucy "$PROJECT_ROOT/.cursor/skills/lucy" 2>/dev/null || true
+  echo "    Linked .agents/skills/lucy → .cursor/skills/lucy"
 fi
 
 install_skill() {
@@ -192,7 +190,7 @@ install_skill() {
       else
         echo "      ok lucide-react"
       fi
-      echo "    Premium UI stack ready. See: .cursor/skills/loop-master/references/premium-ui-stack.md"
+      echo "    Premium UI stack ready. See: .cursor/skills/lucy/references/premium-ui-stack.md"
       ;;
   esac
 }
@@ -220,14 +218,14 @@ if [[ -x "$SCRIPT_DIR/install-hooks.sh" ]]; then
   bash "$SCRIPT_DIR/install-hooks.sh" || true
 fi
 
-PROGRESS="${PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
+PROGRESS="${PROGRESS_FILE:-$(lucy_progress_file "$PROJECT_ROOT")}"
 [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
-INDEX_DOC="$PROJECT_ROOT/docs/LOOP-MASTER-INDEX.md"
+INDEX_DOC="$(lucy_index_doc "$PROJECT_ROOT")"
 
 if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   SENTINEL="AGENT_LOOP_TICK_$(basename "$PROJECT_ROOT" | tr '[:lower:]' '[:upper:]' | tr -cd 'A-Z0-9_')_$(date +%s | tail -c 5)"
-  TARGET="${GOAL:-Define goal via /loop-master init quiz (Round 1)}"
-  PLAN="${PLAN_DOC:-docs/LOOP-MASTER-PLAN.md}"
+  TARGET="${GOAL:-Define goal via /lucy init quiz (Round 1)}"
+  PLAN="${PLAN_DOC:-docs/LUCY-PLAN.md}"
   rel_pf="${PROGRESS#$PROJECT_ROOT/}"
   cat > "$PROGRESS" <<EOF
 {
@@ -236,8 +234,8 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   "overall_pct": 0,
   "skill_pack_version": "2.4.0",
   "progress_file": "$rel_pf",
-  "index_doc": "docs/LOOP-MASTER-INDEX.md",
-  "brain_dir": ".cursor/loop-master-brain",
+  "index_doc": "docs/LUCY-INDEX.md",
+  "brain_dir": ".cursor/lucy-brain",
   "brain_sync": { "last_capture_at": null, "interaction_count": 0, "consciousness_level": 0 },
   "skills_installed": [],
   "quiz_round": 0,
@@ -261,10 +259,10 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   },
   "phases": {
     "phase-1": {
-      "name": "First phase — define in quiz Round 6 + LOOP-MASTER-PLAN.md",
+      "name": "First phase — define in quiz Round 6 + LUCY-PLAN.md",
       "status": "pending",
       "pct": 0,
-      "acceptance_criteria": ["Complete /loop-master init quiz (6 rounds)"]
+      "acceptance_criteria": ["Complete /lucy init quiz (6 rounds)"]
     }
   },
   "minor_cycle": {
@@ -274,9 +272,9 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
     "gate": "pending",
     "tasks": []
   },
-  "last_iteration": { "agent_summary": "Full bootstrap ran. Awaiting /loop-master init quiz (6 rounds)." },
+  "last_iteration": { "agent_summary": "Full bootstrap ran. Awaiting /lucy init quiz (6 rounds)." },
   "next_actions": ["Complete quiz Round 1 (produto)", "Run verify-pack.sh", "Arm dynamic loop after quiz"],
-  "context_files": ["docs/LOOP-MASTER-PLAN.md", "docs/LOOP-MASTER-INDEX.md", ".cursor/loop-master-brain/INDEX.md"],
+  "context_files": ["docs/LUCY-PLAN.md", "docs/LUCY-INDEX.md", ".cursor/lucy-brain/INDEX.md"],
   "human_blockers": [],
   "archive_summaries": []
 }
@@ -286,12 +284,12 @@ elif $PRESERVE_CONTEXT && [[ -f "$PROGRESS" ]]; then
   echo "    Preserving existing progress JSON (update/preserve mode)"
 fi
 
-PLAN_PATH="$PROJECT_ROOT/docs/LOOP-MASTER-PLAN.md"
+PLAN_PATH="$(lucy_plan_doc "$PROJECT_ROOT")"
 if [[ ! -f "$PLAN_PATH" ]] && ! $PRESERVE_CONTEXT; then
   cat > "$PLAN_PATH" <<'EOF'
-# Loop Master Plan
+# Lucy Plan
 
-> Gerado por `loop-master init`. Fases definidas após quiz (Round 6).
+> Gerado por `lucy init`. Fases definidas após quiz (Round 6).
 
 ## North star
 
@@ -317,14 +315,14 @@ fi
 
 if [[ ! -f "$INDEX_DOC" ]] && ! $PRESERVE_CONTEXT; then
   cat > "$INDEX_DOC" <<'EOF'
-# Loop Master Index
+# Lucy Index
 
 Legenda: ✅ OK | ⏳ Pendente | 🔮 Futuro | 👤 Human
 
 | Artefato | Status | Path | Notas |
 |----------|--------|------|-------|
-| Progress JSON | ⏳ | `.cursor/loop-master-progress.json` | Handoff L1 entre ticks |
-| Master Plan | ⏳ | `docs/LOOP-MASTER-PLAN.md` | Fases e gates |
+| Progress JSON | ⏳ | `.cursor/lucy-progress.json` | Handoff L1 entre ticks |
+| Master Plan | ⏳ | `docs/LUCY-PLAN.md` | Fases e gates |
 | Product brief | 🔮 | `PRODUCT.md` | Se escopo FE |
 | Design brief | 🔮 | `DESIGN.md` | Se design_surface ≠ none |
 | claude-mem | ⏳ | worker + MCP | Memória L2 cross-session |
@@ -357,9 +355,9 @@ if ! $PRESERVE_CONTEXT && [[ ! -f "$PROJECT_ROOT/DESIGN_SYSTEM.md" ]]; then
     cat > "$PROJECT_ROOT/DESIGN_SYSTEM.md" <<'EOF'
 # Design System — Padrão Premium
 
-> Gerado por loop-master. Seguir estritamente.
+> Gerado por Lucy. Seguir estritamente.
 > Stack: Next.js + Tailwind + shadcn/ui + Framer Motion + Tremor + TanStack Query
-> Referência completa: `.cursor/skills/loop-master/references/premium-ui-stack.md`
+> Referência completa: `.cursor/skills/lucy/references/premium-ui-stack.md`
 
 ## Paleta
 
@@ -469,13 +467,13 @@ if command -v jq &>/dev/null && [[ -f "$PROGRESS" ]]; then
   tmp=$(mktemp)
   rel_progress="${PROGRESS#$PROJECT_ROOT/}"
   jq --argjson sk "$SKILLS_JSON" --arg v "$PACK_VER" --arg pf "$rel_progress" --arg ms "$MEM_STATUS" \
-    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf | .memory_sync.claude_mem = $ms | .memory_sync.last_sync_at = now | .index_doc = "docs/LOOP-MASTER-INDEX.md"' \
+    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf | .memory_sync.claude_mem = $ms | .memory_sync.last_sync_at = now | .index_doc = "docs/LUCY-INDEX.md"' \
     "$PROGRESS" > "$tmp" && mv "$tmp" "$PROGRESS"
   echo "    skills_installed: $SKILLS_JSON"
 fi
 
 echo ""
 echo "==> Full bootstrap done. Next in Cursor Agent:"
-echo "    /loop-master init"
+echo "    /lucy init"
 echo "    (Agent runs quiz 6 rounds — no extra shell steps needed)"
 echo ""

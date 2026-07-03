@@ -13,8 +13,8 @@ re-arm do próximo tick. Este doc é o **contrato operacional** de cada tick.
 Antes de qualquer ação:
 
 - **Second Brain HYDRATE:** `brain-sync.sh hydrate` + claude-mem MCP (session_start_context → search → timeline)
-- Ler `.cursor/loop-master-brain/dev-profile.json` + `project-mind.json`
-- Ler `.cursor/loop-master-progress.json` **inteiro**
+- Ler `.cursor/lucy-brain/dev-profile.json` + `project-mind.json`
+- Ler `.cursor/lucy-progress.json` **inteiro**
 - Ler `archive_summaries[]` (últimos 5–10 ticks)
 - Ler `plan_doc` + `context_files`
 - `git status` / diff escopo da fase (readonly)
@@ -35,7 +35,7 @@ Persistir snapshot em `last_iteration.state_snapshot` (1 parágrafo).
 Só no **primeiro tick** ou quando `minor_cycle.step === "discover"|"plan"`:
 
 - Fases master mensuráveis em `phases{}` com `acceptance_criteria[]`
-- `docs/LOOP-MASTER-PLAN.md` sincronizado (tabela fases + %)
+- `docs/LUCY-PLAN.md` sincronizado (tabela fases + %)
 - `delivery_contract.phases_required[]` alinhado
 - Quebrar fase atual em `minor_cycle.tasks[]` com `files_scope`, `depends_on`, `skill_hint`
 
@@ -109,9 +109,9 @@ Ao persistir JSON:
 ## Template `next_prompt` (obrigatório todo tick)
 
 ```text
-/loop-master tick #<N+1> — skill loop-master
+/lucy tick #<N+1> — skill lucy
 
-Context: .cursor/loop-master-progress.json
+Context: .cursor/lucy-progress.json
 Plan: <plan_doc>
 Phase: <current_phase> at <pct>%
 Minor step: <step> iteration <i>
@@ -156,8 +156,8 @@ echo 'AGENT_LOOP_TICK_<NAME> {"prompt":"<escaped next_prompt>"}'
 4. Payload JSON: `{"prompt":"<next_prompt>","chain":true}`
 
 ```bash
-bash .cursor/skills/loop-master/scripts/arm-dynamic-loop.sh \
-  --progress-file .cursor/loop-master-progress.skill-pack.json \
+bash .cursor/skills/lucy/scripts/arm-dynamic-loop.sh \
+  --progress-file .cursor/lucy-progress.skill-pack.json \
   --seconds 45
 ```
 

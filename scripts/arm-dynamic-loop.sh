@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Arm dynamic loop — chain next tick when current completes (default for loop-master)
-# Usage: arm-dynamic-loop.sh [--progress-file path] [--seconds N] [--sentinel NAME]
+# Arm dynamic loop — chain next tick when current completes (Lucy default)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(pwd)"
-[[ -d "$PROJECT_ROOT/.git" ]] || PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+# shellcheck source=lib/lucy-paths.sh
+source "$SCRIPT_DIR/lib/lucy-paths.sh"
+PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
-PROGRESS="${LOOP_MASTER_PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
+PROGRESS="$(lucy_progress_file "$PROJECT_ROOT")"
 SENTINEL_CLI=""
 SECONDS_WAIT=45
 
@@ -43,8 +43,8 @@ cli = "$SENTINEL_CLI"
 with open(p) as f:
     d = json.load(f)
 out = {
-    "prompt": d.get("next_prompt", "/loop-master — skill loop-master"),
-    "sentinel": cli or d.get("loop_sentinel") or d.get("loop_arm", {}).get("sentinel") or "AGENT_LOOP_WAKE_LOOPMASTER",
+    "prompt": d.get("next_prompt", "/lucy — skill lucy"),
+    "sentinel": cli or d.get("loop_sentinel") or d.get("loop_arm", {}).get("sentinel") or "AGENT_LOOP_WAKE_LUCY",
     "status": d.get("loop_status", "running"),
 }
 print(json.dumps(out))
@@ -69,7 +69,7 @@ if [[ -f "$PID_FILE" ]]; then
 fi
 sleep 0.3
 
-LOG="${TMPDIR:-/tmp}/loopmaster-arm-${SENTINEL_JSON}.log"
+LOG="${TMPDIR:-/tmp}/lucy-arm-${SENTINEL_JSON}.log"
 PROMPT_ESC=$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$PROMPT_JSON")
 
 nohup bash -c "sleep $SECONDS_WAIT; echo '${SENTINEL_JSON}' \"{\\\"prompt\\\":${PROMPT_ESC},\\\"chain\\\":true}\"" >> "$LOG" 2>&1 &

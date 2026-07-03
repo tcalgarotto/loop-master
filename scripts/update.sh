@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
-# loop-master — update skill pack preserving project context
+# Lucy — update skill pack preserving project context
 # Usage: ./scripts/update.sh [--restart-loop] [--skills a,b,c]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/lucy-paths.sh
+source "$SCRIPT_DIR/lib/lucy-paths.sh"
 SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-PROJECT_ROOT="$(pwd)"
+PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
-if [[ -f "$(pwd)/package.json" ]] || [[ -f "$(pwd)/Makefile" ]] || [[ -d "$(pwd)/.git" ]]; then
-  PROJECT_ROOT="$(pwd)"
-fi
-
-PROGRESS="${LOOP_MASTER_PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
+PROGRESS="$(lucy_progress_file "$PROJECT_ROOT")"
 RESTART_LOOP=false
 SKILLS_CSV=""
 
@@ -28,15 +26,23 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-echo "==> loop-master update (preserve context)"
+echo "==> lucy update (preserve context)"
 echo "    Project: $PROJECT_ROOT"
 echo "    Skill pack: $SKILL_ROOT"
 
 [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
 
+# Migrate legacy loop-master artifacts before update (no data loss)
+if lucy_legacy_paths_present "$PROJECT_ROOT"; then
+  echo "    Legacy loop-master paths detected — running migration..."
+  bash "$SCRIPT_DIR/migrate-loop-master-to-lucy.sh" --project "$PROJECT_ROOT"
+  PROGRESS="$(lucy_progress_file "$PROJECT_ROOT")"
+  [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
+fi
+
 # 1. Backup progress JSON
 if [[ -f "$PROGRESS" ]]; then
-  BAK="$PROJECT_ROOT/.cursor/loop-master-progress.json.bak.$(date +%Y%m%d%H%M%S)"
+  BAK="$PROJECT_ROOT/.cursor/lucy-progress.json.bak.$(date +%Y%m%d%H%M%S)"
   cp "$PROGRESS" "$BAK"
   echo "    Backed up progress → $BAK"
 else
@@ -54,9 +60,9 @@ if [[ -d "$SKILL_ROOT/.git" ]]; then
   (cd "$SKILL_ROOT" && git pull --ff-only) || {
     echo "    WARN: git pull failed — continuing with local files"
   }
-elif [[ -f "$PROJECT_ROOT/.gitmodules" ]] && grep -q loop-master "$PROJECT_ROOT/.gitmodules" 2>/dev/null; then
+elif [[ -f "$PROJECT_ROOT/.gitmodules" ]] && grep -qE 'loop-master|skills/lucy' "$PROJECT_ROOT/.gitmodules" 2>/dev/null; then
   echo "    git submodule update --remote"
-  (cd "$PROJECT_ROOT" && git submodule update --remote --merge .agents/skills/loop-master 2>/dev/null) || true
+  (cd "$PROJECT_ROOT" && git submodule update --remote --merge .agents/skills/lucy 2>/dev/null) || true
 else
   echo "    NOTE: skill pack not a git repo — manual copy required for updates"
 fi
@@ -91,5 +97,5 @@ fi
 
 echo ""
 echo "==> Update complete. Context preserved."
-echo "    Run /loop-master to continue, or read next_prompt in progress JSON."
+echo "    Run /lucy to continue, or read next_prompt in progress JSON."
 echo ""

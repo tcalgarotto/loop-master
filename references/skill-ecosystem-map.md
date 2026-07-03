@@ -146,9 +146,9 @@ Worker deve ler skill Motion se disponível em `.agents/skills/`.
 
 | Camada | Fonte | Propósito |
 |--------|-------|-----------|
-| L1 | `.cursor/loop-master-progress.json` | Handoff obrigatório entre ticks |
+| L1 | `.cursor/lucy-progress.json` | Handoff obrigatório entre ticks |
 | L2 | claude-mem SQLite + MCP | Histórico cross-session, busca semântica |
-| L3 | `docs/LOOP-MASTER-PLAN.md` | Plano humano-legível |
+| L3 | `docs/LUCY-PLAN.md` | Plano humano-legível |
 
 **Hydrate (início de tick):**
 1. Ler JSON L1
@@ -236,7 +236,7 @@ Override: `init.sh --skip-skills` ou `--skills a,b` (subset)
 
 | Skill | Path |
 |-------|------|
-| loop-master | `.agents/skills/loop-master` → `.cursor/skills/loop-master` |
+| loop-master | `.agents/skills/lucy` → `.cursor/skills/lucy` |
 | impeccable | `.cursor/skills/impeccable` (symlink) |
 | ui-ux-pro-max | `.cursor/skills/ui-ux-pro-max` |
 | taste-skill | `.agents/skills/design-taste-frontend` + `.cursor/skills/design-taste-frontend` |

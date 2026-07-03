@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Smoke verification for loop-master skill pack (run before git publish)
+# Smoke verification for Lucy skill pack (run before git publish)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -9,13 +9,13 @@ if [[ -f "$PROJECT_ROOT/Makefile" ]] || [[ -d "$PROJECT_ROOT/.git" ]]; then
   PROJECT_ROOT="$(pwd)"
 fi
 
-PROGRESS="${LOOP_MASTER_PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
+PROGRESS="${LUCY_PROGRESS_FILE:-$PROJECT_ROOT/.cursor/lucy-progress.json}"
 FAIL=0
 
 pass() { echo "  ✓ $1"; }
 fail() { echo "  ✗ $1"; FAIL=1; }
 
-echo "==> verify-pack (loop-master)"
+echo "==> verify-pack (lucy)"
 echo "    skill root: $SKILL_ROOT"
 echo "    progress:   $PROGRESS"
 
