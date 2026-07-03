@@ -4,7 +4,7 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.8.5"
+version: "2.9.0"
 ---
 # Lucy v2.8.0 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
@@ -85,6 +85,19 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | `/lucy build` | Implementar plano existente |
 | `/lucy audit` | Auditar fase atual |
 | `/lucy continuar` | Retomar sessão anterior |
+
+### Frontend (redesign + páginas novas)
+
+| Comando | Ação |
+|---------|------|
+| `/lucy refazer-frontend` | Inventário page-by-page + plano + refatoração com todas as skills |
+| `/lucy refazer-frontend --audit-only` | Só inventário + gap report (não codar) |
+| `/lucy refazer-frontend --rota /x` | Refazer uma rota e filhos |
+| `/lucy refazer-frontend --auto` | Implementa sem checkpoint |
+| `/lucy nova-pagina <nome> --tipo landing` | Cria landing do zero |
+| `/lucy nova-pagina <nome> --tipo app` | Cria página de produto do zero |
+
+Ver: `lucy-refazer-frontend-protocol.md` · `lucy-nova-pagina-protocol.md`
 
 ### Aprendizado e regras (dois escopos)
 
@@ -196,7 +209,8 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/html-native-light-protocol.md` — **UI leve: dialog, HTMX, view-transition, scroll scrub**
 - `references/gsap-premium-protocol.md` — **GSAP: timelines, ScrollTrigger, stagger premium**
 - `references/lucy-aprenda-protocol.md` — **`/lucy aprenda` global → GitHub**
-- `references/lucy-regra-protocol.md` — **`/lucy regra` local imutável**
+- `references/lucy-refazer-frontend-protocol.md` — **`/lucy refazer-frontend`**
+- `references/lucy-nova-pagina-protocol.md` — **`/lucy nova-pagina`**
 - `references/learned/INDEX.md` — catálogo do que o owner ensinou
 - `references/ux-design-intelligence.md` — **15 Laws of UX + 12 padrões sidebar**
 - `references/design-skills-routing-table.md` — routing por superfície

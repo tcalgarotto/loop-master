@@ -46,8 +46,10 @@ Consultar **antes** de spawnar workers de design.
 Entrega tem UI?
 ├─ Não → skip design skills
 └─ Sim
-   ├─ Marketing / landing / hero?
-   │  └─ taste-skill → ui-ux-pro-max → impeccable craft → banner-design (assets)
+   ├─ Refazer todo o frontend existente?
+   │  └─ lucy-refazer-frontend-protocol → inventory → page-by-page
+   ├─ Criar landing ou página nova do zero?
+   │  └─ lucy-nova-pagina-protocol → template-gallery + taste/impeccable
    ├─ Product app (CRM, dashboard, settings)?
    │  └─ ui-ux-pro-max (tokens) → impeccable shape→craft→critique→polish
    ├─ Brand / identidade nova?
