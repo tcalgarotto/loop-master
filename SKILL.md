@@ -86,6 +86,11 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | `/lucy audit` | Auditar fase atual |
 | `/lucy continuar` | Retomar sessão anterior |
 
+### Aprendizado evolutivo
+| Comando | Ação |
+|---------|------|
+| `/lucy aprenda` + texto/prints/@arquivo | Ingere conhecimento do owner → protocolos + brain (`lucy-aprenda-protocol.md`) |
+
 ### Qualidade e entrega
 | Comando | Ação |
 |---------|------|

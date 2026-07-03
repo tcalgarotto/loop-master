@@ -29,7 +29,8 @@ Consultar **antes** de spawnar workers de design.
 | **brand** | `.cursor/skills/brand` | Identidade, voz, assets de marca | discover, plan | design |
 | **banner-design** | `.cursor/skills/banner-design` | Social, ads, web banners | implement | brand |
 | **slides** | `.cursor/skills/slides` | Apresentações, pitch decks | implement | design-system |
-| **framer-motion** | `npm:framer-motion` | Micro-interações, springs, sidebar, troca de abas | implement | impeccable animate |
+| **framer-motion** | `npm:framer-motion` | layoutId, AnimatePresence, sidebar React, DnD | implement | gsap |
+| **gsap** | `npm:gsap` | Timelines, ScrollTrigger, stagger, CustomEase | implement (animate) | framer-motion |
 | **shadcn/ui** | `npx shadcn@latest` | Componentes premium prontos (sidebar, cards, badges, skeleton) | implement, fix | ui-styling |
 | **tremor-raw** | `npm:@tremor/react` | Gráficos de dashboard leves, limpos, responsivos | implement | tanstack-query |
 | **magic-ui** | `npm:magic-ui` | Efeitos IA: Dot Pattern, Bento Grid, texto digitado | implement | shadcn |
@@ -61,10 +62,12 @@ Entrega tem UI?
    │  └─ html-native-light-protocol → animation-timeline: view() / scroll() scrub
    ├─ Lista/tabela com refresh parcial?
    │  └─ html-native-light-protocol → HTMX fragment (antes de client fetch chain)
-   └─ Animação de produto (sidebar React, layoutId, Kanban)?
-      └─ framer-motion OU gsap (timeline/scroll → GSAP primeiro)
-   └─ Hover micro (scale, lift)?
-      └─ CSS transition — nunca misturar com GSAP no mesmo nó
+   ├─ Timeline multi-step, stagger 20+, ScrollTrigger?
+   │  └─ gsap-premium-protocol (sem transition-* no elemento)
+   ├─ Hover micro (scale, lift)?
+   │  └─ CSS transition — nunca misturar com GSAP no mesmo nó
+   └─ Animação React (sidebar, layoutId, Kanban)?
+      └─ framer-motion (GSAP se scroll storytelling global)
 ```
 
 ---
