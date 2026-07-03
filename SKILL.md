@@ -4,7 +4,7 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.8.2"
+version: "2.8.3"
 ---
 # Lucy v2.8.0 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
@@ -121,7 +121,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 
 Design: rotear via `design-skills-routing-table.md` (design director–style)
 
-**UI leve (v2.8.2+):** antes de `use client` ou Framer Motion em modais/listas, aplicar `references/html-native-light-protocol.md` (HTML `command`/`dialog`, Popover API, HTMX parcial).
+**UI leve (v2.8.2+):** antes de `use client`, `useScroll` ou Framer Motion em modais/listas/rotas, aplicar `references/html-native-light-protocol.md` (`command`/`dialog`, Popover API, `@view-transition`, `animation-timeline: view`, HTMX parcial).
 
 ### Depois (handoff)
 1. JSON + INDEX + **brain-sync capture** + claude-mem observation_add
@@ -184,6 +184,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 
 ### Design
 - `references/premium-ui-stack.md` — **stack Next.js + paletas + prompts-mestre**
+- `references/html-native-light-protocol.md` — **UI leve: dialog, HTMX, view-transition, scroll scrub**
 - `references/ux-design-intelligence.md` — **15 Laws of UX + 12 padrões sidebar**
 - `references/design-skills-routing-table.md` — routing por superfície
 - `references/design-stack-protocol.md`

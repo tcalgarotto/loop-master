@@ -55,8 +55,10 @@ Entrega tem UI?
    │  └─ design-system → ui-styling → impeccable layout/typeset
    ├─ Apresentação / deck?
    │  └─ slides → design-system
-   ├─ Modal / popover / confirmação simples?
-   │  └─ html-native-light-protocol → <dialog>+command ou Popover API (antes de use client)
+   ├─ Troca de rota ou painel com transição suave?
+   │  └─ html-native-light-protocol → View Transitions (antes de motion global)
+   ├─ Reveal no scroll, header compact, timeline IA?
+   │  └─ html-native-light-protocol → animation-timeline: view() / scroll() scrub
    ├─ Lista/tabela com refresh parcial?
    │  └─ html-native-light-protocol → HTMX fragment (antes de client fetch chain)
    └─ Animação de produto (sidebar, layoutId, Kanban)?
