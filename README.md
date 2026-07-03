@@ -59,6 +59,6 @@ No Cursor Agent:
 
 ## Versão
 
-**2.5.1** — Cursor hooks for session-wide memory + MANUAL.md
+**2.5.2** — quiz-next.sh enforces 6-round AskQuestion (fixes legacy flat quiz).
 
 MIT License

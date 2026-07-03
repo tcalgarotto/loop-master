@@ -7,8 +7,17 @@ Cada rodada é **uma interação completa** (várias perguntas com opções + su
 ## Regra de ouro
 
 1. **Antes do quiz:** rodar `bash .cursor/skills/loop-master/scripts/init.sh` **sem perguntar** (bootstrap completo).
-2. **Durante init:** uma rodada por turno; persistir `quiz_answers.round_N` após cada rodada.
-3. **Após Round 6:** criar fases, atualizar INDEX/plan, armar loop dinâmico, tick 1.
+2. **Antes de cada rodada:** rodar `bash .cursor/skills/loop-master/scripts/quiz-next.sh` e usar **só** os IDs impressos.
+3. **Durante init:** uma rodada por turno; persistir `quiz_answers.round_N` após cada rodada.
+4. **Após Round 6:** criar fases, atualizar INDEX/plan, armar loop dinâmico, tick 1.
+
+## ⛔ Quiz legado — PROIBIDO
+
+Não usar o formato antigo (v2.3) de **6 perguntas num único turno**:
+- ~~Qual o objetivo north-star~~ + ~~Escopo~~ + ~~Barra~~ + ~~Superfície visual~~ + ~~Agendamento~~ + ~~Skills opcionais~~
+
+Esse formato foi **substituído** por 6 rodadas com IDs `r1_*` … `r6_*`.  
+Se o agente misturar rodadas ou pular `quiz-next.sh`, o init está **incorreto**.
 
 ---
 

@@ -1,4 +1,4 @@
-# `/loop-master init` — Protocolo zero-config v2.5.1
+# `/loop-master init` — Protocolo zero-config v2.5.2
 
 Quando o usuário invoca `/loop-master init`, o orchestrator executa **nesta ordem exata**.
 **Sem rodeios. Sem pedir permissão para rodar scripts.**
@@ -38,6 +38,14 @@ Se script falhar parcialmente: registrar WARN em `human_blockers[]`, continuar q
 ---
 
 ## Fase 1–6 — Quiz (AskQuestion, uma rodada por turno)
+
+**Antes de cada rodada**, executar:
+
+```bash
+bash .cursor/skills/loop-master/scripts/quiz-next.sh
+```
+
+Usar **somente** os question IDs impressos. **Não** improvisar perguntas legadas.
 
 Seguir `references/quiz-protocol.md`:
 

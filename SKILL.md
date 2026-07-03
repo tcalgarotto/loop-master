@@ -4,9 +4,9 @@ description: >-
   Zero-config autonomous orchestrator with Second Brain memory: learns project and
   dev on every interaction via brain-sync + claude-mem. Full skill install on init,
   6-round quiz, dynamic AGI workflows, design routing. Commands: /loop-master init, update, tick.
-version: "2.5.1"
+version: "2.5.2"
 ---
-# Loop Master v2.5.1 — orquestrador + segundo cérebro
+# Loop Master v2.5.2 — orquestrador + segundo cérebro
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -37,11 +37,18 @@ Diretório: `.cursor/loop-master-brain/`
    ```
    Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem (+ start), motion, symlinks, JSON, PLAN, INDEX.
 
-2. **Quiz 6 rodadas** (AskQuestion, uma rodada por turno) — ver `quiz-protocol.md`
+2. **Quiz 6 rodadas** — **OBRIGATÓRIO** executar antes de perguntar:
+   ```bash
+   bash .cursor/skills/loop-master/scripts/quiz-next.sh
+   ```
+   Ler saída → usar **AskQuestion** **somente** com os IDs da rodada atual (`r1_goal`, `r2_scope`, …).
+   
+   **PROIBIDO** quiz legado (6 perguntas flat num turno: goal+scope+design+loop+skills).
+   **Uma rodada por turno.** Detalhe: `references/quiz-protocol.md`
 
-3. **Plano + memória + armar loop** — fases, INDEX (✅⏳🔮👤), `arm-dynamic-loop.sh`, tick 1
+3. Após cada rodada: persistir `quiz_answers.round_N`, incrementar `quiz_round`.
 
-4. **`next_prompt`** armado para tick seguinte
+4. Após Round 6 (`quiz_complete: true`): fases, INDEX, `arm-dynamic-loop.sh`, tick 1, `next_prompt`.
 
 **Usuário só digita:** `/loop-master init`
 
