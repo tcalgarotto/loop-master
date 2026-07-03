@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.2 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.3 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -25,6 +25,7 @@
 |-----|----------|
 | [lucy-refazer-frontend-protocol.md](lucy-refazer-frontend-protocol.md) | `/lucy refazer-frontend` — audit + quiz design |
 | [lucy-nova-pagina-protocol.md](lucy-nova-pagina-protocol.md) | `/lucy nova-pagina` — landing e app |
+| [visual-gate-protocol.md](visual-gate-protocol.md) | `/lucy visual-gate` — Playwright + vision QA |
 | [premium-ui-stack.md](premium-ui-stack.md) | Stack Next.js + paletas |
 | [html-native-light-protocol.md](html-native-light-protocol.md) | UI leve, view-transition, HTMX |
 | [gsap-premium-protocol.md](gsap-premium-protocol.md) | GSAP timelines, ScrollTrigger |

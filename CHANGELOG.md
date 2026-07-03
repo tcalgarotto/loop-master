@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.3] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`) — Visual gate
+
+- **`/lucy visual-gate`** — Playwright captura desktop + mobile por rota
+- **`scripts/visual-gate-capture.sh`** — grava `.lucy/visual-gates/tick-N/`
+- **`references/visual-gate-protocol.md`** — checklist vision V1–V8 (ux-design-intelligence)
+- `last_visual_audit` no progress JSON + `audit-checklist.md` §9
+- Gate FE bloqueado sem análise visual de PNGs no Cursor
+
+---
+
 ## [2.9.2] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)
@@ -79,5 +91,6 @@
 
 ---
 
+[2.9.3]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.3
 [2.9.2]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.2
 [2.9.1]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.1

@@ -29,6 +29,7 @@ cd seu-projeto
 | `/lucy` | Um tick autônomo |
 | `/lucy update` | Atualizar skill sem perder contexto |
 | `/lucy refazer-frontend` | Redesign visual (slop, órfãs) — mantém URLs |
+| `/lucy visual-gate` | Screenshots + vision QA (gate FE) |
 | `/lucy nova-pagina X --tipo landing` | Landing do zero |
 | `/lucy aprenda` | Evoluir Lucy global (GitHub) |
 | `/lucy regra` | Regra imutável do projeto |

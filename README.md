@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.2-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.3-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -181,6 +181,9 @@ pare o loop         → Para o loop autônomo
 /lucy refazer-frontend --audit-only → Só diagnóstico
 /lucy nova-pagina pricing --tipo landing
 /lucy nova-pagina crm-reports --tipo app
+/lucy visual-gate                    → Screenshots Playwright + vision QA (gate FE)
+/lucy visual-gate --escopo /crm
+/lucy visual-gate --capture-only     → Só PNGs; julgar depois no Cursor
 ```
 
 ### Aprendizado e regras
@@ -273,6 +276,7 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/gsap-premium-protocol.md` | GSAP timelines, ScrollTrigger |
 | `references/lucy-refazer-frontend-protocol.md` | Redesign visual page-by-page |
 | `references/lucy-nova-pagina-protocol.md` | Landing e páginas app do zero |
+| `references/visual-gate-protocol.md` | Screenshots + vision QA antes do gate |
 | `references/lucy-aprenda-protocol.md` | `/lucy aprenda` global |
 | `references/lucy-regra-protocol.md` | `/lucy regra` por projeto |
 | `references/docs-sync-discipline.md` | Sync docs obrigatória após mudanças (P0) |
@@ -282,6 +286,6 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 
 ## Versão
 
-**v2.9.2** — disciplina de sync de docs (`docs-sync-discipline.md`), redesign frontend, aprendizado dual. Ver [CHANGELOG.md](CHANGELOG.md).
+**v2.9.3** — visual gate (Playwright + vision QA), docs-sync, redesign frontend. Ver [CHANGELOG.md](CHANGELOG.md).
 
 MIT License — feito com 100% do cérebro.

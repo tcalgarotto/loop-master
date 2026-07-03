@@ -133,7 +133,7 @@ Pedir **sim** para implementar — exceto `--auto`.
 
 ```
 impeccable critique (página) → implement visual fixes → verify build
-→ impeccable polish → taste anti-slop check → gate
+→ visual-gate-capture (rota) → vision checklist → impeccable polish → gate
 ```
 
 **Por página refeita:**

@@ -46,7 +46,7 @@ Se plano já existe e fase em andamento → **validar**, não reescrever.
 Por fase master, **obrigatório** percorrer:
 
 ```
-implement → verify → audit → [fix → audit]×N → gate
+implement → verify → visual-gate (se FE) → audit → [fix → audit]×N → gate
 ```
 
 | Regra | Detalhe |
@@ -55,6 +55,7 @@ implement → verify → audit → [fix → audit]×N → gate
 | **Gate bloqueado** | Nunca `phases[id].pct=100` com findings abertos |
 | **Docs** | Ao fechar gate: atualizar seção da fase em `plan_doc` + `docs/LOOP-MASTER-STATUS.md` se existir |
 | **Docs sync (skill pack)** | Se este tick alterou comando/script/protocolo: seguir `docs-sync-discipline.md` antes do handoff |
+| **Visual gate (FE)** | Fase com UI: `visual-gate-capture.sh` + vision checklist **antes** de `gate_passed` (`visual-gate-protocol.md`) |
 | **Versionamento** | Incrementar `doc_versions[]` ao alterar docs de operação |
 | **Memória viva** | `archive_summaries` + claude-mem capture (se instalado) |
 | **100% fase** | Só então avançar `current_phase`; reset minor → `discover` |

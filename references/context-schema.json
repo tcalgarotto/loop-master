@@ -304,9 +304,48 @@
           "properties": {
             "impeccable_detect": { "enum": ["pass", "fail", "skip"] },
             "ui_ux_checklist": { "enum": ["pass", "fail", "skip"] },
-            "critique_p0_open": { "type": "integer" }
+            "critique_p0_open": { "type": "integer" },
+            "visual_gate": { "enum": ["pass", "fail", "skip", "pending"] }
           }
         }
+      }
+    },
+    "last_visual_audit": {
+      "type": "object",
+      "description": "Playwright screenshots + vision QA before FE gate (visual-gate-protocol.md)",
+      "properties": {
+        "at": { "type": "string", "format": "date-time" },
+        "tick": { "type": "integer" },
+        "phase_id": { "type": "string" },
+        "capture_dir": { "type": "string" },
+        "manifest": { "type": "string" },
+        "base_url": { "type": "string" },
+        "status": {
+          "enum": ["captured_pending_vision", "vision_complete", "failed"]
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "route": { "type": "string" },
+              "screenshots": {
+                "type": "object",
+                "properties": {
+                  "desktop": { "type": "string" },
+                  "mobile": { "type": "string" }
+                }
+              },
+              "scores": { "type": "object" },
+              "findings": { "type": "array" },
+              "passed": { "type": ["boolean", "null"] },
+              "errors": { "type": "array" }
+            }
+          }
+        },
+        "gate_passed": { "type": "boolean" },
+        "waived": { "type": "array", "items": { "type": "string" } },
+        "agent_notes": { "type": "string" }
       }
     },
     "next_actions": {

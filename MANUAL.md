@@ -2,7 +2,7 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.9.2** · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.9.3** · *Autor:* **Thales Calgarotto**
 
 ---
 
@@ -127,8 +127,10 @@ O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de dese
 | `/lucy refazer-frontend --audit-only` | Inventário + relatório — não altera código. |
 | `/lucy nova-pagina <nome> --tipo landing` | Cria landing page do zero (taste-skill + template gallery). |
 | `/lucy nova-pagina <nome> --tipo app` | Cria página de produto dentro do shell existente. |
+| `/lucy visual-gate` | Captura prints desktop+mobile (Playwright) e exige análise visual no Cursor antes do gate. |
+| `/lucy visual-gate --capture-only` | Só gera PNGs em `.lucy/visual-gates/tick-N/`. |
 
-Ver: `references/lucy-refazer-frontend-protocol.md`, `references/lucy-nova-pagina-protocol.md`
+Ver: `references/lucy-refazer-frontend-protocol.md`, `references/visual-gate-protocol.md`, `references/lucy-nova-pagina-protocol.md`
 
 ### 4.6 Aprendizado e regras do projeto
 

@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.2"
+version: "2.9.3"
 ---
-# Lucy v2.9.2 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.3 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -99,8 +99,11 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | `/lucy refazer-frontend --sem-quiz` | Pula quiz (só se já completo no JSON) |
 | `/lucy nova-pagina <nome> --tipo landing` | Landing do zero |
 | `/lucy nova-pagina <nome> --tipo app` | Página app do zero |
+| `/lucy visual-gate` | Playwright screenshots (desktop+mobile) + vision QA antes do gate FE |
+| `/lucy visual-gate --capture-only` | Só captura PNGs — agente julga depois |
+| `/lucy visual-gate --escopo /crm` | Só rotas indicadas |
 
-Ver: `lucy-refazer-frontend-protocol.md` · `design-quiz-next.sh` · `lucy-nova-pagina-protocol.md`
+Ver: `lucy-refazer-frontend-protocol.md` · `visual-gate-protocol.md` · `design-quiz-next.sh` · `lucy-nova-pagina-protocol.md`
 
 ### Aprendizado e regras (dois escopos)
 
@@ -142,7 +145,7 @@ Ver: `lucy-aprenda-protocol.md` · `lucy-regra-protocol.md`
 4. Scan `skills_installed[]`
 
 ### Durante (minor step)
-`discover → plan → implement → verify → audit → fix ↺ → gate`
+`discover → plan → implement → verify → visual-gate (se FE) → audit → fix ↺ → gate`
 
 Design: rotear via `design-skills-routing-table.md` (design director–style)
 
@@ -216,6 +219,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/lucy-regra-protocol.md` — **`/lucy regra` local imutável**
 - `references/lucy-refazer-frontend-protocol.md` — **`/lucy refazer-frontend`**
 - `references/lucy-nova-pagina-protocol.md` — **`/lucy nova-pagina`**
+- `references/visual-gate-protocol.md` — **`/lucy visual-gate` — screenshots + vision QA**
 - `references/learned/INDEX.md` — catálogo do que o owner ensinou
 - `references/ux-design-intelligence.md` — **15 Laws of UX + 12 padrões sidebar**
 - `references/design-skills-routing-table.md` — routing por superfície
@@ -254,3 +258,4 @@ Enquanto incompleto: re-arm automático obrigatório.
 - Misturar `/lucy aprenda` (global) com pedido só do projeto — use `/lucy regra`
 - Ignorar `rules/` P0 no HYDRATE
 - Mudar comando/script/protocolo sem grep + sync README/MANUAL/SKILL/CHANGELOG (`docs-sync-discipline.md`)
+- `gate_passed` em fase FE sem `last_visual_audit.gate_passed` (`visual-gate-protocol.md`)

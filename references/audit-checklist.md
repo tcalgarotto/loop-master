@@ -57,6 +57,21 @@ Use na fase atual antes de `gate`. Registrar tudo em `last_audit` no JSON.
 - [ ] Nomes e padrões do repo
 - [ ] Sem TODOs críticos deixados sem ticket/nota no JSON
 
+## 9. Visual gate (fases com superfície FE)
+
+**Obrigatório** antes de `gate_passed: true` se a fase altera UI. Ver `visual-gate-protocol.md`.
+
+- [ ] Dev server ou staging URL acessível
+- [ ] `visual-gate-capture.sh` executado → `.lucy/visual-gates/tick-N/`
+- [ ] `manifest.json` + PNGs desktop **e** mobile por rota no escopo
+- [ ] Agente Cursor analisou PNGs (vision) com checklist V1–V8
+- [ ] `last_visual_audit` preenchido: `scores`, `findings`, `gate_passed`
+- [ ] `last_audit.design_checks.visual_gate` = `pass` ou `pending`→`pass`
+- [ ] Zero findings **critical/high** categoria `design`/`ux` abertos
+- [ ] Rotas com `overall` < 7 → `step=fix` ou waiver documentado em `waived[]`
+
+**Comando:** `/lucy visual-gate` ou `bash .cursor/skills/lucy/scripts/visual-gate-capture.sh --base-url http://localhost:3000`
+
 ## Severidade e gate
 
 | Severity | Gate |
