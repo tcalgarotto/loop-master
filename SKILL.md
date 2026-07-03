@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.13"
+version: "2.9.14"
 ---
-# Lucy v2.9.13 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.14 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -18,9 +18,10 @@ version: "2.9.13"
 
 A cada `/lucy` (tick ou chat):
 
-1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search + ler **`.cursor/lucy-brain/rules/*.md` (P0)** + protocolos do skill pack
+1. **HYDRATE** — `brain-sync.sh hydrate` + ler **`.cursor/lucy-brain/rules/*.md` (P0)** + protocolos do skill pack  
+   *(L2 claude-mem MCP — opcional; só se `LUCY_CLAUDE_MEM=1` + MCP cadastrado)*
 2. **TRABALHAR** — com contexto acumulado
-3. **CAPTURE** — `brain-sync.sh capture` + claude-mem observation_add
+3. **CAPTURE** — `brain-sync.sh capture` *(+ claude-mem observation_add se L2 ativo)*
 
 Armazena: perfil dev, decisões de arquitetura, log de interações, consciência crescente.
 Diretório: `.cursor/lucy-brain/`
@@ -37,7 +38,8 @@ Diretório: `.cursor/lucy-brain/`
    ```bash
    bash .cursor/skills/lucy/scripts/init.sh
    ```
-   Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem (+ start), motion, shadcn/ui, framer-motion, tremor, tanstack-query, Playwright (visual-gate), Firecrawl* (se `FIRECRAWL_API_KEY`), symlinks, JSON, PLAN, INDEX.
+   Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, motion, shadcn/ui, framer-motion, tremor, tanstack-query, Playwright (visual-gate), Firecrawl* (se `FIRECRAWL_API_KEY`), symlinks, JSON, PLAN, INDEX.  
+   **claude-mem (L2):** opt-in — `LUCY_CLAUDE_MEM=1 bash .../init.sh` + cadastrar MCP no Cursor.
 
 2. **Quiz 7 rodadas** — **OBRIGATÓRIO** executar antes de perguntar:
    ```bash
@@ -139,7 +141,7 @@ Ver: `lucy-aprenda-protocol.md` · `lucy-regra-protocol.md`
 ## Modo autônomo — cada tick
 
 ### Antes (hidratação)
-1. **Second Brain HYDRATE** — `brain-sync.sh hydrate` + claude-mem search
+1. **Second Brain HYDRATE** — `brain-sync.sh hydrate` *(+ claude-mem search se L2 ativo)*
 2. L1 JSON + `next_prompt` + L0 dev-profile + project-mind
 3. INDEX sync emojis
 4. Scan `skills_installed[]`
@@ -157,7 +159,7 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 
 ### Depois (handoff)
 1. **Docs sync** — se mudou comando/script/protocolo: `references/docs-sync-discipline.md` (grep → README/MANUAL/SKILL/CHANGELOG → bump patch)
-2. JSON + INDEX + **brain-sync capture** + claude-mem observation_add
+2. JSON + INDEX + **brain-sync capture** *(+ claude-mem observation_add se L2 ativo)*
 3. `next_prompt` completo
 4. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%`
 
@@ -169,7 +171,8 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 |-------|-----------|
 | lucy (legado loop-master) | sim — use `migrate-loop-master-to-lucy.sh` |
 | impeccable, ui-ux-pro-max | sim |
-| taste-skill, caveman, claude-mem, motion | sim |
+| taste-skill, caveman, motion | sim |
+| claude-mem (L2) | **opt-in** (`LUCY_CLAUDE_MEM=1`) |
 | **nextjs-premium-stack** | **sim (auto-detecta Next.js e instala: shadcn/ui, framer-motion, tremor, tanstack-query, lucide-react)** |
 | **visual-gate** | **sim (Playwright + chromium se Next.js)** |
 | **firecrawl-cli** | **sim se `FIRECRAWL_API_KEY` no env** |
@@ -184,7 +187,7 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 |--------|-------------|
 | L0 Brain | `.cursor/lucy-brain/` — **toda interação** |
 | L1 JSON | progress handoff |
-| L2 claude-mem | MCP search + observation_add |
+| L2 claude-mem | MCP search + observation_add — **opcional** (opt-in) |
 | L3 PLAN/INDEX | docs humanos |
 
 Ver `references/second-brain-protocol.md` + `memory-protocol.md`
@@ -267,7 +270,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - Pedir permissão antes de rodar init.sh
 - Pular quiz ou implementar antes de Round 7
 - Terminar tick sem next_prompt + re-arm
-- Ignorar INDEX / claude-mem sync
+- Ignorar INDEX / brain-sync capture
 - Secrets no progress JSON
 - Misturar `/lucy aprenda` (global) com pedido só do projeto — use `/lucy regra`
 - Ignorar `rules/` P0 no HYDRATE

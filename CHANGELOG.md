@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.14] — 2026-07-03
+
+### claude-mem L2 opt-out por padrão
+
+- **`init.sh`** — remove claude-mem do default skills; instala/start só com `LUCY_CLAUDE_MEM=1`
+- **`brain-sync.sh`** — hints MCP L2 só quando opt-in + worker/MCP presente; skip silencioso
+- **`install-idempotent.sh`** — helpers `lucy_claude_mem_enabled`, `lucy_claude_mem_active`
+- **Docs:** `SKILL.md`, `second-brain-protocol.md`, `memory-protocol.md` — L2 opcional; L0+L1 suficientes
+- **Aprendizado:** `references/learned/` — claude-mem optional
+
+---
+
 ## [2.9.13] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`) + docs sync

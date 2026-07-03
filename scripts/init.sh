@@ -12,7 +12,7 @@ SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
 # Full ecosystem — installed by default unless --skip-skills or custom --skills
-DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion,nextjs-premium-stack,visual-gate,firecrawl-cli"
+DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,motion,nextjs-premium-stack,visual-gate,firecrawl-cli"
 SKILLS_CSV=""
 SKIP_SKILLS=false
 PRESERVE_CONTEXT=false
@@ -35,7 +35,8 @@ while [[ $# -gt 0 ]]; do
       cat <<'HELP'
 Usage: init.sh [options]
 
-Default (zero-config): install full skill ecosystem + claude-mem + symlinks + INDEX stub.
+Default (zero-config): install full skill ecosystem + symlinks + INDEX stub.
+  claude-mem (L2): opt-in — set LUCY_CLAUDE_MEM=1 before init to install/start.
 
 Options:
   --skills a,b,c     Install only listed skills (overrides default full set)
@@ -124,6 +125,10 @@ install_skill() {
       fi
       ;;
     claude-mem)
+      if ! lucy_claude_mem_enabled; then
+        echo "    skip claude-mem (opt-in — set LUCY_CLAUDE_MEM=1 to enable L2 memory)"
+        return 0
+      fi
       if lucy_skill_present "$PROJECT_ROOT" "claude-mem"; then
         echo "    ok claude-mem (skip install)"
       else
@@ -366,7 +371,7 @@ Legenda: ✅ OK | ⏳ Pendente | 🔮 Futuro | 👤 Human
 | Master Plan | ⏳ | `docs/LUCY-PLAN.md` | Fases e gates |
 | Product brief | 🔮 | `PRODUCT.md` | Se escopo FE |
 | Design brief | 🔮 | `DESIGN.md` | Se design_surface ≠ none |
-| claude-mem | ⏳ | worker + MCP | Memória L2 cross-session |
+| claude-mem L2 | 🔮 | opt-in (`LUCY_CLAUDE_MEM=1`) | Memória semântica cross-session — opcional |
 | Skills ecosystem | ⏳ | `.cursor/skills/` | Scan a cada tick |
 | Dynamic loop | 🔮 | `arm-dynamic-loop.sh` | Após quiz + tick 1 |
 
@@ -511,8 +516,12 @@ scan_skills() {
 if command -v jq &>/dev/null && [[ -f "$PROGRESS" ]]; then
   SKILLS_JSON=$(scan_skills)
   PACK_VER=$(grep -E '^version:' "$SKILL_ROOT/SKILL.md" | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "2.4.0")
-  MEM_STATUS="pending"
-  if echo "$SKILLS_JSON" | jq -e 'index("claude-mem")' &>/dev/null; then MEM_STATUS="installed"; fi
+  MEM_STATUS="disabled"
+  if lucy_claude_mem_enabled; then
+    MEM_STATUS="pending"
+    if echo "$SKILLS_JSON" | jq -e 'index("claude-mem")' &>/dev/null; then MEM_STATUS="installed"; fi
+    if lucy_claude_mem_worker_running; then MEM_STATUS="running"; fi
+  fi
   tmp=$(mktemp)
   rel_progress="${PROGRESS#$PROJECT_ROOT/}"
   jq --argjson sk "$SKILLS_JSON" --arg v "$PACK_VER" --arg pf "$rel_progress" --arg ms "$MEM_STATUS" \

@@ -10,7 +10,7 @@ Ver protocolo completo: `references/second-brain-protocol.md`
 |--------|---------|--------|-------------|
 | **L0 Brain** | `.cursor/lucy-brain/` | Perfil dev, ADRs, log interações | **Sim — toda interação** |
 | **L1 Handoff** | `.cursor/lucy-progress.json` | Este loop / projeto | Sim |
-| **L2 Semantic** | claude-mem MCP | Cross-session, busca semântica | Sim |
+| **L2 Semantic** | claude-mem MCP | Cross-session, busca semântica | **Opcional** (opt-in) |
 | **L3 Human** | PLAN + INDEX + brain/INDEX.md | Legível por humanos | Sim |
 
 ## L1 — JSON handoff (fonte da verdade)
@@ -37,41 +37,44 @@ Todo tick **termina** atualizando L1. Campos críticos:
 - `archive_summaries`: manter últimos 10 ticks
 - Sem transcripts, sem secrets
 
-## L2 — claude-mem (obrigatório desde v2.4)
+## L2 — claude-mem (opt-in desde v2.9.14)
 
-Instalado automaticamente em `init.sh`. Ver [claude-mem](https://github.com/thedotmack/claude-mem).
+**Padrão desabilitado.** Habilitar: `LUCY_CLAUDE_MEM=1` + `init.sh` + MCP cadastrado + worker.
 
-### Init + cada sessão
+Ver [claude-mem](https://github.com/thedotmack/claude-mem) e `second-brain-protocol.md`.
+
+### Init + cada sessão (só se L2 ativo)
 
 | Momento | Ação |
 |---------|------|
-| `init.sh` | `npx claude-mem install` + `npx claude-mem start` |
+| `init.sh` | `npx claude-mem install` + `start` **somente se** `LUCY_CLAUDE_MEM=1` |
 | Início de tick | `search(query="<target> <current_phase>", limit=5)` |
 | Fim de tick | capture compacto (paths, findings, decisões quiz) |
 | Nova sessão Cursor | Re-hydrate L1 + claude-mem search antes de agir |
-| `memory_sync` JSON | Atualizar `last_sync_at`, status ✅/⏳ |
+| `memory_sync` JSON | `claude_mem: disabled` (padrão) ou `running` |
 
 Registrar em JSON:
 
 ```json
 "memory_sync": {
-  "claude_mem": "running",
-  "last_sync_at": "2026-07-03T00:00:00Z",
-  "last_search_query": "premium-ui phase-2",
-  "observations_captured": 3
+  "claude_mem": "disabled",
+  "last_sync_at": "2026-07-03T00:00:00Z"
 }
 ```
 
-### Worker (obrigatório para L2 ativo)
+Valores: `disabled` | `pending` | `installed` | `running` | `failed`
+
+### Worker (só se L2 opt-in)
 
 Após install, iniciar o worker (install não-TTY não autostart):
 
 ```bash
+export LUCY_CLAUDE_MEM=1
 npx claude-mem start
 # UI opcional: http://localhost:37700
 ```
 
-Verificar: processo escutando na porta do worker. Sem worker, L1 JSON continua como fonte da verdade; L2 fica inativo.
+Sem worker ou sem MCP: L0 + L1 JSON continuam como fonte da verdade; L2 ignorado silenciosamente.
 
 
 ```

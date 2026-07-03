@@ -77,11 +77,29 @@ lucy_playwright_ready() {
   lucy_playwright_in_pkg "$root" && lucy_playwright_chromium_cached
 }
 
+# Opt-in only: export LUCY_CLAUDE_MEM=1 before init/update to install/start worker
+lucy_claude_mem_enabled() {
+  [[ "${LUCY_CLAUDE_MEM:-0}" == "1" ]]
+}
+
+lucy_claude_mem_present() {
+  local root="${1:-}"
+  lucy_skill_present "${root:-.}" "claude-mem" 2>/dev/null
+}
+
 lucy_claude_mem_worker_running() {
+  if ! lucy_claude_mem_enabled; then
+    return 1
+  fi
   if command -v npx &>/dev/null; then
     npx --yes claude-mem status 2>/dev/null | grep -qiE 'running|active|ok' && return 0
   fi
   pgrep -f 'claude-mem' &>/dev/null
+}
+
+lucy_claude_mem_active() {
+  lucy_claude_mem_enabled && \
+    { lucy_claude_mem_worker_running || lucy_claude_mem_present "${1:-}"; }
 }
 
 lucy_brain_initialized() {

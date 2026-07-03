@@ -9,27 +9,51 @@ Equivalente operacional ao chat Hermes que grava contexto a cada mensagem — ma
 
 ## Arquitetura — 4 camadas
 
-| Camada | Storage | O que guarda | Quando |
-|--------|---------|--------------|--------|
-| **L0 Brain** | `.cursor/lucy-brain/` | Perfil dev, decisões, log | **Toda interação** |
-| **L1 Handoff** | `lucy-progress.json` | Tick, fases, next_prompt | Todo tick |
-| **L2 Semantic** | claude-mem MCP | Busca semântica cross-session | Hydrate + capture |
-| **L3 Human** | PLAN + INDEX + brain/INDEX.md | Legível por humanos | Sync contínuo |
+| Camada | Storage | O que guarda | Quando | Obrigatório |
+|--------|---------|--------------|--------|-------------|
+| **L0 Brain** | `.cursor/lucy-brain/` | Perfil dev, decisões, log | **Toda interação** | **Sim** |
+| **L1 Handoff** | `lucy-progress.json` | Tick, fases, next_prompt | Todo tick | **Sim** |
+| **L2 Semantic** | claude-mem MCP | Busca semântica cross-session | Hydrate + capture | **Opcional** |
+| **L3 Human** | PLAN + INDEX + brain/INDEX.md | Legível por humanos | Sync contínuo | **Sim** |
 
 ```
 Usuário → /lucy
             │
             ├─ HYDRATE (início)
-            │    ├─ brain-sync.sh hydrate
-            │    ├─ claude-mem session_start_context
-            │    └─ claude-mem search → memory_refs[]
+            │    ├─ brain-sync.sh hydrate          ← sempre
+            │    └─ claude-mem search (se L2 ativo) ← opt-in
             │
             ├─ TRABALHAR (tick ou chat)
             │
             └─ CAPTURE (fim — obrigatório)
-                 ├─ brain-sync.sh capture --summary ...
-                 └─ claude-mem observation_add
+                 ├─ brain-sync.sh capture --summary ...  ← sempre
+                 └─ claude-mem observation_add (se L2)   ← opt-in
 ```
+
+---
+
+## L2 claude-mem — opt-in (v2.9.14+)
+
+**Padrão:** desabilitado. L0 + L1 cobrem handoff e memória local sem worker em background.
+
+**Habilitar:**
+
+```bash
+export LUCY_CLAUDE_MEM=1
+bash .cursor/skills/lucy/scripts/init.sh
+# Cadastrar MCP claude-mem no Cursor (plugin ou mcp.json)
+npx claude-mem start   # worker local
+```
+
+**Desabilitar / remover:**
+
+```bash
+npx claude-mem stop    # ou kill worker
+unset LUCY_CLAUDE_MEM
+# Opcional: rm -rf ~/.claude-mem  # SQLite + Chroma (~MB) — só se não usar em outro projeto
+```
+
+Sem L2: `brain-sync.sh` não emite erros; agente **não** deve chamar MCP claude-mem.
 
 ---
 
@@ -55,7 +79,7 @@ Usuário → /lucy
 bash .cursor/skills/lucy/scripts/brain-sync.sh hydrate
 ```
 
-Agente **também** chama MCP claude-mem (3-layer workflow):
+**Sempre** ler L0 + rules P0. **Se L2 ativo** (`LUCY_CLAUDE_MEM=1` + worker + MCP):
 
 ```
 1. session_start_context(project="<repo-name>", platformSource="cursor")
@@ -64,7 +88,7 @@ Agente **também** chama MCP claude-mem (3-layer workflow):
 4. get_observations([ids]) — só IDs filtrados
 ```
 
-Merge em `memory_refs[]` no progress JSON. **Não agir** sem hydrate.
+Merge em `memory_refs[]` no progress JSON. **Não agir** sem hydrate L0.
 
 ### 2. CAPTURE (antes de encerrar turno)
 
@@ -77,7 +101,7 @@ bash .cursor/skills/lucy/scripts/brain-sync.sh capture \
   --dev-note "Dev prefere respostas em PT-BR, commits focados"
 ```
 
-Agente **também** chama:
+**Se L2 ativo**, agente **também** chama:
 
 ```
 observation_add(
@@ -90,7 +114,7 @@ observation_add(
 Para chat casual (não tick):
 
 ```
-observation_add(kind="lucy-chat", ...)
+observation_add(kind="lucy-chat", ...)   # só se L2
 brain-sync.sh capture --kind chat --summary "..."
 ```
 
@@ -127,11 +151,9 @@ Orchestrator deve **citar** fatos do brain quando relevante:
 
 ## Integração com ticks autônomos
 
-No autonomous-orchestrator-protocol, substituir "se claude-mem ativo" por:
-
 - **Sempre** brain-sync hydrate no início
 - **Sempre** brain-sync capture no fim
-- claude-mem é extensão semântica do L0, não opcional
+- claude-mem L2 é extensão semântica opcional — L0+L1 bastam para a maioria dos projetos
 
 ---
 
@@ -162,17 +184,19 @@ Instalados em `.cursor/hooks/lucy/` pelo `install-hooks.sh`:
 
 | Evento | Script | Comportamento |
 |--------|--------|---------------|
-| `sessionStart` | `brain-hydrate.sh` | Hidrata brain → `additional_context` |
+| `sessionStart` | `brain-hydrate.sh` | Hidrata brain L0 → `additional_context` |
 | `stop` | `brain-capture.sh` | Captura resumo do turno (sem followup) |
 
 Fonte na skill: `hooks/hooks.template.json`  
 Reinstalar: `bash .cursor/skills/lucy/scripts/install-hooks.sh`
 
-**Nota:** hooks só aplicam ao **Agent Chat**, não ao Tab inline.
+**Nota:** hooks só aplicam ao **Agent Chat**, não ao Tab inline. Hooks **não** chamam claude-mem — só L0.
 
 ## Anti-padrões
 
-- Terminar turno sem capture
+- Terminar turno sem capture L0
 - Ignorar dev-profile em decisões de estilo/escopo
 - Duplicar fatos já em project-mind (atualizar, não append infinito)
 - Substituir L1 JSON pelo brain — são complementares
+- Chamar MCP claude-mem quando L2 desabilitado (ruído / falhas)
+- Instalar worker claude-mem sem opt-in (`LUCY_CLAUDE_MEM=1`)

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Lucy Second Brain — local memory + claude-mem sync
+# Lucy Second Brain — local memory + optional claude-mem L2
 # Usage:
 #   brain-sync.sh init
 #   brain-sync.sh hydrate [--json]
@@ -10,6 +10,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=lib/lucy-paths.sh
 source "$SCRIPT_DIR/lib/lucy-paths.sh"
+# shellcheck source=lib/install-idempotent.sh
+source "$SCRIPT_DIR/lib/install-idempotent.sh"
 PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
 BRAIN_DIR="$(lucy_brain_dir "$PROJECT_ROOT")"
@@ -83,7 +85,7 @@ Legenda: ✅ consolidado | ⏳ aprendendo | 🔮 inferido | 👤 confirmado pelo
 | Perfil dev | ⏳ | `.cursor/lucy-brain/dev-profile.json` |
 | Mente projeto | ⏳ | `.cursor/lucy-brain/project-mind.json` |
 | Log interações | ⏳ | `.cursor/lucy-brain/interaction-log.jsonl` |
-| claude-mem L2 | ⏳ | MCP search + observation_add |
+| claude-mem L2 | 🔮 | opt-in (`LUCY_CLAUDE_MEM=1`) | MCP search + observation_add — opcional |
 
 > Atualizado automaticamente a cada `/lucy` (hydrate → trabalho → capture).
 EOF
@@ -153,11 +155,16 @@ PY
   tail -n 3 "$LOG" 2>/dev/null | while read -r line; do
     echo "$line" | jq -r '"[\(.at)] \(.kind): \(.summary)"' 2>/dev/null || echo "$line"
   done
-  echo ""
-  echo ">>> Agent: também chamar claude-mem MCP:"
-  echo "    1. session_start_context(project=\"$(basename "$PROJECT_ROOT")\", platformSource=\"cursor\")"
-  echo "    2. search(query=\"$target $phase\", limit=5, platformSource=\"cursor\")"
-  echo "    3. timeline(anchor=<id>) se relevante"
+  if lucy_claude_mem_active "$PROJECT_ROOT"; then
+    echo ""
+    echo ">>> Agent: também chamar claude-mem MCP:"
+    echo "    1. session_start_context(project=\"$(basename "$PROJECT_ROOT")\", platformSource=\"cursor\")"
+    echo "    2. search(query=\"$target $phase\", limit=5, platformSource=\"cursor\")"
+    echo "    3. timeline(anchor=<id>) se relevante"
+  else
+    echo ""
+    echo ">>> claude-mem L2: desabilitado (L0 brain + L1 JSON suficientes). Opt-in: LUCY_CLAUDE_MEM=1 + MCP cadastrado."
+  fi
 }
 
 brain_capture() {
@@ -229,11 +236,13 @@ PY
 
   echo "==> brain capture OK (#$count)"
   echo "    summary: ${summary:0:120}..."
-  echo ""
-  echo ">>> Agent: também chamar claude-mem MCP observation_add:"
-  echo "    content: compact narrative of this interaction"
-  echo "    kind: lucy-$kind"
-  echo "    metadata: {paths, phase, tick}"
+  if lucy_claude_mem_active "$PROJECT_ROOT"; then
+    echo ""
+    echo ">>> Agent: também chamar claude-mem MCP observation_add:"
+    echo "    content: compact narrative of this interaction"
+    echo "    kind: lucy-$kind"
+    echo "    metadata: {paths, phase, tick}"
+  fi
 }
 
 brain_status() {

@@ -84,7 +84,7 @@
     "memory_sync": {
       "type": "object",
       "properties": {
-        "claude_mem": { "enum": ["pending", "installed", "running", "failed"] },
+        "claude_mem": { "enum": ["disabled", "pending", "installed", "running", "failed"] },
         "last_sync_at": { "type": ["string", "null"], "format": "date-time" },
         "last_search_query": { "type": "string" },
         "observations_captured": { "type": "integer" }

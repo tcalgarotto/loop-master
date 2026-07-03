@@ -22,3 +22,4 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 | 2026-07-03 | `gsap-premium` | GSAP para timelines/ScrollTrigger/stagger; CSS só hover; sem `transition-*` com GSAP | `references/gsap-premium-protocol.md` |
 | 2026-07-03 | `html-native-view-scroll` | `@view-transition`, `animation-timeline: view()`, scrub | `references/html-native-light-protocol.md` |
 | 2026-07-03 | `html-native-dialog-htmx` | `command`/`dialog`, Popover, HTMX parcial | `references/html-native-light-protocol.md` |
+| 2026-07-03 | `claude-mem-optional-l2` | claude-mem L2 opt-out default; LUCY_CLAUDE_MEM=1 para habilitar; L0 brain + L1 JSON bastam |
