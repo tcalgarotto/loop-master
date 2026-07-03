@@ -5,6 +5,7 @@ Conhecimento destilado sobre como criar interfaces de **qualidade máxima** em N
 
 > 🧠 Leis psicológicas, sidebar research, Refactoring UI e Apple HIG: `references/ux-design-intelligence.md`
 > 📚 Routing de skills por superfície: `references/design-skills-routing-table.md`
+> ⚡ Sites leves (HTML nativo + HTMX + híbrido motion): `references/html-native-light-protocol.md`
 
 ---
 
@@ -25,7 +26,7 @@ Inspiração obrigatória: estudar os sistemas de design de referência do merca
 | Estilo | **Tailwind CSS** | Free | Tokens utilitários, paleta controlada |
 | Componentes | **shadcn/ui** | Free | Estrutura visual pronta e acessível |
 | Ícones | **Lucide React** | Free | Incluído no shadcn — 1 cor neutra |
-| Animações | **Framer Motion** | Free | Springs, transições de aba, micro-animações |
+| Animações | **Framer Motion** | Free | Springs, layoutId, stagger — **não** para abrir modal simples (usar `<dialog>`+`command`) |
 | Gráficos | **Tremor Raw** | Free | Dashboards financeiros leves e limpos |
 | Efeitos IA | **Magic UI** | Free | Dot Pattern, Bento Grid, texto digitado |
 | Efeitos premium | **Aceternity UI** | Free/Paid | Spotlight, skeletons avançados |
@@ -189,6 +190,17 @@ Skeleton de loading deve aparecer antes dos dados chegarem (shadcn skeleton).
 ```
 
 ---
+
+## Animações — modelo híbrido (nativo + Framer Motion)
+
+**Leia primeiro:** `references/html-native-light-protocol.md`
+
+| Superfície | Ferramenta |
+|------------|------------|
+| Modal CRUD, confirmação | `<dialog>` + `command`/`commandfor` + CSS `@starting-style` |
+| Popover, filtros, menu | Popover API ou shadcn Popover fino |
+| Refresh parcial de lista/painel | HTMX + Route Handler HTML |
+| Sidebar spring, layoutId, Kanban | Framer Motion |
 
 ## Animações (Framer Motion — padrões)
 

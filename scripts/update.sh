@@ -83,6 +83,10 @@ fi
 
 bash "$SCRIPT_DIR/init.sh" "${INIT_ARGS[@]}"
 
+# Remove legacy skill duplicates (/loop-master alias, lucy-pack)
+lucy_cleanup_skill_duplicates "$PROJECT_ROOT/.cursor/skills"
+lucy_cleanup_skill_duplicates "$HOME/.cursor/skills"
+
 # 4. Patch version into JSON
 if [[ -f "$PROGRESS" ]] && command -v jq &>/dev/null; then
   tmp=$(mktemp)

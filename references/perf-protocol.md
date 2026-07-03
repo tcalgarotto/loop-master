@@ -36,6 +36,9 @@ ANALYZE=true npm run build
 ### Checklist de bundle
 
 ```
+[ ] Modais simples usam <dialog>+command (html-native-light-protocol) — não useState só para toggle
+[ ] Popovers leves sem React state desnecessário
+[ ] Listas com partial refresh avaliadas para HTMX antes de client component
 [ ] Chunk JS inicial < 100kB (gzip)
 [ ] Sem bibliotecas duplicadas
 [ ] Dynamic imports em rotas pesadas

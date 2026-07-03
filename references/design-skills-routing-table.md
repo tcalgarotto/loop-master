@@ -35,6 +35,7 @@ Consultar **antes** de spawnar workers de design.
 | **magic-ui** | `npm:magic-ui` | Efeitos IA: Dot Pattern, Bento Grid, texto digitado | implement | shadcn |
 | **aceternity-ui** | aceternity.com | Spotlight, hover effects avançados | polish | shadcn |
 | **tanstack-query** | `npm:@tanstack/react-query` | Cache SWR, atualização background de dados | implement | Server Actions |
+| **html-native** | navegador + opcional `htmx.org` | `<dialog>`+`command`, Popover API, HTMX partial | implement | perf-protocol |
 
 ---
 
@@ -54,8 +55,12 @@ Entrega tem UI?
    │  └─ design-system → ui-styling → impeccable layout/typeset
    ├─ Apresentação / deck?
    │  └─ slides → design-system
-   └─ Animação?
-      └─ motion + impeccable animate (prefers-reduced-motion)
+   ├─ Modal / popover / confirmação simples?
+   │  └─ html-native-light-protocol → <dialog>+command ou Popover API (antes de use client)
+   ├─ Lista/tabela com refresh parcial?
+   │  └─ html-native-light-protocol → HTMX fragment (antes de client fetch chain)
+   └─ Animação de produto (sidebar, layoutId, Kanban)?
+      └─ framer-motion + impeccable animate (prefers-reduced-motion)
 ```
 
 ---

@@ -128,7 +128,6 @@ retarget_skill_symlink() {
     ln -sfn "$target" "$new"
   fi
   rm -rf "$old"
-  lucy_install_loop_master_alias "$SCRIPT_DIR/.." "$PROJECT_ROOT"
 }
 
 echo "==> migrate loop-master → lucy"

@@ -99,18 +99,42 @@ lucy_legacy_paths_present() {
   [[ -f "$root/docs/LOOP-MASTER-PLAN.md" ]] && return 0
   [[ -f "$root/docs/LOOP-MASTER-INDEX.md" ]] && return 0
   [[ -d "$root/.cursor/hooks/loop-master" ]] && return 0
-  [[ -e "$root/.cursor/skills/loop-master" ]] && return 0
+  # Full legacy skill pack only (not thin alias folder)
+  if [[ -L "$root/.cursor/skills/loop-master" ]]; then return 0; fi
+  if [[ -d "$root/.cursor/skills/loop-master/scripts" ]]; then return 0; fi
   return 1
 }
 
-# Install thin /loop-master slash-command alias (separate folder; canonical pack stays at lucy/)
-lucy_install_loop_master_alias() {
-  local skill_root="$1"
-  local project_root="$2"
-  local alias_src="$skill_root/alias/loop-master/SKILL.md"
-  local alias_dst="$project_root/.cursor/skills/loop-master"
-  [[ -f "$alias_src" ]] || return 0
-  mkdir -p "$alias_dst"
-  cp "$alias_src" "$alias_dst/SKILL.md"
-  echo "    Installed /loop-master alias → $alias_dst/SKILL.md"
+# Remove duplicate / legacy skill entries (loop-master alias, lucy-pack folder)
+lucy_cleanup_skill_duplicates() {
+  local skills_dir="${1:-}"
+  [[ -n "$skills_dir" && -d "$skills_dir" ]] || return 0
+
+  local lm="$skills_dir/loop-master"
+  if [[ -d "$lm" && ! -L "$lm" && ! -d "$lm/scripts" && -f "$lm/SKILL.md" ]]; then
+    local count
+    count=$(find "$lm" -mindepth 1 -maxdepth 1 | wc -l)
+    if [[ "$count" -le 2 ]]; then
+      rm -rf "$lm"
+      echo "    Removed legacy /loop-master alias skill"
+    fi
+  fi
+
+  local pack="$skills_dir/lucy-pack"
+  local lucy="$skills_dir/lucy"
+  if [[ -d "$pack" ]]; then
+    if [[ -L "$lucy" ]]; then
+      rm -f "$lucy"
+      if [[ ! -e "$lucy" ]]; then
+        mv "$pack" "$lucy"
+        echo "    Normalized lucy-pack → lucy (single skill install)"
+      fi
+    elif [[ ! -e "$lucy" ]]; then
+      mv "$pack" "$lucy"
+      echo "    Renamed lucy-pack → lucy"
+    else
+      rm -rf "$pack"
+      echo "    Removed duplicate lucy-pack folder"
+    fi
+  fi
 }
