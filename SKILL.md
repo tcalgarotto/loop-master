@@ -6,7 +6,7 @@ description: >-
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
 version: "2.9.10"
 ---
-# Lucy v2.9.10 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.11 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -223,6 +223,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/html-native-light-protocol.md` — **UI leve: dialog, HTMX, view-transition, scroll scrub**
 - `references/html-first-design-protocol.md` — **HTML-first: preview local antes de Next + biblioteca de referências**
 - `references/html-preview-interactive-mocks-protocol.md` — **mocks HTML interativos espelhando produto real**
+- `references/integration-cards-patterns.md` — **3 modelos de cards de integração (carousel, marketplace, grid)**
 - `references/design-editable-hybrid-protocol.md` — **Caminho C: HTML até aprovar → Penpot MCP → Next → Puck opcional**
 - `references/gsap-premium-protocol.md` — **GSAP: timelines, ScrollTrigger, stagger premium**
 - `references/lucy-aprenda-protocol.md` — **`/lucy aprenda` global → GitHub**

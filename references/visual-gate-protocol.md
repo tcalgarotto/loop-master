@@ -193,10 +193,22 @@ Merge em `last_audit.findings[]` **e** `last_visual_audit.routes[].findings[]`.
 | `/lucy refazer-frontend` | Após polish de cada página (1 rota) ou lote no fim do escopo |
 | `/lucy audit` | Se fase atual tem superfície FE |
 | `/lucy deploy` | Opcional smoke visual em staging URL |
+| **HTML-first** (`preview/*.html`) | `html-preview-section-gate.sh` — full + seções antes de aprovar owner |
+
+### HTML preview — captura por seção
+
+```bash
+bash scripts/html-preview-serve.sh          # :8765
+bash scripts/html-preview-section-gate.sh --file preview/hubfu-landing-premium.html
+```
+
+Saída: `.lucy/html-preview-gates/<timestamp>/` — `full-desktop.png`, `section-*.png`, `full-mobile.png`.
+
+**Vision checklist extra:** contraste em mocks dark, kanban sem clip, carousel integrações contínuo.
+
+Ver `html-preview-interactive-mocks-protocol.md` §7.
 
 ---
-
-## Browser IA / OpenRouter (futuro)
 
 Hoje: **Cursor multimodal** lê PNGs locais (custo zero extra se já no plano).
 

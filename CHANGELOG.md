@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.11] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`integration-cards-patterns.md`** — 3 modelos canônicos (carousel pills, marketplace sidebar, grid denso) com logos reais
+- **`html-preview-interactive-mocks-protocol.md`** — carousel ≥8 integrações, contraste dark P0, QA screenshot por seção
+- **`scripts/html-preview-section-gate.sh`** — Playwright full-page + seções para HTML preview
+- **`visual-gate-protocol.md`** — extensão HTML-first
+- HubFU `preview/hubfu-landing-premium.html` v6: carousel integrações, contraste estoque hero, kanban sem clip
+
+---
+
 ## [2.9.10] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)

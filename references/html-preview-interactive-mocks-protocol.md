@@ -43,16 +43,59 @@ Ver `gsap-premium-protocol.md` — CSS `transition-*` só hover; não no mesmo n
 
 ---
 
-## 3. Integrações — grid de cards
+## 3. Integrações — 3 modelos (ver catálogo)
 
-Estilo marketplace (logo + nome + status), não só pills de texto.
+**Canônico:** `integration-cards-patterns.md` — Modelo A (carousel), B (marketplace sidebar), C (grid denso).
 
-| Propriedade | Valor |
-|-------------|--------|
-| Layout | `grid` 3–4 colunas, gap 12–16px |
-| Card | fundo branco, borda sutil, ícone/initials, nome, badge status |
-| Hover | `translateY(-2px)` + sombra leve |
-| Click | alterna "Conectado" / "Conectar" |
+| Contexto | Modelo | Regra |
+|----------|--------|-------|
+| Landing com **≥8** integrações | **A** — carousel infinito | Logos **reais** (SVG), não iniciais |
+| Página settings / conectar dados | **B** — sidebar + grid | Filtro por categoria |
+| Catálogo completo | **C** — grid 5×7 | Logo + label |
+
+**Landing HubFU:** Modelo A com `cdn.simpleicons.org` no preview; assets em `public/integrations/` no port Next.
+
+**Proibido:** só iniciais "WA", "GC" em HTML aprovado para cliente.
+
+---
+
+## 6. Contraste em mocks dark (P0)
+
+Texto dentro de device mock (`#1c1c1e`) **não herda** `body { color: #1d1d1f }`.
+
+| Superfície | Mínimo |
+|------------|--------|
+| `.device-main` | `color: #f5f5f7` no container |
+| Tabelas estoque (hero + tabs) | células `rgba(245,245,247,.88)`; headers `.55` |
+| `.deal-name` em dark | `rgba(255,255,255,.92)` |
+| `.deal-meta` em dark | `rgba(255,255,255,.55)` — nunca `.35` |
+
+**Gate:** zoom 100% desktop — ler nomes de produto na view Estoque do hero sem esforço.
+
+---
+
+## 7. QA por seção (screenshot obrigatório)
+
+Antes de aprovar `preview/*.html`:
+
+```bash
+bash scripts/html-preview-serve.sh   # terminal 1
+bash scripts/html-preview-section-gate.sh --file preview/<slug>.html
+```
+
+**Checklist vision (cada PNG):**
+
+| Seção | Verificar |
+|-------|-----------|
+| Hero device | 4 views; tabela estoque legível |
+| Integrações | logos reais; carousel sem gap; não cortado |
+| Feature rows | kanban 4 colunas visíveis (sem clip) |
+| Tabs produto | 4 cenas completas; filtros CRM |
+| Mobile | sem overflow horizontal indesejado |
+
+**Proibido:** gate_passed com seção vazia, texto ilegível ou card cortado na borda.
+
+Ver `visual-gate-protocol.md` — extensão HTML preview.
 
 ---
 
@@ -85,7 +128,9 @@ Na view **Pipeline** do hero device: kanban **full width**, sem gráfico de linh
 - [ ] Nav sidebar troca 4 views distintas
 - [ ] Tabs produto trocam 4 cenas completas
 - [ ] Filtros CRM funcionam
-- [ ] Integrações em grid de cards interativos
+- [ ] Integrações: modelo certo (carousel se ≥8) + logos reais
+- [ ] Contraste OK em mocks dark (estoque hero, deal cards)
+- [ ] Screenshot por seção (`html-preview-section-gate.sh`)
 - [ ] Barras financeiras = crescimento exponencial
 - [ ] Kanban organizado (headers, totais, seleção)
 - [ ] Motion equilibrado (≤2 GSAP por viewport)
