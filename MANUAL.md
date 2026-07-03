@@ -2,7 +2,7 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.9.1** · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.9.2** · *Autor:* **Thales Calgarotto**
 
 ---
 
@@ -138,6 +138,17 @@ Ver: `references/lucy-refazer-frontend-protocol.md`, `references/lucy-nova-pagin
 | `/lucy regra` + pedido | **Só este projeto** | Regra P0 imutável em `.cursor/lucy-brain/rules/` — sobrevive ao update. |
 
 Ver: `references/lucy-aprenda-protocol.md`, `references/lucy-regra-protocol.md`
+
+### 4.7 Disciplina de documentação (Hermes-style)
+
+Toda mudança em **comando, script ou protocolo** exige, antes de encerrar o turno:
+
+1. `grep` nos docs por termos afetados  
+2. Atualizar README, MANUAL, SKILL, `references/README.md`, CHANGELOG  
+3. Bump patch em `SKILL.md`  
+4. Registrar em `references/learned/INDEX.md` (se via `/lucy aprenda`)
+
+Ver: `references/docs-sync-discipline.md`
 
 ---
 

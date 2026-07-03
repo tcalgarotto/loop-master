@@ -38,4 +38,5 @@ cd seu-projeto
 
 - [MANUAL.md](../MANUAL.md) — guia completo
 - [references/README.md](README.md) — índice técnico
+- [docs-sync-discipline.md](docs-sync-discipline.md) — sync obrigatória após mudanças na skill
 - [second-brain-protocol.md](second-brain-protocol.md) — memória viva

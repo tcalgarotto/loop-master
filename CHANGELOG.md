@@ -1,5 +1,14 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.2] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`references/docs-sync-discipline.md`** — regra P0: após mudança em comando/script/protocolo → grep docs → sync README/MANUAL/SKILL/references/README/CHANGELOG → bump patch → `learned/INDEX`
+- Integrado em `SKILL.md` (handoff + anti-padrão), `lucy-aprenda-protocol.md`, `autonomous-orchestrator-protocol.md`
+
+---
+
 ## [2.9.1] — 2026-07-03
 
 ### Documentação
@@ -70,4 +79,5 @@
 
 ---
 
+[2.9.2]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.2
 [2.9.1]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.1

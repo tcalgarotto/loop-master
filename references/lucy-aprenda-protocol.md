@@ -30,6 +30,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | Deploy / test / i18n | protocolo correspondente em `references/` |
 | Novo domínio | `references/learned/<slug>.md` |
 | Script / automação | `scripts/` |
+| Processo / disciplina operacional | `docs-sync-discipline.md` + protocolo dono |
 | Conflito com regra global | nota + ADR; **nunca** apagar regra de projeto (`/lucy regra`) |
 
 ### 2. Editar o skill pack
@@ -38,8 +39,9 @@ Trabalhar no clone canônico (`~/Projetos/Loop-master` ou `.cursor/skills/lucy`)
 
 - Atualizar protocolo canônico com regras acionáveis.
 - Atualizar `design-skills-routing-table.md` / `SKILL.md` se mudar comandos ou routing.
+- **Aplicar `docs-sync-discipline.md`** — grep docs, sync README/MANUAL/SKILL/references/README/CHANGELOG.
 - Registrar em `references/learned/INDEX.md`.
-- Bump `version` em `SKILL.md` (patch: 2.8.4 → 2.8.5).
+- Bump `version` em `SKILL.md` (patch: 2.9.1 → 2.9.2).
 
 ### 3. Registrar (log global)
 

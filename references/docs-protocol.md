@@ -2,6 +2,8 @@
 
 Geração automática de documentação técnica por fase: API, componentes, decisões de arquitetura e changelog.
 
+**Sync obrigatória após editar** (comandos, scripts, protocolos): ver `docs-sync-discipline.md` — grep + README/MANUAL/SKILL/CHANGELOG + bump patch. Complementa este protocolo; não substitui.
+
 ---
 
 ## Modos

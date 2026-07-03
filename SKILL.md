@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.1"
+version: "2.9.2"
 ---
-# Lucy v2.9.1 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.2 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -26,6 +26,8 @@ Armazena: perfil dev, decisões de arquitetura, log de interações, consciênci
 Diretório: `.cursor/lucy-brain/`
 
 **Nunca encerrar turno sem CAPTURE.**
+
+**Docs sync (P0):** mudança em comando/script/protocolo → `references/docs-sync-discipline.md` antes do handoff.
 
 ## `/lucy init` — zero-config
 
@@ -147,9 +149,10 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 **UI leve + motion premium (v2.8.4+):** aplicar `references/html-native-light-protocol.md` (nativo/CSS scrub) e `references/gsap-premium-protocol.md` (timelines, ScrollTrigger, stagger) antes de `use client` / Framer. CSS `transition-*` só em hover — nunca no mesmo elemento que GSAP anima.
 
 ### Depois (handoff)
-1. JSON + INDEX + **brain-sync capture** + claude-mem observation_add
-2. `next_prompt` completo
-3. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%`
+1. **Docs sync** — se mudou comando/script/protocolo: `references/docs-sync-discipline.md` (grep → README/MANUAL/SKILL/CHANGELOG → bump patch)
+2. JSON + INDEX + **brain-sync capture** + claude-mem observation_add
+3. `next_prompt` completo
+4. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%`
 
 ---
 
@@ -228,6 +231,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/deploy-protocol.md` — **pipeline de deploy /lucy deploy**
 - `references/i18n-protocol.md` — **internacionalização /lucy i18n**
 - `references/docs-protocol.md` — **geração de docs /lucy docs**
+- `references/docs-sync-discipline.md` — **sync obrigatória após mudança (Hermes-style)**
 
 ### Memória
 - `references/second-brain-protocol.md`
@@ -249,3 +253,4 @@ Enquanto incompleto: re-arm automático obrigatório.
 - Secrets no progress JSON
 - Misturar `/lucy aprenda` (global) com pedido só do projeto — use `/lucy regra`
 - Ignorar `rules/` P0 no HYDRATE
+- Mudar comando/script/protocolo sem grep + sync README/MANUAL/SKILL/CHANGELOG (`docs-sync-discipline.md`)

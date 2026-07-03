@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.1-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.2-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -275,12 +275,13 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/lucy-nova-pagina-protocol.md` | Landing e páginas app do zero |
 | `references/lucy-aprenda-protocol.md` | `/lucy aprenda` global |
 | `references/lucy-regra-protocol.md` | `/lucy regra` por projeto |
+| `references/docs-sync-discipline.md` | Sync docs obrigatória após mudanças (P0) |
 | `CHANGELOG.md` | Histórico de versões |
 
 ---
 
 ## Versão
 
-**v2.9.1** — redesign frontend (`/lucy refazer-frontend`), páginas novas (`/lucy nova-pagina`), aprendizado dual (`/lucy aprenda` + `/lucy regra`), UI leve + GSAP. Ver [CHANGELOG.md](CHANGELOG.md) e [release v2.9.1](https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.1).
+**v2.9.2** — disciplina de sync de docs (`docs-sync-discipline.md`), redesign frontend, aprendizado dual. Ver [CHANGELOG.md](CHANGELOG.md).
 
 MIT License — feito com 100% do cérebro.

@@ -54,6 +54,7 @@ implement → verify → audit → [fix → audit]×N → gate
 | **Autocorreção** | Finding critical/high → `step=fix` → re-audit; `iteration++` |
 | **Gate bloqueado** | Nunca `phases[id].pct=100` com findings abertos |
 | **Docs** | Ao fechar gate: atualizar seção da fase em `plan_doc` + `docs/LOOP-MASTER-STATUS.md` se existir |
+| **Docs sync (skill pack)** | Se este tick alterou comando/script/protocolo: seguir `docs-sync-discipline.md` antes do handoff |
 | **Versionamento** | Incrementar `doc_versions[]` ao alterar docs de operação |
 | **Memória viva** | `archive_summaries` + claude-mem capture (se instalado) |
 | **100% fase** | Só então avançar `current_phase`; reset minor → `discover` |

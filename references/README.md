@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.1 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.2 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -43,6 +43,7 @@
 | [lucy-aprenda-protocol.md](lucy-aprenda-protocol.md) | `/lucy aprenda` — global → GitHub |
 | [lucy-regra-protocol.md](lucy-regra-protocol.md) | `/lucy regra` — projeto P0 |
 | [learned/INDEX.md](learned/INDEX.md) | Catálogo aprendizados globais |
+| [docs-sync-discipline.md](docs-sync-discipline.md) | **Sync obrigatória** após mudança (Hermes-style) |
 
 ## Autonomia & loop
 
@@ -71,6 +72,7 @@
 | [deploy-protocol.md](deploy-protocol.md) | `/lucy deploy` |
 | [i18n-protocol.md](i18n-protocol.md) | `/lucy i18n` |
 | [docs-protocol.md](docs-protocol.md) | `/lucy docs` |
+| [docs-sync-discipline.md](docs-sync-discipline.md) | Sync docs após editar (P0 global) |
 | [audit-checklist.md](audit-checklist.md) | Checklist audit |
 | [security-audit-protocol.md](security-audit-protocol.md) | Red team |
 
