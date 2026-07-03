@@ -96,7 +96,10 @@
       "properties": {
         "visual_gate_auto": { "type": "boolean", "default": true },
         "visual_gate_on_fe_phase": { "type": "boolean", "default": true },
-        "require_vision_before_gate": { "type": "boolean", "default": true }
+        "require_vision_before_gate": { "type": "boolean", "default": true },
+        "premium_tool_orchestration": { "type": "boolean", "default": true },
+        "landing_requires_motion": { "type": "boolean", "default": true },
+        "landing_visual_gate_production": { "type": "boolean", "default": true }
       }
     },
     "quiz_answers": {

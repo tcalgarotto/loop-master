@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.5"
+version: "2.9.6"
 ---
-# Lucy v2.9.5 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.6 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -37,7 +37,7 @@ Diretório: `.cursor/lucy-brain/`
    ```bash
    bash .cursor/skills/lucy/scripts/init.sh
    ```
-   Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem (+ start), motion, shadcn/ui, framer-motion, tremor, tanstack-query, symlinks, JSON, PLAN, INDEX.
+   Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem (+ start), motion, shadcn/ui, framer-motion, tremor, tanstack-query, Playwright (visual-gate), Firecrawl* (se `FIRECRAWL_API_KEY`), symlinks, JSON, PLAN, INDEX.
 
 2. **Quiz 6 rodadas** — **OBRIGATÓRIO** executar antes de perguntar:
    ```bash
@@ -151,7 +151,9 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 
 **UI leve + motion premium (v2.8.4+):** aplicar `references/html-native-light-protocol.md` (nativo/CSS scrub) e `references/gsap-premium-protocol.md` (timelines, ScrollTrigger, stagger) antes de `use client` / Framer. CSS `transition-*` só em hover — nunca no mesmo elemento que GSAP anima.
 
-**Visual gate (v2.9.4+):** se `quality_gates.visual_gate_on_fe_phase` e fase tem UI → `visual-gate-capture.sh` + vision checklist **antes** do gate (automático no loop; comando manual opcional).
+**Visual gate (v2.9.4+):** se `quality_gates.visual_gate_on_fe_phase` e fase tem UI → `visual-gate-capture.sh` + vision checklist **antes** do gate.
+
+**Orquestração premium (v2.9.6+):** `premium-tool-orchestration.md` — usar taste + impeccable + GSAP + browser + Firecrawl conforme o momento; landing exige motion + visual-gate na URL final.
 
 ### Depois (handoff)
 1. **Docs sync** — se mudou comando/script/protocolo: `references/docs-sync-discipline.md` (grep → README/MANUAL/SKILL/CHANGELOG → bump patch)
@@ -169,6 +171,8 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 | impeccable, ui-ux-pro-max | sim |
 | taste-skill, caveman, claude-mem, motion | sim |
 | **nextjs-premium-stack** | **sim (auto-detecta Next.js e instala: shadcn/ui, framer-motion, tremor, tanstack-query, lucide-react)** |
+| **visual-gate** | **sim (Playwright + chromium se Next.js)** |
+| **firecrawl-cli** | **sim se `FIRECRAWL_API_KEY` no env** |
 | design, design-system, ui-styling, brand, slides, banner-design | symlink se presentes |
 | security-review, bugbot | nativos Cursor |
 
@@ -231,6 +235,8 @@ Enquanto incompleto: re-arm automático obrigatório.
 ### Análise competitiva
 - `references/competitive-intelligence.md` — **protocolo /lucy analise**
 - `references/browser-ai-scrape-protocol.md` — **headless scrape + screenshots (Firecrawl, Playwright, Obscura)**
+- `references/premium-tool-orchestration.md` — **qual ferramenta usar em cada momento (P0)**
+- `references/design-system-intake.md` — **referências de design tagadas pelo owner**
 
 ### Qualidade e entrega
 - `references/test-protocol.md` — **geração de testes /lucy test**

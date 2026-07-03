@@ -80,15 +80,17 @@ src/components/<slug>/                 # superfície isolada
 
 ### Fase 4 — Craft + implement
 
-**Landing premium (checklist):**
+**Landing premium (checklist) — mínimo “com vida”:**
 
+- [ ] taste-skill com VARIANCE/MOTION altos (não layout genérico)
 - [ ] Hero com hierarquia clara (taste anti-slop)
+- [ ] **Motion obrigatório:** GSAP hero entrada OU view() em ≥2 seções
 - [ ] Social proof / logos (placeholder se sem assets)
-- [ ] Bento ou features grid (`magic-ui` opcional)
-- [ ] Motion: `animation-timeline: view()` reveal OU GSAP stagger — não ambos no mesmo nó
-- [ ] CTA acima da dobra + repetido no footer
+- [ ] Bento ou features grid (`magic-ui` opcional — sem slop)
+- [ ] CTA acima da dobra + repetido no footer (Von Restorff)
 - [ ] Mobile-first, `prefers-reduced-motion`
 - [ ] Meta title/description na page ou layout
+- [ ] visual-gate screenshot antes de entregar
 
 **App page premium (checklist):**
 
@@ -98,12 +100,30 @@ src/components/<slug>/                 # superfície isolada
 - [ ] Empty state projetado
 - [ ] Dialog nativo para ações CRUD simples
 
-### Fase 5 — Verify + gate
+### Fase 5 — Verify + gate (obrigatório)
 
 ```bash
 npm run build
 npx impeccable detect <frontend-path>
 ```
+
+**Landing — gate premium (v2.9.6+):**
+
+```bash
+# Preview local OU produção (ex. https://hubfu.vercel.app)
+bash .cursor/skills/lucy/scripts/visual-gate-capture.sh \
+  --base-url "${PREVIEW_URL:-http://localhost:3000}" \
+  --escopo /<slug>
+```
+
+- [ ] Agente analisa PNGs (vision) — checklist `visual-gate-protocol.md`
+- [ ] `last_visual_audit.gate_passed === true` antes de declarar pronto
+- [ ] **Motion:** ≥1 GSAP timeline OU view() scroll (ver `premium-tool-orchestration.md` R3)
+- [ ] **SSR hero:** sem “Carregando flags…” na primeira pintura — flags/i18n não bloqueiam HTML do hero
+
+Se landing “sem vida” → `/lucy refazer-frontend --escopo /<slug>` com taste + GSAP.
+
+**Design systems tagados:** seguir `design-system-intake.md` antes do craft.
 
 Atualizar:
 
@@ -154,5 +174,8 @@ Se `--template` omitido: agente escolhe e documenta no shape.
 
 - Landing inteira como um único `use client`
 - Copiar template sem impeccable critique
+- Entregar landing sem motion (R3 `premium-tool-orchestration.md`)
+- Ship landing sem visual-gate na URL de preview/produção
+- Hero bloqueado por “Carregando…” / flags na SSR
 - Ignorar grupo de rotas `(marketing)` vs `(app)` do projeto existente
 - Azul puro / preto puro (premium-ui-stack)

@@ -24,6 +24,7 @@ Isso instala e configura **tudo**:
 | claude-mem | install + **start worker** (skip se já instalado/rodando) |
 | motion | npm install no frontend |
 | **visual-gate** | Playwright + chromium se Next.js (**skip se já ok**) |
+| **firecrawl-cli** | Se `FIRECRAWL_API_KEY` → `npx firecrawl-cli init --browser` |
 | Symlinks | `link-ecosystem-skills.sh` |
 | JSON L1 | `.cursor/lucy-progress.json` |
 | Plan stub | `docs/LUCY-PLAN.md` |

@@ -5,7 +5,8 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
-| 2026-07-03 | `browser-ai-scrape` | Pipeline browser→screenshot+markdown→LLM/vision; Firecrawl Sandbox, Obscura, Playwright | `references/browser-ai-scrape-protocol.md` |
+| 2026-07-03 | `premium-tool-orchestration` | P0: taste+GSAP+browser+Firecrawl por momento; landing com motion | `premium-tool-orchestration.md` |
+| 2026-07-03 | `browser-ai-scrape` | Pipeline browser→screenshot+markdown→LLM/vision | `browser-ai-scrape-protocol.md` |
 | 2026-07-04 | `visual-gate-auto-incremental-update` | Visual gate default on init/update; update só instala deps faltantes | `visual-gate-protocol.md`, `install-idempotent.sh` |
 | 2026-07-03 | `visual-gate` | Playwright desktop+mobile + vision checklist V1–V8 antes do gate FE | `references/visual-gate-protocol.md` |
 | 2026-07-03 | `docs-sync-discipline` | Grep docs + sync README/MANUAL/SKILL/CHANGELOG + bump patch após mudança | `references/docs-sync-discipline.md` |

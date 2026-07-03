@@ -54,6 +54,9 @@ lucy_skill_present() {
     visual-gate)
       lucy_playwright_ready "$root"
       ;;
+    firecrawl-cli)
+      command -v firecrawl &>/dev/null || [[ -f "$root/.lucy/firecrawl-ready" ]]
+      ;;
     *) return 1 ;;
   esac
 }
@@ -140,6 +143,33 @@ lucy_ensure_playwright() {
   date -u +%Y-%m-%dT%H:%M:%SZ > "$root/.lucy/visual-gate-ready"
 }
 
+lucy_ensure_firecrawl() {
+  local root="$1" incremental="${2:-false}"
+
+  if command -v firecrawl &>/dev/null; then
+    echo "    ok firecrawl-cli ($(firecrawl --version 2>/dev/null | head -1 || echo installed))"
+    mkdir -p "$root/.lucy"
+    date -u +%Y-%m-%dT%H:%M:%SZ > "$root/.lucy/firecrawl-ready"
+    return 0
+  fi
+
+  if [[ -z "${FIRECRAWL_API_KEY:-}" ]]; then
+    echo "    skip firecrawl-cli (set FIRECRAWL_API_KEY in env to auto-install)"
+    return 0
+  fi
+
+  if $incremental && [[ -f "$root/.lucy/firecrawl-ready" ]]; then
+    echo "    ok firecrawl-cli (marker)"
+    return 0
+  fi
+
+  echo "    Configuring firecrawl-cli (browser scrape for @url)..."
+  (cd "$root" && npx -y firecrawl-cli@latest init --all --browser 2>/dev/null) || \
+    echo "    WARN: firecrawl-cli init failed — set FIRECRAWL_API_KEY and run: npx firecrawl-cli init --all --browser"
+  mkdir -p "$root/.lucy"
+  date -u +%Y-%m-%dT%H:%M:%SZ > "$root/.lucy/firecrawl-ready"
+}
+
 lucy_patch_quality_gates() {
   local progress="$1"
   command -v jq &>/dev/null && [[ -f "$progress" ]] || return 0
@@ -151,7 +181,10 @@ lucy_patch_quality_gates() {
       {
         "visual_gate_auto": true,
         "visual_gate_on_fe_phase": true,
-        "require_vision_before_gate": true
+        "require_vision_before_gate": true,
+        "premium_tool_orchestration": true,
+        "landing_requires_motion": true,
+        "landing_visual_gate_production": true
       }
     )
   ' "$progress" > "$tmp" && mv "$tmp" "$progress"

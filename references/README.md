@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.5 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.6 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -56,6 +56,8 @@
 | [prompt-template.md](prompt-template.md) | Templates next_prompt |
 | [competitive-intelligence.md](competitive-intelligence.md) | `/lucy @url`, analise, build |
 | [browser-ai-scrape-protocol.md](browser-ai-scrape-protocol.md) | Headless scrape + screenshots para IA |
+| [premium-tool-orchestration.md](premium-tool-orchestration.md) | Orquestração P0 — ferramenta por momento |
+| [design-system-intake.md](design-system-intake.md) | Referências de design do owner |
 
 ## Memória
 

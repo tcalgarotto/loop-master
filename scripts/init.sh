@@ -12,7 +12,7 @@ SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 
 # Full ecosystem — installed by default unless --skip-skills or custom --skills
-DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion,nextjs-premium-stack,visual-gate"
+DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion,nextjs-premium-stack,visual-gate,firecrawl-cli"
 SKILLS_CSV=""
 SKIP_SKILLS=false
 PRESERVE_CONTEXT=false
@@ -214,6 +214,9 @@ install_skill() {
     visual-gate)
       lucy_ensure_playwright "$PROJECT_ROOT" "$UPDATE_MODE"
       ;;
+    firecrawl-cli)
+      lucy_ensure_firecrawl "$PROJECT_ROOT" "$UPDATE_MODE"
+      ;;
   esac
 }
 
@@ -274,7 +277,10 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   "quality_gates": {
     "visual_gate_auto": true,
     "visual_gate_on_fe_phase": true,
-    "require_vision_before_gate": true
+    "require_vision_before_gate": true,
+    "premium_tool_orchestration": true,
+    "landing_requires_motion": true,
+    "landing_visual_gate_production": true
   },
   "current_phase": "phase-1",
   "target": "$TARGET",
@@ -496,6 +502,9 @@ scan_skills() {
       json=$(echo "$json" | jq -c '. + ["visual-gate"]' 2>/dev/null || echo "$json")
     fi
   fi
+  if command -v firecrawl &>/dev/null || [[ -f "$PROJECT_ROOT/.lucy/firecrawl-ready" ]]; then
+    json=$(echo "$json" | jq -c '. + ["firecrawl-cli"]' 2>/dev/null || echo "$json")
+  fi
   echo "$json"
 }
 
@@ -507,7 +516,7 @@ if command -v jq &>/dev/null && [[ -f "$PROGRESS" ]]; then
   tmp=$(mktemp)
   rel_progress="${PROGRESS#$PROJECT_ROOT/}"
   jq --argjson sk "$SKILLS_JSON" --arg v "$PACK_VER" --arg pf "$rel_progress" --arg ms "$MEM_STATUS" \
-    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf | .memory_sync.claude_mem = $ms | .memory_sync.last_sync_at = now | .index_doc = "docs/LUCY-INDEX.md" | .quality_gates = ((.quality_gates // {}) + {"visual_gate_auto": true, "visual_gate_on_fe_phase": true, "require_vision_before_gate": true})' \
+    '.skills_installed = $sk | .skill_pack_version = $v | .skills_inventory = $sk | .progress_file = $pf | .memory_sync.claude_mem = $ms | .memory_sync.last_sync_at = now | .index_doc = "docs/LUCY-INDEX.md" | .quality_gates = ((.quality_gates // {}) + {"visual_gate_auto": true, "visual_gate_on_fe_phase": true, "require_vision_before_gate": true, "premium_tool_orchestration": true, "landing_requires_motion": true, "landing_visual_gate_production": true})' \
     "$PROGRESS" > "$tmp" && mv "$tmp" "$PROGRESS"
   echo "    skills_installed: $SKILLS_JSON"
   echo "    quality_gates: visual_gate_auto=true (default)"

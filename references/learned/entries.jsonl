@@ -2,3 +2,4 @@
 {"ts":"2026-07-03T08:47:45Z","slug":"visual-gate","summary":"Playwright desktop+mobile screenshots + vision checklist V1-V8 before FE gate_passed","scope":"global"}
 {"ts":"2026-07-03T08:56:06Z","slug":"visual-gate-auto-incremental-update","summary":"Visual gate default on init/update; update incremental skip installed deps","scope":"global"}
 {"ts":"2026-07-03T08:59:48Z","slug":"browser-ai-scrape","summary":"Headless browser\u2192screenshot+markdown\u2192LLM/vision; Firecrawl Sandbox, Obscura, Playwright routing","scope":"global"}
+{"ts":"2026-07-03T09:07:53Z","slug":"premium-tool-orchestration","summary":"P0 orchestration: taste+impeccable+GSAP+browser; landing motion+visual-gate; design-system intake","scope":"global"}

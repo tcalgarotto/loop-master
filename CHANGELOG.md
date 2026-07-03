@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.6] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`premium-tool-orchestration.md`** — regras P0: usar taste+impeccable+GSAP+browser no momento certo
+- **`design-system-intake.md`** — protocolo quando owner taga design systems
+- **Landing premium:** motion obrigatório + visual-gate na URL final; anti “Carregando flags…” SSR
+- **`firecrawl-cli` no init** — auto se `FIRECRAWL_API_KEY`; Playwright já default
+- `quality_gates`: `premium_tool_orchestration`, `landing_requires_motion`, `landing_visual_gate_production`
+
+---
+
 ## [2.9.5] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)
@@ -112,6 +124,7 @@
 
 ---
 
+[2.9.6]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.6
 [2.9.5]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.5
 [2.9.4]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.4
 [2.9.3]: https://github.com/tcalgarotto/loop-master/releases/tag/v2.9.3
