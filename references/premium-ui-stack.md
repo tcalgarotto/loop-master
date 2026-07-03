@@ -202,7 +202,8 @@ Skeleton de loading deve aparecer antes dos dados chegarem (shadcn skeleton).
 | Troca de rota / painel | `startViewTransition` + `::view-transition-*` (ver protocolo) |
 | Cards reveal, header scroll, timeline | `animation-timeline: view()` / `scroll()` — scrub |
 | Refresh parcial de lista/painel | HTMX + Route Handler HTML |
-| Sidebar spring, layoutId, Kanban | Framer Motion |
+| Sidebar spring, layoutId, Kanban | Framer Motion ou GSAP timeline |
+| Timeline abertura CRM, scroll storytelling | **GSAP** + ScrollTrigger |
 
 ## Animações (Framer Motion — padrões)
 

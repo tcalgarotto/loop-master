@@ -1,0 +1,9 @@
+# Lucy — índice de aprendizados (`/lucy aprenda`)
+
+Conhecimento incorporado pelo owner. Protocolo: `references/lucy-aprenda-protocol.md`.
+
+| Data | Slug | Resumo | Protocolo canônico |
+|------|------|--------|-------------------|
+| 2026-07-03 | `gsap-premium` | GSAP para timelines/ScrollTrigger/stagger; CSS só hover; sem `transition-*` com GSAP | `references/gsap-premium-protocol.md` |
+| 2026-07-03 | `html-native-view-scroll` | `@view-transition`, `animation-timeline: view()`, scrub | `references/html-native-light-protocol.md` |
+| 2026-07-03 | `html-native-dialog-htmx` | `command`/`dialog`, Popover, HTMX parcial | `references/html-native-light-protocol.md` |

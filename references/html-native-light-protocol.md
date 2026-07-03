@@ -13,9 +13,10 @@
 | **HTML nativo** | `command` / `commandfor`, `<dialog>`, Popover API, `details/summary` | Modais simples, popovers, menus, confirmações — **zero React state** |
 | **CSS scroll/view** | `@view-transition`, `animation-timeline: view()`, scrub | Header que encolhe no scroll, cards que surgem, timeline IA, transições de rota — **GPU, 0 JS** |
 | **HTMX** | Atributos `hx-get`, `hx-post`, `hx-target`, `hx-swap` | Atualizar **fragmentos** da página via servidor, sem SPA pesado |
-| **React + Framer Motion** | Componentes com ciclo de vida React | Drag-and-drop, `layoutId` card→modal, springs interativos, gestos complexos |
+| **React + Framer Motion** | Componentes com ciclo de vida React | `layoutId`, AnimatePresence, DnD na árvore React |
+| **GSAP** | Timelines, ScrollTrigger, stagger em escala | Abertura CRM em acts, pin+scrub, 50+ itens cascade |
 
-**Regra Lucy:** nativo HTML → CSS scroll/view → HTMX parcial → React só onde nativo não resolve.
+**Regra Lucy:** nativo HTML → CSS scroll/view → CSS hover → GSAP (lógica/scroll) → Framer (React layout) → HTMX parcial onde couber.
 
 ---
 
@@ -370,8 +371,12 @@ Nova superfície UI?
 │  └─ SIM → animation-timeline: view() ou scroll() — scrub, 0 JS
 ├─ Atualizar lista/célula sem navegar?
 │  └─ SIM → HTMX fragment + Route Handler HTML (+ transition:true se swap grande)
-├─ Drag Kanban, reorder, layoutId mágico, spring interativo?
-│  └─ SIM → React client + Framer Motion
+├─ Drag Kanban, reorder, layoutId mágico no React?
+│  └─ SIM → Framer Motion
+├─ Timeline multi-step, stagger 20+, ScrollTrigger pin/scrub?
+│  └─ SIM → GSAP (gsap-premium-protocol) — sem transition-* no elemento
+├─ Hover/active isolado (botão, card lift)?
+│  └─ SIM → CSS transition apenas — GSAP não precisa saber
 └─ Dúvida?
    └─ Default CSS nativo → HTMX; medir bundle antes de use client
 ```

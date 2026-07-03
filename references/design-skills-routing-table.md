@@ -61,8 +61,10 @@ Entrega tem UI?
    │  └─ html-native-light-protocol → animation-timeline: view() / scroll() scrub
    ├─ Lista/tabela com refresh parcial?
    │  └─ html-native-light-protocol → HTMX fragment (antes de client fetch chain)
-   └─ Animação de produto (sidebar, layoutId, Kanban)?
-      └─ framer-motion + impeccable animate (prefers-reduced-motion)
+   └─ Animação de produto (sidebar React, layoutId, Kanban)?
+      └─ framer-motion OU gsap (timeline/scroll → GSAP primeiro)
+   └─ Hover micro (scale, lift)?
+      └─ CSS transition — nunca misturar com GSAP no mesmo nó
 ```
 
 ---
