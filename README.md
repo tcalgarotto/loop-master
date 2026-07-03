@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.7-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.13-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -284,12 +284,22 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/lucy-aprenda-protocol.md` | `/lucy aprenda` global |
 | `references/lucy-regra-protocol.md` | `/lucy regra` por projeto |
 | `references/docs-sync-discipline.md` | Sync docs obrigatória após mudanças (P0) |
+| `references/html-preview-interactive-mocks-protocol.md` | Mocks HTML interativos (nav, kanban DnD, carousel) |
+| `references/integration-cards-patterns.md` | 3 modelos de cards de integração (carousel, marketplace, grid) |
 | `CHANGELOG.md` | Histórico de versões |
 
 ---
 
 ## Versão
 
-**v2.9.7** — HTML-first design preview, biblioteca shadcn/Atlassian/Figma/M3. Ver [CHANGELOG.md](CHANGELOG.md).
+**v2.9.13** — HTML preview interativo (kanban DnD, integration cards, section gate). Ver [CHANGELOG.md](CHANGELOG.md).
+
+### Scripts HTML preview (HubFU / landings)
+
+```bash
+bash scripts/html-preview-serve.sh                    # servidor local :8765
+bash scripts/html-preview-section-gate.sh --file preview/<slug>.html   # screenshots por seção
+python3 scripts/build-hubfu-integrations-data.py      # catálogo integrações → preview JS
+```
 
 MIT License — feito com 100% do cérebro.

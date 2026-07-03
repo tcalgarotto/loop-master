@@ -50,6 +50,8 @@ Entrega tem UI?
    │  └─ lucy-refazer-frontend-protocol → inventory → page-by-page
    ├─ Criar landing ou página nova do zero?
    │  └─ html-first-design-protocol (preview HTML) → lucy-nova-pagina-protocol → template-gallery + taste/impeccable
+   ├─ HTML preview com mocks SaaS (nav, kanban, integrações)?
+   │  └─ html-preview-interactive-mocks-protocol → integration-cards-patterns → html-preview-section-gate.sh
    ├─ Product app (CRM, dashboard, settings)?
    │  └─ ui-ux-pro-max (tokens) → impeccable shape→craft→critique→polish
    ├─ Brand / identidade nova?
@@ -99,6 +101,7 @@ Máx **2 skills design por tick**.
 | Dashboard (simples) | ui-ux-pro-max, impeccable | shadcn, tremor-raw, framer-motion | layout, polish |
 | Dashboard CRM/ERP | ui-ux-pro-max, impeccable, taste-skill | shadcn (double sidebar), tremor-raw, framer-motion, tanstack-query | layout, colorize, polish |
 | Kanban/board | impeccable, motion | shadcn, framer-motion | layout, animate |
+| HTML preview kanban (landing mock) | html-preview-interactive-mocks-protocol, gsap | HTML nativo + GSAP snap | DnD nativo + section gate |
 | Inbox/chat | impeccable, ui-styling | shadcn, framer-motion | craft, clarify |
 | Settings | impeccable, design-system | shadcn | distill, quieter |
 | Landing | taste-skill, banner-design | shadcn, framer-motion, magic-ui | craft, animate |

@@ -195,6 +195,12 @@ Pedido envolve internacionalização?
 Pedido envolve gerar documentação?
 └─ docs-protocol.md (/lucy docs)
 
+HTML preview / landing mock antes de Next?
+└─ html-first-design-protocol.md → html-preview-interactive-mocks-protocol.md
+   ├─ Integrações (carousel/marketplace/grid) → integration-cards-patterns.md
+   ├─ QA visual por seção → scripts/html-preview-section-gate.sh
+   └─ Catálogo HubFU → scripts/build-hubfu-integrations-data.py
+
 Entrega truncada pelo model?
 └─ taste-skill full-output-enforcement
 ```

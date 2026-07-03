@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.13] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`) + docs sync
+
+- **`html-preview-interactive-mocks-protocol.md`** — kanban DnD nativo (drag cards, column drop targets, drag-over styling, GSAP snap on drop); section gate `waitUntil: load` (estável vs `networkidle`)
+- HubFU `preview/hubfu-landing-premium.html` **v9**: feature kanbans CRM/ERP/finance com drag-drop funcional
+- **Docs sync:** README, MANUAL, `references/README.md`, routing tables alinhados a v2.9.11–2.9.12 (integration cards, section gate, regressions v8)
+
+---
+
 ## [2.9.12] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)

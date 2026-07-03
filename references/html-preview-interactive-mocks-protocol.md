@@ -118,6 +118,7 @@ Exemplo normalizado (6–7 períodos): `28, 35, 44, 55, 68, 82, 95` (% da altura
 | Cards | Avatar, nome, valor, prob bar, data |
 | Coluna body | `min-height`, fundo distinto, scroll se muitos cards |
 | Interação | Clique seleciona; botão ou duplo-clique avança etapa |
+| Drag-and-drop (v9+) | Cards `draggable`; colunas como drop targets; `.drag-over` no hover; GSAP snap ao soltar |
 
 Na view **Pipeline** do hero device: kanban **full width**, sem gráfico de linha competindo.
 
@@ -133,6 +134,7 @@ Na view **Pipeline** do hero device: kanban **full width**, sem gráfico de linh
 - [ ] Screenshot por seção (`html-preview-section-gate.sh`)
 - [ ] Barras financeiras = crescimento exponencial
 - [ ] Kanban organizado (headers, totais, seleção)
+- [ ] Kanban DnD funcional nas feature rows (CRM/ERP/finance) — v9+
 - [ ] Motion equilibrado (≤2 GSAP por viewport)
 - [ ] **P0 regressão:** hero nav + tabs produto — smoke manual após qualquer JS novo
 - [ ] Marketplace ≥20 itens: paginação 9/página + busca re-renderiza grid
@@ -150,6 +152,7 @@ Na view **Pipeline** do hero device: kanban **full width**, sem gráfico de linh
 | Carousel rápido + logos sem fallback | Animação ≥80s; `onerror`: CDN colorido → jsdelivr SVG → iniciais |
 | GSAP opacity em hero/tab deixa view invisível | `killTweensOf`; limpar `opacity` inline; toggle `.active` antes de animar |
 | Feature kanban com wrap feio | `minmax(112px,1fr)` colunas; `white-space: nowrap` + ellipsis em `.deal-name` |
+| Section gate trava em `networkidle` | Playwright `waitUntil: 'load'` em `html-preview-section-gate.mjs` |
 | Tab/hero view switch quebrado após edit | Checklist P0 acima — smoke obrigatório antes de gate |
 
 ---
@@ -159,5 +162,7 @@ Na view **Pipeline** do hero device: kanban **full width**, sem gráfico de linh
 | Comando | Uso |
 |---------|-----|
 | `/lucy aprenda` | Evoluir este protocolo |
+| `bash scripts/html-preview-section-gate.sh --file preview/<slug>.html` | Screenshot por seção (gate HTML) |
+| `bash scripts/html-preview-serve.sh` | Servidor local :8765 |
 | HTML-first | `preview/<slug>.html` |
 | Port | `lucy-nova-pagina` / `refazer-frontend` |

@@ -5,6 +5,10 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-03 | `hubfu-docs-sync-v2913` | Audit docs-sync: README/MANUAL/routing alinhados v2.9.11–13; CHANGELOG v9 kanban DnD | `docs-sync-discipline.md` |
+| 2026-07-03 | `html-preview-kanban-dnd-v9` | Kanban DnD nativo + GSAP snap; section gate waitUntil load | `html-preview-interactive-mocks-protocol.md` |
+| 2026-07-03 | `integration-cards-patterns` | 3 modelos carousel/marketplace/grid; logos reais; build-hubfu script | `integration-cards-patterns.md` |
+| 2026-07-03 | `html-preview-section-gate` | Playwright full-page + screenshots por seção para HTML preview | `visual-gate-protocol.md`, `html-preview-interactive-mocks-protocol.md` |
 | 2026-07-03 | `html-preview-regressions-v8` | Anti-padrões JS: reduced TDZ, paginação 9/página, logo fallback chain, hero/tab P0 checklist | `html-preview-interactive-mocks-protocol.md` |
 | 2026-07-03 | `html-interactive-mocks` | Mocks HTML reais: nav troca view, kanban funcional, integrações carousel, contraste dark, section gate | `html-preview-interactive-mocks-protocol.md` |
 | 2026-07-03 | `mcp-quiz-setup-guide` | Quiz Round 3 MCP; mcp-setup-status/guide; guia cadastro integrações | `mcp-integrations-setup-guide.md` |

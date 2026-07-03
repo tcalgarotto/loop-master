@@ -26,6 +26,7 @@ Invocar via ferramenta **Task**; múltiplos Tasks na **mesma mensagem** quando p
 | PR merge-ready | — | — | babysit | após fase com PR |
 | Integração / import E2E | `generalPurpose` + `explore` | mixed | loop-master | paths da integração |
 | Competitive intel `@url` | `explore` | true | firecrawl, `browser-ai-scrape-protocol.md` | scrape + screenshot → `.lucy/browser/` |
+| HTML preview gate (landing mock) | orchestrator | — | `html-preview-section-gate.sh`, `html-preview-interactive-mocks-protocol.md` | `preview/*.html` |
 | Multitenancy / RLS | `security-review` + `generalPurpose` | mixed | — | `tenant`, `rls`, `organization_id` |
 | Pagamentos (gateway externo) | `generalPurpose` | false | payments-best-practices | `billing`, `payments` |
 | Red team / pentest | `shell` | false | security-audit-protocol | `scripts/security/**` |

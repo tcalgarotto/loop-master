@@ -2,7 +2,7 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.9.6** · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.9.13** · *Autor:* **Thales Calgarotto**
 
 ---
 
@@ -130,9 +130,25 @@ O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de dese
 | `/lucy visual-gate` | Automático em fases FE (`quality_gates`); manual: captura prints + vision QA. |
 | `/lucy visual-gate --capture-only` | Só gera PNGs em `.lucy/visual-gates/tick-N/`. |
 
-Ver: `references/lucy-refazer-frontend-protocol.md`, `references/visual-gate-protocol.md`, `references/html-first-design-protocol.md`, `references/lucy-nova-pagina-protocol.md`
+Ver: `references/lucy-refazer-frontend-protocol.md`, `references/visual-gate-protocol.md`, `references/html-first-design-protocol.md`, `references/lucy-nova-pagina-protocol.md`, `references/html-preview-interactive-mocks-protocol.md`, `references/integration-cards-patterns.md`
 
-### 4.6 Aprendizado e regras do projeto
+### 4.6 Scripts HTML preview (landings / HubFU)
+
+| Script | Uso |
+|--------|-----|
+| `scripts/html-preview-serve.sh` | Servidor local porta **8765** para iterar `preview/*.html` com o owner |
+| `scripts/html-preview-section-gate.sh --file preview/<slug>.html` | Playwright: full-page + screenshot por seção (gate antes de aprovar HTML) |
+| `scripts/build-hubfu-integrations-data.py` | Gera `preview/hubfu-integrations-data.js` — catálogo de integrações com logos reais |
+
+**Protocolos:** mocks interativos (`html-preview-interactive-mocks-protocol.md`), 3 modelos de cards (`integration-cards-patterns.md`), regressões v8 (hero/tabs, marketplace paginação, carousel), kanban DnD v9.
+
+```bash
+bash scripts/html-preview-serve.sh
+bash scripts/html-preview-section-gate.sh --file preview/hubfu-landing-premium.html
+python3 scripts/build-hubfu-integrations-data.py
+```
+
+### 4.7 Aprendizado e regras do projeto
 
 | Comando | Escopo | Descrição |
 |---------|--------|-----------|
