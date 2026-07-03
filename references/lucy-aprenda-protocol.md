@@ -27,6 +27,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 |------|----------------------|
 | Animação / perf UI | `html-native-light-protocol.md`, `gsap-premium-protocol.md` |
 | Prototipação HTML antes de Next | `html-first-design-protocol.md` |
+| Design editável híbrido (HTML + Penpot + Next) | `design-editable-hybrid-protocol.md` |
 | QA visual / screenshots | `visual-gate-protocol.md` |
 | Processo / orquestração premium | `premium-tool-orchestration.md` |
 | Design systems tagados | `design-system-intake.md` |

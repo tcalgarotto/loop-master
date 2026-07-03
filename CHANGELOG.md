@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.8] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **`design-editable-hybrid-protocol.md`** — Caminho C: iterar HTML em `preview/` até aprovação → Penpot MCP (tokens/DS) → port Next → Puck opcional
+- **`scripts/penpot-mcp-configure.sh`** — configura Cursor MCP a partir de `~/.config/penpot/mcp-token` (sem secrets no repo)
+- `premium-tool-orchestration.md` · `html-first-design-protocol.md` · `SKILL.md` cross-links
+
+---
+
 ## [2.9.7] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)
