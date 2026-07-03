@@ -39,7 +39,7 @@ Se script falhar parcialmente: registrar WARN em `human_blockers[]`, continuar q
 
 ---
 
-## Fase 1–6 — Quiz (AskQuestion, uma rodada por turno)
+## Fase 1–7 — Quiz (AskQuestion, uma rodada por turno)
 
 **Antes de cada rodada**, executar:
 
@@ -55,18 +55,22 @@ Seguir `references/quiz-protocol.md`:
 |-------|--------|------|
 | 1 | Round 1 | Produto & North Star |
 | 2 | Round 2 | Escopo técnico |
-| 3 | Round 3 | Design & UX |
-| 4 | Round 4 | Qualidade & gates |
-| 5 | Round 5 | Autonomia & loop |
-| 6 | Round 6 | Kickoff contextual |
+| 3 | Round 3 | **MCP & integrações** (+ guia cadastro) |
+| 4 | Round 4 | Design & UX |
+| 5 | Round 5 | Qualidade & gates |
+| 6 | Round 6 | Autonomia & loop |
+| 7 | Round 7 | Kickoff contextual |
+
+**Round 3:** rodar `mcp-setup-status.sh` + `mcp-integrations-setup-guide.md` se owner pedir guiar setup.
 
 Após cada rodada:
 - Persistir `quiz_answers.round_N` + incrementar `quiz_round`
+- Round 3: persistir também `mcp_setup_status`
 - Atualizar `docs/LUCY-INDEX.md`
 
 ---
 
-## Fase 7 — Plano + memória + armar loop
+## Fase 8 — Plano + memória + armar loop
 
 Quando `quiz_complete: true`:
 
@@ -82,7 +86,7 @@ bash .cursor/skills/lucy/scripts/arm-dynamic-loop.sh \
   --seconds 45
 ```
 
-6. **Tick 1 imediato** — `discover` → `plan` (ou `implement` se Round 6 definiu tasks claras)
+6. **Tick 1 imediato** — `discover` → `plan` (ou `implement` se Round 7 definiu tasks claras)
 7. **`next_prompt`** + re-arm ao fim do tick
 
 ---

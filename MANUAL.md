@@ -69,7 +69,7 @@ No chat do Cursor Agent, execute o seguinte comando:
 Esse comando realiza os seguintes passos de forma automática:
 1. Executa o script de inicialização (`scripts/init.sh`).
 2. Configura e inicializa o **Second Brain** local.
-3. Inicia o **Quiz de 6 rodadas** para definir o contexto do seu projeto.
+3. Inicia o **Quiz de 7 rodadas** para definir o contexto do seu projeto (Round 3: MCP e integrações).
 4. Gera o plano inicial e as tarefas em fases.
 
 ---
@@ -82,7 +82,7 @@ O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de dese
 
 | Comando | Descrição |
 |---------|-----------|
-| `/lucy init` | Inicializa o ambiente, instala as dependências e roda o quiz de 6 rodadas. |
+| `/lucy init` | Inicializa o ambiente, instala as dependências e roda o quiz de 7 rodadas. |
 | `/lucy` | Executa o próximo "tick" de trabalho autônomo. |
 | `/lucy update` | Atualiza a skill (git pull + init **incremental** — não reinstala o que já existe). |
 | `pare o loop` | Interrompe o loop recorrente de execução. |

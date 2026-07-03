@@ -121,7 +121,7 @@ git clone https://github.com/tcalgarotto/lucy.git ~/.cursor/skills/lucy
 
 **É isso.** Lucy faz o resto:
 - Instala o ecossistema completo de skills
-- Conduz o quiz de 6 rodadas para entender seu projeto
+- Conduz o quiz de 7 rodadas para entender seu projeto (Round 3 guia MCP e integrações)
 - Cria o plano de fases com critérios de aceite
 - Arma o loop autônomo
 - Nunca para até chegar a 100%

@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.8 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.9 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -15,7 +15,8 @@
 | Doc | Conteúdo |
 |-----|----------|
 | [init-protocol.md](init-protocol.md) | Fluxo `/lucy init` zero-config |
-| [quiz-protocol.md](quiz-protocol.md) | Quiz 6 rodadas (init) |
+| [quiz-protocol.md](quiz-protocol.md) | Quiz 7 rodadas (init; Round 3 = MCP) |
+| [mcp-integrations-setup-guide.md](mcp-integrations-setup-guide.md) | **Guia cadastro MCP** — quiz + agente |
 | [update-protocol.md](update-protocol.md) | `/lucy update` |
 | [multi-project-protocol.md](multi-project-protocol.md) | Vários loops no mesmo repo |
 

@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.9] — 2026-07-03
+
+### Aprendizado global (`/lucy aprenda`)
+
+- **Quiz 7 rodadas** — Round 3 dedicado a MCP/integrações: detecta gaps, sugere cadastro, guia setup
+- **`mcp-integrations-setup-guide.md`** — guia canônico Penpot, HTML-first, visual-gate, Firecrawl, claude-mem
+- **`scripts/mcp-setup-status.sh`** — scan local sem expor secrets
+- **`scripts/mcp-setup-guide.sh`** — passos guiados por integração
+- `quiz-protocol.md` · `init-protocol.md` · `SKILL.md` atualizados
+
+---
+
 ## [2.9.8] — 2026-07-03
 
 ### Aprendizado global (`/lucy aprenda`)

@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.8"
+version: "2.9.9"
 ---
-# Lucy v2.9.8 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.9 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -39,7 +39,7 @@ Diretório: `.cursor/lucy-brain/`
    ```
    Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem (+ start), motion, shadcn/ui, framer-motion, tremor, tanstack-query, Playwright (visual-gate), Firecrawl* (se `FIRECRAWL_API_KEY`), symlinks, JSON, PLAN, INDEX.
 
-2. **Quiz 6 rodadas** — **OBRIGATÓRIO** executar antes de perguntar:
+2. **Quiz 7 rodadas** — **OBRIGATÓRIO** executar antes de perguntar:
    ```bash
    bash .cursor/skills/lucy/scripts/quiz-next.sh
    ```
@@ -50,7 +50,7 @@ Diretório: `.cursor/lucy-brain/`
 
 3. Após cada rodada: persistir `quiz_answers.round_N`, incrementar `quiz_round`.
 
-4. Após Round 6 (`quiz_complete: true`): fases, INDEX, `arm-dynamic-loop.sh`, tick 1, `next_prompt`.
+4. Após Round 7 (`quiz_complete: true`): fases, INDEX, `arm-dynamic-loop.sh`, tick 1, `next_prompt`.
 
 **Usuário só digita:** `/lucy init`
 
@@ -73,7 +73,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 ### Orquestração
 | Comando | Ação |
 |---------|------|
-| `/lucy init` | Bootstrap shell + quiz 6 rodadas + plano + arm loop |
+| `/lucy init` | Bootstrap shell + quiz 7 rodadas (incl. MCP setup) + plano + arm loop |
 | `/lucy update` | git pull + re-init **incremental** (só instala o que falta) |
 | `/lucy` | Um tick autônomo |
 | `pare o loop` | Stop + `loop_status: stopped` |
@@ -214,7 +214,8 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/autonomous-orchestrator-protocol.md` — os 7 mandamentos do loop
 - `references/skill-ecosystem-map.md` — qual skill usar em cada step
 - `references/agent-routing-table.md` — roteamento de subagentes
-- `references/quiz-protocol.md` — quiz de 6 rodadas
+- `references/quiz-protocol.md` — quiz de 7 rodadas (Round 3 = MCP + guia cadastro)
+- `references/mcp-integrations-setup-guide.md` — **guia MCP/integrações para quiz e ticks**
 - `references/init-protocol.md`
 
 ### Design
@@ -262,7 +263,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 ## Anti-padrões
 
 - Pedir permissão antes de rodar init.sh
-- Pular quiz ou implementar antes de Round 6
+- Pular quiz ou implementar antes de Round 7
 - Terminar tick sem next_prompt + re-arm
 - Ignorar INDEX / claude-mem sync
 - Secrets no progress JSON

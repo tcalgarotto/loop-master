@@ -25,7 +25,7 @@ cd seu-projeto
 
 | Comando | Uso |
 |---------|-----|
-| `/lucy init` | Configurar projeto |
+| `/lucy init` | Configurar projeto (quiz 7 rodadas; Round 3 = MCP) |
 | `/lucy` | Um tick autônomo |
 | `/lucy update` | Atualizar skill (incremental — só o que falta) |
 | `/lucy refazer-frontend` | Redesign visual (slop, órfãs) — mantém URLs |

@@ -13,7 +13,7 @@
 O orchestrator deve:
 
 1. Rodar `bash .cursor/skills/lucy/scripts/init.sh` **sem perguntar**
-2. Iniciar quiz Round 1 (AskQuestion) — 6 rodadas total
+2. Iniciar quiz Round 1 (AskQuestion) — 7 rodadas total; Round 3 guia cadastro MCP
 3. Criar fases, INDEX, armar loop dinâmico, tick 1
 
 ---
@@ -47,5 +47,6 @@ Ou ler `next_prompt` do JSON e executar.
 ## Docs
 
 - [getting-started.md](getting-started.md)
-- [quiz-protocol.md](quiz-protocol.md) — 6 rodadas
+- [quiz-protocol.md](quiz-protocol.md) — 7 rodadas
+- [mcp-integrations-setup-guide.md](mcp-integrations-setup-guide.md) — cadastro MCP
 - [design-skills-routing-table.md](design-skills-routing-table.md)
