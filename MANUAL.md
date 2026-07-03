@@ -157,7 +157,7 @@ python3 scripts/build-hubfu-integrations-data.py
 
 Ver: `references/lucy-aprenda-protocol.md`, `references/lucy-regra-protocol.md`
 
-### 4.7 Disciplina de documentação (Hermes-style)
+### 4.8 Disciplina de documentação (Hermes-style)
 
 Toda mudança em **comando, script ou protocolo** exige, antes de encerrar o turno:
 
