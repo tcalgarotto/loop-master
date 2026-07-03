@@ -6,7 +6,7 @@ description: >-
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
 version: "2.9.15"
 ---
-# Lucy v2.9.15 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.16 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  

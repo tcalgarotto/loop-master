@@ -12,3 +12,4 @@
 {"ts":"2026-07-03T18:39:43Z","slug":"hubfu-docs-sync-v2913","summary":"Audit docs-sync: README/MANUAL/routing v2.9.11-13; CHANGELOG v9 kanban DnD; section gate waitUntil load","scope":"global"}
 {"ts":"2026-07-03T21:49:50Z","slug":"claude-mem-optional-l2","summary":"claude-mem L2 opt-out default; LUCY_CLAUDE_MEM=1 para habilitar; L0 brain + L1 JSON bastam","scope":"global"}
 {"ts":"2026-07-03T22:02:15Z","slug":"claude-mem-nvidia-l2","summary":"L2 claude-mem com NVIDIA NIM (build.nvidia.com); multi-sess\u00e3o single-writer L1; templates settings/.env","scope":"global"}
+{"ts":"2026-07-03T23:21:50Z","slug":"hubfu-pricing-landing-integrity","summary":"Pricing auditado vs produto; sem hints fake; CTAs uniformes; FAQ/footer premium","scope":"global"}
