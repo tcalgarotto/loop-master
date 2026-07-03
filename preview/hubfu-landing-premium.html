@@ -78,17 +78,22 @@
     .hero-stock-row.head { color: rgba(255,255,255,.55); font-size: .6875rem; text-transform: uppercase; letter-spacing: .06em; }
     .hero-stock-row:not(.head) { color: rgba(245,245,247,.9); }
     .hero-stock-row:not(.head) span:first-child { color: #fff; font-weight: 500; }
-    .feature-visual .kanban-col { min-height: auto; background: transparent; border: none; padding: 0; }
-    .feature-visual .kanban { grid-template-columns: repeat(4, minmax(112px, 1fr)); gap: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; align-items: start; }
-    .feature-visual .kanban-col { min-height: 120px; }
-    .feature-visual .deal-card { min-height: 92px; display: flex; flex-direction: column; }
+    .feature-visual .kanban { grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 12px; min-width: 100%; overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; scrollbar-width: none; align-items: start; padding-bottom: 4px; }
+    .feature-visual .kanban-col { min-height: 180px; padding: 12px 10px 14px; border-radius: 12px; background: rgba(255,255,255,.03); border: 1px dashed rgba(255,255,255,.1); transition: border-color .22s var(--ease), background .22s, box-shadow .22s; }
+    .feature-visual .kanban-col.drag-over { border-color: rgba(52,211,153,.5); border-style: solid; background: rgba(52,211,153,.08); box-shadow: inset 0 0 0 1px rgba(52,211,153,.18); }
+    .feature-visual.light .kanban-col { background: rgba(29,29,31,.025); border-color: rgba(29,29,31,.1); }
+    .feature-visual.light .kanban-col.drag-over { border-color: rgba(10,127,92,.4); background: rgba(10,127,92,.05); box-shadow: inset 0 0 0 1px rgba(10,127,92,.12); }
+    .feature-visual .deal-card { min-height: 104px; padding: 12px 12px 14px; display: flex; flex-direction: column; cursor: grab; touch-action: none; }
+    .feature-visual .deal-card:active { cursor: grabbing; }
+    .feature-visual .deal-card.dragging { opacity: .55; transform: scale(.98); box-shadow: 0 12px 32px rgba(0,0,0,.22); z-index: 2; }
     .feature-visual .deal-top { align-items: flex-start; min-width: 0; }
     .feature-visual .deal-top > div { min-width: 0; flex: 1; }
-    .feature-visual .deal-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .6875rem; line-height: 1.25; }
-    .feature-visual .deal-amt { white-space: nowrap; font-size: .625rem; }
-    .feature-visual .deal-meta { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: auto; }
+    .feature-visual .deal-name { white-space: normal; overflow: visible; text-overflow: unset; font-size: .75rem; line-height: 1.3; word-break: break-word; hyphens: auto; }
+    .feature-visual .deal-amt { white-space: nowrap; font-size: .6875rem; margin-top: 2px; }
+    .feature-visual .deal-meta { white-space: normal; overflow: visible; text-overflow: unset; margin-top: auto; padding-top: 4px; font-size: .625rem; line-height: 1.35; }
     .feature-visual .kanban::-webkit-scrollbar { display: none; }
-    .feature-visual .kanban-col h4 { color: rgba(255,255,255,.5); font-size: .625rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+    .feature-visual .kanban-col h4 { color: rgba(255,255,255,.5); font-size: .625rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .feature-visual.light .kanban-col h4 { border-bottom-color: var(--line); }
     .metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 28px; }
     .metric-label { font-size: .6875rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .06em; }
     .metric-val { font-size: 1.75rem; font-weight: 600; color: #fff; letter-spacing: -.03em; margin-top: 4px; }
@@ -223,7 +228,7 @@
     .feature-list { margin-top: 24px; list-style: none; display: grid; gap: 12px; }
     .feature-list li { font-size: .9375rem; color: var(--fg-secondary); padding-left: 20px; position: relative; }
     .feature-list li::before { content: ""; position: absolute; left: 0; top: .65em; width: 6px; height: 1px; background: var(--fg); }
-    .feature-visual { border-radius: 16px; overflow: hidden; background: #1c1c1e; min-height: 280px; box-shadow: 0 20px 60px rgba(0,0,0,.12); padding: 24px; color: rgba(255,255,255,.9); }
+    .feature-visual { border-radius: 16px; overflow: visible; background: #1c1c1e; min-height: 340px; box-shadow: 0 20px 60px rgba(0,0,0,.12); padding: 28px; color: rgba(255,255,255,.9); }
     .feature-visual.light { background: #fff; color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 16px 48px rgba(0,0,0,.06); border: 1px solid var(--line); }
     .product { padding: 120px 0; }
     .product-head { text-align: center; margin-bottom: 56px; }
@@ -333,7 +338,7 @@
   </style>
 </head>
 <body>
-  <span class="preview-tag">Preview Lucy · premium v8</span>
+  <span class="preview-tag">Preview Lucy · premium v9</span>
   <header class="nav" id="nav">
     <div class="nav-inner">
       <a class="logo" href="#">HubFU</a>
@@ -480,19 +485,19 @@
       <div class="step-card reveal"><div class="step-icon">○</div><h3>Ative estoque e fiscal</h3><p>Produtos, NF-e e pedidos sincronizados com o pipeline.</p></div>
       <div class="step-card reveal"><div class="step-icon">▣</div><h3>Veja o caixa</h3><p>Projeção e alertas da IA assim que os dados entram.</p></div>
     </div></div></section>
-    <section class="feature-section" id="plataforma"><div class="wrap"><div class="feature-row reveal"><div class="feature-copy"><span class="feature-tag">CRM</span><h2>Pipeline que o time adota.</h2><p>Funil visual, follow-up automático e histórico por cliente. WhatsApp no contexto do negócio.</p><ul class="feature-list"><li>Kanban por etapa com valor e probabilidade</li><li>Propostas e contratos no mesmo fluxo</li><li>Alertas quando um negócio esfria</li></ul></div><div class="feature-visual"><div class="kanban">
+    <section class="feature-section" id="plataforma"><div class="wrap"><div class="feature-row reveal"><div class="feature-copy"><span class="feature-tag">CRM</span><h2>Pipeline que o time adota.</h2><p>Funil visual, follow-up automático e histórico por cliente. WhatsApp no contexto do negócio.</p><ul class="feature-list"><li>Kanban por etapa com valor e probabilidade</li><li>Propostas e contratos no mesmo fluxo</li><li>Alertas quando um negócio esfria</li></ul></div><div class="feature-visual"><div class="kanban feature-kanban">
       <div class="kanban-col"><h4>Qualificado</h4><div class="deal-card"><div class="deal-top"><span class="avatar">MS</span><div><div class="deal-name">Metalúrgica Sul</div><div class="deal-amt">R$ 42k</div></div></div><div class="prob-bar"><div class="prob-fill" style="transform:scaleX(.4)"></div></div><div class="deal-meta">11 mar</div></div></div>
       <div class="kanban-col"><h4>Proposta</h4><div class="deal-card"><div class="deal-top"><span class="avatar">CA</span><div><div class="deal-name">Clínica Aurora</div><div class="deal-amt">R$ 24k</div></div></div><div class="prob-bar"><div class="prob-fill" style="transform:scaleX(.55)"></div></div><div class="deal-meta">10 mar</div></div></div>
       <div class="kanban-col"><h4>Follow-up</h4><div class="deal-card"><div class="deal-top"><span class="avatar">DL</span><div><div class="deal-name">Distrib. Lima</div><div class="deal-amt">R$ 56k</div></div></div><div class="prob-bar"><div class="prob-fill" style="transform:scaleX(.7)"></div></div><div class="deal-meta">9 mar</div></div></div>
       <div class="kanban-col"><h4>Ganho</h4><div class="deal-card"><div class="deal-top"><span class="avatar">TP</span><div><div class="deal-name">TechParts</div><div class="deal-amt">R$ 31k</div></div></div><div class="prob-bar"><div class="prob-fill" style="transform:scaleX(1)"></div></div><div class="deal-meta">5 mar</div></div></div>
     </div></div></div></div></section>
-    <section class="feature-section alt"><div class="wrap"><div class="feature-row flip reveal"><div class="feature-copy"><span class="feature-tag">ERP</span><h2>Estoque e fiscal, sincronizados.</h2><p>Pedidos, NF-e e inventário conversam com vendas.</p><ul class="feature-list"><li>Movimentação em tempo real</li><li>NF-e integrada ao pedido</li><li>Multi-filial com isolamento por CNPJ</li></ul></div><div class="feature-visual light"><div class="kanban">
+    <section class="feature-section alt"><div class="wrap"><div class="feature-row flip reveal"><div class="feature-copy"><span class="feature-tag">ERP</span><h2>Estoque e fiscal, sincronizados.</h2><p>Pedidos, NF-e e inventário conversam com vendas.</p><ul class="feature-list"><li>Movimentação em tempo real</li><li>NF-e integrada ao pedido</li><li>Multi-filial com isolamento por CNPJ</li></ul></div><div class="feature-visual light"><div class="kanban feature-kanban">
       <div class="kanban-col"><h4>Pedido</h4><div class="deal-card"><div class="deal-top"><span class="avatar">#48</span><div><div class="deal-name">Kit Pro x12</div><div class="deal-amt">142 un.</div></div></div><div class="deal-meta">Reservado</div></div></div>
       <div class="kanban-col"><h4>Separando</h4><div class="deal-card"><div class="deal-top"><span class="avatar">HF</span><div><div class="deal-name">Filtro M</div><div class="deal-amt">12 un.</div></div></div><div class="deal-meta">Reposição</div></div></div>
       <div class="kanban-col"><h4>NF-e</h4><div class="deal-card"><div class="deal-top"><span class="avatar">NF</span><div><div class="deal-name">TechParts</div><div class="deal-amt">R$ 31k</div></div></div><div class="deal-meta">Autorizada</div></div></div>
       <div class="kanban-col"><h4>Entrega</h4><div class="deal-card"><div class="deal-top"><span class="avatar">TR</span><div><div class="deal-name">Lima SP</div><div class="deal-amt">Amanhã</div></div></div><div class="deal-meta">Rota 3</div></div></div>
     </div></div></div></div></section>
-    <section class="feature-section"><div class="wrap"><div class="feature-row reveal"><div class="feature-copy"><span class="feature-tag">Financeiro + IA</span><h2>Caixa claro. Próximo passo óbvio.</h2><p>Fluxo projetado e assistente que lê seu funil de verdade.</p><ul class="feature-list"><li>Projeção de caixa em 90 dias</li><li>Resumos e alertas proativos</li><li>DRE e exportação</li></ul></div><div class="feature-visual"><div class="kanban">
+    <section class="feature-section"><div class="wrap"><div class="feature-row reveal"><div class="feature-copy"><span class="feature-tag">Financeiro + IA</span><h2>Caixa claro. Próximo passo óbvio.</h2><p>Fluxo projetado e assistente que lê seu funil de verdade.</p><ul class="feature-list"><li>Projeção de caixa em 90 dias</li><li>Resumos e alertas proativos</li><li>DRE e exportação</li></ul></div><div class="feature-visual"><div class="kanban feature-kanban">
       <div class="kanban-col"><h4>Hoje</h4><div class="deal-card"><div class="deal-top"><span class="avatar">IA</span><div><div class="deal-name">3 negócios parados</div><div class="deal-amt">Proposta</div></div></div><div class="deal-meta">Contatar Lima</div></div></div>
       <div class="kanban-col"><h4>Caixa</h4><div class="deal-card"><div class="deal-top"><span class="avatar">90</span><div><div class="deal-name">Projeção</div><div class="deal-amt">R$ 127k</div></div></div><div class="prob-bar"><div class="prob-fill" style="transform:scaleX(.82)"></div></div><div class="deal-meta">Confiança alta</div></div></div>
       <div class="kanban-col"><h4>Estoque</h4><div class="deal-card"><div class="deal-top"><span class="avatar">!</span><div><div class="deal-name">Filtro M</div><div class="deal-amt">Abaixo mín.</div></div></div><div class="deal-meta">Comprar 40</div></div></div>
@@ -858,6 +863,64 @@
         });
       });
     }
+
+
+    function initKanbanDnD(container) {
+      if (!container || container.dataset.dndInit === "1") return;
+      container.dataset.dndInit = "1";
+      const cols = container.querySelectorAll(".kanban-col");
+      let dragCard = null;
+
+      container.querySelectorAll(".deal-card").forEach(card => {
+        card.setAttribute("draggable", "true");
+        card.addEventListener("dragstart", e => {
+          dragCard = card;
+          card.classList.add("dragging");
+          e.dataTransfer.effectAllowed = "move";
+          e.dataTransfer.setData("text/plain", card.querySelector(".deal-name")?.textContent || "deal");
+          if (e.dataTransfer.setDragImage) {
+            const ghost = card.cloneNode(true);
+            ghost.style.width = card.offsetWidth + "px";
+            ghost.style.position = "absolute";
+            ghost.style.top = "-9999px";
+            ghost.style.opacity = "0.92";
+            document.body.appendChild(ghost);
+            e.dataTransfer.setDragImage(ghost, card.offsetWidth / 2, 20);
+            requestAnimationFrame(() => ghost.remove());
+          }
+        });
+        card.addEventListener("dragend", () => {
+          card.classList.remove("dragging");
+          cols.forEach(col => col.classList.remove("drag-over"));
+          dragCard = null;
+        });
+      });
+
+      cols.forEach(col => {
+        col.addEventListener("dragover", e => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = "move";
+          col.classList.add("drag-over");
+        });
+        col.addEventListener("dragleave", e => {
+          if (!col.contains(e.relatedTarget)) col.classList.remove("drag-over");
+        });
+        col.addEventListener("drop", e => {
+          e.preventDefault();
+          col.classList.remove("drag-over");
+          const card = dragCard || container.querySelector(".deal-card.dragging");
+          if (!card || col === card.parentElement) return;
+          col.appendChild(card);
+          if (!reduced && window.gsap) {
+            gsap.fromTo(card, { scale: 0.92 }, { scale: 1, duration: 0.45, ease: "elastic.out(1, 0.6)", overwrite: true });
+          }
+        });
+      });
+    }
+
+    document.querySelectorAll(".feature-kanban").forEach(kb => {
+      try { initKanbanDnD(kb); } catch (err) { console.warn("initKanbanDnD:", err); }
+    });
 
     const heroKanban = document.getElementById("hero-kanban");
     if (heroKanban) {

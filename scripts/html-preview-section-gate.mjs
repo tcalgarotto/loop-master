@@ -22,7 +22,7 @@ fs.mkdirSync(out, { recursive: true });
 
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+await page.goto(url, { waitUntil: 'load', timeout: 60000 });
 // Force visible state (GSAP .reveal hides off-screen content until scroll)
 await page.addStyleTag({ content: '.reveal { opacity: 1 !important; transform: none !important; }' });
 await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -41,7 +41,7 @@ for (const id of sections) {
 }
 
 await page.setViewportSize({ width: 390, height: 844 });
-await page.goto(url, { waitUntil: 'networkidle' });
+await page.goto(url, { waitUntil: 'load' });
 await page.screenshot({ path: path.join(out, 'full-mobile.png'), fullPage: true });
 
 await browser.close();
