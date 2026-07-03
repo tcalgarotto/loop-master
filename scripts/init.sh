@@ -68,6 +68,9 @@ elif [[ -d "$PROJECT_ROOT/.agents/skills/lucy" ]] && [[ ! -e "$PROJECT_ROOT/.cur
   echo "    Linked .agents/skills/lucy → .cursor/skills/lucy"
 fi
 
+# Backward-compatible /loop-master slash command (alias skill; scripts stay under lucy/)
+lucy_install_loop_master_alias "$SKILL_ROOT" "$PROJECT_ROOT"
+
 install_skill() {
   local name="$1"
   if $SKIP_SKILLS; then return 0; fi

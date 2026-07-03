@@ -22,13 +22,13 @@ Renames loop-master project artifacts to lucy naming without deleting data.
 Creates a timestamped backup under .cursor/lucy-migration-backup-* before changes.
 
 Mappings:
-  .cursor/lucy-progress.json     → .cursor/lucy-progress.json
-  .cursor/lucy-progress.*.json   → .cursor/lucy-progress.*.json
-  .cursor/lucy-brain/            → .cursor/lucy-brain/
-  docs/LUCY-PLAN.md              → docs/LUCY-PLAN.md
-  docs/LUCY-INDEX.md             → docs/LUCY-INDEX.md
-  .cursor/hooks/lucy/            → .cursor/hooks/lucy/
-  .cursor/skills/lucy            → .cursor/skills/lucy (symlink retarget)
+  .cursor/loop-master-progress.json     → .cursor/lucy-progress.json
+  .cursor/loop-master-progress.*.json   → .cursor/lucy-progress.*.json
+  .cursor/loop-master-brain/            → .cursor/lucy-brain/
+  docs/LOOP-MASTER-PLAN.md              → docs/LUCY-PLAN.md
+  docs/LOOP-MASTER-INDEX.md             → docs/LUCY-INDEX.md
+  .cursor/hooks/loop-master/            → .cursor/hooks/lucy/
+  .cursor/skills/loop-master            → .cursor/skills/lucy (symlink retarget)
 HELP
       exit 0
       ;;
@@ -61,14 +61,14 @@ patch_json_paths() {
   local tmp
   tmp=$(mktemp)
   sed -e 's|loop-master-progress\.json|lucy-progress.json|g' \
-      -e 's|lucy-brain|lucy-brain|g' \
+      -e 's|loop-master-brain|lucy-brain|g' \
       -e 's|LOOP-MASTER-PLAN\.md|LUCY-PLAN.md|g' \
       -e 's|LOOP-MASTER-INDEX\.md|LUCY-INDEX.md|g' \
-      -e 's|/lucy|/lucy|g' \
-      -e 's|lucy init|lucy init|g' \
-      -e 's|lucy-tick|lucy-tick|g' \
-      -e 's|skills/lucy|skills/lucy|g' \
-      -e 's|hooks/lucy|hooks/lucy|g' \
+      -e 's|/loop-master|/lucy|g' \
+      -e 's|loop-master init|lucy init|g' \
+      -e 's|loop-master-tick|lucy-tick|g' \
+      -e 's|skills/loop-master|skills/lucy|g' \
+      -e 's|hooks/loop-master|hooks/lucy|g' \
       "$file" > "$tmp" && mv "$tmp" "$file"
 }
 
@@ -80,14 +80,14 @@ patch_text_file() {
   local tmp
   tmp=$(mktemp)
   sed -e 's|loop-master-progress\.json|lucy-progress.json|g' \
-      -e 's|lucy-brain|lucy-brain|g' \
+      -e 's|loop-master-brain|lucy-brain|g' \
       -e 's|LOOP-MASTER-PLAN\.md|LUCY-PLAN.md|g' \
       -e 's|LOOP-MASTER-INDEX\.md|LUCY-INDEX.md|g' \
-      -e 's|\.cursor/skills/lucy|.cursor/skills/lucy|g' \
-      -e 's|\.cursor/hooks/lucy|.cursor/hooks/lucy|g' \
+      -e 's|\.cursor/skills/loop-master|.cursor/skills/lucy|g' \
+      -e 's|\.cursor/hooks/loop-master|.cursor/hooks/lucy|g' \
       -e 's|Loop Master|Lucy|g' \
-      -e 's|lucy init|lucy init|g' \
-      -e 's|/lucy|/lucy|g' \
+      -e 's|loop-master init|lucy init|g' \
+      -e 's|/loop-master|/lucy|g' \
       "$file" > "$tmp" && mv "$tmp" "$file"
 }
 
@@ -112,7 +112,7 @@ PY
 }
 
 retarget_skill_symlink() {
-  local old="$PROJECT_ROOT/.cursor/skills/lucy"
+  local old="$PROJECT_ROOT/.cursor/skills/loop-master"
   local new="$PROJECT_ROOT/.cursor/skills/lucy"
   [[ -e "$old" ]] || return 0
   if [[ -e "$new" && ! -L "$new" ]]; then
@@ -121,10 +121,14 @@ retarget_skill_symlink() {
   fi
   local target
   target=$(readlink -f "$old" 2>/dev/null || echo "")
+  [[ -z "$target" && -d "$old" ]] && target="$old"
   echo "    retarget skill symlink: loop-master → lucy"
   if $DRY_RUN; then return 0; fi
-  [[ -n "$target" ]] && ln -sfn "$target" "$new"
-  rm -f "$old"
+  if [[ -n "$target" && ! -e "$new" ]]; then
+    ln -sfn "$target" "$new"
+  fi
+  rm -rf "$old"
+  lucy_install_loop_master_alias "$SCRIPT_DIR/.." "$PROJECT_ROOT"
 }
 
 echo "==> migrate loop-master → lucy"
@@ -141,23 +145,21 @@ if ! $DRY_RUN; then
   echo "    backup: $BACKUP_DIR"
 fi
 
-# Progress JSON (+ backups and skill-pack variants)
-for f in "$PROJECT_ROOT/.cursor"/lucy-progress*.json; do
+for f in "$PROJECT_ROOT/.cursor"/loop-master-progress*.json; do
   [[ -e "$f" ]] || continue
   base=$(basename "$f")
-  new_name=${base/lucy-progress/lucy-progress}
+  new_name=${base/loop-master-progress/lucy-progress}
   mv_if_exists "$f" "$PROJECT_ROOT/.cursor/$new_name"
 done
 
-mv_if_exists "$PROJECT_ROOT/.cursor/lucy-brain" "$PROJECT_ROOT/.cursor/lucy-brain"
-mv_if_exists "$PROJECT_ROOT/docs/LUCY-PLAN.md" "$PROJECT_ROOT/docs/LUCY-PLAN.md"
-mv_if_exists "$PROJECT_ROOT/docs/LUCY-INDEX.md" "$PROJECT_ROOT/docs/LUCY-INDEX.md"
-mv_if_exists "$PROJECT_ROOT/.cursor/hooks/lucy" "$PROJECT_ROOT/.cursor/hooks/lucy"
+mv_if_exists "$PROJECT_ROOT/.cursor/loop-master-brain" "$PROJECT_ROOT/.cursor/lucy-brain"
+mv_if_exists "$PROJECT_ROOT/docs/LOOP-MASTER-PLAN.md" "$PROJECT_ROOT/docs/LUCY-PLAN.md"
+mv_if_exists "$PROJECT_ROOT/docs/LOOP-MASTER-INDEX.md" "$PROJECT_ROOT/docs/LUCY-INDEX.md"
+mv_if_exists "$PROJECT_ROOT/.cursor/hooks/loop-master" "$PROJECT_ROOT/.cursor/hooks/lucy"
 
 retarget_skill_symlink
 merge_hooks_json
 
-# Patch migrated JSON + docs
 for f in "$PROJECT_ROOT/.cursor"/lucy-progress*.json; do
   [[ -f "$f" ]] && patch_json_paths "$f"
 done
