@@ -1,6 +1,8 @@
-# Protocolo `/lucy aprenda` — memória evolutiva do skill pack
+# Protocolo `/lucy aprenda` — evolução global do produto Lucy
 
-**Objetivo:** incorporar conhecimento que o owner envia (texto, prints, transcrições, links resumidos) no ecossistema Lucy — sem perder o que já existe.
+**Escopo:** skill pack (`loop-master` / `lucy` no GitHub) — **todos os usuários** recebem no próximo `git pull` / `/lucy update`.
+
+**Não confundir com:** `/lucy regra` — regras **locais e imutáveis** do projeto (`lucy-regra-protocol.md`).
 
 ---
 
@@ -8,97 +10,91 @@
 
 ```
 /lucy aprenda <conteúdo>
+/lucy aprenda --dry-run <conteúdo>   # só mostra o que mudaria, sem commit
 ```
 
-Variantes:
-- `/lucy aprenda` + texto colado na mesma mensagem
-- `/lucy aprenda @arquivo.md`
-- `/lucy aprenda` + prints (frames de vídeo/Reels)
+Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
+
+**Intenção do owner:** transformar tema em **habilidade ou regra de produção** da Lucy (protocolo, routing, checklist, script).
 
 ---
 
 ## Pipeline obrigatório (agente)
 
-### 1. Ingerir
-- Ler **todo** o conteúdo enviado (texto, imagens, anexos).
-- Extrair: conceitos, regras, anti-patterns, exemplos de código, casos de uso (CRM/ERP/IA).
+### 1. Ingerir e classificar
 
-### 2. Classificar
-| Tipo | Destino |
-|------|---------|
-| Animação / performance UI | `gsap-premium-protocol.md`, `html-native-light-protocol.md` |
+| Tipo | Destino no skill pack |
+|------|----------------------|
+| Animação / perf UI | `html-native-light-protocol.md`, `gsap-premium-protocol.md` |
 | Design / UX | `ux-design-intelligence.md`, `premium-ui-stack.md` |
-| Deploy / perf / test | protocolo correspondente |
-| Novo domínio | `references/learned/<slug>.md` + entrada no INDEX |
-| Conflito com regra existente | **ADR** em `docs/adr/` ou nota no protocolo — nunca sobrescrever silenciosamente |
+| Deploy / test / i18n | protocolo correspondente em `references/` |
+| Novo domínio | `references/learned/<slug>.md` |
+| Script / automação | `scripts/` |
+| Conflito com regra global | nota + ADR; **nunca** apagar regra de projeto (`/lucy regra`) |
 
-### 3. Integrar (não só arquivar)
+### 2. Editar o skill pack
 
-**Ordem de persistência (obrigatória — sobrevive a `/lucy update`):**
+Trabalhar no clone canônico (`~/Projetos/Loop-master` ou `.cursor/skills/lucy`):
 
-| Camada | Onde grava | Sobrevive `git pull` no skill pack? |
-|--------|------------|-------------------------------------|
-| **1. Projeto (primário)** | `.cursor/lucy-brain/learned/<slug>.md` + `entries.jsonl` | **Sim** — update não apaga brain |
-| **2. Projeto (handoff)** | entrada em `references/learned/INDEX.md` **do projeto** se existir `docs/` local | **Sim** |
-| **3. Skill pack (opcional)** | `references/*.md` no clone `~/.cursor/skills/lucy` | **Só se commitado** no fork do usuário; `git pull` upstream pode sobrescrever edits locais não commitados |
+- Atualizar protocolo canônico com regras acionáveis.
+- Atualizar `design-skills-routing-table.md` / `SKILL.md` se mudar comandos ou routing.
+- Registrar em `references/learned/INDEX.md`.
+- Bump `version` em `SKILL.md` (patch: 2.8.4 → 2.8.5).
 
-**Regra:** conhecimento do **owner/usuário** → sempre camada 1 primeiro. Skill pack upstream (GitHub) só recebe o que for publicado de propósito (PR/fork).
+### 3. Registrar (log global)
 
-- Atualizar protocolo canônico do **projeto** em `.cursor/lucy-brain/learned/` com regras acionáveis.
-- Opcionalmente espelhar no skill pack se o owner pedir publish global.
-- Atualizar matriz em `design-skills-routing-table.md` só no skill pack se for mudança de produto Lucy; senão nota no `<slug>.md` do projeto.
-- Registrar em `references/learned/INDEX.md` do skill pack **apenas** quando publicar upstream; no projeto, append em `.cursor/lucy-brain/learned/INDEX.md`.
-
-### 4. Persistir memória
 ```bash
 bash .cursor/skills/lucy/scripts/aprenda-capture.sh \
   --slug "gsap-premium" \
-  --summary "GSAP para timelines/ScrollTrigger; CSS só hover; sem transition-* com GSAP"
+  --summary "GSAP timelines + ScrollTrigger; CSS só hover"
 ```
-- **Brain (sempre):** `.cursor/lucy-brain/learned/entries.jsonl` + `.cursor/lucy-brain/learned/<slug>.md` (conteúdo completo)
-- **HYDRATE:** agente deve ler `lucy-brain/learned/*.md` após protocolos do skill pack
-- Skill pack upstream: commit `learn: <slug>` só se owner pedir publish
 
-### 5. Confirmar ao owner
-Resumo em 3–5 bullets: o que aprendeu, onde foi gravado, como afeta implementações futuras.
+Grava em `references/learned/` do **skill pack** (não no brain do app).
 
----
+### 4. Publicar no GitHub (padrão)
 
-## O que NÃO é `/lucy aprenda`
+`/lucy aprenda` **implica** commit + push no repo `loop-master`, salvo `--dry-run`:
 
-| Comando | Diferença |
-|---------|-----------|
-| `/lucy` tick | Executa trabalho no projeto (código, deploy) |
-| `/lucy docs --adr` | Uma decisão pontual formal |
-| `/lucy aprenda` | **Evolui o cérebro da Lucy** para todos os projetos futuros |
+```bash
+cd /path/to/Loop-master
+git add references/ SKILL.md scripts/
+git commit -m "learn: <slug> via /lucy aprenda"
+git push origin main
+```
 
----
+Owner vê URL do commit. Usuários atualizam com `/lucy update`.
 
-## Formato de entrada aceito
+### 5. Confirmar
 
-- Texto corrido (como GSAP abaixo)
-- Bullets de Reels / YouTube (owner transcreve)
-- Screenshots de código ou UI
-- Links + resumo do owner (agente não depende de Instagram/YouTube direto)
+Bullets: o que virou habilidade global, arquivos alterados, versão nova, como usar em ticks futuros.
 
 ---
 
-## Índice de aprendizados
+## O que `/lucy aprenda` NÃO faz
 
-| Escopo | Arquivo |
-|--------|---------|
-| Skill pack (upstream) | `references/learned/INDEX.md` |
-| **Seu projeto (não perde no update)** | `.cursor/lucy-brain/learned/INDEX.md` + `*.md` |
+| Ação | Comando correto |
+|------|-----------------|
+| Regra só deste CRM/ERP | `/lucy regra` |
+| Memória de conversa pontual | brain-sync `capture` |
+| Decisão arquitetural do app | `/lucy docs --adr` |
 
 ---
 
-## `/lucy update` — o que preserva?
+## `/lucy update` e aprendizado global
 
-| Artefato | Update apaga? |
-|----------|---------------|
-| `.cursor/lucy-progress.json` | **Não** (backup + preserve-context) |
-| `.cursor/lucy-brain/` (incl. `learned/`) | **Não** |
-| Edits locais no clone `skills/lucy` sem commit | **Sim** — perdidos no `git pull` |
-| Protocolos já no GitHub (ex. GSAP v2.8.4) | **Não** — você recebe a versão mais nova |
+| Artefato | Efeito do update |
+|----------|------------------|
+| Protocolos novos no GitHub | **Baixados** — todos ganham |
+| `.cursor/lucy-brain/rules/` do projeto | **Intocados** — regras locais prevalecem em conflito |
 
-**Conclusão:** aprendizado do usuário fica no **brain do projeto**; update só atualiza o pacote Lucy, não o cérebro do app.
+---
+
+## Matriz rápida
+
+| | `/lucy aprenda` | `/lucy regra` |
+|--|-----------------|---------------|
+| **Quem recebe** | Todos (GitHub) | Só este projeto |
+| **Onde grava** | `references/` no skill pack | `.cursor/lucy-brain/rules/` |
+| **Sobrevive update** | Sim (vem do upstream) | Sim (nunca sobrescrito) |
+| **Commit** | repo `loop-master` | opcional `docs/lucy-rules/` no app |
+| **Prioridade em conflito** | Base global | **P0 — vence** |

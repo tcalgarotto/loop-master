@@ -131,7 +131,19 @@ PY
   echo "    progress: tick=$tick phase=$phase pct=$pct%"
   echo "    target: $target"
   echo ""
-  echo "--- dev-profile (últimos fatos) ---"
+  echo "--- project rules (P0 — imutáveis) ---"
+  local rf
+  shopt -s nullglob
+  for rf in "$BRAIN_DIR/rules"/*.md; do
+    [[ "$(basename "$rf")" == "INDEX.md" ]] && continue
+    grep -q '^revoked: true' "$rf" 2>/dev/null && continue
+    echo "  [P0] $(basename "$rf" .md):"
+    sed -n '/^# /,$p' "$rf" | head -8
+    echo ""
+  done
+  shopt -u nullglob
+  [[ -d "$BRAIN_DIR/rules" ]] || echo "(nenhuma — use /lucy regra)"
+  echo ""
   jq -r '.learned_facts[-5:][]? | "- [\(.confidence // "medium")] \(.fact)"' "$DEV" 2>/dev/null || echo "(vazio)"
   echo ""
   echo "--- project-mind (decisões recentes) ---"

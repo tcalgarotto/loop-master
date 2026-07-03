@@ -1,6 +1,7 @@
-# Lucy — índice de aprendizados (`/lucy aprenda`)
+# Lucy — aprendizados globais (`/lucy aprenda` only)
 
-Conhecimento incorporado pelo owner. Protocolo: `references/lucy-aprenda-protocol.md`.
+Publicados no GitHub (`loop-master`) — **todos** recebem no `/lucy update`.  
+Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não listadas aqui).
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|

@@ -101,6 +101,6 @@ fi
 
 echo ""
 echo "==> Update complete. Context preserved."
-echo "    Brain + learned/ (.cursor/lucy-brain/) untouched by update."
+echo "    Brain + rules/ (.cursor/lucy-brain/) untouched by update."
 echo "    Run /lucy to continue, or read next_prompt in progress JSON."
 echo ""

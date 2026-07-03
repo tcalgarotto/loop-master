@@ -4,7 +4,7 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.8.4"
+version: "2.8.5"
 ---
 # Lucy v2.8.0 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
@@ -18,7 +18,7 @@ version: "2.8.4"
 
 A cada `/lucy` (tick ou chat):
 
-1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search + ler `.cursor/lucy-brain/learned/*.md` (aprendizados locais)
+1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search + ler **`.cursor/lucy-brain/rules/*.md` (P0)** + protocolos do skill pack
 2. **TRABALHAR** — com contexto acumulado
 3. **CAPTURE** — `brain-sync.sh capture` + claude-mem observation_add
 
@@ -86,10 +86,14 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | `/lucy audit` | Auditar fase atual |
 | `/lucy continuar` | Retomar sessão anterior |
 
-### Aprendizado evolutivo
-| Comando | Ação |
-|---------|------|
-| `/lucy aprenda` + texto/prints/@arquivo | Ingere conhecimento do owner → protocolos + brain (`lucy-aprenda-protocol.md`) |
+### Aprendizado e regras (dois escopos)
+
+| Comando | Escopo | Onde grava | GitHub |
+|---------|--------|------------|--------|
+| `/lucy aprenda` + conteúdo | **Global** — evolui a Lucy para todos | `references/` no repo `loop-master` | **Sim** — commit + push |
+| `/lucy regra` + pedido | **Projeto** — imutável após update | `.cursor/lucy-brain/rules/` | Opcional (`--versionar` → `docs/lucy-rules/`) |
+
+Ver: `lucy-aprenda-protocol.md` · `lucy-regra-protocol.md`
 
 ### Qualidade e entrega
 | Comando | Ação |
@@ -191,7 +195,8 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/premium-ui-stack.md` — **stack Next.js + paletas + prompts-mestre**
 - `references/html-native-light-protocol.md` — **UI leve: dialog, HTMX, view-transition, scroll scrub**
 - `references/gsap-premium-protocol.md` — **GSAP: timelines, ScrollTrigger, stagger premium**
-- `references/lucy-aprenda-protocol.md` — **protocolo `/lucy aprenda`**
+- `references/lucy-aprenda-protocol.md` — **`/lucy aprenda` global → GitHub**
+- `references/lucy-regra-protocol.md` — **`/lucy regra` local imutável**
 - `references/learned/INDEX.md` — catálogo do que o owner ensinou
 - `references/ux-design-intelligence.md` — **15 Laws of UX + 12 padrões sidebar**
 - `references/design-skills-routing-table.md` — routing por superfície
@@ -226,3 +231,5 @@ Enquanto incompleto: re-arm automático obrigatório.
 - Terminar tick sem next_prompt + re-arm
 - Ignorar INDEX / claude-mem sync
 - Secrets no progress JSON
+- Misturar `/lucy aprenda` (global) com pedido só do projeto — use `/lucy regra`
+- Ignorar `rules/` P0 no HYDRATE
