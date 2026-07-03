@@ -1,19 +1,26 @@
-# Manual — Loop Master
+# Manual do Usuário — Lucy
 
-Guia completo de uso da skill loop-master no Cursor Agent.
-
-**Versão:** 2.5.1 · **Repo:** https://github.com/tcalgarotto/loop-master
+> **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
+> 
+> *Versão:* **v2.7.0** · *Mascote:* **Nano Banana** 🍌 · *Autor:* **Thales Calgarotto**
 
 ---
 
-## 1. O que é
+<div align="center">
+  <img src="assets/nanobanana.png" alt="Lucy Mascot" width="220" style="border-radius: 20px; margin-bottom: 10px;" />
+  <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i></p>
+</div>
 
-Loop Master transforma o Cursor Agent em um **orquestrador autônomo** com **segundo cérebro**:
+---
 
-- Planeja em fases até **100% de entrega**
-- Instala skills de design, memória e qualidade
-- Loop dinâmico encadeado (tick → tick)
-- Memória viva do projeto e do dev a **cada sessão Agent**
+## 1. O que é o Lucy?
+
+O **Lucy** transforma o Cursor Agent em um desenvolvedor autônomo de nível máximo, integrando:
+
+- **100% do Cérebro**: Loops de execução autônomos que avançam até 100% de conclusão.
+- **Segundo Cérebro**: Lembrança persistente de decisões de projeto, preferências e contexto entre sessões.
+- **Inteligência Competitiva**: Ferramentas para analisar o mercado e fechar gaps de funcionalidades automaticamente.
+- **Director de Design**: Seleção e roteamento das melhores ferramentas estéticas do ecossistema.
 
 ---
 
@@ -23,181 +30,124 @@ Loop Master transforma o Cursor Agent em um **orquestrador autônomo** com **seg
 |-----------|----------------|
 | Cursor com **Agent Skills** ON | Settings → Rules → Agent Skills |
 | Git + Node.js + jq | `node -v`, `jq --version` |
-| Projeto com código | repo git ou app |
+| Projeto com código ativo | Qualquer repositório Git |
 
 ---
 
-## 3. Instalação (primeira vez)
+## 3. Instalação e Configuração
 
-### 3.1 Clone da skill
+### 3.1 Clone do Repositório
 
 ```bash
-git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/loop-master
+git clone https://github.com/tcalgarotto/loop-master.git ~/.cursor/skills/lucy
 cd seu-projeto
-ln -sf ~/.cursor/skills/loop-master .cursor/skills/loop-master   # opcional
 ```
 
-### 3.2 Um comando no Cursor Agent
+### 3.2 Inicialização Automática
+
+No chat do Cursor Agent, execute o seguinte comando:
 
 ```
-/loop-master init
+/lucy init
 ```
 
-Isso executa **automaticamente**:
-
-1. `init.sh` — instala impeccable, ui-ux-pro-max, taste, caveman, claude-mem, motion
-2. `brain-sync.sh init` — cria `.cursor/loop-master-brain/`
-3. `install-hooks.sh` — registra hooks Cursor (memória em todo chat Agent)
-4. Quiz em **6 rodadas** (AskQuestion)
-5. Plano + INDEX + armamento do loop dinâmico
-
-**Não precisa** rodar scripts manualmente após o clone.
-
-### 3.3 Verificar
-
-```bash
-bash .cursor/skills/loop-master/scripts/verify-pack.sh    # → PASSED
-bash .cursor/skills/loop-master/scripts/brain-sync.sh status
-cat .cursor/hooks.json   # deve listar loop-master hooks
-```
-
-Reinicie o Cursor se os hooks não aparecerem em Settings → Hooks.
+Esse comando realiza os seguintes passos de forma automática:
+1. Executa o script de inicialização (`scripts/init.sh`).
+2. Configura e inicializa o **Second Brain** local.
+3. Inicia o **Quiz de 6 rodadas** para definir o contexto do seu projeto.
+4. Gera o plano inicial e as tarefas em fases.
 
 ---
 
-## 4. Comandos
+## 4. Guia de Comandos
 
-| Comando | Quando usar |
-|---------|-------------|
-| `/loop-master init` | Projeto novo ou reconfigurar |
-| `/loop-master` | Executar **um tick** de trabalho |
-| `/loop-master update` | Atualizar skill sem perder progresso |
-| `pare o loop` | Parar loop automático |
+O Lucy vem com um conjunto completo de comandos para cada etapa do ciclo de desenvolvimento:
 
----
+### 4.1 Orquestração
 
-## 5. Second Brain — memória viva
+| Comando | Descrição |
+|---------|-----------|
+| `/lucy init` | Inicializa o ambiente, instala as dependências e roda o quiz de 6 rodadas. |
+| `/lucy` | Executa o próximo "tick" de trabalho autônomo. |
+| `/lucy update` | Atualiza a skill para a última versão sem perder o contexto do projeto. |
+| `pare o loop` | Interrompe o loop recorrente de execução. |
 
-### Onde fica
+### 4.2 Análise Competitiva
 
-```
-.cursor/loop-master-brain/
-├── STATE.json           # consciência (0–100%)
-├── dev-profile.json     # preferências do dev
-├── project-mind.json    # decisões de arquitetura
-├── interaction-log.jsonl
-└── INDEX.md             # ✅ ⏳ 🔮 👤
-```
+| Comando | Descrição |
+|---------|-----------|
+| `/lucy @url` | Analisa a URL de referência, mapeia gaps e cria um plano de implementação. |
+| `/lucy --auto @url` | Executa a análise competitiva e a implementação sem pausas para aprovação. |
+| `/lucy analise @url` | Realiza apenas o mapeamento de gaps (análise pura, sem alterar código). |
+| `/lucy build` | Executa o plano competitivo gerado. |
+| `/lucy audit` | Reaudita a fase atual em busca de conformidade e gaps. |
+| `/lucy continuar` | Retoma o progresso do pipeline competitivo após reinicialização. |
 
-### Ciclo automático (hooks — Opção B)
+### 4.3 Qualidade e Entrega
 
-| Evento Cursor | Hook | Ação |
-|---------------|------|------|
-| Nova sessão Agent | `sessionStart` | Hidrata memória → injeta contexto |
-| Fim do turno Agent | `stop` | Captura resumo da sessão |
+| Comando | Descrição |
+|---------|-----------|
+| `/lucy test` | Cria e executa testes unitários, de integração e testes E2E (Playwright). |
+| `/lucy test --ci` | Executa a suíte de testes de forma silenciosa para integrações CI. |
+| `/lucy perf` | Realiza auditoria completa de performance (Core Web Vitals, bundle, N+1 queries). |
+| `/lucy perf --fix` | Analisa a performance e aplica otimizações automáticas de baixo risco. |
+| `/lucy deploy` | Executa build, pré-validações, deploy real e monitoramento pós-deploy. |
+| `/lucy deploy --rollback` | Reverte o último deploy caso o health check pós-deploy falhe. |
 
-Hooks instalados em `.cursor/hooks/loop-master/` via `install-hooks.sh`.
+### 4.4 Internacionalização (i18n) e Docs
 
-### Ciclo manual (cada `/loop-master`)
-
-1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search
-2. **TRABALHAR** — implement / audit / fix
-3. **CAPTURE** — `brain-sync.sh capture` + claude-mem observation_add
-
-Detalhe: [references/second-brain-protocol.md](references/second-brain-protocol.md)
-
----
-
-## 6. Quiz — 6 rodadas
-
-| # | Tema |
-|---|------|
-| 1 | Produto & North Star |
-| 2 | Escopo técnico |
-| 3 | Design & UX |
-| 4 | Qualidade & gates |
-| 5 | Autonomia & loop |
-| 6 | Kickoff — por onde começar |
-
-Detalhe: [references/quiz-protocol.md](references/quiz-protocol.md)
+| Comando | Descrição |
+|---------|-----------|
+| `/lucy i18n` | Escaneia strings fixas, monta arquivos de tradução e configura internacionalização. |
+| `/lucy i18n --scan` | Apenas faz o levantamento de strings fixas sem realizar alterações. |
+| `/lucy docs` | Gera documentação de APIs, componentes e changelogs. |
+| `/lucy docs --adr` | Cria e registra um Architecture Decision Record (ADR) para o projeto. |
 
 ---
 
-## 7. Loop autônomo
+## 5. Second Brain (Estrutura de Memória)
 
-Após init, cada tick:
+O Lucy gerencia sua própria persistência de memória em quatro camadas:
 
-```
-discover → plan → implement → verify → audit → fix ↺ → gate
-```
-
-Ao fim: `arm-dynamic-loop.sh` re-arma o próximo tick em ~45s até `overall_pct === 100`.
-
-Detalhe: [references/autonomous-orchestrator-protocol.md](references/autonomous-orchestrator-protocol.md)
+1. **L0 (Brain Local)**: `.cursor/loop-master-brain/` — Guarda suas preferências em `dev-profile.json` e decisões arquiteturais em `project-mind.json`.
+2. **L1 (Progress)**: `.cursor/loop-master-progress.json` — Handoff do estado atual entre os ticks do loop.
+3. **L2 (claude-mem)**: Busca semântica local baseada em banco de dados SQLite.
+4. **L3 (Documentação)**: `docs/LOOP-MASTER-PLAN.md` e `docs/LOOP-MASTER-INDEX.md` legíveis por humanos.
 
 ---
 
-## 8. Design — skills roteadas
+## 6. O Ecossistema de Skills
 
-O orchestrator escolhe automaticamente:
-
-impeccable · ui-ux-pro-max · taste-skill · design · design-system · ui-styling · brand · slides · motion
-
-Detalhe: [references/design-skills-routing-table.md](references/design-skills-routing-table.md)
-
----
-
-## 9. Arquivos do projeto
-
-| Arquivo | Função |
-|---------|--------|
-| `.cursor/loop-master-progress.json` | Estado do loop (L1) |
-| `docs/LOOP-MASTER-PLAN.md` | Fases e gates |
-| `docs/LOOP-MASTER-INDEX.md` | Índice operacional |
-| `.cursor/hooks.json` | Hooks Cursor (brain) |
+Durante o `/lucy init`, a stack padrão é automaticamente instalada:
+- **impeccable**: Otimização estática de CSS, tipografia e layout de UI.
+- **ui-ux-pro-max**: Design systems padronizados por indústria.
+- **taste-skill**: Prevenção de interfaces estilo "template genérico".
+- **caveman**: Compressão de texto para economizar até 75% em tokens de entrada.
+- **nextjs-premium-stack**: (Auto-detectada) Instala e configura shadcn/ui, framer-motion, Tremor e TanStack Query.
 
 ---
 
-## 10. Atualizar a skill
+## 7. Integração Contínua (CI/CD)
 
-```bash
-bash ~/.cursor/skills/loop-master/scripts/update.sh
-```
-
-Ou no Agent: `/loop-master update`
+O Lucy pode ser acionada por eventos de Git/CI através do hook em `scripts/ci-hook.sh`:
+- PRs abertos ou atualizados disparam auditorias automáticas.
+- Notificações de falha no pipeline local despertam o assistente com contexto do erro.
 
 ---
 
-## 11. Parar o loop
+## 8. Resolução de Problemas (Troubleshooting)
 
-Digite no chat:
+### Os ganchos (hooks) não estão rodando
+1. Verifique se o arquivo `.cursor/hooks.json` foi criado.
+2. Certifique-se de que a opção de Agent Skills está ativa em seu editor.
+3. Reinicie o Cursor.
 
-```
-pare o loop
-```
-
-Ou: `loop_status: stopped` no JSON.
-
----
-
-## 12. Troubleshooting
-
-| Problema | Solução |
-|----------|---------|
-| Hooks não carregam | Reiniciar Cursor; conferir `.cursor/hooks.json` |
-| claude-mem inativo | `npx claude-mem start` |
-| verify-pack FAILED | Rodar do root do projeto; ver mensagem |
-| Brain vazio | Rodar `/loop-master init` ou `brain-sync.sh init` |
-| Skills não instaladas | `init.sh` de novo ou `--skills ...` |
+### O loop parou de rodar antes de 100%
+Execute `/lucy` no chat para forçar a hidratação e rearmar a fila.
 
 ---
 
-## 13. Referência técnica
+## Licença
 
-Índice completo: [references/README.md](references/README.md)
-
----
-
-## 14. Licença
-
-MIT — ver [LICENSE](LICENSE)
+MIT License. Copyright (c) 2026 Thales Calgarotto.
+Descubra como desenvolver mais rápido com 100% de capacidade. 🍌
