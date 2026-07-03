@@ -1,12 +1,12 @@
 ---
-name: loop-master
+name: lucy
 description: >-
-  Zero-config autonomous orchestrator with Second Brain memory: learns project and
-  dev on every interaction via brain-sync + claude-mem. Full skill install on init,
-  6-round quiz, dynamic AGI workflows, design routing. Commands: /loop-master init, update, tick.
-version: "2.5.2"
+  Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
+  and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
+  workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
+version: "2.7.0"
 ---
-# Loop Master v2.5.2 — orquestrador + segundo cérebro
+# Lucy v2.7.0 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -14,9 +14,9 @@ version: "2.5.2"
 
 ---
 
-## Second Brain — memória viva (NOVO v2.5)
+## Second Brain — memória viva
 
-A cada `/loop-master` (tick ou chat):
+A cada `/lucy` (tick ou chat):
 
 1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search
 2. **TRABALHAR** — com contexto acumulado
@@ -27,30 +27,30 @@ Diretório: `.cursor/loop-master-brain/`
 
 **Nunca encerrar turno sem CAPTURE.**
 
-## `/loop-master init` — zero-config
+## `/lucy init` — zero-config
 
 **Ordem obrigatória — sem pedir permissão:**
 
 1. **Shell automático** (silencioso):
    ```bash
-   bash .cursor/skills/loop-master/scripts/init.sh
+   bash .cursor/skills/lucy/scripts/init.sh
    ```
-   Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem (+ start), motion, symlinks, JSON, PLAN, INDEX.
+   Instala: impeccable, ui-ux-pro-max, taste-skill, caveman, claude-mem (+ start), motion, shadcn/ui, framer-motion, tremor, tanstack-query, symlinks, JSON, PLAN, INDEX.
 
 2. **Quiz 6 rodadas** — **OBRIGATÓRIO** executar antes de perguntar:
    ```bash
-   bash .cursor/skills/loop-master/scripts/quiz-next.sh
+   bash .cursor/skills/lucy/scripts/quiz-next.sh
    ```
    Ler saída → usar **AskQuestion** **somente** com os IDs da rodada atual (`r1_goal`, `r2_scope`, …).
    
-   **PROIBIDO** quiz legado (6 perguntas flat num turno: goal+scope+design+loop+skills).
+   **PROIBIDO** quiz legado (6 perguntas flat num turno).
    **Uma rodada por turno.** Detalhe: `references/quiz-protocol.md`
 
 3. Após cada rodada: persistir `quiz_answers.round_N`, incrementar `quiz_round`.
 
 4. Após Round 6 (`quiz_complete: true`): fases, INDEX, `arm-dynamic-loop.sh`, tick 1, `next_prompt`.
 
-**Usuário só digita:** `/loop-master init`
+**Usuário só digita:** `/lucy init`
 
 ---
 
@@ -68,12 +68,43 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 
 ## Comandos
 
+### Orquestração
 | Comando | Ação |
 |---------|------|
-| `/loop-master init` | Bootstrap shell + quiz 6 rodadas + plano + arm loop |
-| `/loop-master update` | git pull + re-init preservando contexto |
-| `/loop-master` | Um tick autônomo |
+| `/lucy init` | Bootstrap shell + quiz 6 rodadas + plano + arm loop |
+| `/lucy update` | git pull + re-init preservando contexto |
+| `/lucy` | Um tick autônomo |
 | `pare o loop` | Stop + `loop_status: stopped` |
+
+### Análise competitiva
+| Comando | Ação |
+|---------|------|
+| `/lucy @url [prints]` | Análise competitiva + implementação faseada |
+| `/lucy --auto @url` | Id. sem checkpoint |
+| `/lucy analise @url` | Só gap analysis (não codar) |
+| `/lucy build` | Implementar plano existente |
+| `/lucy audit` | Auditar fase atual |
+| `/lucy continuar` | Retomar sessão anterior |
+
+### Qualidade e entrega
+| Comando | Ação |
+|---------|------|
+| `/lucy test` | Gera e executa testes (unit + E2E) |
+| `/lucy test --ci` | Modo CI silencioso (exit 1 se falhar) |
+| `/lucy perf` | Audit de performance (bundle, CWV, N+1) |
+| `/lucy perf --fix` | Audit + aplica correções automáticas |
+| `/lucy deploy` | Build + validate + deploy + health check |
+| `/lucy deploy --dry-run` | Simula deploy sem push real |
+| `/lucy deploy --rollback` | Reverte para último estado estável |
+
+### Internacionalização e documentação
+| Comando | Ação |
+|---------|------|
+| `/lucy i18n` | Detecta strings hardcoded + configura i18n |
+| `/lucy i18n --scan` | Só lista strings (não altera código) |
+| `/lucy docs` | Gera documentação completa (API, componentes, changelog) |
+| `/lucy docs --adr` | Registra decisão de arquitetura (ADR) |
+| `/lucy docs --changelog` | Atualiza CHANGELOG.md |
 
 ---
 
@@ -88,7 +119,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 ### Durante (minor step)
 `discover → plan → implement → verify → audit → fix ↺ → gate`
 
-Design: rotear via `design-skills-routing-table.md` (Claude Design–style)
+Design: rotear via `design-skills-routing-table.md` (design director–style)
 
 ### Depois (handoff)
 1. JSON + INDEX + **brain-sync capture** + claude-mem observation_add
@@ -99,11 +130,12 @@ Design: rotear via `design-skills-routing-table.md` (Claude Design–style)
 
 ## Skills — init instala tudo (padrão)
 
-| Skill | Init v2.4 |
+| Skill | Init v2.6 |
 |-------|-----------|
 | loop-master | sim |
 | impeccable, ui-ux-pro-max | sim |
 | taste-skill, caveman, claude-mem, motion | sim |
+| **nextjs-premium-stack** | **sim (auto-detecta Next.js e instala: shadcn/ui, framer-motion, tremor, tanstack-query, lucide-react)** |
 | design, design-system, ui-styling, brand, slides, banner-design | symlink se presentes |
 | security-review, bugbot | nativos Cursor |
 
@@ -141,14 +173,38 @@ Enquanto incompleto: re-arm automático obrigatório.
 
 ## Referências
 
-- `references/skill-ecosystem-map.md`
+### Núcleo
+- `references/autonomous-orchestrator-protocol.md` — os 7 mandamentos do loop
+- `references/skill-ecosystem-map.md` — qual skill usar em cada step
+- `references/agent-routing-table.md` — roteamento de subagentes
+- `references/quiz-protocol.md` — quiz de 6 rodadas
 - `references/init-protocol.md`
-- `references/quiz-protocol.md`
-- `references/design-skills-routing-table.md`
+
+### Design
+- `references/premium-ui-stack.md` — **stack Next.js + paletas + prompts-mestre**
+- `references/ux-design-intelligence.md` — **15 Laws of UX + 12 padrões sidebar**
+- `references/design-skills-routing-table.md` — routing por superfície
+- `references/design-stack-protocol.md`
+- `references/template-gallery.md` — **layouts premium prontos para copiar**
+
+### Análise competitiva
+- `references/competitive-intelligence.md` — **protocolo /lucy analise**
+
+### Qualidade e entrega
+- `references/test-protocol.md` — **geração de testes /lucy test**
+- `references/perf-protocol.md` — **audit de performance /lucy perf**
+- `references/deploy-protocol.md` — **pipeline de deploy /lucy deploy**
+- `references/i18n-protocol.md` — **internacionalização /lucy i18n**
+- `references/docs-protocol.md` — **geração de docs /lucy docs**
+
+### Memória
 - `references/second-brain-protocol.md`
 - `references/memory-protocol.md`
+
+### Onboarding
 - `references/getting-started.md`
 - `references/setup-prompt.md`
+- `MANUAL.md`
 
 ---
 

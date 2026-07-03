@@ -12,7 +12,7 @@ if [[ -f "$(pwd)/package.json" ]] || [[ -f "$(pwd)/Makefile" ]] || [[ -d "$(pwd)
 fi
 
 # Full ecosystem — installed by default unless --skip-skills or custom --skills
-DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion"
+DEFAULT_SKILLS="impeccable,ui-ux-pro-max,taste-skill,caveman,claude-mem,motion,nextjs-premium-stack"
 SKILLS_CSV=""
 SKIP_SKILLS=false
 PRESERVE_CONTEXT=false
@@ -140,6 +140,59 @@ install_skill() {
       else
         echo "    skip motion (no package.json)"
       fi
+      ;;
+    nextjs-premium-stack)
+      # Auto-install premium UI stack when Next.js project detected
+      local PKG_JSON=""
+      if [[ -f "$PROJECT_ROOT/package.json" ]]; then PKG_JSON="$PROJECT_ROOT/package.json"
+      elif [[ -f "$PROJECT_ROOT/frontend/package.json" ]]; then PKG_JSON="$PROJECT_ROOT/frontend/package.json"
+      fi
+      if [[ -z "$PKG_JSON" ]]; then echo "    skip nextjs-premium-stack (no package.json)"; return 0; fi
+      local PKG_DIR="$(dirname "$PKG_JSON")"
+      local IS_NEXT=false
+      grep -q '"next"' "$PKG_JSON" 2>/dev/null && IS_NEXT=true
+      [[ -d "$PROJECT_ROOT/app" || -d "$PROJECT_ROOT/src/app" ]] && IS_NEXT=true
+      if ! $IS_NEXT; then echo "    skip nextjs-premium-stack (not a Next.js project)"; return 0; fi
+      echo "    Detected Next.js — installing premium UI stack..."
+      # shadcn/ui
+      if ! grep -q '"@radix-ui/react" \|shadcn' "$PKG_JSON" 2>/dev/null && \
+         [[ ! -f "$PKG_DIR/components.json" ]]; then
+        echo "      shadcn/ui (non-interactive)..."
+        (cd "$PKG_DIR" && NEXT_PUBLIC_SKIP_AUTO_DETECT=true npx shadcn@latest init \
+          --defaults --style default --base-color zinc --yes 2>/dev/null) || \
+          echo "      WARN: shadcn init skipped (run manually: npx shadcn@latest init)"
+      else
+        echo "      ok shadcn/ui"
+      fi
+      # framer-motion
+      if ! grep -q '"framer-motion"' "$PKG_JSON" 2>/dev/null; then
+        echo "      framer-motion..."
+        (cd "$PKG_DIR" && npm install framer-motion 2>/dev/null) || true
+      else
+        echo "      ok framer-motion"
+      fi
+      # tremor (gráficos)
+      if ! grep -q '@tremor/react' "$PKG_JSON" 2>/dev/null; then
+        echo "      @tremor/react (gráficos)..."
+        (cd "$PKG_DIR" && npm install @tremor/react 2>/dev/null) || true
+      else
+        echo "      ok @tremor/react"
+      fi
+      # TanStack Query
+      if ! grep -q '@tanstack/react-query' "$PKG_JSON" 2>/dev/null; then
+        echo "      @tanstack/react-query..."
+        (cd "$PKG_DIR" && npm install @tanstack/react-query 2>/dev/null) || true
+      else
+        echo "      ok @tanstack/react-query"
+      fi
+      # lucide-react
+      if ! grep -q 'lucide-react' "$PKG_JSON" 2>/dev/null; then
+        echo "      lucide-react..."
+        (cd "$PKG_DIR" && npm install lucide-react 2>/dev/null) || true
+      else
+        echo "      ok lucide-react"
+      fi
+      echo "    Premium UI stack ready. See: .cursor/skills/loop-master/references/premium-ui-stack.md"
       ;;
   esac
 }
@@ -292,6 +345,81 @@ if ! $PRESERVE_CONTEXT && [[ ! -f "$PROJECT_ROOT/PRODUCT.md" ]] && [[ -d "$PROJE
 - **Voice:** Clear, operational
 EOF
   echo "    Created PRODUCT.md stub"
+fi
+
+# DESIGN_SYSTEM.md stub — padrões premium para CRM/ERP/IA
+if ! $PRESERVE_CONTEXT && [[ ! -f "$PROJECT_ROOT/DESIGN_SYSTEM.md" ]]; then
+  # Detect Next.js
+  IS_NEXT=false
+  [[ -f "$PROJECT_ROOT/package.json" ]] && grep -q '"next"' "$PROJECT_ROOT/package.json" 2>/dev/null && IS_NEXT=true
+  [[ -d "$PROJECT_ROOT/app" || -d "$PROJECT_ROOT/src/app" ]] && IS_NEXT=true
+  if $IS_NEXT; then
+    cat > "$PROJECT_ROOT/DESIGN_SYSTEM.md" <<'EOF'
+# Design System — Padrão Premium
+
+> Gerado por loop-master. Seguir estritamente.
+> Stack: Next.js + Tailwind + shadcn/ui + Framer Motion + Tremor + TanStack Query
+> Referência completa: `.cursor/skills/loop-master/references/premium-ui-stack.md`
+
+## Paleta
+
+- Fundo página: `bg-zinc-50` | `bg-zinc-100`
+- Cards: `bg-white rounded-xl shadow-sm`
+- Sidebar escura: `bg-zinc-950`
+- Sidebar expansível: `bg-zinc-50`
+- Texto principal: `text-zinc-900`
+- Texto secundário: `text-zinc-500`
+- PROIBIDO: azul puro, verde saturado, bordas coloridas
+
+## Espaçamento
+
+- Regra 8px: `p-4`, `p-6`, `p-8`, `gap-4`
+- Arredondamento: cards `rounded-xl`, modais `rounded-2xl`, botões `rounded-lg`
+- Sombra: `shadow-sm` em cards, nunca `shadow-xl` em elementos internos
+
+## Sidebar Dupla
+
+- Mini (64px): `bg-zinc-950`, ícones `text-zinc-400` → `text-white` (ativo)
+- Expansível (240px): `bg-zinc-50`, framer-motion spring
+- Separadores: group labels `text-[10px] font-bold text-zinc-400 tracking-wider uppercase`
+- Item ativo: `bg-zinc-200/50 rounded-lg`
+
+## Badges
+
+- Conectado: `bg-emerald-50 text-emerald-700`
+- Erro: `bg-red-50 text-red-700`
+- Warning: `bg-amber-50 text-amber-700`
+
+## Ícones
+
+- Biblioteca: lucide-react exclusivamente
+- Tamanho: `size-4` (inline), `size-5` (sidebar/card)
+- Cor: `text-zinc-500` padrão, `text-zinc-900` ativo
+
+## Animações (Framer Motion)
+
+```tsx
+// Spring padrão
+const spring = { type: "spring", stiffness: 400, damping: 30 }
+// Fade-in de cards
+initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}
+// Sempre respeitar prefers-reduced-motion
+```
+
+## Gráficos
+
+- Biblioteca: Tremor Raw (`@tremor/react`)
+- Paleta: zinc/slate, sem cores saturadas
+- Loading: shadcn Skeleton + framer-motion fade-in
+
+## Dados
+
+- Cache: TanStack Query (`@tanstack/react-query`)
+- Proibido: `useEffect` + fetch manual para dados de server
+- Server Actions para mutações
+EOF
+    echo "    Created DESIGN_SYSTEM.md (Next.js premium preset)"
+  fi
 fi
 
 scan_skills() {

@@ -2,10 +2,12 @@
 
 Pipeline unificado para entregas com **design premium** em qualquer projeto web/app.
 
+> 📖 Stack completa com padrões, paletas e prompts: `references/premium-ui-stack.md`
+
 ## Princípio
 
 ```
-Descobrir (ui-ux-pro-max) → Planejar (shape) → Construir (craft/taste) → Refinar (impeccable) → Animar (motion) → Validar (critique) → Ship (polish+gate)
+Descobrir (ui-ux-pro-max) → Planejar (shape) → Construir (craft+shadcn+taste) → Refinar (impeccable) → Animar (framer-motion) → Validar (critique) → Ship (polish+gate)
 ```
 
 Uma fase master pode exigir **vários ticks** — máximo 1–2 comandos design por tick.
@@ -26,13 +28,16 @@ Fontes: `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json` (se Impeccable inst
 
 ### A) Página product nova (dashboard, inbox, settings…)
 
-| Tick | Skill | Ação |
-|------|-------|------|
+| Tick | Skill / Lib | Ação |
+|------|------------|------|
 | 1 | ui-ux-pro-max | `--design-system --persist` |
 | 2 | impeccable | `shape <surface>` |
-| 3 | impeccable | `craft <surface>` |
-| 4–N | impeccable | layout → colorize → typeset → clarify |
-| N+1 | motion | springs se task pede |
+| 3 | shadcn/ui | instalar componentes da superfície (sidebar, card, badge, skeleton) |
+| 4 | impeccable | `craft <surface>` |
+| 5–N | impeccable | layout → colorize (zinc/slate) → typeset → clarify |
+| N+1 | framer-motion | springs sutis, fade-in de cards |
+| N+2 | tremor-raw | gráficos de dashboard (se houver métricas) |
+| N+3 | tanstack-query | cache de dados, skeleton loading |
 | Gate | impeccable | critique → harden → polish → optimize |
 
 ### B) Refino de UI existente
@@ -51,21 +56,50 @@ Alternativa: taste-skill `redesign-existing-projects`
 |------|-------|------|
 | 1 | taste-skill | `design-taste-frontend` — dials altos |
 | 2 | ui-ux-pro-max | design system por indústria |
-| 3+ | impeccable | craft → animate → polish |
+| 3 | shadcn/ui | componentes base |
+| 4 | magic-ui | efeitos IA (Dot Pattern, Bento Grid) se produto IA |
+| 5+ | impeccable | craft → animate → polish |
 
-### D) Backend-only
+### D) CRM / ERP / Dashboard com IA
+
+| Tick | Skill / Lib | Ação |
+|------|------------|------|
+| 1 | ui-ux-pro-max | design system |
+| 2 | shadcn/ui | double sidebar (mini 64px + expansível 240px) |
+| 3 | framer-motion | spring animation na sidebar |
+| 4 | tremor-raw | gráficos de métricas |
+| 5 | tanstack-query | cache de dados + skeleton loading |
+| 6 | magic-ui | efeitos IA (Bento Grid para KPIs) |
+| Gate | impeccable | critique → polish |
+
+### E) Backend-only
 
 **Nenhuma skill de design.** Seguir `agent-routing-table.md` padrão.
 
-## motion/react
+## framer-motion (padrão)
 
 ```tsx
-import { motion } from "motion/react"
+import { motion } from "framer-motion"
 
-const transition = { type: "spring", stiffness: 400, damping: 30 }
+// Spring padrão (sidebar, troca de abas)
+const spring = { type: "spring", stiffness: 400, damping: 30 }
+
+// Fade-in de cards
+<motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
 ```
 
 Respeitar `prefers-reduced-motion`. Só no step `implement` quando `skill_hint` inclui `motion` ou Impeccable `animate`.
+
+## Estratégia de Modelo para Design
+
+| Fase | Modelo | Por quê |
+|------|--------|---------|
+| Geração inicial da UI | Claude Sonnet 5 (OpenRouter) | Melhor "gosto estético" — entrega moderno de primeira |
+| Iterações, bugs, páginas internas | DeepSeek V4 Pro | 50x mais barato, ótimo para lógica |
+| Sistemas complexos do zero | Claude Fable 5 | Raciocínio profundo, 1M tokens contexto |
+| Uso diário / rotina | Modo Auto do Cursor | Rápido, incluído no plano |
+
+Regra: modelo com melhor critério estético para casca visual inicial → modelo eficiente para páginas internas e correções.
 
 ## ui-ux-pro-max — exemplo genérico
 

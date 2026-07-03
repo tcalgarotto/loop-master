@@ -103,7 +103,7 @@ brain-sync.sh capture --kind chat --summary "..."
 | **Decisão arquitetura** | "Multitenancy via company_id" | project-mind.json |
 | **Preferência dev** | "Não fazer force push" | dev-profile.json |
 | **Convenção** | "FE usa PageHeader + tokens" | project-mind.conventions |
-| **Blocker** | "Playwright bloqueado Vercel checkpoint" | human_blockers + brain |
+| **Blocker** | "Serviço externo bloqueou requisição" | human_blockers + brain |
 | **Fato domínio** | "CRM referência = parity alvo" | project-mind.glossary |
 | **Mudança código** | paths touched | interaction-log.jsonl |
 

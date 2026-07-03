@@ -21,12 +21,12 @@ Invocar via ferramenta **Task**; múltiplos Tasks na **mesma mensagem** quando p
 | Review UX design | orchestrator | true | impeccable critique | FE paths |
 | CI falhando no PR | `ci-investigator` | true | — | check específico |
 | Arquitetura / design API | `ai-architect` | true | — | antes de implement grande |
-| Deploy Vercel, pipelines | `deployment-expert` | true | deployments-cicd | infra, preview |
+| Deploy / cloud / pipelines | `deployment-expert` | true | deployments-cicd | infra, preview |
 | Performance, bundle, CWV | `performance-optimizer` | true | impeccable optimize | frontend perf |
 | PR merge-ready | — | — | babysit | após fase com PR |
 | Integração / import E2E | `generalPurpose` + `explore` | mixed | loop-master | paths da integração |
 | Multitenancy / RLS | `security-review` + `generalPurpose` | mixed | — | `tenant`, `rls`, `organization_id` |
-| Pagamentos (Stripe etc.) | `generalPurpose` | false | stripe-best-practices | `billing`, `payments` |
+| Pagamentos (gateway externo) | `generalPurpose` | false | payments-best-practices | `billing`, `payments` |
 | Red team / pentest | `shell` | false | security-audit-protocol | `scripts/security/**` |
 | Handoff compress | orchestrator | — | caveman-compress | JSON summaries |
 

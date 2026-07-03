@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 .cursor/
+.agents/
 *.pid
 *.log
 .DS_Store

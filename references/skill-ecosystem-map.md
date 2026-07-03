@@ -29,12 +29,18 @@ discover → plan → implement → verify → audit → fix → [repeat audit/f
 |-------|------|------------|-------------|------------|----------|
 | **loop** | Cursor built-in | já presente | Agendar ticks recorrentes | fora do minor (infra) | Dentro de execute |
 | **loop-master** | este pacote | `init.sh` | Orquestração multi-fase | sempre (orchestrator) | — |
-| **impeccable** | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `npx impeccable install` | Refino UI product; 23 cmds design | plan→gate (FE) | Backend, migrations |
-| **ui-ux-pro-max** | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `uipro init --ai cursor` | Design system inicial; regras por indústria | discover, plan | Polish pontual |
-| **taste-skill** | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | `npx skills add …` | Anti-slop greenfield; landing/marketing | implement (FE novo) | Product UI estável |
-| **motion** | [motiondivision/motion](https://github.com/motiondivision/motion) | `npm install motion` + skill Motion | Animações React (`motion/react`) | implement (animate) | Backend; CSS-only trivial |
-| **caveman** | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) | `curl install.sh \| bash` | Comprimir handoff JSON; commits; reviews | persist (todo tick) | Comunicação com humano |
-| **claude-mem** | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | `npx claude-mem install` | Memória cross-session; busca histórico | discover, hydrate | Substituir JSON handoff |
+| **impeccable** | open-source | `npx impeccable install` | Refino UI product; 23 cmds design | plan→gate (FE) | Backend, migrations |
+| **ui-ux-pro-max** | open-source | `uipro init --ai cursor` | Design system inicial; regras por indústria | discover, plan | Polish pontual |
+| **taste-skill** | open-source | `npx skills add …` | Anti-slop greenfield; landing/marketing | implement (FE novo) | Product UI estável |
+| **framer-motion** | npm | `npm install framer-motion` | Springs, AnimatePresence, layoutId | implement (animate) | Backend; CSS trivial |
+| **shadcn/ui** | npm | `npx shadcn@latest init` | Componentes premium (sidebar, card, skeleton) | implement, fix | Backend |
+| **tremor-raw** | npm | `npm install @tremor/react` | Gráficos de dashboard leves | implement | Marketing |
+| **tanstack-query** | npm | `npm install @tanstack/react-query` | Cache SWR, dados assíncronos | implement | Backend direto |
+| **magic-ui** | npm | `npm install magic-ui` | Efeitos IA (Bento Grid, Dot Pattern) | polish | Product UI simples |
+| **motion** | open-source | `npm install motion` + skill | Animações React (`motion/react`) | implement (animate) | Backend |
+| **caveman** | open-source | `curl install.sh \| bash` | Comprimir handoff JSON; commits; reviews | persist (todo tick) | Comunicação com humano |
+| **claude-mem** | open-source | `npx claude-mem install` | Memória cross-session; busca histórico | discover, hydrate | Substituir JSON handoff |
+| **competitive-intel** | este pacote | built-in | Gap analysis + implementação faseada (/lucy) | discover, implement | — |
 
 ### Subagents Cursor (via Task)
 
@@ -99,7 +105,7 @@ Detalhe: `references/impeccable-routing-table.md`
 | `design-taste-frontend-v1` | Pin v1 se v2 quebrar workflow |
 | `gpt-taste` | GPT/Codex — anti-slop agressivo |
 | `redesign-existing-projects` | Audit UI existente antes de implement |
-| `minimalist-ui` | Product editorial (Linear/Notion vibes) |
+| `minimalist-ui` | Product editorial minimalista |
 | `high-end-visual-design` | Premium calm — dashboards executivos |
 | `image-to-code` | Pipeline imagem → código |
 | `full-output-enforcement` | Model trunca output — forçar entrega completa |
@@ -153,20 +159,41 @@ Detalhe: `references/memory-protocol.md`
 
 ---
 
-## Árvore de decisão — qual skill de design?
+## Árvore de decisão — qual skill usar?
 
 ```
-Novo projeto / sem DESIGN.md?
-├─ Marketing/landing → taste-skill ou ui-ux-pro-max
-└─ Product/app → ui-ux-pro-max (design-system) → impeccable shape
+Pedido envolve UI / design?
+├─ Novo projeto / sem DESIGN.md?
+│  ├─ Marketing/landing → taste-skill ou ui-ux-pro-max
+│  └─ Product/app → ui-ux-pro-max → impeccable shape + shadcn/ui
+│     Ver template-gallery.md para ponto de partida
+├─ UI existente a refinar?
+│  ├─ Audit primeiro → impeccable critique OU taste redesign-existing-projects
+│  └─ Fix pontual → impeccable layout/typeset/clarify (1–2 por tick)
+├─ Dashboard / CRM / ERP?
+│  └─ design-skills-routing-table.md + template-gallery.md #1 ou #2
+└─ Precisa animação?
+   ├─ Product subtle → framer-motion (AnimatePresence, layoutId, spring)
+   └─ Marketing hero → taste-skill MOTION dial alto + framer-motion scroll
 
-UI existente a refinar?
-├─ Audit primeiro → impeccable critique OU taste redesign-existing-projects
-└─ Fix pontual → impeccable layout/typeset/clarify (1–2 por tick)
+Pedido envolve análise competitiva / paridade funcional?
+└─ competitive-intelligence.md (/lucy analise)
 
-Precisa animação?
-├─ Product subtle → impeccable animate + motion/react springs
-└─ Marketing hero → taste-skill MOTION dial alto + motion scroll
+Pedido envolve testes?
+└─ test-protocol.md (/lucy test)
+
+Pedido envolve performance / bundle / queries?
+└─ perf-protocol.md (/lucy perf)
+
+Pedido envolve deploy / entrega?
+└─ deploy-protocol.md (/lucy deploy)
+   └─ Pre-check: /lucy test --ci + /lucy perf obrigatórios antes
+
+Pedido envolve internacionalização?
+└─ i18n-protocol.md (/lucy i18n)
+
+Pedido envolve gerar documentação?
+└─ docs-protocol.md (/lucy docs)
 
 Entrega truncada pelo model?
 └─ taste-skill full-output-enforcement
@@ -178,27 +205,30 @@ Entrega truncada pelo model?
 
 | Step | Skills permitidas | Máx invocações |
 |------|-------------------|----------------|
-| discover | loop-master quiz, ui-ux-pro-max, explore, claude-mem | 1 quiz + 1 explore |
-| plan | ui-ux-pro-max, impeccable shape, ai-architect | 2 |
-| implement | generalPurpose, impeccable (1–2), taste-skill, motion | 4 workers |
+| discover | loop-master quiz, ui-ux-pro-max, explore, claude-mem, **competitive-intel** | 1 quiz + 1 explore |
+| plan | ui-ux-pro-max, impeccable shape, shadcn/ui, ai-architect | 2 |
+| implement | generalPurpose, impeccable (1–2), taste-skill, framer-motion, shadcn/ui, tremor-raw, tanstack-query | 4 workers |
 | verify | shell, impeccable detect CLI | 1 shell |
-| audit | bugbot, security-review, impeccable critique, ci-investigator | 2 verifiers + 1 critique |
+| audit | bugbot, security-review, impeccable critique, ci-investigator, **competitive-intel audit** | 2 verifiers + 1 critique |
 | fix | generalPurpose, impeccable (1–2) | 4 workers |
 | gate | shell, impeccable polish+optimize | 1 shell + 1–2 impeccable |
 
 ---
 
-## O que o init instala (v2.4 — tudo por padrão)
+## O que o init instala (v2.7 — tudo por padrão)
 
 | Componente | Instalado no init? |
 |------------|-------------------|
 | **loop-master** | Sim |
 | **impeccable, ui-ux-pro-max** | Sim (se ausente) |
-| **taste-skill, caveman, claude-mem, motion** | **Sim (padrão v2.4)** |
+| **taste-skill, caveman, claude-mem, motion** | Sim (padrão) |
+| **nextjs-premium-stack** | Sim — auto-detecta Next.js: shadcn/ui, framer-motion, tremor, tanstack-query, lucide-react |
+| **competitive-intelligence** | Sim — built-in (references/competitive-intelligence.md) |
 | **design, design-system, ui-styling, brand, slides, banner-design** | Symlink se presentes em `.agents/skills/` |
 | **security-review, bugbot** | Nativos Cursor |
 
 Design routing completo: `references/design-skills-routing-table.md`
+Competitive intelligence: `references/competitive-intelligence.md`
 
 Override: `init.sh --skip-skills` ou `--skills a,b` (subset)
 
