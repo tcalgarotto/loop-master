@@ -1,14 +1,17 @@
 # Memory Protocol — persistência entre ticks e sessões
 
-Loop-master usa **três camadas** de memória. Nenhuma substitui outra.
+Loop-master usa **quatro camadas** de memória. O **Second Brain (L0)** é o diferencial v2.5.
+
+Ver protocolo completo: `references/second-brain-protocol.md`
 
 ## Camadas
 
 | Camada | Storage | Escopo | Obrigatório |
 |--------|---------|--------|-------------|
+| **L0 Brain** | `.cursor/loop-master-brain/` | Perfil dev, ADRs, log interações | **Sim — toda interação** |
 | **L1 Handoff** | `.cursor/loop-master-progress.json` | Este loop / projeto | Sim |
-| **L2 Semantic** | claude-mem (SQLite + Chroma) | Cross-session, cross-agent | **Sim (init v2.4+)** |
-| **L3 Human** | `docs/LOOP-MASTER-PLAN.md`, `docs/LOOP-MASTER-INDEX.md` | Legível por humanos | Sim |
+| **L2 Semantic** | claude-mem MCP | Cross-session, busca semântica | Sim |
+| **L3 Human** | PLAN + INDEX + brain/INDEX.md | Legível por humanos | Sim |
 
 ## L1 — JSON handoff (fonte da verdade)
 

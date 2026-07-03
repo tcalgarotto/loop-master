@@ -12,6 +12,8 @@ re-arm do próximo tick. Este doc é o **contrato operacional** de cada tick.
 
 Antes de qualquer ação:
 
+- **Second Brain HYDRATE:** `brain-sync.sh hydrate` + claude-mem MCP (session_start_context → search → timeline)
+- Ler `.cursor/loop-master-brain/dev-profile.json` + `project-mind.json`
 - Ler `.cursor/loop-master-progress.json` **inteiro**
 - Ler `archive_summaries[]` (últimos 5–10 ticks)
 - Ler `plan_doc` + `context_files`
@@ -95,7 +97,8 @@ Ao persistir JSON:
 
 1. `tick_count++`, `updated_at`, `overall_pct`
 2. `last_iteration.agent_summary` (3–8 frases)
-3. `next_actions[]` (max 5, ordenadas)
+3. **`brain-sync.sh capture`** + claude-mem `observation_add`
+4. `next_actions[]` (max 5, ordenadas)
 4. **`next_prompt`** — prompt completo copiável para o próximo tick (ver template abaixo)
 5. Se fase gate passed e `overall_pct < 100` → preparar `discover` da próxima fase
 6. Se `overall_pct === 100` → `delivery_contract.status=complete`, `LOOP-MASTER-COMPLETE.md`, **stop** loop

@@ -157,6 +157,11 @@ if [[ -x "$SCRIPT_DIR/link-ecosystem-skills.sh" ]]; then
   bash "$SCRIPT_DIR/link-ecosystem-skills.sh" || true
 fi
 
+# Second Brain (L0) — local memory directory
+if [[ -x "$SCRIPT_DIR/brain-sync.sh" ]]; then
+  bash "$SCRIPT_DIR/brain-sync.sh" init || true
+fi
+
 PROGRESS="${PROGRESS_FILE:-$PROJECT_ROOT/.cursor/loop-master-progress.json}"
 [[ "$PROGRESS" != /* ]] && PROGRESS="$PROJECT_ROOT/$PROGRESS"
 INDEX_DOC="$PROJECT_ROOT/docs/LOOP-MASTER-INDEX.md"
@@ -174,6 +179,8 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   "skill_pack_version": "2.4.0",
   "progress_file": "$rel_pf",
   "index_doc": "docs/LOOP-MASTER-INDEX.md",
+  "brain_dir": ".cursor/loop-master-brain",
+  "brain_sync": { "last_capture_at": null, "interaction_count": 0, "consciousness_level": 0 },
   "skills_installed": [],
   "quiz_round": 0,
   "quiz_complete": false,
@@ -211,7 +218,7 @@ if [[ ! -f "$PROGRESS" ]] && ! $PRESERVE_CONTEXT; then
   },
   "last_iteration": { "agent_summary": "Full bootstrap ran. Awaiting /loop-master init quiz (6 rounds)." },
   "next_actions": ["Complete quiz Round 1 (produto)", "Run verify-pack.sh", "Arm dynamic loop after quiz"],
-  "context_files": ["docs/LOOP-MASTER-PLAN.md", "docs/LOOP-MASTER-INDEX.md"],
+  "context_files": ["docs/LOOP-MASTER-PLAN.md", "docs/LOOP-MASTER-INDEX.md", ".cursor/loop-master-brain/INDEX.md"],
   "human_blockers": [],
   "archive_summaries": []
 }

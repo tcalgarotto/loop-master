@@ -25,7 +25,8 @@ for f in SKILL.md README.md scripts/init.sh scripts/update.sh scripts/link-ecosy
   references/autonomous-orchestrator-protocol.md references/skill-ecosystem-map.md \
   references/init-protocol.md references/setup-prompt.md references/git-publish-checklist.md \
   references/getting-started.md references/skills-you-can-use.md references/quiz-protocol.md \
-  references/design-skills-routing-table.md references/init-protocol.md; do
+  references/design-skills-routing-table.md references/init-protocol.md \
+  references/second-brain-protocol.md scripts/brain-sync.sh; do
   [[ -f "$SKILL_ROOT/$f" ]] && pass "$f" || fail "missing $f"
 done
 
@@ -33,7 +34,7 @@ done
 bash -n "$SKILL_ROOT/scripts/init.sh" && pass "init.sh syntax" || fail "init.sh syntax"
 bash -n "$SKILL_ROOT/scripts/update.sh" && pass "update.sh syntax" || fail "update.sh syntax"
 bash -n "$SKILL_ROOT/scripts/link-ecosystem-skills.sh" && pass "link-ecosystem-skills.sh syntax" || fail "link syntax"
-bash -n "$SKILL_ROOT/scripts/arm-dynamic-loop.sh" && pass "arm-dynamic-loop.sh syntax" || fail "arm-dynamic-loop syntax"
+bash -n "$SKILL_ROOT/scripts/brain-sync.sh" && pass "brain-sync.sh syntax" || fail "brain-sync syntax"
 
 # Version in SKILL.md
 VER=$(grep -E '^version:' "$SKILL_ROOT/SKILL.md" | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "")

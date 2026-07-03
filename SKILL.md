@@ -1,19 +1,31 @@
 ---
 name: loop-master
 description: >-
-  Zero-config autonomous orchestrator until 100% delivery: full skill ecosystem install
-  on init, 6-round quiz, phased plan, self-correcting loops, dynamic AGI workflows,
-  design director routing, claude-mem sync, auto re-arm. Commands: /loop-master init, update, tick.
-version: "2.4.0"
+  Zero-config autonomous orchestrator with Second Brain memory: learns project and
+  dev on every interaction via brain-sync + claude-mem. Full skill install on init,
+  6-round quiz, dynamic AGI workflows, design routing. Commands: /loop-master init, update, tick.
+version: "2.5.0"
 ---
-# Loop Master v2.4.0 — orquestrador autônomo zero-config
+# Loop Master v2.5.0 — orquestrador + segundo cérebro
 
+**Second Brain:** `references/second-brain-protocol.md`  
 **Doc mestre:** `references/autonomous-orchestrator-protocol.md`  
-**Init zero-config:** `references/init-protocol.md`  
-**Quiz 6 rodadas:** `references/quiz-protocol.md`  
-**Design routing:** `references/design-skills-routing-table.md`
+**Init:** `references/init-protocol.md` · **Quiz:** `references/quiz-protocol.md`
 
 ---
+
+## Second Brain — memória viva (NOVO v2.5)
+
+A cada `/loop-master` (tick ou chat):
+
+1. **HYDRATE** — `brain-sync.sh hydrate` + claude-mem search
+2. **TRABALHAR** — com contexto acumulado
+3. **CAPTURE** — `brain-sync.sh capture` + claude-mem observation_add
+
+Armazena: perfil dev, decisões de arquitetura, log de interações, consciência crescente.
+Diretório: `.cursor/loop-master-brain/`
+
+**Nunca encerrar turno sem CAPTURE.**
 
 ## `/loop-master init` — zero-config
 
@@ -61,9 +73,9 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 ## Modo autônomo — cada tick
 
 ### Antes (hidratação)
-1. L1 JSON inteiro + `next_prompt`
-2. claude-mem search (L2) + capture ao fim
-3. `docs/LOOP-MASTER-INDEX.md` — sync emojis
+1. **Second Brain HYDRATE** — `brain-sync.sh hydrate` + claude-mem search
+2. L1 JSON + `next_prompt` + L0 dev-profile + project-mind
+3. INDEX sync emojis
 4. Scan `skills_installed[]`
 
 ### Durante (minor step)
@@ -72,7 +84,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 Design: rotear via `design-skills-routing-table.md` (Claude Design–style)
 
 ### Depois (handoff)
-1. JSON + INDEX + claude-mem capture
+1. JSON + INDEX + **brain-sync capture** + claude-mem observation_add
 2. `next_prompt` completo
 3. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%`
 
@@ -90,15 +102,16 @@ Design: rotear via `design-skills-routing-table.md` (Claude Design–style)
 
 ---
 
-## Memória (3 camadas)
+## Memória (4 camadas)
 
 | Camada | Obrigatório |
 |--------|-------------|
-| L1 JSON | sim |
-| L2 claude-mem | sim (init + sync cada sessão) |
-| L3 PLAN + INDEX | sim (emojis ✅⏳🔮👤) |
+| L0 Brain | `.cursor/loop-master-brain/` — **toda interação** |
+| L1 JSON | progress handoff |
+| L2 claude-mem | MCP search + observation_add |
+| L3 PLAN/INDEX | docs humanos |
 
-Ver `references/memory-protocol.md`
+Ver `references/second-brain-protocol.md` + `memory-protocol.md`
 
 ---
 
@@ -125,6 +138,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/init-protocol.md`
 - `references/quiz-protocol.md`
 - `references/design-skills-routing-table.md`
+- `references/second-brain-protocol.md`
 - `references/memory-protocol.md`
 - `references/getting-started.md`
 - `references/setup-prompt.md`
