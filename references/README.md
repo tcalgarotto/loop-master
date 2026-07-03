@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.13 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.15 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -17,6 +17,7 @@
 | [init-protocol.md](init-protocol.md) | Fluxo `/lucy init` zero-config |
 | [quiz-protocol.md](quiz-protocol.md) | Quiz 7 rodadas (init; Round 3 = MCP) |
 | [mcp-integrations-setup-guide.md](mcp-integrations-setup-guide.md) | **Guia cadastro MCP** — quiz + agente |
+| [claude-mem-nvidia-setup.md](claude-mem-nvidia-setup.md) | **L2 claude-mem** — NVIDIA NIM + multi-sessão |
 | [update-protocol.md](update-protocol.md) | `/lucy update` |
 | [multi-project-protocol.md](multi-project-protocol.md) | Vários loops no mesmo repo |
 

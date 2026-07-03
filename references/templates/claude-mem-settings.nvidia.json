@@ -1,0 +1,6 @@
+{
+  "CLAUDE_MEM_RUNTIME": "worker",
+  "CLAUDE_MEM_PROVIDER": "openrouter",
+  "CLAUDE_MEM_OPENROUTER_BASE_URL": "https://integrate.api.nvidia.com/v1",
+  "CLAUDE_MEM_OPENROUTER_MODEL": "meta/llama-3.3-70b-instruct"
+}

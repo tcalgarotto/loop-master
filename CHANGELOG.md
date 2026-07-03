@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.15] — 2026-07-03
+
+### claude-mem L2 — NVIDIA build.nvidia.com + multi-sessão
+
+- **`references/claude-mem-nvidia-setup.md`** — setup passo a passo: NVIDIA NIM via openrouter provider, `.env` secrets, opt-in `LUCY_CLAUDE_MEM=1`, MCP Cursor, troubleshooting, C62 vs VPS
+- **Templates:** `references/templates/claude-mem-settings.nvidia.json`, `claude-mem-nvidia.env.example`
+- **`mcp-integrations-setup-guide.md`** — § claude-mem atualizado (NVIDIA em vez de DeepSeek)
+- **`second-brain-protocol.md`**, **`memory-protocol.md`** — regras multi-sessão paralela (single-writer L1, rótulos `[design]`/`[integration]`/`[security]`)
+- **`scripts/mcp-setup-guide.sh`** — passos NVIDIA para slug claude-mem
+
+---
+
 ## [2.9.14] — 2026-07-03
 
 ### claude-mem L2 opt-out por padrão

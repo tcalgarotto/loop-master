@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-03 | `claude-mem-nvidia-l2` | L2 claude-mem com NVIDIA NIM (build.nvidia.com); multi-sessão sem corromper L1; templates settings/.env | `claude-mem-nvidia-setup.md` |
 | 2026-07-03 | `hubfu-docs-sync-v2913` | Audit docs-sync: README/MANUAL/routing alinhados v2.9.11–13; CHANGELOG v9 kanban DnD | `docs-sync-discipline.md` |
 | 2026-07-03 | `html-preview-kanban-dnd-v9` | Kanban DnD nativo + GSAP snap; section gate waitUntil load | `html-preview-interactive-mocks-protocol.md` |
 | 2026-07-03 | `integration-cards-patterns` | 3 modelos carousel/marketplace/grid; logos reais; build-hubfu script | `integration-cards-patterns.md` |

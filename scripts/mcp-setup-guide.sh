@@ -52,8 +52,12 @@ steps = {
         "Ver: html-first-design-protocol.md",
     ],
     "claude-mem": [
-        "1. bash .cursor/skills/lucy/scripts/init.sh",
-        "2. claude-mem start && claude-mem status",
+        "1. build.nvidia.com → API key (nvapi-...) → ~/.claude-mem/.env (chmod 600)",
+        "2. Copiar references/templates/claude-mem-settings.nvidia.json → ~/.claude-mem/settings.json",
+        "3. export LUCY_CLAUDE_MEM=1",
+        "4. LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/init.sh",
+        "5. npx claude-mem status && Cursor → Tools & MCPs → claude-mem ON",
+        "Ver: references/claude-mem-nvidia-setup.md (multi-sessão + troubleshooting)",
     ],
 }
 

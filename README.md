@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.13-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.15-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -270,6 +270,7 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/competitive-intelligence.md` | Protocolo completo de gap analysis |
 | `references/design-skills-routing-table.md` | Qual skill de design usar por superfície |
 | `references/second-brain-protocol.md` | Como a memória funciona |
+| `references/claude-mem-nvidia-setup.md` | L2 claude-mem + NVIDIA NIM + multi-sessão |
 | `references/autonomous-orchestrator-protocol.md` | Loop autônomo |
 | `MANUAL.md` | Manual completo em português |
 | `references/html-native-light-protocol.md` | UI leve: dialog, HTMX, view-transition, scroll scrub |
@@ -292,7 +293,7 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 
 ## Versão
 
-**v2.9.13** — HTML preview interativo (kanban DnD, integration cards, section gate). Ver [CHANGELOG.md](CHANGELOG.md).
+**v2.9.15** — claude-mem L2 com NVIDIA build.nvidia.com + guia multi-sessão. Ver [CHANGELOG.md](CHANGELOG.md).
 
 ### Scripts HTML preview (HubFU / landings)
 

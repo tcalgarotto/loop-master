@@ -30,7 +30,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | Mocks interativos (espelho do produto) | `html-preview-interactive-mocks-protocol.md` |
 | Cards de integração (3 modelos) | `integration-cards-patterns.md` |
 | Design editável híbrido (HTML + Penpot + Next) | `design-editable-hybrid-protocol.md` |
-| MCP / integrações / quiz setup | `mcp-integrations-setup-guide.md` |
+| MCP / integrações / quiz setup | `mcp-integrations-setup-guide.md`, `claude-mem-nvidia-setup.md` |
 | QA visual / screenshots | `visual-gate-protocol.md` |
 | Processo / orquestração premium | `premium-tool-orchestration.md` |
 | Design systems tagados | `design-system-intake.md` |

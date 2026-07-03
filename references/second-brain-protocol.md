@@ -55,6 +55,26 @@ unset LUCY_CLAUDE_MEM
 
 Sem L2: `brain-sync.sh` não emite erros; agente **não** deve chamar MCP claude-mem.
 
+**Setup NVIDIA (build.nvidia.com):** `references/claude-mem-nvidia-setup.md` — openrouter provider + base URL NIM.
+
+---
+
+## Multi-sessão paralela — design / integração / security
+
+Sessões Cursor simultâneas são seguras quando cada concern respeita **single-writer** por artefato:
+
+| Artefato | Paralelo? | Regra |
+|----------|-----------|-------|
+| L0 `rules/` | ❌ | Append só via `/lucy regra` — uma sessão por vez |
+| L1 `lucy-progress.json` | ❌ | **Single writer**; demais sessões leem + usam L2 search |
+| L2 claude-mem | ✅ | Índice semântico compartilhado na mesma máquina |
+| `preview/`, `src/` (paths distintos) | ✅ | Dividir arquivos por sessão |
+| L3 INDEX / PLAN | ❌ | Só sessão orquestradora ou fim de tick |
+
+**Handoff:** prefixar `next_prompt` com rótulos — `[design]`, `[integration]`, `[security]` — e declarar qual sessão é single writer L1.
+
+Detalhes: `claude-mem-nvidia-setup.md` § Multi-sessão · `memory-protocol.md` § Concorrência L1.
+
 ---
 
 ## Diretório `.cursor/lucy-brain/`

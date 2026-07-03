@@ -76,6 +76,16 @@ npx claude-mem start
 
 Sem worker ou sem MCP: L0 + L1 JSON continuam como fonte da verdade; L2 ignorado silenciosamente.
 
+**Setup NVIDIA:** `references/claude-mem-nvidia-setup.md` (build.nvidia.com + openrouter provider).
+
+### Concorrência L1 — multi-sessão
+
+| Cenário | Seguro? | Como |
+|---------|---------|------|
+| 3 chats editando `lucy-progress.json` | ❌ | **Proibido** — corrupção JSON |
+| 3 chats em arquivos diferentes + 1 writer L1 | ✅ | Rótulos `[design]`/`[integration]`/`[security]` no `next_prompt` |
+| 3 chats só L2 search + observation_add | ✅ | L2 append-only; L1 read-only nas secundárias |
+| C62 + VPS mesmo projeto | ⚠️ | L2 **não** sincroniza entre hosts — cada máquina tem índice local |
 
 ```
 1. Ler L1 inteiro

@@ -2,7 +2,7 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.9.13** · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.9.15** · *Autor:* **Thales Calgarotto**
 
 ---
 
@@ -176,7 +176,7 @@ O Lucy gerencia sua própria persistência de memória em quatro camadas:
 
 1. **L0 (Brain Local)**: `.cursor/lucy-brain/` — preferências, decisões, `rules/` (regras P0), `learned/`.
 2. **L1 (Progress)**: `.cursor/lucy-progress.json` — Handoff do estado atual entre os ticks do loop.
-3. **L2 (claude-mem)**: Busca semântica local baseada em banco de dados SQLite.
+3. **L2 (claude-mem)**: Busca semântica local (opt-in). Setup NVIDIA: `references/claude-mem-nvidia-setup.md`.
 4. **L3 (Documentação)**: `docs/LUCY-PLAN.md` e `docs/LUCY-INDEX.md` legíveis por humanos.
 
 ---

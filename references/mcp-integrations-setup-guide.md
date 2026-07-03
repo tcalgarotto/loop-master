@@ -101,17 +101,27 @@ Fallback sem key: Playwright + `browser-ai-scrape-protocol.md`
 
 ---
 
-## § claude-mem — Memória L2
+## § claude-mem — Memória L2 (opt-in)
 
-**Quando sugerir:** sempre no init (Recommended).
+**Quando sugerir:** owner com 2+ sessões paralelas ou recall cross-session (Recommended se RAM OK).
+
+**Padrão v2.9.14+:** desabilitado — L0 brain + L1 JSON bastam. Habilitar só com opt-in.
 
 | Passo | Ação |
 |-------|------|
-| 1 | `bash .cursor/skills/lucy/scripts/init.sh` |
-| 2 | `claude-mem start` |
-| 3 | `claude-mem status` |
+| 1 | API key em [build.nvidia.com](https://build.nvidia.com) → Profile → Generate Personal Key (`nvapi-...`) |
+| 2 | Copiar `references/templates/claude-mem-settings.nvidia.json` → `~/.claude-mem/settings.json` |
+| 3 | Copiar `references/templates/claude-mem-nvidia.env.example` → `~/.claude-mem/.env` (chmod 600) e colar key |
+| 4 | `export LUCY_CLAUDE_MEM=1` (profile ou sessão) |
+| 5 | `LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/init.sh` |
+| 6 | `npx claude-mem status` — worker running |
+| 7 | Cursor → Settings → Tools & MCPs → **claude-mem** verde |
 
-Ver: `second-brain-protocol.md`
+**Provider:** openrouter-compatible apontando para NVIDIA NIM (`integrate.api.nvidia.com/v1`) — **não** DeepSeek.
+
+**Multi-sessão:** L2 = índice compartilhado (search); L1 `lucy-progress.json` = **single writer** — ver guia completo.
+
+Ver: `claude-mem-nvidia-setup.md` · `second-brain-protocol.md` · `memory-protocol.md`
 
 ---
 
