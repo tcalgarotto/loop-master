@@ -24,13 +24,14 @@ Isso instala e configura **tudo**:
 | claude-mem | install + **start worker** (skip se já instalado/rodando) |
 | motion | npm install no frontend |
 | **visual-gate** | Playwright + chromium se Next.js (**skip se já ok**) |
+| **headless-browser** | `ensure-headless-browser.sh` → `.lucy/headless-browser-ready.json` (VPS = Playwright default) |
 | **firecrawl-cli** | Se `FIRECRAWL_API_KEY` → `npx firecrawl-cli init --browser` |
 | Symlinks | `link-ecosystem-skills.sh` |
 | JSON L1 | `.cursor/lucy-progress.json` |
 | Plan stub | `docs/LUCY-PLAN.md` |
 | Index | `docs/LUCY-INDEX.md` (✅⏳🔮👤) |
 | Second Brain | `brain-sync.sh init` → `.cursor/lucy-brain/` |
-| **Cursor hooks** | `install-hooks.sh` → sessionStart + stop |
+| **Cursor hooks** | `install-hooks.sh` → sessionStart (hydrate + browser routing) + stop |
 | PRODUCT.md | stub se FE |
 
 **Não** perguntar ao usuário nesta fase. Reportar resumo em 3 linhas após concluir.

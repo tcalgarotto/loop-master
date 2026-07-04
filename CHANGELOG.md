@@ -5,6 +5,8 @@
 ### VPS headless browser default (`/lucy aprenda`)
 
 - **`references/learned/vps-headless-browser-default.md`** — Playwright headless é browser padrão em VPS/Remote SSH; MCP `cursor-ide-browser` toolCount=0
+- **`hooks/brain-hydrate.sh`** — sessionStart chama `ensure-headless-browser.sh` e injeta routing Playwright no contexto
+- **`scripts/cursor-browser-seed-tools.sh`** — copia descriptors MCP de outro workspace quando `tools/` vazio
 - **`scripts/ensure-headless-browser.sh`** — instala Playwright + chromium; grava `.lucy/headless-browser-ready.json`
 - **`scripts/browser-open-url.mjs`** — screenshot URL externa (profiler share, etc.)
 - **`mcp-setup-status.sh`** — `browser_primary`, `headless_browser_ready`, `remote_vps`
