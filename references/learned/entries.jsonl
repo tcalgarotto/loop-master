@@ -14,3 +14,4 @@
 {"ts":"2026-07-03T22:02:15Z","slug":"claude-mem-nvidia-l2","summary":"L2 claude-mem com NVIDIA NIM (build.nvidia.com); multi-sess\u00e3o single-writer L1; templates settings/.env","scope":"global"}
 {"ts":"2026-07-03T23:21:50Z","slug":"hubfu-pricing-landing-integrity","summary":"Pricing auditado vs produto; sem hints fake; CTAs uniformes; FAQ/footer premium","scope":"global"}
 {"ts":"2026-07-04T00:02:15Z","slug":"react-list-keys-unique","summary":"React list keys: scope+label not href alone; grep before visual gate","scope":"global"}
+{"ts":"2026-07-04T01:06:30Z","slug":"optimistic-inline-edit-v1","summary":"useOptimistic + Server Actions + HubfuSheet save otimista; EditableTable spec HubFU","scope":"global"}

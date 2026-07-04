@@ -34,6 +34,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | QA visual / screenshots | `visual-gate-protocol.md` |
 | Processo / orquestração premium | `premium-tool-orchestration.md` |
 | Design systems tagados | `design-system-intake.md` |
+| Planilhas / edição inline otimista | `optimistic-inline-edit-protocol.md`, `design-system/hubfu/editable-table.md` |
 | Design / UX | `ux-design-intelligence.md`, `premium-ui-stack.md` |
 | Deploy / test / i18n | protocolo correspondente em `references/` |
 | Novo domínio | `references/learned/<slug>.md` |

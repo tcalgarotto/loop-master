@@ -3,7 +3,7 @@
 **Origem:** `/lucy aprenda` — 2026-07-03 — owner  
 **Papel:** primeira versão visual em **HTML standalone** local → owner valida → portar para Next/shadcn com confiança.
 
-> Complementa: `gsap-premium-protocol.md` (motion no HTML) · `design-system-intake.md` (referências) · `lucy-nova-pagina-protocol.md` (port para React) · **`design-editable-hybrid-protocol.md`** · **`html-preview-interactive-mocks-protocol.md`**
+> Complementa: `gsap-premium-protocol.md` (motion no HTML) · `design-system-intake.md` (referências) · `lucy-nova-pagina-protocol.md` (port para React) · **`design-editable-hybrid-protocol.md`** · **`html-preview-interactive-mocks-protocol.md`** · **`optimistic-inline-edit-protocol.md`** (planilhas densas)
 
 ---
 
@@ -58,6 +58,8 @@
 | Mock SVG/dashboard | Tremor charts + shadcn Card em app pages |
 
 **Não descartar** o HTML após port: manter em `preview/` como referência de design aprovado.
+
+**Design systems:** além da landing, shippar catálogo HTML standalone (ex.: `preview/hubfu-design-system.html`) com swatches, componentes vivos e toggle de tema. Markdown em `references/design-system/` aponta para o HTML como referência visual canônica.
 
 ---
 

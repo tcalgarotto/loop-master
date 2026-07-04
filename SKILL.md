@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.17"
+version: "2.9.18"
 ---
-# Lucy v2.9.17 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.18 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -224,6 +224,8 @@ Enquanto incompleto: re-arm automático obrigatório.
 ### Design
 - `references/premium-ui-stack.md` — **stack Next.js + paletas + prompts-mestre**
 - `references/html-native-light-protocol.md` — **UI leve: dialog, HTMX, view-transition, scroll scrub**
+- `references/optimistic-inline-edit-protocol.md` — **planilhas densas: useOptimistic + Server Actions + HubfuSheet**
+- `references/design-system/hubfu/editable-table.md` — **HubFU EditableTable / InlineEditCell**
 - `references/html-first-design-protocol.md` — **HTML-first: preview local antes de Next + biblioteca de referências**
 - `references/html-preview-interactive-mocks-protocol.md` — **mocks HTML interativos espelhando produto real**
 - `references/integration-cards-patterns.md` — **3 modelos de cards de integração (carousel, marketplace, grid)**

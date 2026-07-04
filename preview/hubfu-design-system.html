@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HubFU Design System | Catálogo Visual</title>
+  <link rel="stylesheet" href="hubfu-design-tokens.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: var(--hubfu-font-sans); background: var(--hubfu-bg); color: var(--hubfu-fg); line-height: 1.47; letter-spacing: -.022em; -webkit-font-smoothing: antialiased; }
+    @media print { .ds-sidebar, .ds-topbar, .preview-tag { display: none !important; } .ds-main { margin-left: 0 !important; max-width: 100% !important; } .ds-section { break-inside: avoid; } }
+    .ds-shell { display: flex; min-height: 100vh; }
+    .ds-sidebar { position: fixed; inset: 0 auto 0 0; width: 240px; background: var(--hubfu-bg-alt); border-right: 1px solid var(--hubfu-line); padding: 24px 0 32px; overflow-y: auto; z-index: 50; }
+    .ds-sidebar-brand { padding: 0 20px 20px; font-size: .9375rem; font-weight: 600; letter-spacing: -.03em; border-bottom: 1px solid var(--hubfu-line); margin-bottom: 16px; }
+    .ds-sidebar-brand span { display: block; font-size: .6875rem; font-weight: 500; color: var(--hubfu-fg-tertiary); margin-top: 4px; }
+    .ds-nav { list-style: none; }
+    .ds-nav li a { display: block; padding: 7px 20px; font-size: .8125rem; color: var(--hubfu-fg-secondary); text-decoration: none; transition: color .2s, background .2s; }
+    .ds-nav li a:hover { color: var(--hubfu-fg); background: var(--hubfu-line); }
+    .ds-nav li a.active { color: var(--hubfu-accent); font-weight: 500; }
+    .ds-nav-group { padding: 12px 20px 6px; font-size: .625rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--hubfu-fg-tertiary); }
+    .ds-main { margin-left: 240px; flex: 1; max-width: calc(100% - 240px); }
+    .ds-topbar { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; padding: 12px 40px; background: var(--hubfu-nav-bg); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--hubfu-line); }
+    .ds-topbar h1 { font-size: 1rem; font-weight: 600; letter-spacing: -.02em; }
+    .ds-content { padding: 48px 40px 120px; max-width: 960px; }
+    .ds-section { margin-bottom: 72px; }
+    .ds-section-head { margin-bottom: 28px; }
+    .ds-section-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.15; }
+    .ds-section-head p { margin-top: 8px; font-size: .9375rem; color: var(--hubfu-fg-secondary); max-width: 60ch; }
+    .ds-subhead { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--hubfu-fg-tertiary); margin: 28px 0 14px; }
+    .ds-grid { display: grid; gap: 12px; }
+    .ds-grid-2 { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .ds-grid-3 { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    .ds-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .ds-card { background: var(--hubfu-bg-alt); border: 1px solid var(--hubfu-line); border-radius: var(--hubfu-radius-control); padding: 20px; }
+    .ds-label { font-size: .6875rem; color: var(--hubfu-fg-tertiary); font-family: var(--hubfu-font-mono); margin-top: 6px; }
+    .swatch { border-radius: var(--hubfu-radius-chip); overflow: hidden; border: 1px solid var(--hubfu-line); }
+    .swatch-color { height: 64px; }
+    .swatch-meta { padding: 8px 10px; background: var(--hubfu-bg); }
+    .swatch-name { font-size: .75rem; font-weight: 500; }
+    .swatch-token { font-size: .625rem; color: var(--hubfu-fg-tertiary); font-family: var(--hubfu-font-mono); }
+    .grad-block { height: 100px; border-radius: var(--hubfu-radius-panel); border: 1px solid var(--hubfu-line); }
+    .grad-hero-glow { background: radial-gradient(ellipse at center, var(--hubfu-glow), transparent 70%); }
+    .grad-accent { background: linear-gradient(90deg, var(--hubfu-accent), var(--hubfu-accent-bright)); }
+    .grad-prob { background: linear-gradient(90deg, var(--hubfu-primitive-emerald-600), var(--hubfu-primitive-emerald-400)); }
+    .grad-mp { background: var(--hubfu-mp-bg); }
+    .grad-device { background: linear-gradient(165deg, var(--hubfu-primitive-surface-3), var(--hubfu-primitive-surface-4)); }
+    .grad-integrations { background: var(--hubfu-integrations-bg); }
+    .type-sample { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--hubfu-line); }
+    .type-sample:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .type-display { font-size: clamp(2.75rem, 5vw, 4.5rem); font-weight: 600; letter-spacing: -.04em; line-height: 1.05; }
+    .type-display em { font-family: var(--hubfu-font-serif); font-style: italic; font-weight: 400; }
+    .type-h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; letter-spacing: -.03em; }
+    .type-body-lg { font-size: 1.0625rem; color: var(--hubfu-fg-secondary); line-height: 1.55; }
+    .type-kicker { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--hubfu-accent); }
+    .type-micro { font-size: .625rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--hubfu-fg-tertiary); }
+    .space-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .space-bar { height: 24px; background: var(--hubfu-accent); border-radius: 4px; opacity: .75; }
+    .space-label { font-size: .75rem; font-family: var(--hubfu-font-mono); color: var(--hubfu-fg-secondary); min-width: 48px; }
+    .radius-box { width: 80px; height: 80px; background: var(--hubfu-bg-alt); border: 2px solid var(--hubfu-accent); display: flex; align-items: center; justify-content: center; font-size: .625rem; font-family: var(--hubfu-font-mono); color: var(--hubfu-fg-tertiary); }
+    .shadow-box { width: 120px; height: 80px; background: var(--hubfu-card-bg); border-radius: var(--hubfu-radius-chip); display: flex; align-items: center; justify-content: center; font-size: .625rem; color: var(--hubfu-fg-tertiary); }
+    .shadow-device { box-shadow: var(--hubfu-device-shadow); }
+    .shadow-feature { box-shadow: var(--hubfu-feature-shadow); }
+    .shadow-feature-light { box-shadow: var(--hubfu-feature-light-shadow); }
+    .shadow-pill { box-shadow: var(--hubfu-pill-shadow); }
+    .border-sample { padding: 20px; border-radius: var(--hubfu-radius-control); font-size: .8125rem; color: var(--hubfu-fg-secondary); }
+    .border-1px { border: 1px solid var(--hubfu-line); }
+    .border-glass { background: var(--hubfu-nav-bg); backdrop-filter: saturate(180%) blur(20px); border: 1px solid var(--hubfu-line); }
+    .border-accent { border: 1px solid var(--hubfu-accent); box-shadow: 0 0 0 1px var(--hubfu-accent); }
+    .border-violet { border: 1px solid var(--hubfu-violet); box-shadow: 0 0 0 1px var(--hubfu-violet), 0 8px 24px rgba(124,58,237,.15); }
+    .link-btn { font-size: .8125rem; font-weight: 500; text-decoration: none; padding: 8px 16px; border-radius: var(--hubfu-radius-pill); background: var(--hubfu-btn-primary-bg); color: var(--hubfu-btn-fg-on-accent); border: none; cursor: pointer; font-family: inherit; transition: opacity .2s, transform .2s; }
+    .link-btn:hover { opacity: .88; }
+    .link-btn:active { transform: scale(.98); }
+    .link-btn.outline { background: transparent; color: var(--hubfu-fg); box-shadow: inset 0 0 0 1px var(--hubfu-line); }
+    .link-btn.outline:hover { background: var(--hubfu-bg-alt); }
+    .link-btn.accent { background: var(--hubfu-accent); color: var(--hubfu-btn-fg-on-accent); }
+    .link-btn.ghost { background: transparent; color: var(--hubfu-fg-secondary); box-shadow: none; }
+    .link-btn.ghost:hover { color: var(--hubfu-fg); background: var(--hubfu-bg-alt); }
+    .nav-specimen { display: flex; align-items: center; justify-content: space-between; height: var(--hubfu-nav-height); padding: 0 20px; background: var(--hubfu-nav-bg); backdrop-filter: saturate(180%) blur(20px); border: 1px solid var(--hubfu-line); border-radius: var(--hubfu-radius-control); }
+    .nav-specimen .logo { font-size: 1.0625rem; font-weight: 600; text-decoration: none; color: inherit; }
+    .nav-specimen .nav-links { display: flex; gap: 24px; }
+    .nav-specimen .nav-links a { font-size: .8125rem; color: var(--hubfu-fg-secondary); text-decoration: none; }
+    .theme-toggle { min-width: 36px; padding: 8px 12px; cursor: pointer; font-size: .875rem; line-height: 1; }
+    .quote-card { padding: 32px 28px; border-radius: var(--hubfu-radius-card); background: var(--hubfu-card-bg); border: 1px solid var(--hubfu-line); }
+    .quote-card blockquote { font-family: var(--hubfu-font-serif); font-size: 1.125rem; font-style: italic; line-height: 1.4; }
+    .quote-card cite { display: block; margin-top: 16px; font-style: normal; font-size: .8125rem; color: var(--hubfu-fg-tertiary); }
+    .pricing-grid { display: grid; gap: 1px; background: var(--hubfu-line); border: 1px solid var(--hubfu-line); border-radius: var(--hubfu-radius-card); overflow: hidden; }
+    @media (min-width: 640px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+    .plan { background: var(--hubfu-bg); padding: 32px 24px; display: flex; flex-direction: column; }
+    .plan.featured { background: var(--hubfu-card-elevated); box-shadow: inset 0 0 0 1px rgba(52,211,153,.2); }
+    .plan h3 { font-size: .875rem; font-weight: 600; color: var(--hubfu-fg-tertiary); }
+    .plan-price { font-size: 2rem; font-weight: 600; letter-spacing: -.04em; margin: 10px 0 4px; }
+    .plan-price span { font-size: .875rem; font-weight: 400; color: var(--hubfu-fg-tertiary); }
+    .plan-desc { font-size: .8125rem; color: var(--hubfu-fg-secondary); margin-bottom: 16px; }
+    .tab-bar-wrap { position: relative; border-bottom: 1px solid var(--hubfu-line); margin-bottom: 20px; }
+    .tab-bar { display: flex; }
+    .tab-btn { background: none; border: none; font-family: inherit; font-size: .875rem; color: var(--hubfu-fg-tertiary); cursor: pointer; padding: 10px 16px; flex: 1; transition: color .2s; }
+    .tab-btn.active { color: var(--hubfu-fg); font-weight: 500; }
+    .tab-indicator { position: absolute; bottom: -1px; left: 0; height: 2px; width: 25%; background: var(--hubfu-fg); transform-origin: left center; }
+    .tab-panel-mini { border-radius: var(--hubfu-radius-device); background: var(--hubfu-surface-ui); color: var(--hubfu-primitive-text-light); padding: 20px; min-height: 120px; font-size: .8125rem; box-shadow: var(--hubfu-device-shadow); }
+    .kanban-mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .kanban-col { min-height: 140px; padding: 10px 8px; border-radius: var(--hubfu-radius-control); background: rgba(255,255,255,.03); border: 1px dashed rgba(255,255,255,.1); }
+    .kanban-col h4 { font-size: .625rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .deal-card { padding: 10px; border-radius: var(--hubfu-radius-chip); background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); transition: transform .25s var(--hubfu-ease), box-shadow .25s; }
+    .deal-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+    .deal-card.selected { border-color: rgba(52,211,153,.5); background: rgba(52,211,153,.08); }
+    .deal-top { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+    .avatar { width: 24px; height: 24px; border-radius: var(--hubfu-radius-avatar); background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: .5625rem; font-weight: 600; color: #fff; }
+    .deal-name { font-size: .6875rem; color: rgba(255,255,255,.9); font-weight: 500; }
+    .deal-amt { font-size: .625rem; color: var(--hubfu-primitive-emerald-300); }
+    .prob-bar { height: 3px; border-radius: 2px; background: rgba(255,255,255,.08); margin-top: 6px; overflow: hidden; }
+    .prob-fill { height: 100%; width: 72%; background: linear-gradient(90deg, var(--hubfu-primitive-emerald-600), var(--hubfu-primitive-emerald-400)); }
+    .int-pill { width: 64px; height: 64px; border-radius: 50%; background: var(--hubfu-pill-bg); display: flex; align-items: center; justify-content: center; box-shadow: var(--hubfu-pill-shadow); transition: transform .2s var(--hubfu-ease), box-shadow .2s; font-size: 1.25rem; }
+    .int-pill:hover { transform: translateY(-3px) scale(1.04); box-shadow: var(--hubfu-pill-shadow-hover); }
+    .int-card { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); color: var(--hubfu-primitive-text-light); min-height: 180px; }
+    .int-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .int-status { font-size: .625rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: var(--hubfu-radius-badge); }
+    .int-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+    .int-status.connected { color: var(--hubfu-primitive-emerald-300); background: rgba(52,211,153,.12); }
+    .int-status.connected::before { background: var(--hubfu-primitive-emerald-400); }
+    .int-logo { width: 40px; height: 40px; border-radius: var(--hubfu-radius-chip); background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: .6875rem; font-weight: 700; }
+    .int-name { font-size: .9375rem; font-weight: 600; }
+    .int-desc { font-size: .75rem; color: rgba(255,255,255,.55); line-height: 1.45; flex: 1; }
+    .int-action { align-self: flex-start; font-size: .6875rem; font-weight: 600; padding: 6px 12px; border-radius: var(--hubfu-radius-avatar); border: none; background: var(--hubfu-violet); color: #fff; cursor: pointer; font-family: inherit; }
+    .int-marketplace-bg { background: var(--hubfu-mp-bg); padding: 20px; border-radius: var(--hubfu-radius-panel); }
+    .faq-item { border-top: 1px solid var(--hubfu-line); }
+    .faq-item:last-child { border-bottom: 1px solid var(--hubfu-line); }
+    .faq-q { width: 100%; text-align: left; padding: 16px 0; background: none; border: none; font-family: inherit; font-size: .9375rem; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--hubfu-fg); }
+    .faq-q .icon { font-size: 1.125rem; color: var(--hubfu-fg-tertiary); transition: transform .3s; }
+    .faq-item.open .faq-q .icon { transform: rotate(45deg); }
+    .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s var(--hubfu-ease); }
+    .faq-item.open .faq-a { grid-template-rows: 1fr; }
+    .faq-a-inner { overflow: hidden; font-size: .875rem; color: var(--hubfu-fg-secondary); line-height: 1.55; opacity: 0; transform: translateY(-4px); transition: opacity .3s, transform .3s; }
+    .faq-item.open .faq-a-inner { opacity: 1; transform: translateY(0); padding-bottom: 16px; }
+    .badge { font-size: .625rem; font-weight: 600; padding: 4px 8px; border-radius: var(--hubfu-radius-badge); text-transform: uppercase; letter-spacing: .04em; }
+    .badge.ok { background: rgba(52,211,153,.15); color: var(--hubfu-primitive-emerald-300); }
+    .badge.warn { background: rgba(220,38,38,.15); color: var(--hubfu-primitive-red-300); }
+    .badge.low { background: rgba(251,191,36,.15); color: var(--hubfu-primitive-amber-300); }
+    .badge.beta { background: var(--hubfu-violet-soft); color: var(--hubfu-primitive-violet-300); }
+    .chip { font-size: .6875rem; padding: 6px 12px; border-radius: var(--hubfu-radius-pill); background: var(--hubfu-bg-alt); color: var(--hubfu-fg-secondary); border: 1px solid var(--hubfu-line); }
+    .filter-pill { font-size: .6875rem; padding: 6px 12px; border-radius: var(--hubfu-radius-pill); background: rgba(255,255,255,.06); color: rgba(255,255,255,.6); border: none; font-family: inherit; cursor: pointer; transition: background .2s, color .2s; }
+    .filter-pill.on { background: rgba(52,211,153,.15); color: var(--hubfu-primitive-emerald-300); }
+    .form-field { margin-bottom: 16px; }
+    .form-label { display: block; font-size: .75rem; font-weight: 500; color: var(--hubfu-fg-secondary); margin-bottom: 6px; }
+    .form-input { width: 100%; max-width: 320px; padding: 10px 14px; border-radius: var(--hubfu-radius-chip); border: 1px solid var(--hubfu-line); background: var(--hubfu-bg); color: var(--hubfu-fg); font-family: inherit; font-size: .875rem; transition: border-color .2s, box-shadow .2s; }
+    .form-input:focus { outline: none; border-color: var(--hubfu-accent); box-shadow: 0 0 0 3px var(--hubfu-glow); }
+    .form-input::placeholder { color: var(--hubfu-fg-tertiary); }
+    .form-input-dark { border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: #fff; }
+    .form-input-dark::placeholder { color: rgba(255,255,255,.35); }
+    .motion-demo { padding: 24px; }
+    .motion-box { width: 48px; height: 48px; border-radius: var(--hubfu-radius-chip); background: var(--hubfu-accent); }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hubfu-primitive-emerald-400); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,.5); } 50% { box-shadow: 0 0 0 8px rgba(52,211,153,0); } }
+    @keyframes intScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .motion-carousel { overflow: hidden; mask-image: linear-gradient(90deg, transparent, var(--hubfu-mask-fade) 8%, var(--hubfu-mask-fade) 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, var(--hubfu-mask-fade) 8%, var(--hubfu-mask-fade) 92%, transparent); }
+    .motion-track { display: flex; gap: 16px; width: max-content; animation: intScroll 30s linear infinite; }
+    .motion-carousel:hover .motion-track { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) { .motion-track { animation: none; } .pulse-dot { animation: none; } }
+    .preview-tag { position: fixed; bottom: 20px; left: 20px; z-index: 200; font-size: .6875rem; color: var(--hubfu-fg-tertiary); background: var(--hubfu-tag-bg); backdrop-filter: blur(12px); padding: 8px 12px; border-radius: var(--hubfu-radius-avatar); border: 1px solid var(--hubfu-line); }
+    .preview-tag a { color: var(--hubfu-accent); text-decoration: none; }
+    @media (max-width: 768px) { .ds-sidebar { display: none; } .ds-main { margin-left: 0; max-width: 100%; } .ds-content { padding: 32px 20px 80px; } .nav-specimen .nav-links { display: none; } }
+    [data-theme="dark"] .link-btn.outline { background: transparent; color: var(--hubfu-fg); }
+    [data-theme="dark"] .link-btn { background: var(--hubfu-btn-primary-bg); color: var(--hubfu-btn-fg-on-accent); }
+    .ds-specimen-caption { font-size: .6875rem; color: var(--hubfu-fg-tertiary); margin-bottom: 14px; font-style: italic; }
+    .motion-framer-note { font-size: .6875rem; color: var(--hubfu-fg-tertiary); font-family: var(--hubfu-font-mono); margin-top: 8px; padding: 8px 10px; background: var(--hubfu-bg-alt); border-radius: var(--hubfu-radius-chip); }
+    .motion-framer-demo { display: grid; gap: 16px; }
+    @media (min-width: 640px) { .motion-framer-demo { grid-template-columns: 1fr 1fr; } }
+    .motion-framer-card { will-change: transform; }
+    .motion-framer-tap:active { transform: scale(0.97); }
+  </style>
+</head>
+<body>
+  <span class="preview-tag">Design System v1.2 · <a href="hubfu-landing-premium.html">Landing</a></span>
+  <div class="ds-shell">
+    <aside class="ds-sidebar" aria-label="Navegação do design system">
+      <div class="ds-sidebar-brand">HubFU DS<span>Catálogo visual canônico</span></div>
+      <nav><ul class="ds-nav">
+        <li class="ds-nav-group">Fundamentos</li>
+        <li><a href="#cores">Cores</a></li><li><a href="#gradientes">Gradientes</a></li><li><a href="#tipografia">Tipografia</a></li>
+        <li><a href="#espacamento">Espaçamento</a></li><li><a href="#raios">Raios</a></li><li><a href="#sombras">Sombras</a></li><li><a href="#bordas">Bordas</a></li>
+        <li class="ds-nav-group">Componentes</li>
+        <li><a href="#botoes">Botões</a></li><li><a href="#navegacao">Navegação</a></li><li><a href="#cards">Cards</a></li><li><a href="#tabs">Tabs</a></li>
+        <li><a href="#kanban">Kanban</a></li>
+        <li><a href="#integracoes">Integrações</a></li><li><a href="#integracoes-v2">Cards v2</a></li><li><a href="#data-table">Tabela dados</a></li>
+        <li><a href="#faq">FAQ</a></li><li><a href="#badges">Badges &amp; Chips</a></li><li><a href="#formularios">Formulários</a></li>
+        <li class="ds-nav-group">Motion</li><li><a href="#motion">Animações</a></li><li><a href="#motion-framer">Framer target</a></li>
+      </ul></nav>
+    </aside>
+    <div class="ds-main">
+      <header class="ds-topbar"><h1>HubFU Design System</h1><div class="ds-topbar-actions"><button type="button" class="link-btn outline theme-toggle" id="theme-toggle" aria-label="Alternar tema">☀</button></div></header>
+      <div class="ds-content">
+        <section class="ds-section" id="cores">
+          <div class="ds-section-head"><h2>Cores</h2><p>Primitivos fixos e tokens semânticos que respondem ao tema (<code>data-theme</code>).</p></div>
+          <p class="ds-subhead">Primitivos</p>
+          <div class="ds-grid ds-grid-3" id="swatch-primitives"></div>
+          <p class="ds-subhead">Semânticos (tema atual)</p>
+          <div class="ds-grid ds-grid-3" id="swatch-semantic"></div>
+        </section>
+        <section class="ds-section" id="gradientes">
+          <div class="ds-section-head"><h2>Gradientes</h2><p>Mesh hero, accent bars, superfícies de produto e seção de integrações.</p></div>
+          <div class="ds-grid ds-grid-2">
+            <div><div class="grad-block grad-hero-glow"></div><p class="ds-label">Hero glow · radial(var hubfu-glow)</p></div>
+            <div><div class="grad-block grad-accent"></div><p class="ds-label">Accent · linear accent to accent-bright</p></div>
+            <div><div class="grad-block grad-prob"></div><p class="ds-label">Prob bar · emerald 600 to 400</p></div>
+            <div><div class="grad-block grad-integrations"></div><p class="ds-label">Integrations · hubfu-integrations-bg</p></div>
+            <div><div class="grad-block grad-mp"></div><p class="ds-label">Marketplace · hubfu-mp-bg</p></div>
+            <div><div class="grad-block grad-device"></div><p class="ds-label">Device UI · surface 3 to 4</p></div>
+          </div>
+        </section>
+        <section class="ds-section" id="tipografia">
+          <div class="ds-section-head"><h2>Tipografia</h2><p>System stack sans + serif italic em destaques. Escala da landing premium.</p></div>
+          <div class="ds-card">
+            <div class="type-sample"><p class="type-kicker">Kicker · .75rem uppercase</p><p class="ds-label">CRM · ERP · Financeiro · IA</p></div>
+            <div class="type-sample"><p class="type-display">Operações <em>unificadas</em></p><p class="ds-label">Hero H1 · clamp 2.75rem to 4.5rem · serif em em</p></div>
+            <div class="type-sample"><p class="type-h2">Plataforma completa</p><p class="ds-label">Section H2 · clamp 1.75rem to 2.5rem</p></div>
+            <div class="type-sample"><p class="type-body-lg">CRM, ERP e financeiro num só painel, sem planilhas paralelas nem integrações frágeis.</p><p class="ds-label">Body large · 1.0625rem · fg-secondary</p></div>
+            <div class="type-sample"><p style="font-size:.8125rem">Nav link · .8125rem · fg-secondary</p><p class="ds-label">hubfu-font-sans</p></div>
+            <div class="type-sample"><p class="type-micro">Micro label · deal meta</p><p class="ds-label">.625rem uppercase · fg-tertiary</p></div>
+          </div>
+        </section>
+        <section class="ds-section" id="espacamento">
+          <div class="ds-section-head"><h2>Espaçamento</h2><p>Tokens de layout e gaps recorrentes.</p></div>
+          <div class="ds-card" id="spacing-bars"></div>
+        </section>
+        <section class="ds-section" id="raios">
+          <div class="ds-section-head"><h2>Raios de borda</h2><p>De pill (980px) a badge (6px).</p></div>
+          <div class="ds-row" id="radius-row"></div>
+        </section>
+        <section class="ds-section" id="sombras">
+          <div class="ds-section-head"><h2>Sombras &amp; elevação</h2><p>Tokens theme-aware para device, feature e pills.</p></div>
+          <div class="ds-row">
+            <div><div class="shadow-box shadow-pill">Pill</div><p class="ds-label">hubfu-pill-shadow</p></div>
+            <div><div class="shadow-box shadow-feature-light">Light</div><p class="ds-label">hubfu-feature-light-shadow</p></div>
+            <div><div class="shadow-box shadow-feature">Feature</div><p class="ds-label">hubfu-feature-shadow</p></div>
+            <div><div class="shadow-box shadow-device">Device</div><p class="ds-label">hubfu-device-shadow</p></div>
+          </div>
+        </section>
+        <section class="ds-section" id="bordas">
+          <div class="ds-section-head"><h2>Bordas</h2><p>Line sutil, glass blur e accent rings.</p></div>
+          <div class="ds-grid ds-grid-2">
+            <div class="border-sample border-1px">1px line · hubfu-line</div>
+            <div class="border-sample border-glass">Glass nav · blur + line</div>
+            <div class="border-sample border-accent">Accent ring · emerald</div>
+            <div class="border-sample border-violet">Violet selected · integração</div>
+          </div>
+        </section>
+        <section class="ds-section" id="botoes">
+          <div class="ds-section-head"><h2>Botões</h2><p>Classe <code>.link-btn</code>: pill radius, estados hover/active.</p></div>
+          <div class="ds-row">
+            <button type="button" class="link-btn">Primary</button>
+            <button type="button" class="link-btn outline">Secondary</button>
+            <button type="button" class="link-btn ghost">Ghost</button>
+            <button type="button" class="link-btn accent">Accent</button>
+          </div>
+        </section>
+        <section class="ds-section" id="navegacao">
+          <div class="ds-section-head"><h2>Navegação</h2><p>Nav fixa com blur, links secundários e CTA.</p></div>
+          <div class="nav-specimen">
+            <a class="logo" href="#">HubFU</a>
+            <nav class="nav-links"><a href="#">Integrações</a><a href="#">Plataforma</a><a href="#">Preços</a></nav>
+            <div class="ds-row"><button type="button" class="link-btn outline theme-toggle" aria-hidden="true">☀</button><a class="link-btn" href="#">Agendar demo</a></div>
+          </div>
+        </section>
+        <section class="ds-section" id="cards">
+          <div class="ds-section-head"><h2>Cards</h2><p>Quote, pricing e integração marketplace.</p></div>
+          <p class="ds-subhead">Quote card</p>
+          <div class="quote-card" style="max-width:480px;margin-bottom:24px"><blockquote>"Deixamos três ferramentas em seis semanas. O time finalmente usa um só painel."</blockquote><cite>Ricardo Mendes · TechParts</cite></div>
+          <p class="ds-subhead">Pricing grid</p>
+          <div class="pricing-grid" style="margin-bottom:24px">
+            <article class="plan"><h3>Starter</h3><div class="plan-price">R$ 149<span>/mês</span></div><p class="plan-desc">Até 3 usuários</p></article>
+            <article class="plan featured"><h3>Business</h3><div class="plan-price">R$ 349<span>/mês</span></div><p class="plan-desc">Até 15 usuários</p></article>
+            <article class="plan"><h3>Enterprise</h3><div class="plan-price">Sob consulta</div><p class="plan-desc">SLA dedicado</p></article>
+          </div>
+          <p class="ds-subhead">Integration card v2 (MeetGeek · light marketplace)</p>
+          <p class="ds-specimen-caption">Padrão MeetGeek — replicado em HTML</p>
+          <div class="int-v2-surface" style="margin-bottom:24px">
+            <div class="int-v2-grid" id="int-v2-demo"></div>
+          </div>
+          <p class="ds-subhead">Integration card v1 (dark marketplace — legado)</p>
+          <div class="int-marketplace-bg" style="max-width:320px">
+            <div class="int-card">
+              <div class="int-card-top"><span class="int-status connected">Conectado</span><div class="int-logo">SL</div></div>
+              <div class="int-name">Slack</div><p class="int-desc">Notificações de negócios e alertas de estoque no canal do time.</p>
+              <button type="button" class="int-action">Gerenciar</button>
+            </div>
+          </div>
+        </section>
+        <section class="ds-section" id="tabs">
+          <div class="ds-section-head"><h2>Tabs produto</h2><p>Indicador GSAP + painel escuro tipo device.</p></div>
+          <div class="tab-bar-wrap" id="tab-demo">
+            <div class="tab-bar">
+              <button type="button" class="tab-btn active" data-tab="0">CRM</button>
+              <button type="button" class="tab-btn" data-tab="1">ERP</button>
+              <button type="button" class="tab-btn" data-tab="2">IA</button>
+              <button type="button" class="tab-btn" data-tab="3">FIN</button>
+            </div>
+            <div class="tab-indicator" id="tab-indicator"></div>
+          </div>
+          <div class="tab-panel-mini" id="tab-panel">Pipeline kanban com filtros e cards arrastáveis.</div>
+        </section>
+        <section class="ds-section" id="kanban">
+          <div class="ds-section-head"><h2>Kanban</h2><p>Coluna + deal card com prob bar e estados hover/selected.</p></div>
+          <div class="tab-panel-mini"><div class="kanban-mini">
+            <div class="kanban-col"><h4>Qualificação</h4><div class="deal-card"><div class="deal-top"><div class="avatar">AC</div><div><div class="deal-name">Acme Corp</div><div class="deal-amt">R$ 48k</div></div></div><div class="prob-bar"><div class="prob-fill"></div></div></div></div>
+            <div class="kanban-col"><h4>Proposta</h4><div class="deal-card selected"><div class="deal-top"><div class="avatar">TM</div><div><div class="deal-name">TechParts</div><div class="deal-amt">R$ 92k</div></div></div><div class="prob-bar"><div class="prob-fill" style="width:85%"></div></div></div></div>
+            <div class="kanban-col"><h4>Fechamento</h4><div class="deal-card"><div class="deal-top"><div class="avatar">VR</div><div><div class="deal-name">Varejo+</div><div class="deal-amt">R$ 31k</div></div></div><div class="prob-bar"><div class="prob-fill" style="width:55%"></div></div></div></div>
+          </div></div>
+        </section>
+        <section class="ds-section" id="integracoes">
+          <div class="ds-section-head"><h2>Integrações</h2><p>Carousel pill + filter pills em UI escura.</p></div>
+          <p class="ds-subhead">Carousel pill</p>
+          <div class="ds-row" style="margin-bottom:24px"><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div></div>
+          <p class="ds-subhead">Filter pills (tab panel)</p>
+          <div class="tab-panel-mini" style="min-height:auto"><div class="ds-row">
+            <button type="button" class="filter-pill on">Todos</button><button type="button" class="filter-pill">Abertos</button><button type="button" class="filter-pill">Ganhos</button><button type="button" class="filter-pill">Perdidos</button>
+          </div></div>
+        </section>
+        <section class="ds-section" id="integracoes-v2">
+          <div class="ds-section-head"><h2>Integrações v2</h2><p>Grid 3×3 estilo MeetGeek — cards brancos, logo centralizado, Conectado verde ou Conectar roxo.</p></div>
+          <div class="int-v2-surface"><div class="int-v2-grid" id="int-v2-showcase"></div></div>
+        </section>
+        <section class="ds-section" id="data-table">
+          <div class="ds-section-head"><h2>Tabela / planilha</h2><p>Workflow de leads com header, barra de dicas, tabela numerada editável, redimensionamento de colunas, sidebar Ações e toggles.</p></div>
+          <p class="ds-specimen-caption">Planilha interativa estilo Excel — <code>HubfuSheet</code> vanilla JS · save otimista (dot syncing + toast em erro ~5%)</p>
+          <div id="ds-sheet-specimen"></div>
+        </section>
+        <section class="ds-section" id="motion-framer">
+          <div class="ds-section-head"><h2>Framer Motion (port Next.js)</h2><p>Aproximações CSS no preview; alvo real é Framer no app React. Ver <code>references/design-system/hubfu/motion.md</code>.</p></div>
+          <div class="motion-framer-demo">
+            <div class="ds-card motion-demo">
+              <p class="ds-subhead" style="margin-top:0">Card hover · whileHover</p>
+              <div class="int-v2-surface" style="padding:12px">
+                <article class="int-v2-card motion-framer-card" style="max-width:200px;margin:0 auto">
+                  <span class="int-v2-grid-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                  <div class="int-v2-logo"><span class="int-v2-logo-fallback">SL</span></div>
+                  <h3 class="int-v2-name">Slack</h3>
+                  <p class="int-v2-desc">Notificações de negócios no canal do time.</p>
+                  <div class="int-v2-foot"><span class="int-v2-connected"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Conectado</span></div>
+                </article>
+              </div>
+              <p class="motion-framer-note">Framer: motion.article whileHover={{ scale: 1.02, boxShadow: "..." }}</p>
+            </div>
+            <div class="ds-card motion-demo">
+              <p class="ds-subhead" style="margin-top:0">Connect tap · whileTap</p>
+              <button type="button" class="int-v2-connect motion-framer-tap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Conectar
+              </button>
+              <p class="motion-framer-note">Framer: motion.button whileTap={{ scale: 0.97 }}</p>
+            </div>
+            <div class="ds-card motion-demo">
+              <p class="ds-subhead" style="margin-top:0">Sidebar slide · motion.div x</p>
+              <div style="overflow:hidden;border-radius:var(--hubfu-radius-chip);border:1px solid var(--hubfu-line);height:80px;position:relative;background:var(--hubfu-bg-alt)">
+                <div class="motion-framer-sidebar" style="position:absolute;right:0;top:0;bottom:0;width:40%;background:var(--hubfu-card-bg);border-left:1px solid var(--hubfu-line);padding:12px;font-size:.6875rem;font-weight:600">Actions</div>
+              </div>
+              <p class="motion-framer-note">Framer: initial={{ x: 220 }} animate={{ x: 0 }} transition spring</p>
+            </div>
+            <div class="ds-card motion-demo">
+              <p class="ds-subhead" style="margin-top:0">Row stagger · staggerChildren</p>
+              <div class="ds-row" id="motion-framer-stagger">
+                <div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div>
+              </div>
+              <button type="button" class="link-btn outline" id="motion-framer-replay" style="margin-top:12px">Replay stagger</button>
+              <p class="motion-framer-note">Framer: variants container/child + staggerChildren: 0.06</p>
+            </div>
+          </div>
+        </section>
+        <section class="ds-section" id="faq">
+          <div class="ds-section-head"><h2>FAQ accordion</h2><p>Grid rows 0fr to 1fr + rotação do ícone +.</p></div>
+          <div class="faq-list" style="max-width:560px">
+            <div class="faq-item open"><button class="faq-q" type="button">Preciso de consultor?<span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Não. Onboarding guiado cobre o essencial em poucos dias.</div></div></div>
+            <div class="faq-item"><button class="faq-q" type="button">Dados no Brasil?<span class="icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Sim. Infraestrutura nacional e conformidade com LGPD.</div></div></div>
+          </div>
+        </section>
+        <section class="ds-section" id="badges">
+          <div class="ds-section-head"><h2>Badges &amp; chips</h2><p>Status de estoque, integração e tags neutras.</p></div>
+          <div class="ds-row" style="margin-bottom:16px"><span class="badge ok">OK</span><span class="badge warn">Crítico</span><span class="badge low">Baixo</span><span class="badge beta">Beta</span></div>
+          <div class="ds-row"><span class="chip">CRM</span><span class="chip">NF-e</span><span class="chip">IA Copilot</span></div>
+        </section>
+        <section class="ds-section" id="formularios">
+          <div class="ds-section-head"><h2>Formulários</h2><p>Input landing (claro) e marketplace (escuro).</p></div>
+          <div class="ds-grid ds-grid-2">
+            <div><div class="form-field"><label class="form-label">E-mail corporativo</label><input type="email" class="form-input" placeholder="voce@empresa.com.br" /></div><div class="form-field"><label class="form-label">Empresa</label><input type="text" class="form-input" placeholder="Nome da empresa" /></div></div>
+            <div class="int-marketplace-bg"><div class="form-field"><label class="form-label" style="color:rgba(255,255,255,.55)">Buscar integração</label><input type="search" class="form-input form-input-dark" placeholder="Slack, Trello…" style="max-width:100%" /></div></div>
+          </div>
+        </section>
+        <section class="ds-section" id="motion">
+          <div class="ds-section-head"><h2>Motion</h2><p>GSAP + CSS. Ver motion.md para inventário completo.</p></div>
+          <p class="ds-subhead">GSAP stagger (clique para replay)</p>
+          <div class="ds-card motion-demo"><div class="ds-row" id="motion-stagger"><div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div></div><button type="button" class="link-btn outline" id="motion-replay" style="margin-top:16px">Replay stagger</button></div>
+          <p class="ds-subhead">CSS pulse dot</p><div class="ds-card motion-demo"><div class="pulse-dot"></div></div>
+          <p class="ds-subhead">CSS carousel (intScroll)</p>
+          <div class="motion-carousel ds-card" style="padding:16px 0"><div class="motion-track"><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div></div></div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="hubfu-integrations-data.js"></script>
+  <script src="hubfu-sheet.js"></script>
+  <script>
+    (function initHubfuTheme(){const KEY="hubfu-theme",root=document.documentElement,saved=localStorage.getItem(KEY),prefersDark=matchMedia("(prefers-color-scheme: dark)").matches,theme=saved||(prefersDark?"dark":"light");root.setAttribute("data-theme",theme);document.querySelectorAll(".theme-toggle").forEach(btn=>{function syncIcon(){btn.textContent=root.getAttribute("data-theme")==="dark"?"☾":"☀";}syncIcon();btn.addEventListener("click",()=>{const next=root.getAttribute("data-theme")==="dark"?"light":"dark";root.setAttribute("data-theme",next);localStorage.setItem(KEY,next);syncIcon();});});})();
+    function swatch(name,token,extra){const label=token.replace(/^--/,"");return `<div class="swatch"><div class="swatch-color" style="background:var(${token})${extra||""}"></div><div class="swatch-meta"><div class="swatch-name">${name}</div><div class="swatch-token">${label}</div></div></div>`;}
+    const prim=[["White","--hubfu-primitive-white"],["Gray 50","--hubfu-primitive-gray-50"],["Gray 900","--hubfu-primitive-gray-900"],["Emerald 600","--hubfu-primitive-emerald-600"],["Emerald 400","--hubfu-primitive-emerald-400"],["Violet 600","--hubfu-primitive-violet-600"],["Surface","--hubfu-primitive-surface"],["Integrations tint","--hubfu-primitive-integrations-tint"]];
+    const sem=[["Background","--hubfu-bg"],["Background alt","--hubfu-bg-alt"],["Foreground","--hubfu-fg"],["Accent (green)","--hubfu-accent"],["Action (purple)","--hubfu-action"],["Success","--hubfu-success"],["Violet","--hubfu-violet"],["Line","--hubfu-line",';border:1px dashed var(--hubfu-fg-tertiary)'],["Card bg","--hubfu-card-bg",';border:1px solid var(--hubfu-line)'],["Glow","--hubfu-glow"]];
+    document.getElementById("swatch-primitives").innerHTML=prim.map(p=>swatch(p[0],p[1],p[2])).join("");
+    document.getElementById("swatch-semantic").innerHTML=sem.map(p=>swatch(p[0],p[1],p[2])).join("");
+    const spaces=[[8,"gap interno cards"],[12,"kanban gap"],[14,"hero actions"],[28,"nav links"],[32,"hero meta"],[52,"nav height"],[80,"section md"],[120,"section hero"]];
+    document.getElementById("spacing-bars").innerHTML=spaces.map(([px,l])=>`<div class="space-row"><span class="space-label">${px}px</span><div class="space-bar" style="width:${px}px"></div><span class="ds-label">${l}</span></div>`).join("");
+    const radii=[["badge","--hubfu-radius-badge","6"],["avatar","--hubfu-radius-avatar","8"],["chip","--hubfu-radius-chip","10"],["control","--hubfu-radius-control","12"],["panel","--hubfu-radius-panel","16"],["card","--hubfu-radius-card","18"],["device","--hubfu-radius-device","20"],["pill","--hubfu-radius-pill","pill"]];
+    document.getElementById("radius-row").innerHTML=radii.map(([l,v,t])=>`<div><div class="radius-box" style="border-radius:var(${v})">${t}</div><p class="ds-label">${l}</p></div>`).join("");
+    document.querySelectorAll(".faq-q").forEach(btn=>{btn.addEventListener("click",()=>{const item=btn.parentElement,open=item.classList.contains("open");item.closest(".faq-list").querySelectorAll(".faq-item").forEach(i=>i.classList.remove("open"));if(!open)item.classList.add("open");});});
+    document.querySelectorAll(".filter-pill").forEach(pill=>{pill.addEventListener("click",()=>{pill.closest(".ds-row, .tab-panel-mini")?.querySelectorAll(".filter-pill").forEach(p=>p.classList.remove("on"));pill.classList.add("on");});});
+    const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches,tabBtns=document.querySelectorAll(".tab-btn"),indicator=document.getElementById("tab-indicator"),tabPanel=document.getElementById("tab-panel"),tabLabels=["Pipeline kanban com filtros e cards arrastáveis.","Tabela de estoque com badges OK/warn.","Chat IA com action chips.","Gráfico de barras financeiro."];
+    function moveIndicator(idx){if(!indicator)return;const w=100/tabBtns.length;if(reduced){indicator.style.transform=`translateX(${idx*100}%) scaleX(1)`;indicator.style.width=w+"%";}else if(typeof gsap!=="undefined"){gsap.to(indicator,{x:idx*(indicator.parentElement.offsetWidth/tabBtns.length),scaleX:1,duration:0.45,ease:"power2.out",overwrite:true});}}
+    tabBtns.forEach((btn,i)=>{btn.addEventListener("click",()=>{tabBtns.forEach(b=>b.classList.remove("active"));btn.classList.add("active");if(tabPanel)tabPanel.textContent=tabLabels[i];moveIndicator(i);});});
+    if(indicator&&tabBtns.length)indicator.style.width=(100/tabBtns.length)+"%";
+    function replayStagger(){if(reduced||typeof gsap==="undefined")return;gsap.fromTo("#motion-stagger .motion-box",{opacity:0,y:16,scale:0.9},{opacity:1,y:0,scale:1,duration:0.6,stagger:0.08,ease:"power3.out"});}
+    document.getElementById("motion-replay")?.addEventListener("click",replayStagger);replayStagger();
+    function replayFramerStagger(){if(reduced||typeof gsap==="undefined")return;gsap.fromTo("#motion-framer-stagger .motion-box",{opacity:0,y:12,scale:0.92},{opacity:1,y:0,scale:1,duration:0.45,stagger:0.06,ease:"power2.out"});}
+    document.getElementById("motion-framer-replay")?.addEventListener("click",replayFramerStagger);replayFramerStagger();
+    const CHECK_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+    const CONNECT_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+    const GRID_ICON='<span class="int-v2-grid-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>';
+    const SI_URL="https://cdn.simpleicons.org/";
+    const INT_V2_DEMO=[
+      {id:"googlecalendar",state:"connected",meta:"Usando contato@empresa.com.br",desc:"Sincronize resumos e destaques de reuniões com o HubFU."},
+      {id:"gmail",state:"available",meta:"",desc:"Conecte e-mails e contexto de conversas ao CRM."},
+      {id:"googledrive",state:"connected",meta:"",desc:"Anexe arquivos do Drive a negócios e leads."},
+      {id:"hubspot",state:"available",meta:"",desc:"Sync bidirecional HubSpot ↔ HubFU."},
+      {id:"slack",state:"connected",meta:"",desc:"Notificações de negócios e alertas no canal do time."},
+      {id:"notion",state:"connected",meta:"Usando contato@empresa.com.br",desc:"Base de conhecimento da empresa no Copilot."},
+      {id:"stripe",state:"available",meta:"",desc:"Pagamentos internacionais — clientes e assinaturas."},
+      {id:"trello",state:"available",meta:"",desc:"Cards Trello sincronizados com tarefas HubFU."},
+      {id:"zapier",variant:"dual",metaLink:"Ver templates Zap",desc:"Zaps Zapier — eventos HubFU via webhook outbound."}
+    ];
+    function intV2Logo(item){const slug=item.slug||(typeof HUBFU_LOGO_SLUGS!=="undefined"?HUBFU_LOGO_SLUGS[item.id]:null);const initials=item.name.split(/[\s(]/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();return slug?'<img src="'+SI_URL+slug+'" alt="" width="52" height="52" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" /><span class="int-v2-logo-fallback" style="display:none">'+initials+'</span>':'<span class="int-v2-logo-fallback">'+initials+'</span>';}
+    function intV2Meta(cfg){if(cfg.metaLink)return '<a class="int-v2-meta int-v2-meta-link" href="#">'+cfg.metaLink+'</a>';if(cfg.meta)return '<p class="int-v2-meta">'+cfg.meta+'</p>';return '<p class="int-v2-meta">&nbsp;</p>';}
+    function intV2Foot(item,cfg){if(cfg.variant==="dual")return '<div class="int-v2-foot int-v2-foot-dual"><button type="button" class="int-v2-dual-btn">'+CHECK_SVG+'Copiar API Key</button><button type="button" class="int-v2-dual-btn">'+CHECK_SVG+'Regenerar API</button></div>';const connected=(cfg.state||item.state)==="connected";return '<div class="int-v2-foot">'+(connected?'<span class="int-v2-connected">'+CHECK_SVG+'Conectado</span>':'<button type="button" class="int-v2-connect">'+CONNECT_SVG+'Conectar</button>')+'</div>';}
+    function intV2Card(item,cfg){cfg=cfg||{};const cardClass="int-v2-card"+(cfg.variant==="dual"?" has-dual-foot":"");const desc=cfg.desc||item.desc;return '<article class="'+cardClass+'">'+intV2Meta(cfg)+GRID_ICON+'<div class="int-v2-logo">'+intV2Logo(item)+'</div><h3 class="int-v2-name">'+item.name+'</h3><p class="int-v2-desc">'+desc+'</p>'+intV2Foot(item,cfg)+'</article>';}
+    function renderIntV2Grids(){if(typeof HUBFU_INTEGRATIONS==="undefined")return;const cards=INT_V2_DEMO.map(cfg=>{const item=HUBFU_INTEGRATIONS.find(i=>i.id===cfg.id);return item?intV2Card(item,cfg):null;}).filter(Boolean);const html=cards.join("");document.getElementById("int-v2-showcase")&&(document.getElementById("int-v2-showcase").innerHTML=html);document.getElementById("int-v2-demo")&&(document.getElementById("int-v2-demo").innerHTML=html);}
+    renderIntV2Grids();
+    if (typeof HubfuSheet !== 'undefined') {
+      new HubfuSheet('#ds-sheet-specimen', { variant: 'full' });
+    }
+    const navLinks=document.querySelectorAll(".ds-nav a"),sections=[...navLinks].map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+    const navObs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)navLinks.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+entry.target.id));});},{rootMargin:"-20% 0px -60% 0px"});
+    sections.forEach(s=>navObs.observe(s));
+  </script>
+</body>
+</html>

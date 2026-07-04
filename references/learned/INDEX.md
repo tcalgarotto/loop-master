@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-04 | `optimistic-inline-edit-v1` | useOptimistic + Server Actions + HubfuSheet save otimista; EditableTable/InlineEditCell spec | `optimistic-inline-edit-protocol.md`, `design-system/hubfu/editable-table.md` |
 | 2026-07-03 | `react-list-keys-unique` | Footer/nav: key = scope+label, nunca só href; grep antes visual gate | `references/learned/react-list-keys-unique.md` |
 | 2026-07-03 | `hubfu-pricing-landing-integrity` | Matriz pricing auditada vs produto; sem hints fake; CTAs uniformes; FAQ/footer premium | `references/learned/hubfu-pricing-landing-integrity.md` |
 | 2026-07-03 | `claude-mem-nvidia-l2` | L2 claude-mem com NVIDIA NIM (build.nvidia.com); multi-sessão sem corromper L1; templates settings/.env | `claude-mem-nvidia-setup.md` |
@@ -23,6 +24,8 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 | 2026-07-03 | `visual-gate` | Playwright desktop+mobile + vision checklist V1–V8 antes do gate FE | `references/visual-gate-protocol.md` |
 | 2026-07-03 | `docs-sync-discipline` | Grep docs + sync README/MANUAL/SKILL/CHANGELOG + bump patch após mudança | `references/docs-sync-discipline.md` |
 | 2026-07-03 | `gsap-premium` | GSAP para timelines/ScrollTrigger/stagger; CSS só hover; sem `transition-*` com GSAP | `references/gsap-premium-protocol.md` |
+| 2026-07-04 | `html-design-system-showcase` | Design systems HubFU (e futuros) devem shippar catálogo HTML visual (`preview/*-design-system.html`); markdown aponta pro HTML | `references/design-system/hubfu/INDEX.md`, `html-first-design-protocol.md` |
+| 2026-07-03 | `hubfu-design-system-v1` | Tokens light/dark HubFU extraídos do preview v9; docs em `references/design-system/hubfu/`; toggle `data-theme` | `references/design-system/hubfu/INDEX.md` |
 | 2026-07-03 | `html-native-view-scroll` | `@view-transition`, `animation-timeline: view()`, scrub | `references/html-native-light-protocol.md` |
 | 2026-07-03 | `html-native-dialog-htmx` | `command`/`dialog`, Popover, HTMX parcial | `references/html-native-light-protocol.md` |
 | 2026-07-03 | `claude-mem-optional-l2` | claude-mem L2 opt-out default; LUCY_CLAUDE_MEM=1 para habilitar; L0 brain + L1 JSON bastam |

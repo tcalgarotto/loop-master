@@ -1,5 +1,18 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.18] — 2026-07-04
+
+### Edição inline otimista — planilhas densas (`/lucy aprenda`)
+
+- **`references/optimistic-inline-edit-protocol.md`** — useOptimistic + Server Actions; HTMX alternativa; anti-padrões; prompt template
+- **`references/design-system/hubfu/editable-table.md`** — spec HubfuSheet → EditableTable / InlineEditCell
+- **`references/design-system/hubfu/snippets/optimistic-leads-table.tsx.example`** — snippet Next.js (comentários PT)
+- **`preview/hubfu-sheet.js`** — save otimista: dot `row-syncing`, debounce 300ms, ~5% falha demo + toast rollback
+- **`preview/hubfu-design-tokens.css`** — `.hubfu-toast`, `.row-syncing`
+- HubFU `components.md` + `INDEX.md` v1.3; cross-link `html-native-light-protocol.md`
+
+---
+
 ## [2.9.15] — 2026-07-03
 
 ### claude-mem L2 — NVIDIA build.nvidia.com + multi-sessão

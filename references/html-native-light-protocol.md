@@ -2,7 +2,7 @@
 
 **Objetivo:** reduzir bundle JS, melhorar INP/LCP e manter UX premium usando APIs nativas do navegador + HTMX onde couber — **sem abandonar** Framer Motion onde ele entrega valor real.
 
-> Complementa: `references/perf-protocol.md`, `references/premium-ui-stack.md`, `references/design-skills-routing-table.md`
+> Complementa: `references/perf-protocol.md`, `references/premium-ui-stack.md`, `references/design-skills-routing-table.md` · **Planilhas otimistas:** `optimistic-inline-edit-protocol.md`
 
 ---
 
@@ -407,7 +407,7 @@ Nova superfície UI?
 | ❌ Evitar | ✅ Preferir |
 |-----------|-------------|
 | `useState` + `onClick` só para abrir modal | `commandfor` + `<dialog>` |
-| React Query refetch de página inteira para 1 linha | `hx-get` + swap `outerHTML` |
+| React Query refetch de página inteira para 1 linha | `hx-get` + swap `outerHTML` **ou** `useOptimistic` + Server Action — ver `optimistic-inline-edit-protocol.md` |
 | Framer `AnimatePresence` em todo dropdown | Popover API + CSS |
 | `useScroll` + `motion` em cada card da lista | `animation-timeline: view()` scrub |
 | `useEffect` + `window.scrollY` para header | `animation-timeline: scroll()` no header |

@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.15 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.18 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -30,6 +30,8 @@
 | [visual-gate-protocol.md](visual-gate-protocol.md) | `/lucy visual-gate` — Playwright + vision QA |
 | [premium-ui-stack.md](premium-ui-stack.md) | Stack Next.js + paletas |
 | [html-native-light-protocol.md](html-native-light-protocol.md) | UI leve, view-transition, HTMX |
+| [optimistic-inline-edit-protocol.md](optimistic-inline-edit-protocol.md) | **Planilhas densas** — useOptimistic, Server Actions, HubfuSheet |
+| [design-system/hubfu/INDEX.md](design-system/hubfu/INDEX.md) | **HubFU DS** — tokens, EditableTable, catálogo HTML |
 | [html-first-design-protocol.md](html-first-design-protocol.md) | **HTML-first** — preview local antes de Next |
 | [html-preview-interactive-mocks-protocol.md](html-preview-interactive-mocks-protocol.md) | **Mocks interativos** — espelho do produto SaaS |
 | [integration-cards-patterns.md](integration-cards-patterns.md) | **3 modelos** — carousel, marketplace sidebar, grid denso |

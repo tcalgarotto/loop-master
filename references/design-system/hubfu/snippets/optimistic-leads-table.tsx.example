@@ -1,0 +1,227 @@
+"use client";
+
+/**
+ * EditableTable — leads HubFU (snippet de referência)
+ *
+ * Padrão: useOptimistic + Server Action + InlineEditCell
+ * Espécime HTML: preview/hubfu-sheet.js (HubfuSheet)
+ * Spec: references/design-system/hubfu/editable-table.md
+ *
+ * Copiar para components/crm/ e adaptar imports/actions reais.
+ */
+
+import { useOptimistic, useState, useTransition, useCallback } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { updateLeadCell } from "@/app/actions/leads"; // Server Action — criar no app
+
+// --- Tipos ---
+
+type Lead = {
+  id: string;
+  nome: string;
+  empresa: string;
+  status: string;
+  valor: string;
+};
+
+type LeadAction =
+  | { type: "update"; id: string; field: keyof Lead; value: string }
+  | { type: "revert"; id: string; field: keyof Lead; value: string };
+
+// --- Reducer otimista ---
+
+function leadsReducer(state: Lead[], action: LeadAction): Lead[] {
+  return state.map((lead) =>
+    lead.id === action.id ? { ...lead, [action.field]: action.value } : lead
+  );
+}
+
+// --- InlineEditCell ---
+
+type InlineEditCellProps = {
+  value: string;
+  editing: boolean;
+  onStartEdit: () => void;
+  onCommit: (value: string) => void;
+  onCancel: () => void;
+};
+
+function InlineEditCell({
+  value,
+  editing,
+  onStartEdit,
+  onCommit,
+  onCancel,
+}: InlineEditCellProps) {
+  const [draft, setDraft] = useState(value);
+
+  if (!editing) {
+    return (
+      <span
+        className="block truncate px-2 py-1.5 cursor-text hover:bg-muted/50 rounded-sm"
+        onDoubleClick={onStartEdit}
+        title="Duplo clique para editar"
+      >
+        {value}
+      </span>
+    );
+  }
+
+  return (
+    <Input
+      autoFocus
+      variant="ghost"
+      className="h-8 border-0 shadow-none focus-visible:ring-2 focus-visible:ring-emerald-600 px-2"
+      value={draft}
+      onChange={(e) => setDraft(e.target.value)}
+      onBlur={() => onCommit(draft)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") onCommit(draft);
+        if (e.key === "Escape") {
+          setDraft(value);
+          onCancel();
+        }
+      }}
+    />
+  );
+}
+
+// --- EditableTable ---
+
+type EditableTableProps = {
+  initialLeads: Lead[];
+};
+
+export function EditableLeadsTable({ initialLeads }: EditableTableProps) {
+  const [optimisticLeads, dispatch] = useOptimistic(initialLeads, leadsReducer);
+  const [pendingRows, setPendingRows] = useState<Set<string>>(new Set());
+  const [editCell, setEditCell] = useState<{ id: string; field: keyof Lead } | null>(
+    null
+  );
+  const [, startTransition] = useTransition();
+
+  const handleCellSave = useCallback(
+    (lead: Lead, field: keyof Lead, newValue: string) => {
+      const previous = String(lead[field] ?? "");
+      if (newValue === previous) {
+        setEditCell(null);
+        return;
+      }
+
+      startTransition(async () => {
+        // UI instantânea — antes da resposta do servidor
+        dispatch({ type: "update", id: lead.id, field, value: newValue });
+        setPendingRows((s) => new Set(s).add(lead.id));
+        setEditCell(null);
+
+        try {
+          // Server Action — persistência em background
+          await updateLeadCell(lead.id, field, newValue);
+        } catch {
+          // Rollback otimista + feedback
+          dispatch({ type: "revert", id: lead.id, field, value: previous });
+          toast.error("Falha ao salvar — valor revertido");
+        } finally {
+          setPendingRows((s) => {
+            const next = new Set(s);
+            next.delete(lead.id);
+            return next;
+          });
+        }
+      });
+    },
+    [dispatch]
+  );
+
+  const columns: { key: keyof Lead; label: string }[] = [
+    { key: "nome", label: "Lead" },
+    { key: "empresa", label: "Empresa" },
+    { key: "status", label: "Status" },
+    { key: "valor", label: "Valor" },
+  ];
+
+  return (
+    <div className="rounded-lg border bg-[var(--hubfu-sheet-bg,#fff)] overflow-hidden">
+      <p className="text-xs text-muted-foreground px-3 py-2 border-b">
+        Duplo clique para editar · Salvo otimista (instantâneo) · Tab entre células
+      </p>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-10">#</TableHead>
+            {columns.map((c) => (
+              <TableHead key={c.key}>{c.label}</TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {optimisticLeads.map((lead, index) => (
+            <TableRow
+              key={lead.id}
+              className={pendingRows.has(lead.id) ? "row-syncing" : undefined}
+            >
+              <TableCell className="text-muted-foreground text-xs">
+                {index + 1}
+              </TableCell>
+              {columns.map((col) => (
+                <TableCell key={col.key} className="p-0">
+                  <InlineEditCell
+                    value={String(lead[col.key] ?? "")}
+                    editing={
+                      editCell?.id === lead.id && editCell.field === col.key
+                    }
+                    onStartEdit={() =>
+                      setEditCell({ id: lead.id, field: col.key })
+                    }
+                    onCommit={(v) => handleCellSave(lead, col.key, v)}
+                    onCancel={() => setEditCell(null)}
+                  />
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+
+// --- Server Action (exemplo — app/actions/leads.ts) ---
+
+/*
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+
+const cellSchema = z.object({
+  id: z.string(),
+  field: z.enum(["nome", "empresa", "status", "valor"]),
+  value: z.string().max(500),
+});
+
+export async function updateLeadCell(
+  id: string,
+  field: string,
+  value: string
+) {
+  const parsed = cellSchema.safeParse({ id, field, value });
+  if (!parsed.success) throw new Error("Dados inválidos");
+
+  // await db.lead.update({ where: { id }, data: { [field]: value } });
+  // Simular falha ocasional em dev:
+  // if (Math.random() < 0.05) throw new Error("Simulated failure");
+
+  revalidatePath("/crm/leads");
+  return { ok: true };
+}
+*/
