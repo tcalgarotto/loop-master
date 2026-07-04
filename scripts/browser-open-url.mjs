@@ -7,20 +7,19 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mkdir } from "node:fs/promises";
+import fs from "node:fs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const repoRoot = process.cwd();
+const scriptRoot = path.resolve(here, "..");
+const repoRoot = fs.existsSync(path.join(process.cwd(), "frontend", "package.json"))
+  ? process.cwd()
+  : scriptRoot;
+
 const pkgCandidates = [
   path.join(repoRoot, "frontend", "package.json"),
   path.join(repoRoot, "package.json"),
 ];
-const pkgJson = pkgCandidates.find((p) => {
-  try {
-    return require("node:fs").existsSync(p);
-  } catch {
-    return false;
-  }
-});
+const pkgJson = pkgCandidates.find((p) => fs.existsSync(p));
 if (!pkgJson) {
   console.error("ERROR: no package.json in project root or frontend/");
   process.exit(1);
