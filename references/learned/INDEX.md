@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-03 | `react-list-keys-unique` | Footer/nav: key = scope+label, nunca só href; grep antes visual gate | `references/learned/react-list-keys-unique.md` |
 | 2026-07-03 | `hubfu-pricing-landing-integrity` | Matriz pricing auditada vs produto; sem hints fake; CTAs uniformes; FAQ/footer premium | `references/learned/hubfu-pricing-landing-integrity.md` |
 | 2026-07-03 | `claude-mem-nvidia-l2` | L2 claude-mem com NVIDIA NIM (build.nvidia.com); multi-sessão sem corromper L1; templates settings/.env | `claude-mem-nvidia-setup.md` |
 | 2026-07-03 | `hubfu-docs-sync-v2913` | Audit docs-sync: README/MANUAL/routing alinhados v2.9.11–13; CHANGELOG v9 kanban DnD | `docs-sync-discipline.md` |
