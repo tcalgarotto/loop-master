@@ -15,8 +15,9 @@ Scripts:
 
 | Script | Uso |
 |--------|-----|
-| `scripts/mcp-setup-status.sh --json` | Detectar o que está configurado |
+| `scripts/mcp-setup-status.sh --json` | Detectar o que está configurado (incl. **Cursor Browser** nativo) |
 | `scripts/mcp-setup-guide.sh` | Próximos passos para itens faltando |
+| `scripts/cursor-browser-seed-tools.sh` | Seed descriptors `tools/` se Cursor não materializou |
 | `scripts/penpot-mcp-configure.sh` | Aplicar token Penpot no Cursor |
 
 ---
@@ -69,6 +70,34 @@ Ver: `design-editable-hybrid-protocol.md`
 | 4 | Port Next só depois |
 
 Ver: `html-first-design-protocol.md`
+
+---
+
+## § cursor-browser — Browser integrado Cursor (Desktop local only)
+
+**Quando sugerir:** Cursor Desktop **local** (não Remote SSH/VPS). Complementa Playwright headless.
+
+| Passo | Ação |
+|-------|------|
+| 1 | **Cursor → Settings → Tools & MCPs** → ativar **Browser** (`cursor-ide-browser`) |
+| 2 | Command Palette → **Browser: Open** (inicializa painel uma vez) |
+| 3 | **Developer: Reload Window** |
+| 4 | Confirmar `~/.cursor/projects/<workspace>/mcps/cursor-ide-browser/tools/` (~16 JSON) |
+| 5 | Agente: `browser_tabs` action=list |
+
+**VPS / Remote SSH:** lease retorna `toolCount: 0` — **não usar** MCP browser. Rodar:
+
+```bash
+bash .cursor/skills/lucy/scripts/ensure-headless-browser.sh --project .
+```
+
+Ver: `references/learned/vps-headless-browser-default.md`
+
+**Detectar:** `bash scripts/mcp-setup-status.sh --json` → `browser_primary`, `headless_browser_ready`.
+
+**Seed de descriptors:** **não recomendado** — copiar `tools/` de outro workspace causa mismatch sem habilitar runtime.
+
+**Fallback (sempre):** Playwright — `ensure-headless-browser.sh`, `browser-open-url.mjs`, `visual-gate-capture.sh`.
 
 ---
 
@@ -139,7 +168,7 @@ Cadastrar em **Cursor → Settings → Tools & MCPs** conforme o projeto:
 | **Notion** | docs/specs | Plugin workspace |
 | **Figma** | intake only (não editar vivo) | Plugin — rate limit |
 
-O quiz Round 3 lista os **core** (Penpot, HTML-first, visual-gate, Firecrawl, claude-mem). Plugins opcionais entram em `r3m_optional` (multi).
+O quiz Round 3 lista os **core** (Cursor Browser, Penpot, HTML-first, visual-gate, Firecrawl, claude-mem). Plugins opcionais entram em `r3m_optional` (multi).
 
 ---
 
@@ -182,5 +211,7 @@ Após Round 3:
 |---------|-----|
 | `/lucy init` | Round 3 guia MCP |
 | `/lucy update` | Re-scan integrações |
-| `bash scripts/mcp-setup-status.sh` | Status manual |
+| `bash scripts/mcp-setup-status.sh` | Status manual (incl. Cursor Browser) |
+| `bash scripts/mcp-setup-guide.sh --slug cursor-browser` | Guia Browser nativo |
+| `bash scripts/cursor-browser-seed-tools.sh --project .` | Seed descriptors tools/ |
 | `bash scripts/mcp-setup-guide.sh --slug penpot` | Guia Penpot |

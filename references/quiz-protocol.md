@@ -70,7 +70,7 @@ bash scripts/mcp-setup-guide.sh   # se owner escolher guiar agora
 
 | ID | Pergunta | Opções |
 |----|----------|--------|
-| `r3m_priority` | Integrações a priorizar? | Multi: HTML preview, Penpot MCP, visual-gate, Firecrawl, claude-mem — opções anotadas com **falta** ou **OK** pelo status script |
+| `r3m_priority` | Integrações a priorizar? | Multi: **Cursor Browser**, HTML preview, Penpot MCP, visual-gate, Firecrawl, claude-mem — opções anotadas com **falta** ou **OK** pelo status script |
 | `r3m_guidance` | Como configurar o que falta? | **Guiar setup agora (Recommended)** / Marcar tick 1 / Pular |
 | `r3m_pipeline` | Pipeline de design? | **HTML-first até aprovar** / Penpot+HTML (Caminho C) / Direto Next |
 | `r3m_optional` | MCPs opcionais Cursor? | Multi: Vercel, Supabase, Stripe, Sentry, Linear, Notion, Nenhum |

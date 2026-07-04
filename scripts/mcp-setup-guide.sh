@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Print guided next steps for missing MCP integrations (no secrets).
-# Usage: mcp-setup-guide.sh [--slug penpot|firecrawl|visual-gate|html-first|claude-mem|all]
+# Usage: mcp-setup-guide.sh [--slug penpot|firecrawl|visual-gate|html-first|claude-mem|cursor-browser|all]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -26,6 +26,15 @@ except json.JSONDecodeError:
 missing = {c["slug"]: c for c in status.get("integrations", []) if not c.get("configured")}
 
 steps = {
+    "cursor-browser": [
+        "1. Cursor → Settings → Tools & MCPs → ativar **Browser** (cursor-ide-browser) — toggle verde",
+        "2. Command Palette → 'Browser: Open' (abrir painel uma vez para inicializar)",
+        "3. Developer: Reload Window (Command Palette → 'Developer: Reload Window')",
+        "4. Confirmar ~/.cursor/projects/<workspace>/mcps/cursor-ide-browser/tools/ com ~16 JSON (browser_navigate, browser_tabs, …)",
+        "5. Agente testa: browser_tabs action=list",
+        "Fallback headless: bash scripts/visual-gate-capture.sh (Playwright — já no init Next.js)",
+        "Ver: premium-tool-orchestration.md R2 · mcp-integrations-setup-guide.md §cursor-browser",
+    ],
     "penpot": [
         "1. Penpot → Settings → Integrations → Enable MCP → Generate key",
         "2. Salvar token em ~/.config/penpot/mcp-token (chmod 600)",

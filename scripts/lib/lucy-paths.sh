@@ -92,6 +92,16 @@ lucy_find_init_script() {
   return 1
 }
 
+lucy_cursor_project_id() {
+  local root="$1"
+  echo "${root#/}" | tr '/' '-'
+}
+
+lucy_cursor_mcps_dir() {
+  local root="$1"
+  echo "${HOME}/.cursor/projects/$(lucy_cursor_project_id "$root")/mcps"
+}
+
 lucy_legacy_paths_present() {
   local root="$1"
   [[ -f "$root/.cursor/loop-master-progress.json" ]] && return 0

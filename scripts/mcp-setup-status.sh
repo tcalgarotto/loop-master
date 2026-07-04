@@ -6,6 +6,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=lib/lucy-paths.sh
 source "$SCRIPT_DIR/lib/lucy-paths.sh"
+# shellcheck source=lib/install-idempotent.sh
+source "$SCRIPT_DIR/lib/install-idempotent.sh"
 
 PROJECT_ROOT="$(lucy_detect_project_root "$(pwd)")"
 AS_JSON=false
@@ -69,6 +71,31 @@ fi
 HTML_PREVIEW_OK=false
 [[ -x "$SCRIPT_DIR/html-preview-serve.sh" ]] && HTML_PREVIEW_OK=true
 
+CURSOR_BROWSER_OK=false
+CURSOR_BROWSER_TOOLS=0
+CURSOR_MCPS_DIR="$(lucy_cursor_mcps_dir "$PROJECT_ROOT")"
+CURSOR_BROWSER_TOOLS_DIR="$CURSOR_MCPS_DIR/cursor-ide-browser/tools"
+if [[ -d "$CURSOR_BROWSER_TOOLS_DIR" ]]; then
+  CURSOR_BROWSER_TOOLS=$(find "$CURSOR_BROWSER_TOOLS_DIR" -maxdepth 1 -name 'browser_*.json' 2>/dev/null | wc -l | tr -d ' ')
+  [[ "${CURSOR_BROWSER_TOOLS:-0}" -ge 10 ]] && CURSOR_BROWSER_OK=true
+fi
+
+REMOTE_VPS=false
+[[ -z "${DISPLAY:-}" ]] && REMOTE_VPS=true
+[[ -d "${HOME}/.cursor-server" ]] && REMOTE_VPS=true
+
+HEADLESS_BROWSER_OK=false
+if lucy_playwright_ready "$PROJECT_ROOT" 2>/dev/null; then
+  HEADLESS_BROWSER_OK=true
+elif [[ -f "$PROJECT_ROOT/.lucy/headless-browser-ready.json" ]]; then
+  python3 -c "import json; d=json.load(open('$PROJECT_ROOT/.lucy/headless-browser-ready.json')); exit(0 if d.get('playwright_ready') else 1)" 2>/dev/null && HEADLESS_BROWSER_OK=true || true
+fi
+
+BROWSER_PRIMARY="playwright"
+if [[ "$CURSOR_BROWSER_OK" == true && "$REMOTE_VPS" == false ]]; then
+  BROWSER_PRIMARY="cursor-mcp"
+fi
+
 NEXTJS=false
 [[ -f "$PROJECT_ROOT/package.json" ]] && grep -q '"next"' "$PROJECT_ROOT/package.json" 2>/dev/null && NEXTJS=true
 
@@ -87,7 +114,8 @@ fi
 
 export AS_JSON="$AS_JSON" PROJECT_ROOT PENPOT_OK PENPOT_MCP_OK FIRECRAWL_OK PLAYWRIGHT_OK
 export VISUAL_GATE_SCRIPT CLAUDE_MEM_OK HTML_PREVIEW_OK NEXTJS
-export MCP_JSON
+export CURSOR_BROWSER_OK CURSOR_BROWSER_TOOLS CURSOR_MCPS_DIR MCP_JSON
+export REMOTE_VPS HEADLESS_BROWSER_OK BROWSER_PRIMARY
 python3 <<'PY'
 import json, os
 
@@ -101,6 +129,8 @@ def item(slug, label, ok, guide, priority="recommended"):
     }
 
 checks = [
+    item("headless-browser", "Playwright headless (VPS default)", os.environ.get("HEADLESS_BROWSER_OK") == "true", "visual-gate", "recommended"),
+    item("cursor-browser", "Cursor Browser MCP (só Desktop local)", os.environ.get("CURSOR_BROWSER_OK") == "true", "cursor-browser", "optional"),
     item("penpot", "Penpot MCP (design editável)", os.environ.get("PENPOT_MCP_OK") == "true", "penpot"),
     item("html-first", "HTML preview local (preview/)", os.environ.get("HTML_PREVIEW_OK") == "true", "html-first", "recommended"),
     item("visual-gate", "Visual gate (Playwright)", os.environ.get("PLAYWRIGHT_OK") == "true", "visual-gate"),
@@ -114,6 +144,11 @@ configured = [c for c in checks if c["configured"]]
 out = {
     "project_root": os.environ.get("PROJECT_ROOT", ""),
     "nextjs_detected": os.environ.get("NEXTJS") == "true",
+    "cursor_mcps_dir": os.environ.get("CURSOR_MCPS_DIR", ""),
+    "cursor_browser_tools_count": int(os.environ.get("CURSOR_BROWSER_TOOLS", "0") or 0),
+    "remote_vps": os.environ.get("REMOTE_VPS") == "true",
+    "browser_primary": os.environ.get("BROWSER_PRIMARY", "playwright"),
+    "headless_browser_ready": os.environ.get("HEADLESS_BROWSER_OK") == "true",
     "mcp_servers": [],
     "integrations": checks,
     "missing_count": len(missing),

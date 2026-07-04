@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-04 | `vps-headless-browser-default` | VPS/SSH: Playwright headless é browser padrão; MCP cursor-ide-browser toolCount=0; ensure-headless-browser.sh | `references/learned/vps-headless-browser-default.md`, `scripts/ensure-headless-browser.sh` |
 | 2026-07-04 | `optimistic-inline-edit-v1` | useOptimistic + Server Actions + HubfuSheet save otimista; EditableTable/InlineEditCell spec | `optimistic-inline-edit-protocol.md`, `design-system/hubfu/editable-table.md` |
 | 2026-07-04 | `firefox-profiler-multi-process-tracks` | Profiler captura TODOS os processos do navegador, não só a aba ativa; track de domínio desconhecido = provável aba irmã, não embed; checar PIDs + grep código antes de suspeitar de bug | `references/learned/firefox-profiler-multi-process-tracks.md` |
 | 2026-07-03 | `react-list-keys-unique` | Footer/nav: key = scope+label, nunca só href; grep antes visual gate | `references/learned/react-list-keys-unique.md` |

@@ -193,8 +193,8 @@ else:
     lines = [
         "# Frontend inventory",
         "",
-        f"Project: `{project.name}`",
-        f"App root: `{rel_app}`",
+        f"Project: \`{project.name}\`",
+        f"App root: \`{rel_app}\`",
         f"Pages: **{len(pages)}** | Layouts: **{len(layouts)}** | CSS: **{len(css_files)}**",
         f"Client pages: **{client_pages}** | Server: **{len(pages) - client_pages}**",
         f"Órfãs: **{inventory['summary']['orphan_count']}** | Grupos duplicados: **{inventory['summary']['duplicate_groups']}** | Alto slop: **{inventory['summary']['high_slop_count']}**",
@@ -205,17 +205,17 @@ else:
     if duplicates:
         lines.append("### Rotas possivelmente duplicadas (mesmo segmento)")
         for d in duplicates:
-            lines.append(f"- `{d['segment']}`: {', '.join('`'+r+'`' for r in d['routes'])}")
+            lines.append(f"- \`{d['segment']}\`: {', '.join('\`'+r+'\`' for r in d['routes'])}")
         lines.append("")
     if orphans:
         lines.append("### Órfãs (sem link na nav/sidebar)")
         for r in orphans[:25]:
-            lines.append(f"- `{r}`")
+            lines.append(f"- \`{r}\`")
         lines.append("")
     if high_slop:
         lines.append("### Alto sinal AI slop")
         for x in high_slop[:15]:
-            lines.append(f"- `{x['route']}` — {', '.join(x.get('slop_signals', []))}")
+            lines.append(f"- \`{x['route']}\` — {', '.join(x.get('slop_signals', []))}")
         lines.append("")
     lines += [
         "## Pages (read order for /lucy refazer-frontend)",
@@ -225,17 +225,17 @@ else:
     ]
     for x in inventory["pages"]:
         lines.append(
-            f"| `{x['route']}` | `{x['path']}` | {x.get('slop_score', 0)} | "
+            f"| \`{x['route']}\` | \`{x['path']}\` | {x.get('slop_score', 0)} | "
             f"{'yes' if x.get('orphan') else 'no'} | "
             f"{'yes' if x.get('use_client') else 'no'} |"
         )
     lines += ["", "## Layouts", ""]
     for x in inventory["layouts"]:
-        lines.append(f"- `{x['path']}` ({x.get('lines','?')} lines, client={x.get('use_client')})")
+        lines.append(f"- \`{x['path']}\` ({x.get('lines','?')} lines, client={x.get('use_client')})")
     lines += ["", "## CSS files (sample)", ""]
     for x in inventory["css"][:30]:
         g = " (globals)" if x.get("globals") else ""
-        lines.append(f"- `{x['path']}` — {x['lines']} lines{g}")
+        lines.append(f"- \`{x['path']}\` — {x['lines']} lines{g}")
     print("\n".join(lines))
 PY
 )

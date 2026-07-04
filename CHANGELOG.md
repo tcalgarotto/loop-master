@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.19] — 2026-07-04
+
+### VPS headless browser default (`/lucy aprenda`)
+
+- **`references/learned/vps-headless-browser-default.md`** — Playwright headless é browser padrão em VPS/Remote SSH; MCP `cursor-ide-browser` toolCount=0
+- **`scripts/ensure-headless-browser.sh`** — instala Playwright + chromium; grava `.lucy/headless-browser-ready.json`
+- **`scripts/browser-open-url.mjs`** — screenshot URL externa (profiler share, etc.)
+- **`mcp-setup-status.sh`** — `browser_primary`, `headless_browser_ready`, `remote_vps`
+- **`premium-tool-orchestration.md` R2**, **`browser-ai-scrape-protocol.md`**, **`mcp-integrations-setup-guide.md`** — routing VPS-first
+
 ## [2.9.18] — 2026-07-04
 
 ### Edição inline otimista — planilhas densas (`/lucy aprenda`)
@@ -10,6 +20,14 @@
 - **`preview/hubfu-sheet.js`** — save otimista: dot `row-syncing`, debounce 300ms, ~5% falha demo + toast rollback
 - **`preview/hubfu-design-tokens.css`** — `.hubfu-toast`, `.row-syncing`
 - HubFU `components.md` + `INDEX.md` v1.3; cross-link `html-native-light-protocol.md`
+
+### Cursor Browser MCP — detecção Round 3 + seed tools
+
+- **`mcp-setup-status.sh`** — slug `cursor-browser`: detecta `mcps/cursor-ide-browser/tools/` (~16 JSON)
+- **`mcp-setup-guide.sh`** — guia passo a passo (Settings → Browser ON → Reload Window)
+- **`cursor-browser-seed-tools.sh`** — copia descriptors de outro workspace se `tools/` vazio
+- **`quiz-next.sh`**, **`quiz-protocol.md`** — Round 3 inclui Cursor Browser na prioridade
+- **`mcp-integrations-setup-guide.md`**, **`premium-tool-orchestration.md`** — § cursor-browser (P0)
 
 ---
 

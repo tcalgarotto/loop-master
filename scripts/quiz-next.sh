@@ -82,6 +82,7 @@ rounds = {
     ],
     "questions": [
       {"id": "r3m_priority", "prompt": "Quais integrações priorizar neste projeto?", "options": [
+        mcp_opt("cursor-browser", "Cursor Browser MCP (nativo IDE)"),
         mcp_opt("html-first", "HTML preview local (preview/)"),
         mcp_opt("penpot", "Penpot MCP (design editável)"),
         mcp_opt("visual-gate", "Visual gate Playwright"),

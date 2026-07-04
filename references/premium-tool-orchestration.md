@@ -43,13 +43,25 @@ Antes de implementar UI, **scan** `skills_installed[]` + protocolos. Se taste-sk
 
 ### R2 — Browser funcional obrigatório
 
-| Contexto | Browser |
-|----------|---------|
-| App local/staging/produção | Playwright (`visual-gate-capture.sh --base-url URL`) |
-| Site externo / SPA | Firecrawl (CLI/MCP) → `browser-ai-scrape-protocol.md` |
-| Fallback | Browser MCP Cursor |
+**Bootstrap P0:** antes de qualquer task com browser, rodar:
 
-**Nunca** declarar landing/pricing “pronta” sem screenshot em `.lucy/visual-gates/` ou `.lucy/browser/screenshots/`.
+```bash
+bash .cursor/skills/lucy/scripts/ensure-headless-browser.sh --project .
+```
+
+Ler `.lucy/headless-browser-ready.json` → seguir `primary` e `agent_rule`.
+
+| Contexto | Browser | Como |
+|----------|---------|------|
+| **VPS / Remote SSH / Cloud Agent** (default HubFU) | **Playwright headless** | `browser-open-url.mjs`, `visual-gate-capture.sh`, `make security-browser` |
+| Cursor Desktop local + `tools/` ≥ 10 | Cursor Browser MCP | `browser_navigate`, `browser_snapshot` (agente pai) |
+| Site externo / SPA | Firecrawl | `browser-ai-scrape-protocol.md` |
+
+**Proibido:** `CallMcpTool` → `browser_*` quando `primary: "playwright"` ou `cursor_mcp_available: false`.
+
+Ver: `references/learned/vps-headless-browser-default.md`
+
+**Nunca** declarar landing/pricing “pronta” sem screenshot em `.lucy/visual-gates/` ou `.lucy/browser/`.
 
 ### R3 — HTML-first quando design incerto
 

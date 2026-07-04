@@ -218,6 +218,7 @@ install_skill() {
       ;;
     visual-gate)
       lucy_ensure_playwright "$PROJECT_ROOT" "$UPDATE_MODE"
+      bash "$SCRIPT_DIR/ensure-headless-browser.sh" --project "$PROJECT_ROOT" --quiet 2>/dev/null || true
       ;;
     firecrawl-cli)
       lucy_ensure_firecrawl "$PROJECT_ROOT" "$UPDATE_MODE"
@@ -532,6 +533,10 @@ if command -v jq &>/dev/null && [[ -f "$PROGRESS" ]]; then
 fi
 
 echo ""
+if lucy_is_nextjs "$PROJECT_ROOT" 2>/dev/null; then
+  echo "==> Headless browser ready check"
+  bash "$SCRIPT_DIR/ensure-headless-browser.sh" --project "$PROJECT_ROOT" 2>/dev/null || true
+fi
 echo "==> Full bootstrap done. Next in Cursor Agent:"
 echo "    /lucy init"
 echo "    (Agent runs quiz 6 rounds — no extra shell steps needed)"

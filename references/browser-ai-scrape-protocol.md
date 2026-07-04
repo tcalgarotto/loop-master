@@ -43,13 +43,15 @@
 ### Árvore de decisão (agente)
 
 ```
-É o NOSSO app em localhost/preview?
-  → SIM → Playwright visual-gate
-  → NÃO → Precisa interagir (form, login, paginar)?
-         → SIM → Firecrawl Browser Sandbox (ou Browserbase se bloqueado)
-         → NÃO → Firecrawl scrape/map
-                → Bloqueado? → Bright Data / Browserbase
-                → Volume massivo VPS? → Obscura / Crawl4AI
+Rodar ensure-headless-browser.sh — ler primary
+  → playwright (VPS/SSH) → NUNCA CallMcpTool browser_*
+       → nosso app? visual-gate-capture.sh
+       → URL externa? browser-open-url.mjs
+       → segurança? make security-browser / Playwright spec
+  → cursor-mcp (Desktop local) → browser_navigate / browser_snapshot
+
+É site externo concorrente?
+  → Firecrawl scrape/map → Sandbox se SPA/auth
 ```
 
 ---
