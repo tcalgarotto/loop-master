@@ -2,7 +2,7 @@
 
 > **O cérebro definitivo para orquestração autônoma, design premium e inteligência competitiva no Cursor Agent.**
 > 
-> *Versão:* **v2.9.22** · *Autor:* **Thales Calgarotto**
+> *Versão:* **v2.9.25** · *Autor:* **Thales Calgarotto**
 
 ---
 

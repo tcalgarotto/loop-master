@@ -4,6 +4,7 @@
 **Papel:** timelines complexas, scroll cinematográfico, stagger em escala — **acima** de Framer Motion nesses casos.
 
 > Stack híbrida completa: `references/html-native-light-protocol.md`  
+> **Scroll storytelling premium (pin/scrub/sandwich/imagery):** `references/premium-motion-scroll-protocol.md`  
 > Design routing: `references/design-skills-routing-table.md`
 
 ---
@@ -138,6 +139,18 @@ gsap.to('.chart-morph', {
 
 **Preferir ScrollTrigger** sobre `useScroll` + Framer quando: pin longo, scrub 1:1, múltiplos triggers na mesma página marketing/dashboard storytelling.
 
+### Scroll-scrub pin (vídeo + sandwich) — receitas completas
+
+Padrões Apple-style (vídeo frame-a-frame, cards sandwich) têm receitas detalhadas em **`premium-motion-scroll-protocol.md`**:
+
+| Padrão | GSAP | Link |
+|--------|------|------|
+| Vídeo `currentTime` + pin | `ScrollTrigger.create({ pin, scrub, onUpdate })` | §3 Abordagem A |
+| Canvas image sequence | `onUpdate` → `drawImage` só se frame mudou | §3 Abordagem B |
+| Sandwich stack (fallback JS) | `pin` + scale por card | §4 + CSS nativo prefer |
+
+**Não duplicar** aqui — manter GSAP neste arquivo para stagger/timeline/GPU; storytelling cinematográfico no protocolo premium motion.
+
 ---
 
 ## Regra 4 — Propriedades aceleradas (GPU)
@@ -209,3 +222,4 @@ useEffect(() => {
 
 - https://gsap.com/docs/v3/
 - ScrollTrigger: https://gsap.com/docs/v3/Plugins/ScrollTrigger/
+- Pin/scrub/sandwich/imagery: `references/premium-motion-scroll-protocol.md`

@@ -336,6 +336,131 @@ export function EmptyState({ icon: Icon, title, description, action }) {
 
 ---
 
+## 7. Editorial Hero (Landing / Brand)
+
+**Superfície:** Landing com fotografia como argumento visual  
+**Stack:** Next.js + `next/image` + `<picture>` + gradient overlay  
+**Protocolo:** `premium-motion-scroll-protocol.md` §1
+
+```tsx
+// app/(marketing)/page.tsx — hero art-directed
+import Image from 'next/image'
+
+export function EditorialHero() {
+  return (
+    <section className="relative min-h-[85vh] overflow-clip">
+      <Image
+        src="/hero.webp"
+        alt="Descrição editorial do produto"
+        fill
+        priority
+        className="object-cover object-[center_25%]"
+        sizes="100vw"
+        placeholder="blur"
+        blurDataURL="/hero-lqip.jpg"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent" />
+      <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-6xl flex-col justify-end px-6 pb-20">
+        <p className="text-sm font-medium uppercase tracking-widest text-zinc-400">Categoria</p>
+        <h1 className="mt-3 max-w-3xl text-balance text-5xl font-semibold text-white">
+          Headline que vende o momento, não o feature list
+        </h1>
+      </div>
+    </section>
+  )
+}
+```
+
+---
+
+## 8. Pin + Scroll-Scrub Video (Product Launch)
+
+**Superfície:** Página produto estilo Apple — vídeo avança com scroll  
+**Stack:** Next.js + GSAP ScrollTrigger + `<video>` ou canvas sequence  
+**Protocolo:** `premium-motion-scroll-protocol.md` §3 · `gsap-premium-protocol.md`
+
+```tsx
+'use client'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+export function PinScrubProductVideo() {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const wrap = wrapRef.current
+    const video = videoRef.current
+    if (!wrap || !video) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    video.pause()
+    const st = ScrollTrigger.create({
+      trigger: wrap,
+      start: 'top top',
+      end: '+=250%',
+      pin: true,
+      scrub: true,
+      onUpdate: (self) => {
+        video.currentTime = self.progress * video.duration
+      },
+    })
+    return () => st.kill()
+  }, [])
+
+  return (
+    <div ref={wrapRef} className="relative h-screen bg-zinc-950">
+      <video
+        ref={videoRef}
+        src="/product-scrub.webm"
+        muted
+        playsInline
+        preload="auto"
+        className="mx-auto h-full max-w-5xl object-contain"
+      />
+    </div>
+  )
+}
+```
+
+**Checklist:** `loadedmetadata` antes de attach; reduced-motion → poster estático; não esconder specs críticas só no vídeo.
+
+---
+
+## 9. Sandwich Stack (Feature Cards)
+
+**Superfície:** Landing — benefícios empilhados com pin sticky  
+**Stack:** CSS scroll-driven (prefer) ou GSAP fallback  
+**Protocolo:** `premium-motion-scroll-protocol.md` §4
+
+```html
+<!-- preview/sandwich-stack.html — CSS nativo -->
+<style>
+  #features { --numcards: 3; view-timeline-name: --feat-scroll; }
+  .feat-card { position: sticky; top: calc(var(--i) * 1.25rem); padding-top: calc(var(--i) * 0.5rem); }
+  .feat-card__inner {
+    animation: feat-scale linear forwards;
+    animation-timeline: --feat-scroll;
+    animation-range: exit-crossing calc((var(--i) - 1) / var(--numcards) * 100%)
+                      exit-crossing calc(var(--i) / var(--numcards) * 100%);
+  }
+  @keyframes feat-scale { to { transform: scale(calc(1.04 - 0.04 * var(--i))); } }
+  @media (prefers-reduced-motion: reduce) {
+    .feat-card__inner { animation: none; }
+  }
+</style>
+<div id="features">
+  <article class="feat-card" style="--i: 1"><div class="feat-card__inner">…</div></article>
+  <article class="feat-card" style="--i: 2"><div class="feat-card__inner">…</div></article>
+  <article class="feat-card" style="--i: 3"><div class="feat-card__inner">…</div></article>
+</div>
+```
+
+---
+
 ## Checklist antes de usar um template
 
 - [ ] Substituir dados mockados por dados reais (TanStack Query)

@@ -25,7 +25,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 
 | Tipo | Destino no skill pack |
 |------|----------------------|
-| Animação / perf UI | `html-native-light-protocol.md`, `gsap-premium-protocol.md` |
+| Animação / perf UI | `html-native-light-protocol.md`, `gsap-premium-protocol.md`, **`premium-motion-scroll-protocol.md`** |
 | Prototipação HTML antes de Next | `html-first-design-protocol.md` |
 | **Discussão design → HTML visual (2L+2D default)** | **`design-visual-html-protocol.md`** |
 | Mocks interativos (espelho do produto) | `html-preview-interactive-mocks-protocol.md` |

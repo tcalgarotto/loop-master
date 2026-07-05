@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.25] — 2026-07-05
+
+### Premium motion & scroll storytelling (`/lucy aprenda`)
+
+- **`references/premium-motion-scroll-protocol.md`** — mestre: art-directed imagery, scroll reveals, pin+scrub vídeo/canvas, sandwich stack, morphism tasteful, scroll storytelling 3 acts; register brand vs product
+- **`references/learned/premium-motion-patterns.md`** — log PT-BR
+- **`gsap-premium-protocol.md`** — cross-links pin/scrub/sandwich (sem duplicar receitas)
+- **`premium-tool-orchestration.md`** — R4b: quando SUGERIR (brand) vs restringir (product)
+- **`design-skills-routing-table.md`**, **`template-gallery.md`** — rotas + templates editorial hero, pin-scrub, sandwich
+
 ## [2.9.24] — 2026-07-05
 
 ### Live Mode no VPS — guia owner (`/lucy aprenda`)

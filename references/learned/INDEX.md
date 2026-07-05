@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-05 | `premium-motion-patterns` | Motion premium: scroll storytelling, pin+scrub vídeo, sandwich stack, morphism tasteful, hero editorial; suggest brand / restrain product | `premium-motion-scroll-protocol.md`, `gsap-premium-protocol.md`, `premium-tool-orchestration.md` |
 | 2026-07-05 | `vps-live-mode-owner-guide` | Owner pede Live Mode no VPS: Lucy guia tunnel SSH / Cursor Ports / Desktop local — nunca só "não funciona"; checklist + portas HubFU | `learned/impeccable-live-mode.md`, `learned/vps-live-mode-owner-guide.md`, `impeccable-lucy-integration.md` |
 | 2026-07-05 | `impeccable-live-eight-pillars` | 8 pilares impeccable.style + guia Live Mode (pick→3 variantes→accept→source); VPS fallback; bootstrap HubFU PRODUCT/DESIGN | `learned/impeccable-eight-pillars.md`, `learned/impeccable-live-mode.md`, `learned/impeccable-lucy-integration.md` |
 | 2026-07-05 | `impeccable-lucy-brain` | Catálogo 23 cmds + 45 regras detector + integração explícita Lucy→impeccable em ticks/refazer/nova-pagina/visual-gate | `learned/impeccable-capabilities-map.md`, `learned/impeccable-lucy-integration.md`, `impeccable-routing-table.md` |

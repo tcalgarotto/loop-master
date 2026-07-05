@@ -82,6 +82,24 @@ Toda `--tipo landing` passa por:
 4. Hero SSR — **proibido** flash “Carregando flags…” na primeira pintura (defer i18n/hydration blocking)
 5. visual-gate na URL final (`localhost` ou Vercel)
 
+### R4b — Quando SUGERIR premium motion (register=brand)
+
+**Antes de codar** landing/pricing/portfolio, Lucy **propõe por escrito** 2–3 padrões de `premium-motion-scroll-protocol.md` quando qualquer sinal:
+
+| Sinal | Padrões a considerar |
+|-------|---------------------|
+| Hero sem foto tratada / stock | Art-directed imagery + gradient overlay |
+| Seções planas sem hierarquia scroll | `view()` reveals OU sandwich stack (3–4 cards) |
+| Produto físico / demo visual forte | Pin + scroll-scrub vídeo OU canvas sequence |
+| Nav/CTA flutuante sobre visual | Glassmorphism pontual (máx 2 superfícies) |
+| Página longa tipo product launch | Scroll storytelling 3 acts |
+
+**Template de sugestão (1 turno):**
+
+> Para esta landing (register **brand**), recomendo: (1) … porque …; (2) … — quer que implemente algum?
+
+**Restringir (register=product):** em CRM/dashboard/settings/tabelas, **não sugerir** pin/scrub/sandwich/morphism decorativo. Motion funcional 150–250 ms apenas (`impeccable animate` product). Exceção: `animation-timeline: scroll()` no header app (já em `html-native-light-protocol.md`).
+
 ### R5 — Design systems tagados pelo owner
 
 Se o owner envia `@DESIGN.md`, prints, links Figma, ou “design system do X”:
@@ -150,6 +168,7 @@ Sinais comuns:
 
 - `design-stack-protocol.md` — pipeline A–D
 - `premium-ui-stack.md` — tokens e prompts-mestre
+- `premium-motion-scroll-protocol.md` — **pin/scrub/sandwich/imagery/morphism** + suggest vs restrain
 - `ux-design-intelligence.md` — 15 laws
 - `design-skills-routing-table.md` — superfície → skill
 - `learned/impeccable-eight-pillars.md` — 8 capacidades Impeccable

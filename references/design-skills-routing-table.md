@@ -66,6 +66,16 @@ Entrega tem UI?
    │  └─ html-native-light-protocol → View Transitions (antes de motion global)
    ├─ Reveal no scroll, header compact, timeline IA?
    │  └─ html-native-light-protocol → animation-timeline: view() / scroll() scrub
+   ├─ Landing scroll storytelling (pin/scrub/sandwich/hero editorial)?
+   │  └─ premium-motion-scroll-protocol (brand) — SUGERIR; product → recusar
+   ├─ Vídeo produto frame-a-frame no scroll?
+   │  └─ premium-motion-scroll-protocol §3 + gsap-premium-protocol (pin+scrub)
+   ├─ Cards sandwich / sticky stack?
+   │  └─ premium-motion-scroll-protocol §4 (CSS prefer) → GSAP fallback
+   ├─ Glass/clay/neu morphism?
+   │  └─ premium-motion-scroll-protocol §5 — brand only; impeccable animate
+   ├─ Fotografia hero art-directed?
+   │  └─ premium-motion-scroll-protocol §1 + taste-skill
    ├─ Lista/tabela com refresh parcial?
    │  └─ html-native-light-protocol → HTMX fragment (antes de client fetch chain)
    ├─ Timeline multi-step, stagger 20+, ScrollTrigger?
@@ -101,12 +111,12 @@ Máx **2 skills design por tick**.
 |------------|-----------------|-------------------|-----------------|
 | Login/auth | ui-ux-pro-max, impeccable | shadcn, framer-motion | shape, craft, harden |
 | Dashboard (simples) | ui-ux-pro-max, impeccable | shadcn, tremor-raw, framer-motion | layout, polish |
-| Dashboard CRM/ERP | ui-ux-pro-max, impeccable, taste-skill | shadcn (double sidebar), tremor-raw, framer-motion, tanstack-query | layout, colorize, polish |
+| Dashboard CRM/ERP | ui-ux-pro-max, impeccable, taste-skill | shadcn (double sidebar), tremor-raw, framer-motion, tanstack-query | layout, colorize, polish — **sem** premium-motion-scroll |
 | Kanban/board | impeccable, motion | shadcn, framer-motion | layout, animate |
 | HTML preview kanban (landing mock) | html-preview-interactive-mocks-protocol, gsap | HTML nativo + GSAP snap | DnD nativo + section gate |
 | Inbox/chat | **design-visual-html-protocol**, impeccable, ui-styling | shadcn, framer-motion | craft, clarify — HTML theme picker antes de port tokens |
 | Settings | impeccable, design-system | shadcn | distill, quieter |
-| Landing | taste-skill, banner-design | shadcn, framer-motion, magic-ui | craft, animate |
+| Landing | taste-skill, banner-design, **premium-motion-scroll** | shadcn, framer-motion, magic-ui, gsap | craft, animate — **sugerir** pin/scrub/sandwich |
 | Admin/ERP | impeccable, design-system | shadcn, tremor-raw, tanstack-query | layout, typeset |
 | IA/produto com IA | taste-skill, impeccable | shadcn, magic-ui, aceternity-ui, framer-motion | craft, animate, polish |
 

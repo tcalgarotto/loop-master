@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.24 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.25 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -37,6 +37,7 @@
 | [integration-cards-patterns.md](integration-cards-patterns.md) | **3 modelos** — carousel, marketplace sidebar, grid denso |
 | [design-editable-hybrid-protocol.md](design-editable-hybrid-protocol.md) | **Caminho C** — HTML loop + Penpot MCP + port Next |
 | [gsap-premium-protocol.md](gsap-premium-protocol.md) | GSAP timelines, ScrollTrigger |
+| [premium-motion-scroll-protocol.md](premium-motion-scroll-protocol.md) | **Scroll storytelling** — pin/scrub, sandwich, imagery, morphism |
 | [ux-design-intelligence.md](ux-design-intelligence.md) | 15 Laws of UX |
 | [design-skills-routing-table.md](design-skills-routing-table.md) | Mapa skills design |
 | [design-stack-protocol.md](design-stack-protocol.md) | Pipeline Impeccable × UI |

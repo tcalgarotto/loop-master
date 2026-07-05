@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.22-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.25-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -276,6 +276,7 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/html-native-light-protocol.md` | UI leve: dialog, HTMX, view-transition, scroll scrub |
 | `references/html-first-design-protocol.md` | HTML-first: preview local antes de Next |
 | `references/gsap-premium-protocol.md` | GSAP timelines, ScrollTrigger |
+| `references/premium-motion-scroll-protocol.md` | Scroll storytelling: pin/scrub, sandwich, imagery |
 | `references/lucy-refazer-frontend-protocol.md` | Redesign visual page-by-page |
 | `references/lucy-nova-pagina-protocol.md` | Landing e páginas app do zero |
 | `references/visual-gate-protocol.md` | Screenshots + vision QA antes do gate |
