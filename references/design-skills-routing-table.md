@@ -50,6 +50,8 @@ Entrega tem UI?
    │  └─ lucy-refazer-frontend-protocol → inventory → page-by-page
    ├─ Criar landing ou página nova do zero?
    │  └─ html-first-design-protocol (preview HTML) → lucy-nova-pagina-protocol → template-gallery + taste/impeccable
+   ├─ Discutir paleta, tema, layout ou variantes visuais?
+   │  └─ **design-visual-html-protocol** (ler page.tsx → HTML 2L+2D + seletor) → owner escolhe → port CSS vars mínimo
    ├─ HTML preview com mocks SaaS (nav, kanban, integrações)?
    │  └─ html-preview-interactive-mocks-protocol → integration-cards-patterns → html-preview-section-gate.sh
    ├─ Product app (CRM, dashboard, settings)?
@@ -102,7 +104,7 @@ Máx **2 skills design por tick**.
 | Dashboard CRM/ERP | ui-ux-pro-max, impeccable, taste-skill | shadcn (double sidebar), tremor-raw, framer-motion, tanstack-query | layout, colorize, polish |
 | Kanban/board | impeccable, motion | shadcn, framer-motion | layout, animate |
 | HTML preview kanban (landing mock) | html-preview-interactive-mocks-protocol, gsap | HTML nativo + GSAP snap | DnD nativo + section gate |
-| Inbox/chat | impeccable, ui-styling | shadcn, framer-motion | craft, clarify |
+| Inbox/chat | **design-visual-html-protocol**, impeccable, ui-styling | shadcn, framer-motion | craft, clarify — HTML theme picker antes de port tokens |
 | Settings | impeccable, design-system | shadcn | distill, quieter |
 | Landing | taste-skill, banner-design | shadcn, framer-motion, magic-ui | craft, animate |
 | Admin/ERP | impeccable, design-system | shadcn, tremor-raw, tanstack-query | layout, typeset |

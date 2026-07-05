@@ -27,6 +27,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 |------|----------------------|
 | Animação / perf UI | `html-native-light-protocol.md`, `gsap-premium-protocol.md` |
 | Prototipação HTML antes de Next | `html-first-design-protocol.md` |
+| **Discussão design → HTML visual (2L+2D default)** | **`design-visual-html-protocol.md`** |
 | Mocks interativos (espelho do produto) | `html-preview-interactive-mocks-protocol.md` |
 | Cards de integração (3 modelos) | `integration-cards-patterns.md` |
 | Design editável híbrido (HTML + Penpot + Next) | `design-editable-hybrid-protocol.md` |

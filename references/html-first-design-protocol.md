@@ -3,7 +3,7 @@
 **Origem:** `/lucy aprenda` — 2026-07-03 — owner  
 **Papel:** primeira versão visual em **HTML standalone** local → owner valida → portar para Next/shadcn com confiança.
 
-> Complementa: `gsap-premium-protocol.md` (motion no HTML) · `design-system-intake.md` (referências) · `lucy-nova-pagina-protocol.md` (port para React) · **`design-editable-hybrid-protocol.md`** · **`html-preview-interactive-mocks-protocol.md`** · **`optimistic-inline-edit-protocol.md`** (planilhas densas)
+> Complementa: `gsap-premium-protocol.md` (motion no HTML) · `design-system-intake.md` (referências) · `lucy-nova-pagina-protocol.md` (port para React) · **`design-editable-hybrid-protocol.md`** · **`design-visual-html-protocol.md`** · **`html-preview-interactive-mocks-protocol.md`** · **`optimistic-inline-edit-protocol.md`** (planilhas densas)
 
 ---
 

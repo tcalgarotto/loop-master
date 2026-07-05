@@ -1,5 +1,14 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.21] — 2026-07-05
+
+### Design visual HTML — discussão → preview (`/lucy aprenda`)
+
+- **`references/design-visual-html-protocol.md`** — owner rule global: ler `page.tsx`, HTML standalone com seletor de variantes; default **2 light + 2 dark**; persistir decisão + port CSS vars mínimo
+- **`design-skills-routing-table.md`** — rotear paleta/tema/layout para HTML preview antes de impeccable no Next
+- **`html-first-design-protocol.md`**, **`lucy-aprenda-protocol.md`**, **`learned/INDEX.md`** — slug `design-visual-html-defaults`
+- Referência HubFU: `frontend/preview/inbox-theme-picker.html` (B light / C dark)
+
 ## [2.9.19] — 2026-07-04
 
 ### VPS headless browser default (`/lucy aprenda`)
