@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.30] — 2026-07-05
+
+### Mandato de orquestração proativa (`/lucy aprenda`)
+
+- **`references/learned/proactive-orchestration-mandate.md`** — owner authorization: agente MUST ativar skills/MCPs quando protocolo indica; checklist pré-ação; anti-padrões "Posso usar X?"; exceções destructive/credentials/deploy
+- **`learned/autonomous-routing-contract.md`** — § Mandato proativo v2.9.30+: semi-auto → MUST activate; sem router em código permanece honesto
+- **`autonomous-orchestrator-protocol.md`** — mandamento #8 ativação proativa
+- **`premium-tool-orchestration.md`** — preamble mandato proativo
+- **`SKILL.md`** — tick § Durante: orquestração proativa + anti-padrão pedir permissão
+
 ## [2.9.29] — 2026-07-05
 
 ### Contrato de roteamento autônomo (`/lucy aprenda`)

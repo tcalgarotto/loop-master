@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.29"
+version: "2.9.30"
 ---
-# Lucy v2.9.29 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.30 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -151,6 +151,8 @@ Ver: `lucy-aprenda-protocol.md` · `lucy-regra-protocol.md`
 
 Design: rotear via `design-skills-routing-table.md` (design director–style)
 
+**Orquestração proativa (v2.9.30+ — autorização owner):** o agente **DEVE** auto-ativar skills e MCPs quando routing tables/protocolos indicam — scan → pick → declarar 1 linha → executar; **proibido** pedir permissão ("Posso usar GSAP?", "Quer visual-gate?"). Exceções: destructive, credentials, deploy prod, git push. Ver `learned/proactive-orchestration-mandate.md`.
+
 **UI leve + motion premium (v2.8.4+):** aplicar `references/html-native-light-protocol.md` (nativo/CSS scrub) e `references/gsap-premium-protocol.md` (timelines, ScrollTrigger, stagger) antes de `use client` / Framer. **GSAP Cursor plugin (8 skills):** `references/learned/gsap-plugin-orchestration.md` — ler skill adequada (`gsap-react` em Next, `gsap-scrolltrigger` em brand scroll); **não** é MCP. **Landing brand:** `references/premium-motion-scroll-protocol.md` — sugerir pin/scrub/sandwich/imagery; **product:** motion funcional só. CSS `transition-*` só em hover — nunca no mesmo elemento que GSAP anima.
 
 **Visual gate (v2.9.4+):** se `quality_gates.visual_gate_on_fe_phase` e fase tem UI → `visual-gate-capture.sh` + vision checklist **antes** do gate.
@@ -224,7 +226,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 ## Referências
 
 ### Núcleo
-- `references/autonomous-orchestrator-protocol.md` — os 7 mandamentos do loop
+- `references/autonomous-orchestrator-protocol.md` — os 8 mandamentos do loop
 - `references/skill-ecosystem-map.md` — qual skill usar em cada step
 - `references/agent-routing-table.md` — roteamento de subagentes
 - `references/quiz-protocol.md` — quiz de 7 rodadas (Round 3 = MCP + guia cadastro)
@@ -250,6 +252,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/lucy-nova-pagina-protocol.md` — **`/lucy nova-pagina`**
 - `references/visual-gate-protocol.md` — **`/lucy visual-gate` — screenshots + vision QA**
 - `references/learned/INDEX.md` — catálogo do que o owner ensinou
+- `references/learned/proactive-orchestration-mandate.md` — **mandato proativo owner v2.9.30+** (auto-ativar skills/MCPs)
 - `references/learned/autonomous-routing-contract.md` — **automático vs comando** (skills, MCP, plugin)
 - `references/ux-design-intelligence.md` — **15 Laws of UX + 12 padrões sidebar**
 - `references/design-skills-routing-table.md` — routing por superfície
@@ -285,6 +288,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 ## Anti-padrões
 
 - Pedir permissão antes de rodar init.sh
+- Pedir permissão para skill/MCP quando protocolo/tabela indica uso (`learned/proactive-orchestration-mandate.md`)
 - Pular quiz ou implementar antes de Round 7
 - Terminar tick sem next_prompt + re-arm
 - Ignorar INDEX / brain-sync capture

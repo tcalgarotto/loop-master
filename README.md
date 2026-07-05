@@ -6,7 +6,7 @@
   <p><i>"Nós humanos normais usamos 10% das capacidades do nosso cérebro. Imagina se usássemos 100%."</i><br>— Professor Norman, <b>Lucy</b> (2014)</p>
 
   <p>
-    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.27-blueviolet" alt="version"></a>
+    <a href="SKILL.md"><img src="https://img.shields.io/badge/version-2.9.30-blueviolet" alt="version"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
     <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-Agent_Compatible-blue" alt="cursor"></a>
   </p>
@@ -271,6 +271,7 @@ Backup em `.cursor/lucy-migration-backup-*` — nenhum dado é apagado.
 | `references/design-skills-routing-table.md` | Qual skill de design usar por superfície |
 | `references/second-brain-protocol.md` | Como a memória funciona |
 | `references/claude-mem-nvidia-setup.md` | L2 claude-mem + NVIDIA NIM + multi-sessão |
+| `references/learned/claude-mem-mcp-operational-playbook.md` | MCP claude-mem — workflow 3-layer + checklist status |
 | `references/autonomous-orchestrator-protocol.md` | Loop autônomo |
 | `MANUAL.md` | Manual completo em português |
 | `references/html-native-light-protocol.md` | UI leve: dialog, HTMX, view-transition, scroll scrub |

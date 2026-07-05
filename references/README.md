@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.29 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.30 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -39,6 +39,7 @@
 | [design-editable-hybrid-protocol.md](design-editable-hybrid-protocol.md) | **Caminho C** — HTML loop + Penpot MCP + port Next |
 | [gsap-premium-protocol.md](gsap-premium-protocol.md) | GSAP timelines, ScrollTrigger |
 | [learned/gsap-plugin-orchestration.md](learned/gsap-plugin-orchestration.md) | **GSAP Cursor plugin** — 8 skills, routing (não MCP) |
+| [learned/proactive-orchestration-mandate.md](learned/proactive-orchestration-mandate.md) | **Mandato proativo v2.9.30+** — auto-ativar skills/MCPs sem pedir permissão |
 | [learned/autonomous-routing-contract.md](learned/autonomous-routing-contract.md) | **Automático vs comando** — skills, MCP, plugin, gaps |
 | [premium-motion-scroll-protocol.md](premium-motion-scroll-protocol.md) | **Scroll storytelling** — pin/scrub, sandwich, imagery, morphism |
 | [ux-design-intelligence.md](ux-design-intelligence.md) | 15 Laws of UX |
@@ -69,7 +70,7 @@
 
 | Doc | Conteúdo |
 |-----|----------|
-| [autonomous-orchestrator-protocol.md](autonomous-orchestrator-protocol.md) | 7 mandamentos, re-arm |
+| [autonomous-orchestrator-protocol.md](autonomous-orchestrator-protocol.md) | 8 mandamentos, re-arm |
 | [orchestrator-protocol.md](orchestrator-protocol.md) | Paralelismo, workers |
 | [agent-routing-table.md](agent-routing-table.md) | Subagents Cursor |
 | [prompt-template.md](prompt-template.md) | Templates next_prompt |

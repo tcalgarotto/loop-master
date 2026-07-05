@@ -6,7 +6,7 @@ re-arm do próximo tick. Este doc é o **contrato operacional** de cada tick.
 
 ---
 
-## Os 7 mandamentos (ordem obrigatória)
+## Os 8 mandamentos (ordem obrigatória)
 
 ### 1. Estudar estado atual do projeto
 
@@ -105,6 +105,21 @@ Ao persistir JSON:
 5. Se fase gate passed e `overall_pct < 100` → preparar `discover` da próxima fase
 6. Se `overall_pct === 100` → `delivery_contract.status=complete`, `LOOP-MASTER-COMPLETE.md`, **stop** loop
 7. **Re-arm obrigatório** se `loop_status === "running"` e não 100% (ver seção Re-arm)
+
+### 8. Ativação proativa de ferramentas (owner v2.9.30+)
+
+**Autorização do owner:** o agente **é** o orquestrador — não esperar o usuário pedir skill ou MCP quando protocolo/tabela indica uso.
+
+| Regra | Detalhe |
+|-------|---------|
+| **Scan antes de agir** | `premium-tool-orchestration.md` + `design-skills-routing-table.md` + `agent-routing-table.md` |
+| **Ativar sem perguntar** | Ler `SKILL.md` → executar; MCP cadastrado → `CallMcpTool` |
+| **Declarar em 1 linha** | *"Ativando visual-gate — fase FE com quality_gates"* — depois executar |
+| **Proibido** | "Posso usar GSAP?", "Quer visual-gate?" quando protocolo manda |
+| **Exceções** | Destructive ops, credentials, deploy prod, git push — confirmar |
+| **Honesto** | Sem router em código; VPS browser MCP quebrado → Playwright; MCP opt-in precisa setup |
+
+Ver: `learned/proactive-orchestration-mandate.md`, `learned/autonomous-routing-contract.md` § Mandato proativo.
 
 ---
 

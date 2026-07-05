@@ -5,7 +5,8 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
-| 2026-07-05 | `autonomous-routing-contract` | Matriz honesta: HYDRATE/tabelas/quality_gates automáticos; slash commands e MCP opt-in; GSAP semi-auto via disciplina agente | `learned/autonomous-routing-contract.md`, `premium-tool-orchestration.md` |
+| 2026-07-05 | `proactive-orchestration-mandate` | Owner authorization: agente MUST ativar skills/MCPs quando protocolo indica; proibido "Posso usar X?"; exceções destructive/credentials/deploy | `learned/proactive-orchestration-mandate.md`, `autonomous-routing-contract.md`, `autonomous-orchestrator-protocol.md` |
+| 2026-07-05 | `autonomous-routing-contract` | Matriz honesta: HYDRATE/tabelas/quality_gates automáticos; slash commands e MCP opt-in; v2.9.30+ mandato proativo MUST activate | `learned/autonomous-routing-contract.md`, `premium-tool-orchestration.md` |
 | 2026-07-05 | `claude-mem-mcp-operational-playbook` | MCP plugin search 3-layer; worker :37700 + NVIDIA NIM backend; status 4 camadas; fix mcp-setup-status npx | `learned/claude-mem-mcp-operational-playbook.md`, `claude-mem-nvidia-setup.md`, `mcp-integrations-setup-guide.md` |
 | 2026-07-05 | `gsap-plugin-orchestration` | GSAP Cursor plugin (8 skills, não MCP): routing gsap-react/scrolltrigger/timeline, pirâmide html→GSAP→Framer, register brand/product, matchMedia a11y | `learned/gsap-plugin-orchestration.md`, `gsap-premium-protocol.md`, `design-skills-routing-table.md` |
 | 2026-07-05 | `case-study-neo-mirai` | Case study #001 Neo Mirai: craft pipeline visualize→shape→craft→ship; visual DNA warm paper; INDEX case-studies para sugestões brand | `case-studies/neo-mirai-impeccable.md`, `case-studies/INDEX.md`, `design-system-intake.md`, `premium-tool-orchestration.md` |

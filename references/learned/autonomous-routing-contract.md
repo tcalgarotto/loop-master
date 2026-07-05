@@ -3,7 +3,25 @@
 **Origem:** `/lucy aprenda` — 2026-07-05  
 **Pergunta do owner:** *"Tudo que você aprendeu já está mapeado e útil sem precisar ser mandado?"*
 
-**Resposta curta:** **Parcialmente.** Lucy tem mapas, mandamentos P0 e hidratação automática em ticks — mas **não** existe um router em código que dispare skills/MCPs sozinho. O agente **deve consultar** as tabelas e **decidir**; falhas de roteamento são gaps de disciplina do modelo, não de ausência de docs.
+**Resposta curta:** Lucy tem mapas, mandamentos P0 e hidratação automática em ticks — mas **não** existe um router em código que dispare skills/MCPs sozinho. O agente (LLM) **é** o orquestrador: **deve consultar** tabelas e **ativar** ferramentas sem pedir permissão quando o protocolo indica. Falhas de roteamento são gaps de disciplina do modelo, não de ausência de docs.
+
+---
+
+## Mandato proativo (owner v2.9.30+)
+
+**Autorização do owner:** Lucy opera como orquestrador autônomo — se MCP ou skill deve ser usado, **ativar automaticamente**; usuários sub-utilizam ferramentas por desconhecimento.
+
+| Antes (v2.9.29) | Depois (v2.9.30+) |
+|-----------------|-------------------|
+| Semi-automático: "o agente deve…" | **Mandatório:** "o agente MUST activate" |
+| Risco de perguntar "Posso usar X?" | **Proibido** quando tabela/protocolo manda X |
+| Slash commands = única forma de acionar tools | Slash = entrada de workflow; **dentro do tick/chat** = auto-seleção |
+
+**Sem mudança na arquitetura:** continua sem middleware/router executável. A camada de enforcement é **disciplina do agente** + este mandato.
+
+**Pipeline obrigatório:** scan tabelas → pick skill/MCP → declarar 1 linha → executar. Ver `learned/proactive-orchestration-mandate.md`.
+
+**Ainda confirmar:** destructive ops, credentials, deploy prod, git push. **Ainda opt-in por comando:** `/lucy init`, `/lucy @url`, `/lucy aprenda`, etc.
 
 ---
 
@@ -53,21 +71,22 @@
 
 ---
 
-## Semi-automático (disciplina do agente, não código)
+## Proativo mandatório (disciplina do agente — v2.9.30+)
 
-Está **mapeado** nas tabelas; **não** há garantia runtime:
+Está **mapeado** nas tabelas; enforcement é o agente, não código. **Não perguntar** quando protocolo indica:
 
-| Situação | O agente deve… | Risco se pular |
-|----------|----------------|----------------|
-| Landing brand | taste + GSAP plugin + motion suggest (R4/R4b) | Página "plana" |
-| Product CRM | impeccable + shadcn; **sem** pin/scrub | Motion indevido |
-| React + GSAP | Ler `gsap-react` antes de codar | useEffect sem cleanup |
-| Scroll storytelling | `gsap-scrolltrigger` + `premium-motion-scroll` | Só CSS estático |
-| FE alterado | `npx impeccable detect` no verify | Slop no gate |
-| Site externo | Firecrawl ou Playwright scrape | WebFetch em SPA falha |
-| claude-mem L2 | `search` no HYDRATE | Só se `LUCY_CLAUDE_MEM=1` + MCP verde |
+| Situação | O agente MUST… | Risco se pular ou pedir permissão |
+|----------|----------------|-----------------------------------|
+| Landing brand | Ativar taste + GSAP plugin + motion (R4/R4b) | Página "plana" |
+| Product CRM | Ativar impeccable + shadcn; **sem** pin/scrub | Motion indevido |
+| React + GSAP | Ler e aplicar `gsap-react` antes de codar | useEffect sem cleanup |
+| Scroll storytelling | Ativar `gsap-scrolltrigger` + `premium-motion-scroll` | Só CSS estático |
+| FE alterado | Rodar `npx impeccable detect` no verify | Slop no gate |
+| Site externo | Firecrawl ou Playwright scrape (sem perguntar qual) | WebFetch em SPA falha |
+| claude-mem L2 | `search` no HYDRATE se MCP verde | Memória cross-session perdida |
+| MCP indicado + cadastrado | `CallMcpTool` direto | Sub-utilização de capacidade |
 
-**GSAP (aprendizado recente):** integrado em SKILL.md tick, `design-skills-routing-table`, `premium-tool-orchestration` R1, `gsap-plugin-orchestration.md`. Em ticks autônomos o agente deve **declarar** qual skill GSAP seguirá e **ler** o SKILL.md — não depende de MCP nem de comando `/gsap-*` do owner.
+**GSAP:** em ticks autônomos o agente **declara** (1 linha) qual skill GSAP seguirá, **lê** o SKILL.md e **executa** — não depende de MCP nem de `/gsap-*` do owner. Ver `learned/proactive-orchestration-mandate.md`.
 
 ---
 
@@ -116,6 +135,7 @@ Pedido do owner ou task do tick
 
 ## Cross-links
 
+- `learned/proactive-orchestration-mandate.md` — **mandato owner v2.9.30+** (checklist, anti-padrões, exceções)
 - `premium-tool-orchestration.md` — ferramenta por momento
 - `design-skills-routing-table.md` — superfície → skill
 - `agent-routing-table.md` — subagentes

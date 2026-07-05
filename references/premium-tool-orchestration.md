@@ -4,9 +4,13 @@
 
 **Origem:** `/lucy aprenda` — HubFU landing plana; stack completo deve estar **instalado** (init) e **acionado** (protocolo).
 
+### Mandato proativo — nunca sub-utilizar (v2.9.30+)
+
+**Autorização do owner:** se este doc ou routing table indica ferramenta → **ativar sem pedir permissão**. Declarar em 1 linha; executar. **Proibido** "Posso usar X?" / "Quer que eu rode Y?" quando protocolo manda. Exceções: destructive, credentials, deploy prod, git push. Ver `learned/proactive-orchestration-mandate.md`.
+
 ### Automático vs comando explícito
 
-Lucy **mapeia** skills, MCPs e plugins em tabelas — mas **não** executa um router em código. Em ticks `/lucy`, o agente **deve** aplicar este doc + `design-skills-routing-table.md`; comandos como `/lucy @url`, `/lucy aprenda` ou `/lucy visual-gate` (escopo avulso) continuam **opt-in**. Matriz completa: `learned/autonomous-routing-contract.md`.
+Lucy **mapeia** skills, MCPs e plugins em tabelas — **sem router em código**, mas o agente (LLM) **deve** aplicar este doc + `design-skills-routing-table.md` proativamente em todo tick/chat. Slash commands (`/lucy @url`, `/lucy aprenda`, `/lucy visual-gate` escopo avulso) = entrada explícita de workflow. Matriz completa: `learned/autonomous-routing-contract.md`.
 
 ---
 
@@ -189,6 +193,7 @@ Sinais comuns:
 - `ux-design-intelligence.md` — 15 laws
 - `design-skills-routing-table.md` — superfície → skill
 - `learned/gsap-plugin-orchestration.md` — **GSAP Cursor plugin** (8 skills, não MCP)
+- `learned/proactive-orchestration-mandate.md` — **mandato proativo owner v2.9.30+**
 - `learned/autonomous-routing-contract.md` — **o que é automático vs comando** (honesto)
 - `learned/impeccable-eight-pillars.md` — 8 capacidades Impeccable
 - `learned/impeccable-live-mode.md` — Live Mode beta (owner Desktop)
