@@ -197,15 +197,133 @@ node .cursor/skills/impeccable/scripts/live-server.mjs stop
 
 ---
 
-## VPS / HubFU — resposta prática
+## Quando o owner pede Live Mode no VPS
+
+**Gatilhos (PT-BR):** "abrir live mode", "impeccable live", "/impeccable live", "live mode na vps", "iterar visual no servidor".
+
+**Regra Lucy P0:** **Nunca** responder só "não funciona no VPS". Explicar **por quê** (Browser MCP `toolCount=0` em Remote SSH) e **guiar passo a passo** para liberar acesso remoto ao dev server. Playbook conciso: `vps-live-mode-owner-guide.md`.
+
+### O que o agente pode vs não pode (VPS Remote SSH)
+
+| Pode (VPS) | Não pode (VPS) |
+|------------|----------------|
+| Subir dev server (`npm run dev`, docker onde aplicável) | `browser_navigate`, picker Impeccable, Accept no browser |
+| Rodar `live.mjs` + poll loop em background | Owner clicar Pick/Go sem browser na origem do app |
+| Diagnosticar porta/bind (`ss`, `curl localhost:3000`) | Substituir Live por "tente de novo" sem tutorial |
+| Configurar SSH tunnel / instruir Cursor Ports | Expor `0.0.0.0:3000` na internet pública sem aviso de segurança |
+| Fallback: `polish`/`layout` + detect + visual-gate Playwright | Incluir Live em `minor_cycle.tasks[]` autônomo |
+
+### Árvore de decisão (owner no VPS)
+
+```
+Owner pede Live Mode?
+├─ Tem Cursor Desktop local (Mac/Win/Linux) com clone do projeto?
+│  └─ SIM → Opção A (recomendada)
+├─ Quer manter código na VPS mas browser no laptop?
+│  ├─ SSH manual ok? → Opção B (tunnel)
+│  └─ Prefere UI Cursor? → Opção C (Forwarded Ports)
+├─ Precisa URL acessível fora do laptop (time remoto)?
+│  └─ Opção D (bind 0.0.0.0 + firewall) — ⚠️ só dev, nunca prod exposto
+└─ Nenhuma opção viável agora?
+   └─ Fallback Lucy: polish/layout/colorize + detect + visual-gate; sugerir Live quando Desktop/tunnel pronto
+```
+
+### Opção A — Cursor Desktop local (recomendada)
+
+1. Clonar ou sync do repo (`git pull` / rsync da VPS).
+2. `cd frontend && npm install && npm run dev` (Next default **:3000**).
+3. Backend local ou tunnel da API se necessário (`NEXT_PUBLIC_API_URL`).
+4. Abrir projeto no **Cursor Desktop** (não Remote SSH).
+5. Confirmar: `.cursor/scripts/check-browser-mcp.sh` exit **0**.
+6. Owner: `/impeccable live` → agente: `live.mjs` → `browser_navigate` → poll loop.
+
+**HubFU:** `PRODUCT.md` + `DESIGN.md` na raiz; `.impeccable/live/config.json` → `app/layout.tsx`.
+
+### Opção B — SSH tunnel (código na VPS, browser no laptop)
+
+**Na VPS** (terminal do agente ou SSH separado):
+
+```bash
+cd /path/to/projeto/frontend
+npm run dev
+# Next escuta 127.0.0.1:3000 por default — manter assim (mais seguro)
+```
+
+**No laptop do owner** (terminal local, não na VPS):
+
+```bash
+ssh -L 3000:127.0.0.1:3000 -L 8400:127.0.0.1:8400 USER@VPS_HOST
+```
+
+- `:3000` = app Next (HMR)
+- `:8400` = helper Impeccable (`live.js`, SSE) — porta típica; conferir JSON de `live.mjs`
+
+Abrir **browser no laptop**: `http://localhost:3000/<rota>`.
+
+**Cursor:** sessão Remote SSH na VPS para o agente rodar poll; browser interativo no laptop na URL tunelada. Browser MCP no agente remoto ainda pode falhar — owner pode operar picker manualmente enquanto agente faz poll, **ou** abrir segundo workspace Desktop local apontando pro mesmo repo sync.
+
+### Opção C — Cursor Forwarded Ports (Remote SSH)
+
+1. Dev server na VPS: `npm run dev` em `frontend/` (porta **3000**).
+2. Cursor → aba **Ports** (ou prompt "Forward port").
+3. Forward **3000** (Private) e **8400** (helper Live, se rodando).
+4. Cursor expõe URL `localhost:3000` no **laptop** — abrir no browser local.
+5. Iniciar `/impeccable live`; agente na sessão SSH roda `live.mjs` + poll.
+
+**Nota:** visibility **Private** (default). **Public** só em rede confiável e dev ephemeral.
+
+### Opção D — Bind `0.0.0.0` + firewall (último recurso)
+
+```bash
+cd frontend
+npm run dev -- -H 0.0.0.0 -p 3000
+# ou: HOST=0.0.0.0 npm run dev
+```
+
+⚠️ **Segurança:** restringir no firewall (`ufw allow from SEU_IP to any port 3000`). Nunca deixar `:3000` aberto `0.0.0.0/0` em VPS de produção. Docker HubFU: frontend **não** expõe host port — Live Mode usa dev server **no host**, não container nginx `:80`.
+
+### O que Lucy diz (template — adaptar ao projeto)
+
+> Live Mode precisa de **dev server com HMR** + **browser interativo** onde você clica Pick/Go. No Remote SSH da VPS o Browser MCP do agente não roda (`toolCount=0`) — isso é esperado, não é bug.
+>
+> **Caminho mais simples:** abrir o projeto no **Cursor Desktop local**, `npm run dev` na pasta frontend (porta **3000**), depois `/impeccable live`.
+>
+> **Se quiser manter o código na VPS:** subo o dev server aqui e te guio num **tunnel SSH** (`ssh -L 3000:127.0.0.1:3000 user@vps`) ou **Forwarded Ports** no Cursor — você abre `http://localhost:3000` no browser do seu laptop.
+>
+> Enquanto isso, posso iterar com **polish/layout** + detect + screenshots Playwright. Qual opção prefere: **A** Desktop local, **B** tunnel, **C** Ports?
+
+### HubFU / hermes-crm — portas reais
+
+| Serviço | Porta | Live Mode |
+|---------|-------|-----------|
+| Next dev (`frontend/`) | **3000** (default) | ✅ usar este |
+| Impeccable helper | **8400** (típico) | Forward junto se tunnel |
+| Backend FastAPI (docker) | 8000 (rede interna) | API via env; não é URL do picker |
+| nginx produção (docker) | 80/443 | ❌ não substitui dev HMR |
+
+Comandos HubFU:
+
+```bash
+cd /opt/hermes-crm/frontend && npm run dev
+# outro terminal na VPS:
+node .cursor/skills/impeccable/scripts/live.mjs
+```
+
+Regra local P0 (projeto): `.cursor/lucy-brain/rules/live-mode-vps-guide.md`
+
+### Fallback (sem tunnel/Desktop agora)
+
+`polish` / `layout` / `colorize` no path alvo + `npx impeccable detect` + `visual-gate-capture.sh --base-url http://127.0.0.1:3000`. Registrar `"suggested_live_mode": true` em handoff QA.
+
+---
+
+## VPS / HubFU — resposta rápida (legado)
 
 | Pergunta | Resposta |
 |----------|----------|
-| Lucy no VPS pode rodar Live? | **Não** de forma interativa — Browser MCP `toolCount=0` (ver `vps-headless-browser-default.md`) |
-| Owner no VPS com Cursor Remote SSH? | **Não** — helper e picker precisam de browser na máquina do dev server + agente com poll |
-| Owner com Cursor Desktop local + clone local? | **Sim** — dev server local, `browser_navigate`, `/impeccable live` |
-| Fallback no VPS? | `polish`/`layout`/`colorize` no path + `npx impeccable detect` + `visual-gate-capture.sh` |
-| hermes-crm já tem contexto? | Sim — `PRODUCT.md` (product) + `DESIGN.md` (tokens HubFU) na raiz |
+| Lucy no VPS pode rodar Live interativo sozinha? | **Não** — Browser MCP `toolCount=0` (ver `vps-headless-browser-default.md`) |
+| Owner no VPS pode usar Live? | **Sim**, com tunnel/Ports/Desktop — ver § acima |
+| hermes-crm já tem contexto? | Sim — `PRODUCT.md` + `DESIGN.md` na raiz |
 
 ---
 
@@ -228,5 +346,6 @@ Journal durável em `.impeccable/live/sessions/` — replay após restart do hel
 | `impeccable-eight-pillars.md` | Pilar 7–8 (Live + Accept) |
 | `impeccable-lucy-integration.md` | Routing ticks vs sessão owner |
 | `premium-tool-orchestration.md` | Momento "iteração visual interativa" |
-| `vps-headless-browser-default.md` | Por que VPS não usa Live |
+| `vps-headless-browser-default.md` | Por que Browser MCP falha na VPS |
+| `vps-live-mode-owner-guide.md` | Checklist tunnel / Ports / Desktop |
 | `impeccable-capabilities-map.md` | Catálogo 23 cmds |

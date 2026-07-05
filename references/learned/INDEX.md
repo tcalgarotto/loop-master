@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-05 | `vps-live-mode-owner-guide` | Owner pede Live Mode no VPS: Lucy guia tunnel SSH / Cursor Ports / Desktop local — nunca só "não funciona"; checklist + portas HubFU | `learned/impeccable-live-mode.md`, `learned/vps-live-mode-owner-guide.md`, `impeccable-lucy-integration.md` |
 | 2026-07-05 | `impeccable-live-eight-pillars` | 8 pilares impeccable.style + guia Live Mode (pick→3 variantes→accept→source); VPS fallback; bootstrap HubFU PRODUCT/DESIGN | `learned/impeccable-eight-pillars.md`, `learned/impeccable-live-mode.md`, `learned/impeccable-lucy-integration.md` |
 | 2026-07-05 | `impeccable-lucy-brain` | Catálogo 23 cmds + 45 regras detector + integração explícita Lucy→impeccable em ticks/refazer/nova-pagina/visual-gate | `learned/impeccable-capabilities-map.md`, `learned/impeccable-lucy-integration.md`, `impeccable-routing-table.md` |
 | 2026-07-05 | `design-visual-html-defaults` | Discussão design → HTML preview com seletor variantes; default 2 light + 2 dark; ler page.tsx alvo; persistir decisão owner | `design-visual-html-protocol.md`, `html-first-design-protocol.md` |

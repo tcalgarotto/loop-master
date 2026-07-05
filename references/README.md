@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.22 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.24 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -44,7 +44,8 @@
 | [impeccable-routing-table.md](impeccable-routing-table.md) | 15 cmds Impeccable no minor cycle |
 | [learned/impeccable-capabilities-map.md](learned/impeccable-capabilities-map.md) | **Catálogo completo** — 23 cmds, register, detector 45 regras, live/CLI |
 | [learned/impeccable-eight-pillars.md](learned/impeccable-eight-pillars.md) | **8 pilares** impeccable.style × routing Lucy |
-| [learned/impeccable-live-mode.md](learned/impeccable-live-mode.md) | **Live Mode beta** — pick→variantes→accept; VPS fallback |
+| [learned/impeccable-live-mode.md](learned/impeccable-live-mode.md) | **Live Mode beta** — pick→variantes→accept; guia VPS tunnel/Ports |
+| [learned/vps-live-mode-owner-guide.md](learned/vps-live-mode-owner-guide.md) | **Live Mode VPS** — checklist owner (SSH tunnel, Forwarded Ports) |
 | [learned/impeccable-lucy-integration.md](learned/impeccable-lucy-integration.md) | **Routing Lucy** — ticks, refazer-frontend, nova-pagina, visual-gate |
 | [skill-ecosystem-map.md](skill-ecosystem-map.md) | Todas as skills |
 | [skills-you-can-use.md](skills-you-can-use.md) | Resumo para usuário |

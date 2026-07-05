@@ -132,9 +132,20 @@ O projeto **já possui** contexto Impeccable na raiz:
 
 ## Live Mode — sessão interativa (fora do loop autônomo)
 
-**Guia completo:** `learned/impeccable-live-mode.md` · **Pilares 7–8:** `learned/impeccable-eight-pillars.md`
+**Guia completo:** `learned/impeccable-live-mode.md` · **Playbook VPS:** `learned/vps-live-mode-owner-guide.md` · **Pilares 7–8:** `learned/impeccable-eight-pillars.md`
 
 Live Mode (`/impeccable live`) é **beta** e **exige** browser interativo + dev server HMR na mesma sessão do owner. Lucy **não** spawna Live em ticks autônomos.
+
+### Gatilhos de frase → routing (P0)
+
+| Owner diz (PT-BR / EN) | Ação Lucy — **obrigatória** |
+|------------------------|------------------------------|
+| "live mode", "/impeccable live", "abrir live", "iterar visual no browser" | Carregar `impeccable-live-mode.md` + iniciar boot checklist |
+| + contexto **VPS / Remote SSH / servidor** | **Não** recusar. Carregar § "Quando o owner pede Live Mode no VPS" + `vps-live-mode-owner-guide.md`; oferecer opções A/B/C/D; subir dev server se pedido |
+| "não consigo abrir no browser" / "Preciso de ajuda" (handoff QA) | Tutorial tunnel ou Cursor Ports neste turno |
+| Tick autônomo `/lucy` sem owner presente | **Não** Live — fallback polish + detect; `suggested_live_mode` no handoff |
+
+**Anti-padrão:** responder "Browser MCP não funciona na VPS" **sem** guia de tunnel/Desktop/Ports.
 
 ### Quando sugerir ao owner
 
@@ -145,11 +156,12 @@ Live Mode (`/impeccable live`) é **beta** e **exige** browser interativo + dev 
 | Iteração rápida com comentário/traço no browser | Live > polish genérico no chat |
 | Brief ainda incerto | **shape** primeiro; Live depois |
 
-### Quando NÃO sugerir (fallback)
+### Quando NÃO sugerir Live autônomo (fallback batch)
 
 | Sinal | Fallback Lucy |
 |-------|---------------|
-| VPS / Remote SSH (`cursor_mcp_available: false`) | `polish`/`layout`/`colorize` + detect + visual-gate Playwright |
+| VPS / Remote SSH **e owner não quer configurar acesso remoto agora** | `polish`/`layout`/`colorize` + detect + visual-gate Playwright |
+| VPS / Remote SSH **e owner pede Live explicitamente** | **Guiar** tunnel/Ports/Desktop — ver `vps-live-mode-owner-guide.md`; agente pode subir dev server + `live.mjs` |
 | Tick autônomo `/lucy` | Pipeline shape→craft→polish no minor cycle |
 | `refazer-frontend` em massa | detect → critique → layout → polish por rota |
 | Sem dev server | Subir `npm run dev` ou usar polish offline |
@@ -211,7 +223,8 @@ Live Mode (`/impeccable live`) é **beta** e **exige** browser interativo + dev 
 
 ## VPS / browser
 
-- **Live Mode:** **não** no VPS — requer Browser MCP interativo + owner no picker. Fallback: `polish`/`shape` + detect + visual-gate Playwright. Ver `impeccable-live-mode.md` § VPS.
+- **Live Mode no VPS:** agente **não** usa Browser MCP; owner **pode** usar Live via tunnel/Ports/Desktop local. Lucy **guia** — nunca só "não funciona". Ver `impeccable-live-mode.md` § "Quando o owner pede Live Mode no VPS" + `vps-live-mode-owner-guide.md`.
+- **Fallback batch:** `polish`/`shape` + detect + visual-gate Playwright quando owner adia tunnel.
 - Extension Chrome + overlay detect: opcional no browser do owner (não no agente VPS).
 - `critique` browser pass: Playwright fallback se MCP browser indisponível (`vps-headless-browser-default.md`).
 

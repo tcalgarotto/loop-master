@@ -36,7 +36,7 @@ Rodadas **sequenciais** (uma por turno), agrupadas por tema:
 | R1 | Env / secrets / deploy VPS | `oh_r1_multitenant_strict`, `oh_r1_secrets`, `oh_r1_backend_restart` |
 | R2 | LaunchDarkly / flags | `oh_r2_ai_tenant_data`, `oh_r2_erp_native` |
 | R3 | QA manual funcional | `oh_r3_assistente_e2e`, `oh_r3_smoke_kanban` |
-| R4 | Decisões produto/design | `oh_r4_whatsapp_skin`, `oh_r4_inbox_skin` |
+| R4 | Decisões produto/design | `oh_r4_whatsapp_skin`, `oh_r4_inbox_skin`, `oh_r4_live_mode_vps` |
 | R5 | Ops / migração / prioridade 100% | `oh_r5_alembic`, `oh_r5_commit_deploy` |
 
 **Fonte das perguntas:** extrair de `owner_blocked[]`, handoff §, e critérios parciais — **nunca** quiz genérico de init.
@@ -84,6 +84,7 @@ Após respostas da rodada:
 - **Concluído** → smoke/validação automatizada; marcar critério `pct` subindo
 - **Adiar** → manter `owner_blocked`; não bloquear outras trilhas
 - **Preciso de ajuda** → tutorial + re-perguntar só aquele ID na rodada seguinte
+- **Live Mode na VPS** (`oh_r4_live_mode_vps` ou pedido explícito) → **neste turno:** carregar `learned/vps-live-mode-owner-guide.md`; subir dev server se aplicável; passo a passo tunnel SSH ou Cursor Ports — **nunca** só "MCP não funciona"
 - Código/tests/deploy que **não** dependem do item adiado → **continuar**
 
 Repita rodadas até `owner_qa.complete: true` **ou** todos critérios `done` **ou** só restarem itens explicitamente adiados com owner ciente.

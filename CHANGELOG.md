@@ -1,5 +1,14 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.24] — 2026-07-05
+
+### Live Mode no VPS — guia owner (`/lucy aprenda`)
+
+- **`references/learned/impeccable-live-mode.md`** — § "Quando o owner pede Live Mode no VPS": árvore A/B/C/D, template de resposta Lucy, can vs cannot
+- **`references/learned/vps-live-mode-owner-guide.md`** — playbook checklist (tunnel SSH, Cursor Ports, Desktop local, firewall)
+- **`impeccable-lucy-integration.md`** — gatilhos de frase + routing P0 (nunca só "não funciona")
+- **`premium-tool-orchestration.md`**, **`owner-handoff-qa-protocol.md`** — cross-links e `oh_r4_live_mode_vps`
+
 ## [2.9.23] — 2026-07-05
 
 ### Impeccable Live Mode + 8 pilares (`/lucy aprenda`)

@@ -33,6 +33,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | Design editável híbrido (HTML + Penpot + Next) | `design-editable-hybrid-protocol.md` |
 | MCP / integrações / quiz setup | `mcp-integrations-setup-guide.md`, `claude-mem-nvidia-setup.md` |
 | QA visual / screenshots | `visual-gate-protocol.md` |
+| **Live Mode no VPS (tunnel / Ports)** | `learned/impeccable-live-mode.md`, `learned/vps-live-mode-owner-guide.md` |
 | Processo / orquestração premium | `premium-tool-orchestration.md` |
 | Design systems tagados | `design-system-intake.md` |
 | Planilhas / edição inline otimista | `optimistic-inline-edit-protocol.md`, `design-system/hubfu/editable-table.md` |

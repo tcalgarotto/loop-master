@@ -23,7 +23,7 @@
 | **Mocks interativos na landing** | Nav/tabs/filtros trocam view real; kanban funcional; barras exponenciais | `html-preview-interactive-mocks-protocol.md` |
 | **Design editável híbrido (C)** | HTML loop até aprovar → Penpot MCP tokens → port Next → Puck opcional | `design-editable-hybrid-protocol.md` |
 | **Landing nova (aprovada)** | taste-skill → ui-ux-pro-max → template-gallery → GSAP/view() → shadcn → impeccable polish | `lucy-nova-pagina-protocol.md` · detalhe cmds: `learned/impeccable-lucy-integration.md` |
-| **Iteração visual 1 elemento (owner Desktop)** | `/impeccable live` — pick → 3 variantes → accept grava source | `learned/impeccable-live-mode.md` · VPS: fallback polish/layout |
+| **Iteração visual 1 elemento (owner Desktop)** | `/impeccable live` — pick → 3 variantes → accept grava source | `learned/impeccable-live-mode.md` · VPS: **guiar** tunnel/Ports (`vps-live-mode-owner-guide.md`) ou fallback polish/layout |
 | **Landing sem vida** | impeccable `critique` → GSAP stagger → `/lucy refazer-frontend --escopo /rota` | `gsap-premium-protocol.md` |
 | **App page nova** | ui-ux-pro-max → shadcn → tremor → tanstack-query → impeccable | `design-stack-protocol.md` |
 | **QA visual nosso app** | Playwright `visual-gate-capture.sh` + vision V1–V8 | `visual-gate-protocol.md` |
@@ -154,3 +154,4 @@ Sinais comuns:
 - `design-skills-routing-table.md` — superfície → skill
 - `learned/impeccable-eight-pillars.md` — 8 capacidades Impeccable
 - `learned/impeccable-live-mode.md` — Live Mode beta (owner Desktop)
+- `learned/vps-live-mode-owner-guide.md` — Live Mode no VPS: tunnel, Ports, checklist owner
