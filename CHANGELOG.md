@@ -1,5 +1,14 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.23] — 2026-07-05
+
+### Impeccable Live Mode + 8 pilares (`/lucy aprenda`)
+
+- **`references/learned/impeccable-live-mode.md`** — guia PT-BR: pré-requisitos, poll loop, pick/variantes/accept/carbonize, frameworks, limitações, VPS vs Desktop
+- **`references/learned/impeccable-eight-pillars.md`** — 8 capacidades impeccable.style com routing por tick/refazer/nova-pagina
+- **`impeccable-lucy-integration.md`** — seção Live Mode + bootstrap PRODUCT/DESIGN HubFU
+- **`premium-tool-orchestration.md`** — momento "iteração visual 1 elemento"
+
 ## [2.9.22] — 2026-07-05
 
 ### Impeccable no cérebro Lucy (`/lucy aprenda`)

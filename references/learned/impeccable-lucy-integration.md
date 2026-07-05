@@ -3,6 +3,8 @@
 **Objetivo:** Lucy **roteia explicitamente** trabalho de design frontend pela skill Impeccable — não improvisa polish genérico.
 
 **Catálogo completo:** `learned/impeccable-capabilities-map.md`  
+**8 pilares (impeccable.style):** `learned/impeccable-eight-pillars.md`  
+**Live Mode (beta):** `learned/impeccable-live-mode.md`  
 **15 cmds no minor cycle:** `impeccable-routing-table.md`
 
 ---
@@ -97,13 +99,80 @@ Impeccable **complementa**, não substitui vision:
 
 ---
 
+## Bootstrap PRODUCT.md + DESIGN.md (HubFU / hermes-crm)
+
+O projeto **já possui** contexto Impeccable na raiz:
+
+| Arquivo | Conteúdo | Register |
+|---------|----------|----------|
+| `PRODUCT.md` | PMEs BR, anti-references cream/SaaS, superfícies P0–P2 | **product** |
+| `DESIGN.md` | Tokens `--hf-*`, zinc + roxo ≤8%, light/dark next-themes | product |
+
+**Antes de qualquer tick FE:** agente confirma que `context.mjs` encontraria ambos (não re-rodar `init` se intactos).
+
+| Gap | Ação Lucy |
+|-----|-----------|
+| Sem `PRODUCT.md` | `human_blockers` → owner roda `/impeccable init` |
+| Código sem `DESIGN.md` | Sugerir `/impeccable document` no handoff ou `/lucy init` |
+| DESIGN.md stale pós-refactor grande | `extract` ou `document` refresh antes de `refazer-frontend` massivo |
+| Live Mode primeira vez | Verificar `.impeccable/live/config.json` — Next App Router: `app/layout.tsx` |
+
+**Live config HubFU (referência):**
+
+```json
+{
+  "files": ["app/layout.tsx"],
+  "insertBefore": "</body>",
+  "commentSyntax": "jsx",
+  "cspChecked": true
+}
+```
+
+---
+
+## Live Mode — sessão interativa (fora do loop autônomo)
+
+**Guia completo:** `learned/impeccable-live-mode.md` · **Pilares 7–8:** `learned/impeccable-eight-pillars.md`
+
+Live Mode (`/impeccable live`) é **beta** e **exige** browser interativo + dev server HMR na mesma sessão do owner. Lucy **não** spawna Live em ticks autônomos.
+
+### Quando sugerir ao owner
+
+| Sinal | Sugestão |
+|-------|----------|
+| Owner reclama de **um** componente/hero/card após critique | Live no elemento (Desktop local) |
+| Dev server rodando + owner em Cursor Desktop | `/impeccable live` |
+| Iteração rápida com comentário/traço no browser | Live > polish genérico no chat |
+| Brief ainda incerto | **shape** primeiro; Live depois |
+
+### Quando NÃO sugerir (fallback)
+
+| Sinal | Fallback Lucy |
+|-------|---------------|
+| VPS / Remote SSH (`cursor_mcp_available: false`) | `polish`/`layout`/`colorize` + detect + visual-gate Playwright |
+| Tick autônomo `/lucy` | Pipeline shape→craft→polish no minor cycle |
+| `refazer-frontend` em massa | detect → critique → layout → polish por rota |
+| Sem dev server | Subir `npm run dev` ou usar polish offline |
+
+### Fluxo resumido (owner + agente)
+
+1. `node .cursor/skills/impeccable/scripts/live.mjs`
+2. `browser_navigate` → `http://localhost:3000/<rota>` (Cursor Desktop)
+3. Poll loop background (`live-poll.mjs`) até `exit`
+4. Owner: pick → anotar → Go → cycle → Accept
+5. Agente: carbonize cleanup se `accept` exigir → `polish` + detect no path
+
+**JSON handoff:** registrar `"suggested_live_mode": true` em `human_blockers` ou owner QA — nunca em `minor_cycle.tasks[]`.
+
+---
+
 ## Comandos Impeccable FORA do loop Lucy
 
 | Excluído | Motivo | Quando usar |
 |----------|--------|-------------|
 | `init`, `document`, `extract` | Setup one-time / ownership DS | `/lucy init` do projeto ou sessão manual |
 | `audit` | Lucy usa `critique` + verifiers + detect CLI | Se owner pedir audit técnico explícito |
-| `live`, `pin`, `hooks` | Interativo / harness | Sessão owner + dev server local |
+| `live`, `pin`, `hooks` | Interativo / harness | Sessão owner + dev server + **Cursor Desktop local** |
 | `onboard`, `delight`, `overdrive` | Escopo atípico produto | Pedido explícito do owner |
 
 ---
@@ -116,6 +185,7 @@ Impeccable **complementa**, não substitui vision:
 | R4 pipeline landing | `critique` → `craft` → `polish` (mínimo) |
 | R6 gate FE | `polish` + detect + visual-gate |
 | R7 init | `init.sh` instala impeccable; não substitui critique no fim |
+| **Iteração visual 1 elemento** | **Live Mode** (owner Desktop) ou fallback `polish`/`layout` no VPS |
 
 ---
 
@@ -141,8 +211,21 @@ Impeccable **complementa**, não substitui vision:
 
 ## VPS / browser
 
-- `live` e extension Chrome: **não** no VPS headless default — usar detect CLI + visual-gate Playwright.
+- **Live Mode:** **não** no VPS — requer Browser MCP interativo + owner no picker. Fallback: `polish`/`shape` + detect + visual-gate Playwright. Ver `impeccable-live-mode.md` § VPS.
+- Extension Chrome + overlay detect: opcional no browser do owner (não no agente VPS).
 - `critique` browser pass: Playwright fallback se MCP browser indisponível (`vps-headless-browser-default.md`).
+
+---
+
+## Checklist Live Mode (sessão owner)
+
+- [ ] `PRODUCT.md` + `DESIGN.md` na raiz
+- [ ] Dev server rodando (`localhost:3000` ou porta do projeto)
+- [ ] Cursor **Desktop local** (não Remote SSH VPS)
+- [ ] `.impeccable/live/config.json` válido
+- [ ] CSP dev permite helper `:8400` (se CSP ativo)
+- [ ] Agente: `live.mjs` → navigate → poll loop até exit
+- [ ] Pós-accept: carbonize cleanup + `npx impeccable detect` no path
 
 ---
 
@@ -152,4 +235,5 @@ Quando Impeccable lançar novos comandos ou regras detector:
 
 1. Atualizar `impeccable-capabilities-map.md`
 2. Revisar `impeccable-routing-table.md` (incluir/excluir do loop)
-3. Bump patch Lucy + `learned/INDEX.md`
+3. Atualizar `impeccable-eight-pillars.md` / `impeccable-live-mode.md` se Live evoluir
+4. Bump patch Lucy + `learned/INDEX.md`

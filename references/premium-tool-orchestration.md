@@ -23,6 +23,7 @@
 | **Mocks interativos na landing** | Nav/tabs/filtros trocam view real; kanban funcional; barras exponenciais | `html-preview-interactive-mocks-protocol.md` |
 | **Design editável híbrido (C)** | HTML loop até aprovar → Penpot MCP tokens → port Next → Puck opcional | `design-editable-hybrid-protocol.md` |
 | **Landing nova (aprovada)** | taste-skill → ui-ux-pro-max → template-gallery → GSAP/view() → shadcn → impeccable polish | `lucy-nova-pagina-protocol.md` · detalhe cmds: `learned/impeccable-lucy-integration.md` |
+| **Iteração visual 1 elemento (owner Desktop)** | `/impeccable live` — pick → 3 variantes → accept grava source | `learned/impeccable-live-mode.md` · VPS: fallback polish/layout |
 | **Landing sem vida** | impeccable `critique` → GSAP stagger → `/lucy refazer-frontend --escopo /rota` | `gsap-premium-protocol.md` |
 | **App page nova** | ui-ux-pro-max → shadcn → tremor → tanstack-query → impeccable | `design-stack-protocol.md` |
 | **QA visual nosso app** | Playwright `visual-gate-capture.sh` + vision V1–V8 | `visual-gate-protocol.md` |
@@ -54,7 +55,7 @@ Ler `.lucy/headless-browser-ready.json` → seguir `primary` e `agent_rule`.
 | Contexto | Browser | Como |
 |----------|---------|------|
 | **VPS / Remote SSH / Cloud Agent** (default HubFU) | **Playwright headless** | `browser-open-url.mjs`, `visual-gate-capture.sh`, `make security-browser` |
-| Cursor Desktop local + `tools/` ≥ 10 | Cursor Browser MCP | `browser_navigate`, `browser_snapshot` (agente pai) |
+| Cursor Desktop local + `tools/` ≥ 10 | Cursor Browser MCP | `browser_navigate`, `browser_snapshot` (agente pai); **Live Mode** `/impeccable live` |
 | Site externo / SPA | Firecrawl | `browser-ai-scrape-protocol.md` |
 
 **Proibido:** `CallMcpTool` → `browser_*` quando `primary: "playwright"` ou `cursor_mcp_available: false`.
@@ -151,3 +152,5 @@ Sinais comuns:
 - `premium-ui-stack.md` — tokens e prompts-mestre
 - `ux-design-intelligence.md` — 15 laws
 - `design-skills-routing-table.md` — superfície → skill
+- `learned/impeccable-eight-pillars.md` — 8 capacidades Impeccable
+- `learned/impeccable-live-mode.md` — Live Mode beta (owner Desktop)

@@ -202,12 +202,17 @@ node .agents/skills/impeccable/scripts/detect.mjs --json <paths>  # bundled, sem
 
 ## Live mode
 
-1. Dev server rodando (`localhost:3000`)
-2. `/impeccable live` — pick elemento no browser
-3. Comentário ou ação (ex. "bolder", "more elegant")
-4. 3 variantes via HMR → **Accept** grava no arquivo fonte
+**Guia Lucy completo:** `impeccable-live-mode.md` · **Pilares:** `impeccable-eight-pillars.md` §7–8
 
-**Lucy:** excluído do loop autônomo (requer interação + dev server). Usar em sessão interativa com owner ou Cursor Desktop local.
+1. Dev server rodando (`localhost:3000`)
+2. `/impeccable live` — `live.mjs` boot + poll loop
+3. Owner: pick elemento → comentário/traço (opcional) → ação → Go
+4. Agente: 3 variantes HMR + knobs → `--reply done`
+5. Owner: cycle → **Accept** grava no source (carbonize cleanup obrigatório)
+
+**Scripts:** `live.mjs`, `live-poll.mjs`, `live-wrap.mjs`, `live-accept.mjs`, `live-complete.mjs`
+
+**Lucy:** excluído do loop autônomo (requer interação + Browser MCP). VPS → fallback polish/shape + detect + visual-gate. Cursor Desktop local + dev server = OK.
 
 ---
 
@@ -228,6 +233,8 @@ Requer Node 24+. Builds por provider incluem regras slop extras (Codex ghost-car
 | Doc | Relação |
 |-----|---------|
 | `impeccable-lucy-integration.md` | Como Lucy invoca no tick |
+| `impeccable-eight-pillars.md` | 8 capacidades impeccable.style × routing |
+| `impeccable-live-mode.md` | Live Mode beta — workflow completo PT-BR |
 | `impeccable-routing-table.md` | 15 cmds permitidos no minor cycle |
 | `design-skills-routing-table.md` | Árvore design director |
-| `premium-tool-orchestration.md` | critique→craft→polish em landing |
+| `premium-tool-orchestration.md` | critique→craft→polish; Live em sessão owner |
