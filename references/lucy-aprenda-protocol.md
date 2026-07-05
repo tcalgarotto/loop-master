@@ -41,7 +41,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | Script / automação | `scripts/` |
 | Processo / disciplina operacional | `docs-sync-discipline.md` + protocolo dono |
 | **Pós-loop aguardando owner / credenciais** | `owner-handoff-qa-protocol.md` |
-| Conflito com regra global | nota + ADR; **nunca** apagar regra de projeto (`/lucy regra`) |
+| **Novas features (pós go-live)** | LD / flag só quando feature **nova** e **100% funcional** — shipped = ON para todos |
 
 ### 2. Editar o skill pack
 
