@@ -29,6 +29,21 @@
 
 Detalhe do fluxo HTML-first: `html-first-design-protocol.md`.
 
+### Case study references (owner-provided)
+
+Quando o owner envia **estudos de caso** completos (mock + live + pipeline), Lucy usa a biblioteca global — **não** substitui intake pontual de tokens.
+
+| Recurso | Uso |
+|---------|-----|
+| `references/case-studies/INDEX.md` | Catálogo — checar antes de sugerir landing brand |
+| `references/case-studies/<slug>.md` | Visual DNA, section anatomy, craft mapping, triggers |
+
+**Fluxo:** owner pede sugestão de site → Lucy lê INDEX → propõe 1–2 cases com *"este estudo de caso combina com X porque…"* → opcionalmente intake tokens do case escolhido.
+
+**Escopo:** register **brand** (landing, marketing, editorial). Cases **não** colam em CRM/dashboard — ver register product em `premium-tool-orchestration.md` R4b.
+
+**Primeiro case:** #001 Neo Mirai — `case-studies/neo-mirai-impeccable.md`.
+
 ---
 
 ## Pipeline (ordem)

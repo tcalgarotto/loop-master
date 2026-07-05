@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.26] — 2026-07-05
+
+### Case studies — Neo Mirai #001 (`/lucy aprenda`)
+
+- **`references/case-studies/neo-mirai-impeccable.md`** — estudo completo: visual DNA, section anatomy, craft pipeline, triggers, anti-patterns
+- **`references/case-studies/INDEX.md`** — catálogo owner-provided (#001+) para sugestões brand
+- **`references/learned/case-study-neo-mirai.md`** — log PT-BR
+- **`design-system-intake.md`** — seção case study references
+- **`premium-tool-orchestration.md`** — R5b: checar INDEX ao sugerir landing
+- **`impeccable-lucy-integration.md`** — `/impeccable craft` 4 fases + Neo Mirai exemplar
+- **`template-gallery.md`** — §10 Neo Mirai conference template
+
 ## [2.9.25] — 2026-07-05
 
 ### Premium motion & scroll storytelling (`/lucy aprenda`)

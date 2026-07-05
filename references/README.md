@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.25 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.26 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -42,6 +42,8 @@
 | [design-skills-routing-table.md](design-skills-routing-table.md) | Mapa skills design |
 | [design-stack-protocol.md](design-stack-protocol.md) | Pipeline Impeccable × UI |
 | [template-gallery.md](template-gallery.md) | Layouts prontos |
+| [case-studies/INDEX.md](case-studies/INDEX.md) | **Estudos de caso** owner-provided — sugestões brand (#001 Neo Mirai) |
+| [design-system-intake.md](design-system-intake.md) | Intake design systems + case study refs |
 | [impeccable-routing-table.md](impeccable-routing-table.md) | 15 cmds Impeccable no minor cycle |
 | [learned/impeccable-capabilities-map.md](learned/impeccable-capabilities-map.md) | **Catálogo completo** — 23 cmds, register, detector 45 regras, live/CLI |
 | [learned/impeccable-eight-pillars.md](learned/impeccable-eight-pillars.md) | **8 pilares** impeccable.style × routing Lucy |

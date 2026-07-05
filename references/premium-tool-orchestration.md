@@ -29,6 +29,7 @@
 | **QA visual nosso app** | Playwright `visual-gate-capture.sh` + vision V1–V8 | `visual-gate-protocol.md` |
 | **@url concorrente** | Firecrawl scrape/sandbox + screenshot + vision | `browser-ai-scrape-protocol.md` |
 | **Design system do owner** | intake → tokens em `DESIGN_SYSTEM.md` + routing | `design-system-intake.md` |
+| **Sugestão de site (brand)** | Checar `case-studies/INDEX.md` → propor 1–2 refs + justificativa → craft/shape se do zero | `case-studies/INDEX.md`, `premium-motion-scroll-protocol.md` |
 | **Código** | test, bugbot, security-review | `test-protocol.md` |
 | **Deploy** | deploy + visual-gate URL produção | `deploy-protocol.md` |
 
@@ -110,6 +111,18 @@ Se o owner envia `@DESIGN.md`, prints, links Figma, ou “design system do X”:
 
 **Sim — tagar design systems ajuda.** Formato ideal: link + 2–3 prints + “o que copiar” (sidebar, hero, cards).
 
+### R5b — Case studies para sugestão de site (brand)
+
+Quando o owner pede **sugestão de landing**, **nova página marketing**, ou **“como ficaria o site”**:
+
+1. Ler `references/case-studies/INDEX.md`
+2. Match triggers do pedido (conferência, editorial, retro-futurist, etc.)
+3. Propor **1–2** estudos de caso: *“Este estudo de caso combina com [pedido] porque [2–3 traits]”*
+4. Match forte + brief vago → pipeline craft (#001 Neo Mirai: mock → toolkit → `/impeccable craft`)
+5. **Não** propor case brand para superfície product (CRM, dashboard, settings)
+
+Ver: `case-studies/neo-mirai-impeccable.md` (#001 exemplar).
+
 ### R6 — Qualidade código + design juntos
 
 Gate bloqueado se:
@@ -174,3 +187,5 @@ Sinais comuns:
 - `learned/impeccable-eight-pillars.md` — 8 capacidades Impeccable
 - `learned/impeccable-live-mode.md` — Live Mode beta (owner Desktop)
 - `learned/vps-live-mode-owner-guide.md` — Live Mode no VPS: tunnel, Ports, checklist owner
+- `case-studies/INDEX.md` — catálogo owner-provided site refs (#001 Neo Mirai)
+- `case-studies/neo-mirai-impeccable.md` — exemplar craft pipeline brand

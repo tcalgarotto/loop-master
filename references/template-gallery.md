@@ -461,6 +461,75 @@ export function PinScrubProductVideo() {
 
 ---
 
+## 10. Neo Mirai Conference (Editorial Brand)
+
+**Superfície:** Landing de conferência / evento editorial — register **brand**  
+**Stack:** Semantic HTML + CSS hand-written (ou Next.js port) + art-directed raster illustrations  
+**Case study:** `case-studies/neo-mirai-impeccable.md` · **Live ref:** https://impeccable.style/neo-mirai/  
+**Pipeline:** hi-fi mock → brand toolkit → `/impeccable craft` → asset regeneration + browser iteration
+
+### Estrutura de layout
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ [nav transparent]  HOME AGENDA SPEAKERS …     [GET TICKETS] │
+├─────────────────────────────────────────────────────────────┤
+│ HERO full-bleed illustration                                │
+│   NEO MIRAI AI DESIGN CONFERENCE (serif, top-left)          │
+│   Tokyo 2042 · tagline · dates                    [JP vert] │
+├──────────────────┬──────────────────────────────────────────┤
+│ AGENDA (charcoal) │ illustration + orange circles + JP text  │
+│ DAY 01–03         │                                          │
+├──────────────────┴──────────────────────────────────────────┤
+│ SPEAKERS — 3 portraits horizontal + VIEW ALL              │
+├─────────────────────────────────────────────────────────────┤
+│ INSTALLATIONS — 3-col square grid                           │
+├──────────────────────────┬──────────────────────────────────┤
+│ MANIFESTO (orange block) │ landscape illustration           │
+├──────────────────────────┴──────────────────────────────────┤
+│ TICKETS — 4 tiers + vertical orange CTA                     │
+├─────────────────────────────────────────────────────────────┤
+│ FOOTER (charcoal slim)                                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Visual DNA (copiar, não pixel-clone)
+
+| Token | Valor |
+|-------|-------|
+| Background | Cream/off-white + grain texture |
+| Text | Charcoal (nunca `#000`) |
+| Accent | Burnt orange — sols, CTAs, manifesto |
+| Display type | High-contrast serif |
+| UI type | Tracked sans, small-caps nav |
+| Accent decor | `writing-mode: vertical-rl` JP text |
+
+### Section checklist
+
+- [ ] Hero full-bleed com headline left-aligned (não centered stack)
+- [ ] Agenda split: bloco dark ~40% + ilustração cream
+- [ ] Speakers row com portraits raster + círculos laranja
+- [ ] Installations 3-col grid quadrado
+- [ ] Manifesto band full-width (orange + landscape)
+- [ ] Tickets field com CTA vertical primário
+- [ ] Motion: `premium-motion-scroll-protocol.md` — parallax hero leve + view() reveals
+
+### Quando usar
+
+| Sinal | Usar este template |
+|-------|-------------------|
+| Conferência, summit, evento cultural | Sim |
+| Editorial brand, retro-futurist warm | Sim |
+| CRM dashboard, tabela densa, settings | **Não** — §1–6 product |
+
+### Comando craft
+
+```
+/impeccable craft retro-futurist AI design conference website
+```
+
+---
+
 ## Checklist antes de usar um template
 
 - [ ] Substituir dados mockados por dados reais (TanStack Query)

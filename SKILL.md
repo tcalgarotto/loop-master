@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.25"
+version: "2.9.26"
 ---
-# Lucy v2.9.25 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.26 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -259,6 +259,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/browser-ai-scrape-protocol.md` — **headless scrape + screenshots (Firecrawl, Playwright, Obscura)**
 - `references/premium-tool-orchestration.md` — **qual ferramenta usar em cada momento (P0)**
 - `references/design-system-intake.md` — **referências de design tagadas pelo owner**
+- `references/case-studies/INDEX.md` — **estudos de caso owner-provided para sugestões brand (#001 Neo Mirai)**
 
 ### Qualidade e entrega
 - `references/test-protocol.md` — **geração de testes /lucy test**

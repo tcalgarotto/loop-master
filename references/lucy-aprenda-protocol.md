@@ -35,7 +35,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | QA visual / screenshots | `visual-gate-protocol.md` |
 | **Live Mode no VPS (tunnel / Ports)** | `learned/impeccable-live-mode.md`, `learned/vps-live-mode-owner-guide.md` |
 | Processo / orquestração premium | `premium-tool-orchestration.md` |
-| Design systems tagados | `design-system-intake.md` |
+| **Case studies (owner)** | Animação / craft pipeline / refs visuais brand | `references/case-studies/` + `learned/case-study-*.md` |
 | Planilhas / edição inline otimista | `optimistic-inline-edit-protocol.md`, `design-system/hubfu/editable-table.md` |
 | Design / UX | `ux-design-intelligence.md`, `premium-ui-stack.md` |
 | Deploy / test / i18n | protocolo correspondente em `references/` |

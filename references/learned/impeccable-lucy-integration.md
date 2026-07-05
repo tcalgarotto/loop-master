@@ -80,10 +80,41 @@ Pipeline do protocolo — **impeccable é o motor de refactor visual:**
 | Tipo | Pipeline Impeccable |
 |------|---------------------|
 | **landing** | taste (dials altos) → `shape` → `craft` → `animate` → `polish` |
+| **landing do zero (brief vago)** | Case #001 Neo Mirai pipeline: hi-fi mock → brand toolkit → `craft` → browser iteration |
 | **app** | ui-ux-pro-max → `shape` → `craft` → `layout` → `polish` |
 | Pós HTML-first | Após owner aprovar `preview/*.html` → `craft` port Next |
 
 Gate: `npx impeccable detect` + `visual-gate-capture.sh` na URL Next.
+
+### `/impeccable craft` — exemplar Neo Mirai (#001)
+
+**Case study:** `references/case-studies/neo-mirai-impeccable.md`  
+**Live:** https://impeccable.style/neo-mirai/  
+**Docs:** https://impeccable.style/docs/craft
+
+**4 fases (non-skippable):**
+
+| Fase | Conteúdo |
+|------|----------|
+| 01 Shape discovery | Purpose, users, constraints, direction — brief legível |
+| 02 Load references | Spatial, typography, motion, color, interaction refs |
+| 03 Build | Structure → hierarchy → type → color → states → motion → responsive |
+| 04 Visual iteration | Browser check + refine até match brief + zero critical detect |
+
+**Quando Lucy propõe craft (não polish/critique):**
+
+- Feature/landing **nova do zero**
+- Owner sabe o quê mas não o visual
+- Quer iteração visual no browser por default
+- Mock hi-fi ou case study como north star (#001)
+
+**Comando exemplo:**
+
+```
+/impeccable craft retro-futurist AI design conference website
+```
+
+**Alternativas:** só thinking → `shape` standalone; visão clara + build rápido → `/impeccable` direto; touch-up → `polish` / Live Mode.
 
 ### `/lucy visual-gate`
 
