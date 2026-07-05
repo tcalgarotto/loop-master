@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.19"
+version: "2.9.20"
 ---
-# Lucy v2.9.19 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.20 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -88,7 +88,7 @@ Campos novos v2.4: `quiz_round`, `quiz_complete`, `index_doc`, `memory_sync`
 | `/lucy analise @url` | Só gap analysis (não codar) |
 | `/lucy build` | Implementar plano existente |
 | `/lucy audit` | Auditar fase atual |
-| `/lucy continuar` | Retomar sessão anterior |
+| `/lucy continuar` | Retomar sessão anterior; se `paused_owner` → **Owner Handoff QA** (rodadas AskQuestion) |
 
 ### Frontend (design premium + páginas novas)
 
@@ -161,7 +161,17 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 1. **Docs sync** — se mudou comando/script/protocolo: `references/docs-sync-discipline.md` (grep → README/MANUAL/SKILL/CHANGELOG → bump patch)
 2. JSON + INDEX + **brain-sync capture** *(+ claude-mem observation_add se L2 ativo)*
 3. `next_prompt` completo
-4. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%`
+4. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%` **e** `owner_qa.complete !== false` com rodadas pendentes
+
+### `paused_owner` — QA antes de silêncio
+
+Quando o agente atinge teto (~90–95%) aguardando humano:
+
+1. **Não** encerrar sem rodadas de decisão — ver `references/owner-handoff-qa-protocol.md`
+2. HYDRATE logs `.lucy/*` + handoff doc → montar **AskQuestion por rodada** (Concluído / Adiar / Preciso de ajuda / N/A)
+3. Persistir `owner_qa.round_N` no progress JSON + brain-sync capture
+4. Após cada rodada: validar "Concluído", executar código possível, próxima rodada até 100% ou adiamentos explícitos
+5. Credenciais: passo a passo sem colar secrets; confirmar só status
 
 ---
 
@@ -258,7 +268,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 
 ### Memória
 - `references/second-brain-protocol.md`
-- `references/memory-protocol.md`
+- `references/owner-handoff-qa-protocol.md` — **quiz pós-loop aguardando owner; rodadas + memória**
 
 ### Onboarding
 - `references/getting-started.md`

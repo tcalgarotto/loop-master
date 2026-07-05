@@ -178,7 +178,13 @@ bash .cursor/skills/lucy/scripts/arm-dynamic-loop.sh \
 }
 ```
 
-Orchestrator **nunca** termina turno sem: (a) re-arm, ou (b) `loop_status: stopped` com motivo, ou (c) `delivery_contract.complete`.
+Orchestrator **nunca** termina turno sem: (a) re-arm, ou (b) `loop_status: stopped` com motivo, ou (c) `delivery_contract.complete`, ou (d) **`paused_owner` + owner QA rodada 1 iniciada** (`owner-handoff-qa-protocol.md`).
+
+### Estado `paused_owner`
+
+- Agente esgotou trabalho automatizado; critérios restantes têm `owner_blocked`.
+- **Próximo passo obrigatório:** Owner Handoff QA — não re-arm heartbeat longo.
+- Após `owner_qa.complete: true` e itens "Concluído" validados → retomar ticks ou fechar contrato.
 
 ---
 

@@ -40,6 +40,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | Novo domínio | `references/learned/<slug>.md` |
 | Script / automação | `scripts/` |
 | Processo / disciplina operacional | `docs-sync-discipline.md` + protocolo dono |
+| **Pós-loop aguardando owner / credenciais** | `owner-handoff-qa-protocol.md` |
 | Conflito com regra global | nota + ADR; **nunca** apagar regra de projeto (`/lucy regra`) |
 
 ### 2. Editar o skill pack
