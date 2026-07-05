@@ -4,7 +4,7 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.30"
+version: "2.9.31"
 ---
 # Lucy v2.9.30 — 100% do cérebro + segundo cérebro + inteligência competitiva
 

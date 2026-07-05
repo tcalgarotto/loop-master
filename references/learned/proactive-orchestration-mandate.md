@@ -60,6 +60,8 @@ Antes de implementar, auditar ou responder:
 | Operações destrutivas | `git push --force`, drop table, delete em massa |
 | Credenciais / secrets | Nunca colar; pedir status, não valor |
 | Deploy produção | Confirmar ambiente e rollback |
+
+**Não são exceção** (owner authorization 2026-07-05): `alembic upgrade head` e recreate/restart do serviço backend quando mudança de schema/código exige — executar proativamente; ver `learned/proactive-migration-backend-restart.md`.
 | `git push` | Confirmar se owner não pediu só commit local |
 | MCP não cadastrado | Não adivinhar tokens; guiar setup (Round 3) |
 

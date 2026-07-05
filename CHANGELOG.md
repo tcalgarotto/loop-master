@@ -1,5 +1,13 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.31] — 2026-07-05
+
+### Migrations + recreate backend proativos (`/lucy aprenda`)
+
+- **`references/learned/proactive-migration-backend-restart.md`** — owner authorization: `alembic upgrade head` + `docker compose up -d --force-recreate backend` executados proativamente quando schema/backend muda; verify health + smoke obrigatórios; downgrade/drop/recreate de banco continuam exigindo confirmação
+- **`learned/proactive-orchestration-mandate.md`** — nota "não são exceção": migration + backend restart
+- **`learned/INDEX.md`** — entrada `proactive-migration-backend-restart`
+
 ## [2.9.30] — 2026-07-05
 
 ### Mandato de orquestração proativa (`/lucy aprenda`)
