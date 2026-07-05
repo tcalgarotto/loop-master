@@ -1,5 +1,13 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.22] — 2026-07-05
+
+### Impeccable no cérebro Lucy (`/lucy aprenda`)
+
+- **`references/learned/impeccable-capabilities-map.md`** — catálogo completo: 23 comandos, register brand/product, 45 regras detector, live/CLI/extension, setup PRODUCT.md/DESIGN.md
+- **`references/learned/impeccable-lucy-integration.md`** — routing explícito: ticks minor cycle, refazer-frontend, nova-pagina, visual-gate + checklist pré-gate
+- Cross-links em `impeccable-routing-table.md`, `design-skills-routing-table.md`, `premium-tool-orchestration.md`, `references/README.md`
+
 ## [2.9.21] — 2026-07-05
 
 ### Design visual HTML — discussão → preview (`/lucy aprenda`)

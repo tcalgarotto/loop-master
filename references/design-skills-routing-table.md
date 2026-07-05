@@ -110,7 +110,7 @@ Máx **2 skills design por tick**.
 | Admin/ERP | impeccable, design-system | shadcn, tremor-raw, tanstack-query | layout, typeset |
 | IA/produto com IA | taste-skill, impeccable | shadcn, magic-ui, aceternity-ui, framer-motion | craft, animate, polish |
 
-Detalhe Impeccable: `references/impeccable-routing-table.md`
+Detalhe Impeccable: `references/impeccable-routing-table.md` · catálogo 23 cmds: `learned/impeccable-capabilities-map.md` · routing Lucy: `learned/impeccable-lucy-integration.md`
 
 ---
 

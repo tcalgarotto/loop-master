@@ -5,6 +5,8 @@ Mapeia **15 comandos Impeccable** permitidos no ciclo minor
 
 **Pré-requisito:** skill Impeccable instalada no projeto (`npx impeccable install`).
 **Complementar:** `design-stack-protocol.md`, `ui-ux-pro-max`, `taste-skill`.
+**Catálogo completo (23 cmds + detector):** `learned/impeccable-capabilities-map.md`  
+**Integração Lucy (ticks, refazer, nova-pagina, gate):** `learned/impeccable-lucy-integration.md`
 
 ---
 

@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-05 | `impeccable-lucy-brain` | Catálogo 23 cmds + 45 regras detector + integração explícita Lucy→impeccable em ticks/refazer/nova-pagina/visual-gate | `learned/impeccable-capabilities-map.md`, `learned/impeccable-lucy-integration.md`, `impeccable-routing-table.md` |
 | 2026-07-05 | `design-visual-html-defaults` | Discussão design → HTML preview com seletor variantes; default 2 light + 2 dark; ler page.tsx alvo; persistir decisão owner | `design-visual-html-protocol.md`, `html-first-design-protocol.md` |
 | 2026-07-05 | `owner-handoff-qa-rounds` | Ao atingir teto/paused_owner: quiz por rodadas (Concluído/Adiar/Ajuda/N/A), contexto da sessão como fonte, persistir owner_qa, continuar até 100% | `references/owner-handoff-qa-protocol.md`, `autonomous-orchestrator-protocol.md` |
 | 2026-07-04 | `vps-headless-browser-default` | VPS/SSH: Playwright headless é browser padrão; MCP cursor-ide-browser toolCount=0; ensure-headless-browser.sh | `references/learned/vps-headless-browser-default.md`, `scripts/ensure-headless-browser.sh` |

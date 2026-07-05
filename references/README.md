@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.18 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.22 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -41,7 +41,9 @@
 | [design-skills-routing-table.md](design-skills-routing-table.md) | Mapa skills design |
 | [design-stack-protocol.md](design-stack-protocol.md) | Pipeline Impeccable × UI |
 | [template-gallery.md](template-gallery.md) | Layouts prontos |
-| [impeccable-routing-table.md](impeccable-routing-table.md) | Comandos Impeccable |
+| [impeccable-routing-table.md](impeccable-routing-table.md) | 15 cmds Impeccable no minor cycle |
+| [learned/impeccable-capabilities-map.md](learned/impeccable-capabilities-map.md) | **Catálogo completo** — 23 cmds, register, detector 45 regras, live/CLI |
+| [learned/impeccable-lucy-integration.md](learned/impeccable-lucy-integration.md) | **Routing Lucy** — ticks, refazer-frontend, nova-pagina, visual-gate |
 | [skill-ecosystem-map.md](skill-ecosystem-map.md) | Todas as skills |
 | [skills-you-can-use.md](skills-you-can-use.md) | Resumo para usuário |
 
