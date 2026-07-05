@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.27 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.29 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -18,6 +18,7 @@
 | [quiz-protocol.md](quiz-protocol.md) | Quiz 7 rodadas (init; Round 3 = MCP) |
 | [mcp-integrations-setup-guide.md](mcp-integrations-setup-guide.md) | **Guia cadastro MCP** — quiz + agente |
 | [claude-mem-nvidia-setup.md](claude-mem-nvidia-setup.md) | **L2 claude-mem** — NVIDIA NIM + multi-sessão |
+| [learned/claude-mem-mcp-operational-playbook.md](learned/claude-mem-mcp-operational-playbook.md) | **MCP claude-mem** — workflow 3-layer + checklist status |
 | [update-protocol.md](update-protocol.md) | `/lucy update` |
 | [multi-project-protocol.md](multi-project-protocol.md) | Vários loops no mesmo repo |
 
@@ -38,6 +39,7 @@
 | [design-editable-hybrid-protocol.md](design-editable-hybrid-protocol.md) | **Caminho C** — HTML loop + Penpot MCP + port Next |
 | [gsap-premium-protocol.md](gsap-premium-protocol.md) | GSAP timelines, ScrollTrigger |
 | [learned/gsap-plugin-orchestration.md](learned/gsap-plugin-orchestration.md) | **GSAP Cursor plugin** — 8 skills, routing (não MCP) |
+| [learned/autonomous-routing-contract.md](learned/autonomous-routing-contract.md) | **Automático vs comando** — skills, MCP, plugin, gaps |
 | [premium-motion-scroll-protocol.md](premium-motion-scroll-protocol.md) | **Scroll storytelling** — pin/scrub, sandwich, imagery, morphism |
 | [ux-design-intelligence.md](ux-design-intelligence.md) | 15 Laws of UX |
 | [design-skills-routing-table.md](design-skills-routing-table.md) | Mapa skills design |

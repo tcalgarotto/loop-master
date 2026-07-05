@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.27"
+version: "2.9.29"
 ---
-# Lucy v2.9.27 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.29 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -250,6 +250,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/lucy-nova-pagina-protocol.md` — **`/lucy nova-pagina`**
 - `references/visual-gate-protocol.md` — **`/lucy visual-gate` — screenshots + vision QA**
 - `references/learned/INDEX.md` — catálogo do que o owner ensinou
+- `references/learned/autonomous-routing-contract.md` — **automático vs comando** (skills, MCP, plugin)
 - `references/ux-design-intelligence.md` — **15 Laws of UX + 12 padrões sidebar**
 - `references/design-skills-routing-table.md` — routing por superfície
 - `references/design-stack-protocol.md`

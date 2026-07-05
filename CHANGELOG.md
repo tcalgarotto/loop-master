@@ -1,5 +1,20 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.29] — 2026-07-05
+
+### Contrato de roteamento autônomo (`/lucy aprenda`)
+
+- **`references/learned/autonomous-routing-contract.md`** — matriz honesta: HYDRATE/rules/quality_gates automáticos; slash commands e MCP opt-in; GSAP semi-auto; gaps conhecidos
+- **`premium-tool-orchestration.md`** — § automático vs comando + cross-link
+
+## [2.9.28] — 2026-07-05
+
+### claude-mem MCP — playbook operacional (`/lucy aprenda`)
+
+- **`references/learned/claude-mem-mcp-operational-playbook.md`** — 4 camadas de status, workflow 3-layer search→timeline→get_observations, NVIDIA NIM default `meta/llama-3.3-70b-instruct`
+- **`claude-mem-nvidia-setup.md`**, **`mcp-integrations-setup-guide.md`**, **`second-brain-protocol.md`** — cross-links + verificação agente
+- **`scripts/mcp-setup-status.sh`** — detecta worker via `npx claude-mem` (fix false negative)
+
 ## [2.9.27] — 2026-07-05
 
 ### GSAP Cursor plugin — orquestração (`/lucy aprenda`)

@@ -4,6 +4,10 @@
 
 **Origem:** `/lucy aprenda` — HubFU landing plana; stack completo deve estar **instalado** (init) e **acionado** (protocolo).
 
+### Automático vs comando explícito
+
+Lucy **mapeia** skills, MCPs e plugins em tabelas — mas **não** executa um router em código. Em ticks `/lucy`, o agente **deve** aplicar este doc + `design-skills-routing-table.md`; comandos como `/lucy @url`, `/lucy aprenda` ou `/lucy visual-gate` (escopo avulso) continuam **opt-in**. Matriz completa: `learned/autonomous-routing-contract.md`.
+
 ---
 
 ## North Star de entrega
@@ -185,6 +189,7 @@ Sinais comuns:
 - `ux-design-intelligence.md` — 15 laws
 - `design-skills-routing-table.md` — superfície → skill
 - `learned/gsap-plugin-orchestration.md` — **GSAP Cursor plugin** (8 skills, não MCP)
+- `learned/autonomous-routing-contract.md` — **o que é automático vs comando** (honesto)
 - `learned/impeccable-eight-pillars.md` — 8 capacidades Impeccable
 - `learned/impeccable-live-mode.md` — Live Mode beta (owner Desktop)
 - `learned/vps-live-mode-owner-guide.md` — Live Mode no VPS: tunnel, Ports, checklist owner
