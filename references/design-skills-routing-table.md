@@ -29,8 +29,16 @@ Consultar **antes** de spawnar workers de design.
 | **brand** | `.cursor/skills/brand` | Identidade, voz, assets de marca | discover, plan | design |
 | **banner-design** | `.cursor/skills/banner-design` | Social, ads, web banners | implement | brand |
 | **slides** | `.cursor/skills/slides` | Apresentações, pitch decks | implement | design-system |
-| **framer-motion** | `npm:framer-motion` | layoutId, AnimatePresence, sidebar React, DnD | implement | gsap |
+| **framer-motion** | `npm:framer-motion` | layoutId, AnimatePresence, sidebar React, DnD | implement | gsap-react |
 | **gsap** | `npm:gsap` | Timelines, ScrollTrigger, stagger, CustomEase | implement (animate) | framer-motion |
+| **gsap-core** | Cursor plugin `gsap-core` | Tweens, stagger, easing, `gsap.matchMedia()` | implement | gsap-timeline |
+| **gsap-timeline** | Cursor plugin `gsap-timeline` | Sequências multi-step, labels, position param | implement | gsap-core |
+| **gsap-scrolltrigger** | Cursor plugin `gsap-scrolltrigger` | Pin, scrub, scroll storytelling | implement (brand) | premium-motion-scroll |
+| **gsap-react** | Cursor plugin `gsap-react` | Next/React: `useGSAP`, scope, cleanup | implement | gsap-core |
+| **gsap-frameworks** | Cursor plugin `gsap-frameworks` | Vue/Nuxt/Svelte lifecycle + context | implement | gsap-core |
+| **gsap-plugins** | Cursor plugin `gsap-plugins` | Flip, SplitText, Draggable, DrawSVG, ScrollTo | polish | gsap-scrolltrigger |
+| **gsap-performance** | Cursor plugin `gsap-performance` | 60fps, transforms, `quickTo`, anti-jank | fix | gsap-core |
+| **gsap-utils** | Cursor plugin `gsap-utils` | mapRange, clamp, snap, selector(scope) | implement | gsap-scrolltrigger |
 | **shadcn/ui** | `npx shadcn@latest` | Componentes premium prontos (sidebar, cards, badges, skeleton) | implement, fix | ui-styling |
 | **tremor-raw** | `npm:@tremor/react` | Gráficos de dashboard leves, limpos, responsivos | implement | tanstack-query |
 | **magic-ui** | `npm:magic-ui` | Efeitos IA: Dot Pattern, Bento Grid, texto digitado | implement | shadcn |
@@ -79,7 +87,9 @@ Entrega tem UI?
    ├─ Lista/tabela com refresh parcial?
    │  └─ html-native-light-protocol → HTMX fragment (antes de client fetch chain)
    ├─ Timeline multi-step, stagger 20+, ScrollTrigger?
-   │  └─ gsap-premium-protocol (sem transition-* no elemento)
+   │  └─ **GSAP plugin:** gsap-core → gsap-timeline / gsap-scrolltrigger (ver `learned/gsap-plugin-orchestration.md`)
+   ├─ React/Next GSAP?
+   │  └─ **gsap-react** (useGSAP + scope) — nunca GSAP em Server Component
    ├─ Hover micro (scale, lift)?
    │  └─ CSS transition — nunca misturar com GSAP no mesmo nó
    └─ Animação React (sidebar, layoutId, Kanban)?
@@ -111,12 +121,12 @@ Máx **2 skills design por tick**.
 |------------|-----------------|-------------------|-----------------|
 | Login/auth | ui-ux-pro-max, impeccable | shadcn, framer-motion | shape, craft, harden |
 | Dashboard (simples) | ui-ux-pro-max, impeccable | shadcn, tremor-raw, framer-motion | layout, polish |
-| Dashboard CRM/ERP | ui-ux-pro-max, impeccable, taste-skill | shadcn (double sidebar), tremor-raw, framer-motion, tanstack-query | layout, colorize, polish — **sem** premium-motion-scroll |
+| Dashboard CRM/ERP | ui-ux-pro-max, impeccable, taste-skill | shadcn (double sidebar), tremor-raw, framer-motion, tanstack-query | layout, colorize, polish — **sem** premium-motion-scroll; GSAP só stagger funcional (**gsap-react** + **gsap-core**) |
 | Kanban/board | impeccable, motion | shadcn, framer-motion | layout, animate |
 | HTML preview kanban (landing mock) | html-preview-interactive-mocks-protocol, gsap | HTML nativo + GSAP snap | DnD nativo + section gate |
 | Inbox/chat | **design-visual-html-protocol**, impeccable, ui-styling | shadcn, framer-motion | craft, clarify — HTML theme picker antes de port tokens |
 | Settings | impeccable, design-system | shadcn | distill, quieter |
-| Landing | taste-skill, banner-design, **premium-motion-scroll** | shadcn, framer-motion, magic-ui, gsap | craft, animate — **sugerir** pin/scrub/sandwich |
+| Landing | taste-skill, banner-design, **premium-motion-scroll**, **gsap-scrolltrigger**, **gsap-timeline** | shadcn, framer-motion, magic-ui, gsap | craft, animate — **sugerir** pin/scrub/sandwich |
 | Admin/ERP | impeccable, design-system | shadcn, tremor-raw, tanstack-query | layout, typeset |
 | IA/produto com IA | taste-skill, impeccable | shadcn, magic-ui, aceternity-ui, framer-motion | craft, animate, polish |
 

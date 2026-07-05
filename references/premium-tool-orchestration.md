@@ -22,9 +22,9 @@
 | **Landing nova (design incerto)** | **HTML-first** `preview/*.html` → owner valida → port Next | `html-first-design-protocol.md` |
 | **Mocks interativos na landing** | Nav/tabs/filtros trocam view real; kanban funcional; barras exponenciais | `html-preview-interactive-mocks-protocol.md` |
 | **Design editável híbrido (C)** | HTML loop até aprovar → Penpot MCP tokens → port Next → Puck opcional | `design-editable-hybrid-protocol.md` |
-| **Landing nova (aprovada)** | taste-skill → ui-ux-pro-max → template-gallery → GSAP/view() → shadcn → impeccable polish | `lucy-nova-pagina-protocol.md` · detalhe cmds: `learned/impeccable-lucy-integration.md` |
+| **Landing nova (aprovada)** | taste-skill → ui-ux-pro-max → template-gallery → **GSAP plugin skills** / view() → shadcn → impeccable polish | `lucy-nova-pagina-protocol.md` · GSAP: `learned/gsap-plugin-orchestration.md` |
 | **Iteração visual 1 elemento (owner Desktop)** | `/impeccable live` — pick → 3 variantes → accept grava source | `learned/impeccable-live-mode.md` · VPS: **guiar** tunnel/Ports (`vps-live-mode-owner-guide.md`) ou fallback polish/layout |
-| **Landing sem vida** | impeccable `critique` → GSAP stagger → `/lucy refazer-frontend --escopo /rota` | `gsap-premium-protocol.md` |
+| **Landing sem vida** | impeccable `critique` → **gsap-timeline** ou **gsap-scrolltrigger** (plugin) → `/lucy refazer-frontend --escopo /rota` | `gsap-premium-protocol.md` · `learned/gsap-plugin-orchestration.md` |
 | **App page nova** | ui-ux-pro-max → shadcn → tremor → tanstack-query → impeccable | `design-stack-protocol.md` |
 | **QA visual nosso app** | Playwright `visual-gate-capture.sh` + vision V1–V8 | `visual-gate-protocol.md` |
 | **@url concorrente** | Firecrawl scrape/sandbox + screenshot + vision | `browser-ai-scrape-protocol.md` |
@@ -41,7 +41,7 @@
 
 ### R1 — Orquestrar, não monotool
 
-Antes de implementar UI, **scan** `skills_installed[]` + protocolos. Se taste-skill instalado e landing → **usar**. Se GSAP no package.json → **pelo menos uma** timeline ou view() scroll na landing.
+Antes de implementar UI, **scan** `skills_installed[]` + protocolos. Se taste-skill instalado e landing → **usar**. Se GSAP no package.json → **pelo menos uma** timeline ou view() scroll na landing. Se **GSAP Cursor plugin** instalado → ler skill adequada (`gsap-react` em Next, `gsap-scrolltrigger` em scroll brand) — ver `learned/gsap-plugin-orchestration.md`.
 
 ### R2 — Browser funcional obrigatório
 
@@ -184,6 +184,7 @@ Sinais comuns:
 - `premium-motion-scroll-protocol.md` — **pin/scrub/sandwich/imagery/morphism** + suggest vs restrain
 - `ux-design-intelligence.md` — 15 laws
 - `design-skills-routing-table.md` — superfície → skill
+- `learned/gsap-plugin-orchestration.md` — **GSAP Cursor plugin** (8 skills, não MCP)
 - `learned/impeccable-eight-pillars.md` — 8 capacidades Impeccable
 - `learned/impeccable-live-mode.md` — Live Mode beta (owner Desktop)
 - `learned/vps-live-mode-owner-guide.md` — Live Mode no VPS: tunnel, Ports, checklist owner

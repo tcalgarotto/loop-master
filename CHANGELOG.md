@@ -1,5 +1,14 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.27] — 2026-07-05
+
+### GSAP Cursor plugin — orquestração (`/lucy aprenda`)
+
+- **`references/learned/gsap-plugin-orchestration.md`** — 8 skills oficiais (não MCP), árvore de decisão, register brand/product, pirâmide html→GSAP→Framer, anti-padrões
+- **`gsap-premium-protocol.md`** — § plugin skills + auto-load gsap-react vs gsap-scrolltrigger
+- **`premium-tool-orchestration.md`**, **`design-skills-routing-table.md`** — rows GSAP plugin + R1 scan
+- **`learned/INDEX.md`** — entrada `gsap-plugin-orchestration`
+
 ## [2.9.26] — 2026-07-05
 
 ### Case studies — Neo Mirai #001 (`/lucy aprenda`)

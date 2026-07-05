@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.26"
+version: "2.9.27"
 ---
-# Lucy v2.9.26 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.27 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -151,7 +151,7 @@ Ver: `lucy-aprenda-protocol.md` · `lucy-regra-protocol.md`
 
 Design: rotear via `design-skills-routing-table.md` (design director–style)
 
-**UI leve + motion premium (v2.8.4+):** aplicar `references/html-native-light-protocol.md` (nativo/CSS scrub) e `references/gsap-premium-protocol.md` (timelines, ScrollTrigger, stagger) antes de `use client` / Framer. **Landing brand:** `references/premium-motion-scroll-protocol.md` — sugerir pin/scrub/sandwich/imagery; **product:** motion funcional só. CSS `transition-*` só em hover — nunca no mesmo elemento que GSAP anima.
+**UI leve + motion premium (v2.8.4+):** aplicar `references/html-native-light-protocol.md` (nativo/CSS scrub) e `references/gsap-premium-protocol.md` (timelines, ScrollTrigger, stagger) antes de `use client` / Framer. **GSAP Cursor plugin (8 skills):** `references/learned/gsap-plugin-orchestration.md` — ler skill adequada (`gsap-react` em Next, `gsap-scrolltrigger` em brand scroll); **não** é MCP. **Landing brand:** `references/premium-motion-scroll-protocol.md` — sugerir pin/scrub/sandwich/imagery; **product:** motion funcional só. CSS `transition-*` só em hover — nunca no mesmo elemento que GSAP anima.
 
 **Visual gate (v2.9.4+):** se `quality_gates.visual_gate_on_fe_phase` e fase tem UI → `visual-gate-capture.sh` + vision checklist **antes** do gate.
 
@@ -242,6 +242,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/integration-cards-patterns.md` — **3 modelos de cards de integração (carousel, marketplace, grid)**
 - `references/design-editable-hybrid-protocol.md` — **Caminho C: HTML até aprovar → Penpot MCP → Next → Puck opcional**
 - `references/gsap-premium-protocol.md` — **GSAP: timelines, ScrollTrigger, stagger premium**
+- `references/learned/gsap-plugin-orchestration.md` — **GSAP Cursor plugin:** 8 skills, routing, register brand/product
 - `references/premium-motion-scroll-protocol.md` — **scroll storytelling: pin/scrub, sandwich, imagery, morphism (brand)**
 - `references/lucy-aprenda-protocol.md` — **`/lucy aprenda` global → GitHub**
 - `references/lucy-regra-protocol.md` — **`/lucy regra` local imutável**

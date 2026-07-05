@@ -5,6 +5,7 @@
 
 > Stack híbrida completa: `references/html-native-light-protocol.md`  
 > **Scroll storytelling premium (pin/scrub/sandwich/imagery):** `references/premium-motion-scroll-protocol.md`  
+> **GSAP Cursor plugin (8 skills, não MCP):** `references/learned/gsap-plugin-orchestration.md`  
 > Design routing: `references/design-skills-routing-table.md`
 
 ---
@@ -218,8 +219,28 @@ useEffect(() => {
 
 ---
 
+## GSAP Cursor plugin — skills oficiais (v2.9.27+)
+
+O GSAP no Cursor é um **plugin com 8 skills** — **não** é MCP. Lucy lê a skill antes de codar; o agente pode auto-carregar pela `description` ou o owner invoca `/gsap-*`.
+
+| Cenário Lucy | Skill plugin | Notas |
+|--------------|--------------|-------|
+| React / Next.js (`use client`) | **gsap-react** | `useGSAP({ scope })`, `@gsap/react`; nunca GSAP em Server Component |
+| Pin, scrub, scroll storytelling | **gsap-scrolltrigger** | Pair com `premium-motion-scroll-protocol.md` em register **brand** |
+| Hero intro multi-step, CRM opening acts | **gsap-timeline** | ScrollTrigger no timeline, não nos filhos |
+| Stagger lista, easing, matchMedia a11y | **gsap-core** | `gsap.matchMedia()` para `prefers-reduced-motion` |
+| Flip, SplitText, Draggable, DrawSVG | **gsap-plugins** | `gsap.registerPlugin()` uma vez por app |
+| Jank, 60fps, listas longas | **gsap-performance** | Transforms only; `quickTo` para mouse followers |
+| Scroll progress → frame index | **gsap-utils** | `mapRange`, `clamp`, `selector(scope)` |
+| Vue / Nuxt / Svelte | **gsap-frameworks** | Não usar gsap-react |
+
+**Auto-load vs manual:** pedidos como "animação React com GSAP" → Lucy carrega **gsap-react** primeiro; "scroll pin vídeo" → **gsap-scrolltrigger** + premium-motion-scroll. Detalhe completo: `references/learned/gsap-plugin-orchestration.md`.
+
+---
+
 ## Referências
 
 - https://gsap.com/docs/v3/
 - ScrollTrigger: https://gsap.com/docs/v3/Plugins/ScrollTrigger/
 - Pin/scrub/sandwich/imagery: `references/premium-motion-scroll-protocol.md`
+- Plugin orchestration (8 skills): `references/learned/gsap-plugin-orchestration.md`
