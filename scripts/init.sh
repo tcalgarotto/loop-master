@@ -239,6 +239,11 @@ if [[ -x "$SCRIPT_DIR/link-ecosystem-skills.sh" ]]; then
   bash "$SCRIPT_DIR/link-ecosystem-skills.sh" || true
 fi
 
+# claude-mem L2 bootstrap (opt-in — settings, NVIDIA .env aliases, worker)
+if lucy_claude_mem_enabled && [[ -x "$SCRIPT_DIR/claude-mem-bootstrap.sh" ]]; then
+  bash "$SCRIPT_DIR/claude-mem-bootstrap.sh" "$PROJECT_ROOT" || true
+fi
+
 # Second Brain (L0) — local memory directory
 if [[ -x "$SCRIPT_DIR/brain-sync.sh" ]]; then
   if lucy_brain_initialized "$PROJECT_ROOT"; then

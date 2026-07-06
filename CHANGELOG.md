@@ -1,5 +1,14 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.32] — 2026-07-06
+
+### claude-mem zero-config (`/lucy aprenda`)
+
+- **`scripts/claude-mem-bootstrap.sh`** — idempotente: settings NVIDIA, `.env` com ambas vars (`CLAUDE_MEM_OPENROUTER_API_KEY` + `OPENROUTER_API_KEY`), alias auto a partir de key existente, worker start, doctor, contagens SQLite/Chroma
+- **`references/learned/claude-mem-zero-config-playbook.md`** — guia owner 3 passos (key → `LUCY_CLAUDE_MEM=1` → bootstrap)
+- **`init.sh`** — chama bootstrap automaticamente quando `LUCY_CLAUDE_MEM=1`
+- **`claude-mem-nvidia-setup.md`**, **`mcp-integrations-setup-guide.md`**, **`mcp-setup-guide.sh`** — caminho zero-config + bootstrap
+
 ## [2.9.31] — 2026-07-05
 
 ### Migrations + recreate backend proativos (`/lucy aprenda`)

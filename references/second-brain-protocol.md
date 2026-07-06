@@ -57,6 +57,10 @@ Sem L2: `brain-sync.sh` não emite erros; agente **não** deve chamar MCP claude
 
 **Setup NVIDIA (build.nvidia.com):** `references/claude-mem-nvidia-setup.md` — openrouter provider + base URL NIM.
 
+**Zero-config (v2.9.32+):** `references/learned/claude-mem-zero-config-playbook.md` — 3 passos + `scripts/claude-mem-bootstrap.sh`.
+
+**MCP workflow (3 camadas):** `search` → `timeline(anchor=ID)` → `get_observations([IDs])`. Playbook: `references/learned/claude-mem-mcp-operational-playbook.md`.
+
 ---
 
 ## Multi-sessão paralela — design / integração / security

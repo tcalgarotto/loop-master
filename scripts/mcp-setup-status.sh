@@ -64,9 +64,14 @@ VISUAL_GATE_SCRIPT=false
 [[ -x "$SCRIPT_DIR/visual-gate-capture.sh" ]] && VISUAL_GATE_SCRIPT=true
 
 CLAUDE_MEM_OK=false
-if has_cmd claude-mem; then
-  claude-mem status 2>/dev/null | grep -qi running && CLAUDE_MEM_OK=true || true
-fi
+_claude_mem_status() {
+  if has_cmd claude-mem; then
+    claude-mem status 2>/dev/null
+  elif has_cmd npx; then
+    npx claude-mem status 2>/dev/null
+  fi
+}
+_claude_mem_status | grep -qi running && CLAUDE_MEM_OK=true || true
 
 HTML_PREVIEW_OK=false
 [[ -x "$SCRIPT_DIR/html-preview-serve.sh" ]] && HTML_PREVIEW_OK=true

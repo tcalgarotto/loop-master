@@ -5,6 +5,7 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-06 | `claude-mem-zero-config` | L2 zero-config: 3 passos owner, bootstrap idempotente, alias NVIDIA .env, init auto-call | `learned/claude-mem-zero-config-playbook.md`, `claude-mem-nvidia-setup.md`, `scripts/claude-mem-bootstrap.sh` |
 | 2026-07-05 | `proactive-migration-backend-restart` | Owner authorization: migration (`alembic upgrade head`) + recreate backend são proativos e obrigatórios quando schema/backend muda; verify health + smoke; downgrade/drop continuam exigindo confirmação | `learned/proactive-migration-backend-restart.md`, `learned/proactive-orchestration-mandate.md` |
 | 2026-07-05 | `proactive-orchestration-mandate` | Owner authorization: agente MUST ativar skills/MCPs quando protocolo indica; proibido "Posso usar X?"; exceções destructive/credentials/deploy | `learned/proactive-orchestration-mandate.md`, `autonomous-routing-contract.md`, `autonomous-orchestrator-protocol.md` |
 | 2026-07-05 | `autonomous-routing-contract` | Matriz honesta: HYDRATE/tabelas/quality_gates automáticos; slash commands e MCP opt-in; v2.9.30+ mandato proativo MUST activate | `learned/autonomous-routing-contract.md`, `premium-tool-orchestration.md` |

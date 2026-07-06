@@ -136,21 +136,30 @@ Fallback sem key: Playwright + `browser-ai-scrape-protocol.md`
 
 **Padrão v2.9.14+:** desabilitado — L0 brain + L1 JSON bastam. Habilitar só com opt-in.
 
+**Guia zero-config (3 passos):** `learned/claude-mem-zero-config-playbook.md`
+
+**MCP Cursor:** plugin `plugin-claude-mem-mcp-search` (tools: `search`, `timeline`, `get_observations`, `observation_add`).  
+**Backend LLM:** NVIDIA NIM via `build.nvidia.com` — **não** é MCP separado; key em `~/.claude-mem/.env`.
+
 | Passo | Ação |
 |-------|------|
-| 1 | API key em [build.nvidia.com](https://build.nvidia.com) → Profile → Generate Personal Key (`nvapi-...`) |
-| 2 | Copiar `references/templates/claude-mem-settings.nvidia.json` → `~/.claude-mem/settings.json` |
-| 3 | Copiar `references/templates/claude-mem-nvidia.env.example` → `~/.claude-mem/.env` (chmod 600) e colar key |
-| 4 | `export LUCY_CLAUDE_MEM=1` (profile ou sessão) |
-| 5 | `LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/init.sh` |
-| 6 | `npx claude-mem status` — worker running |
-| 7 | Cursor → Settings → Tools & MCPs → **claude-mem** verde |
+| 1 | API key em [build.nvidia.com](https://build.nvidia.com) → colar **uma vez** em `~/.claude-mem/.env` (chmod 600) |
+| 2 | `LUCY_CLAUDE_MEM=1` no `.env` do projeto |
+| 3 | `LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/claude-mem-bootstrap.sh` |
+| 4 | Cursor → Settings → Tools & MCPs → **claude-mem** verde |
+| 5 | Teste agente: MCP `search(query="projeto")` → índice com IDs |
+
+*Alternativa:* `LUCY_CLAUDE_MEM=1 bash scripts/init.sh --update-mode incremental` (chama bootstrap automaticamente).
+
+**Workflow MCP (3 camadas):** `search` → `timeline(anchor=ID)` → `get_observations([IDs])` — nunca pular filtro.
 
 **Provider:** openrouter-compatible apontando para NVIDIA NIM (`integrate.api.nvidia.com/v1`) — **não** DeepSeek.
 
+**Modelo default:** `meta/llama-3.3-70b-instruct` (ver `claude-mem-nvidia-setup.md` para alternativas VPS).
+
 **Multi-sessão:** L2 = índice compartilhado (search); L1 `lucy-progress.json` = **single writer** — ver guia completo.
 
-Ver: `claude-mem-nvidia-setup.md` · `second-brain-protocol.md` · `memory-protocol.md`
+Ver: `claude-mem-nvidia-setup.md` · `learned/claude-mem-mcp-operational-playbook.md` · `second-brain-protocol.md` · `memory-protocol.md`
 
 ---
 

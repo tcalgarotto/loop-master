@@ -84,6 +84,20 @@ flowchart LR
 
 ## Setup NVIDIA — passo a passo
 
+**Caminho zero-config (v2.9.32+):** ver `references/learned/claude-mem-zero-config-playbook.md` — 3 passos owner + `claude-mem-bootstrap.sh`.
+
+### Atalho — bootstrap idempotente
+
+```bash
+# 1. Colar nvapi- em ~/.claude-mem/.env (uma vez por máquina)
+# 2. LUCY_CLAUDE_MEM=1 no .env do projeto
+LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/claude-mem-bootstrap.sh
+# ou init incremental (chama bootstrap automaticamente):
+LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/init.sh --update-mode incremental
+```
+
+O script: copia `settings.json` + template `.env`, sincroniza **ambas** vars NVIDIA a partir de uma key existente, inicia worker, roda `doctor`.
+
 ### 1. Obter API key (build.nvidia.com)
 
 1. Acesse [build.nvidia.com](https://build.nvidia.com)
@@ -95,11 +109,22 @@ Modelos recomendados para extração de observações (baratos/rápidos no NIM):
 
 | Model ID | Notas |
 |----------|-------|
-| `meta/llama-3.3-70b-instruct` | Bom equilíbrio qualidade/custo |
-| `mistralai/mistral-small-24b-instruct-2501` | Mais leve, VPS com RAM limitada |
-| `nvidia/nemotron-4-340b-instruct` | Reasoning; mais lento |
+| **`meta/llama-3.3-70b-instruct`** | **Default v2.9.28+** — melhor equilíbrio qualidade/latência/custo para indexação L2 |
+| `mistralai/mistral-small-24b-instruct-2501` | Mais leve, VPS com RAM limitada (~11 GB) |
+| `nvidia/llama-3.1-nemotron-70b-instruct` | Reasoning; mais lento — reservar para tarefas pontuais, não indexação contínua |
+| `nvidia/nemotron-4-340b-instruct` | Reasoning pesado; evitar em worker 24/7 |
 
 Consulte modelos ativos em build.nvidia.com — IDs mudam; o valor vai **verbatim** em `CLAUDE_MEM_OPENROUTER_MODEL`.
+
+### Verificar stack completa (agente)
+
+```bash
+npx claude-mem status                                    # worker :37700
+test -f ~/.claude-mem/.env && echo "nvidia env present"  # nvapi- fora do repo
+# MCP: search(query="projeto") → índice com IDs
+```
+
+Ver playbook operacional: `references/learned/claude-mem-mcp-operational-playbook.md`.
 
 ### 2. `~/.claude-mem/settings.json`
 
@@ -123,23 +148,22 @@ Template no skill pack: `references/templates/claude-mem-settings.nvidia.json`
 ```bash
 # chmod 600 ~/.claude-mem/.env
 CLAUDE_MEM_OPENROUTER_API_KEY=nvapi-SUA_KEY_AQUI
+OPENROUTER_API_KEY=nvapi-SUA_KEY_AQUI   # obrigatório — worker só ativa OpenRouter/NIM com esta var
 ```
 
-Fallbacks aceitos pelo worker: `OPENROUTER_API_KEY` (mesmo valor).
+Defina **as duas** com o mesmo `nvapi-…`. Só `CLAUDE_MEM_OPENROUTER_API_KEY` faz o worker cair no Claude SDK (falha em VPS sem `claude` CLI).
 
 Template: `references/templates/claude-mem-nvidia.env.example`
 
 ### 4. Habilitar L2 na Lucy
 
 ```bash
-# Persistir no ~/.bashrc ou ~/.profile (opcional):
-export LUCY_CLAUDE_MEM=1
+# Uma linha no .env do projeto (não é secret):
+LUCY_CLAUDE_MEM=1
 
-# Init incremental (instala/start worker só se opt-in):
-cd /path/to/seu-projeto
-LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/init.sh
-# ou no Loop-master:
-LUCY_CLAUDE_MEM=1 bash /home/thales/Projetos/Loop-master/scripts/init.sh
+# Bootstrap (recomendado) ou init incremental:
+LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/claude-mem-bootstrap.sh
+# LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/init.sh --update-mode incremental
 ```
 
 Verificar:
@@ -172,7 +196,8 @@ Não reinstala o que já está OK (`install-idempotent.sh`).
 
 | Sintoma | Causa provável | Ação |
 |---------|----------------|------|
-| `OpenRouter API key not configured` | `.env` ausente ou vazio | Criar `~/.claude-mem/.env` com `CLAUDE_MEM_OPENROUTER_API_KEY` |
+| `OpenRouter API key not configured` | `.env` ausente ou vazio | Criar `~/.claude-mem/.env` com ambas as vars `nvapi-` |
+| Worker running, logs `Claude executable not found` | Só `CLAUDE_MEM_OPENROUTER_API_KEY` no `.env` | Adicionar `OPENROUTER_API_KEY=` (mesmo valor) + `npx claude-mem restart` |
 | Worker running, agente não busca L2 | MCP desligado no Cursor | Settings → Tools & MCPs → claude-mem ON |
 | `Dependencies: degraded` (VPS) | Claude CLI não necessário para NVIDIA | Ignorar se provider=openrouter + doctor OK para embeddings |
 | Observações não indexam | Model ID inválido no NIM | Conferir ID em build.nvidia.com |
@@ -229,7 +254,8 @@ npx claude-mem stop && npx claude-mem start
 
 | Comando | Ação |
 |---------|------|
-| `LUCY_CLAUDE_MEM=1 bash scripts/init.sh` | Instalar/start worker |
+| `LUCY_CLAUDE_MEM=1 bash scripts/claude-mem-bootstrap.sh` | **Zero-config** — settings + .env + worker + verify |
+| `LUCY_CLAUDE_MEM=1 bash scripts/init.sh` | Instalar/start worker (+ bootstrap automático) |
 | `npx claude-mem status` | Health worker |
 | `npx claude-mem doctor` | Diagnóstico provider |
 | `bash scripts/mcp-setup-guide.sh --slug claude-mem` | Guia resumido |
