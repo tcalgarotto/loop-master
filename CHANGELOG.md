@@ -1,5 +1,18 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.36] — 2026-07-06
+
+### Handoff completo após subagentes (`/lucy aprenda`)
+
+- **`references/learned/multi-subagent-handoff-synthesis.md`** — owner authorization: parent MUST entregar 5 seções (per-agent, estado, owner items, agent-next, checklist); anti-padrão "subagent completed"
+- **`owner-handoff-qa-protocol.md`**, **`autonomous-orchestrator-protocol.md`**, **`agent-routing-table.md`**, **`SKILL.md`** — cross-links e handoff §7
+
+## [2.9.35] — 2026-07-06
+
+### L2b knowledge-agent — project slug + query login (`/lucy configure`)
+
+- **`references/learned/l2-knowledge-agent-protocol.md`** — armadilha `project=hermes-crm` (0 obs); usar slug claude-mem; `query_corpus` exige `claude /login`
+
 ## [2.9.34] — 2026-07-06
 
 ### knowledge-agent L2b + arquitetura de memória (`/lucy aprenda`)

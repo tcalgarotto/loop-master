@@ -43,6 +43,7 @@ Entrada: texto, prints, `@arquivo.md`, transcrição de Reel.
 | Script / automação | `scripts/` |
 | Processo / disciplina operacional | `docs-sync-discipline.md` + protocolo dono |
 | **Pós-loop aguardando owner / credenciais** | `owner-handoff-qa-protocol.md` |
+| **Handoff após subagentes (síntese coordinator)** | **`learned/multi-subagent-handoff-synthesis.md`**, `owner-handoff-qa-protocol.md` |
 | **Novas features (pós go-live)** | LD / flag só quando feature **nova** e **100% funcional** — shipped = ON para todos |
 
 ### 2. Editar o skill pack

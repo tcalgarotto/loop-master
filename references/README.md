@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.34 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.36 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -72,7 +72,9 @@
 
 | Doc | Conteúdo |
 |-----|----------|
-| [autonomous-orchestrator-protocol.md](autonomous-orchestrator-protocol.md) | 8 mandamentos, re-arm |
+| [autonomous-orchestrator-protocol.md](autonomous-orchestrator-protocol.md) | 8 mandamentos, re-arm, handoff pós-workers |
+| [learned/multi-subagent-handoff-synthesis.md](learned/multi-subagent-handoff-synthesis.md) | **Síntese coordinator** — 5 seções após subagentes |
+| [owner-handoff-qa-protocol.md](owner-handoff-qa-protocol.md) | Quiz pós-loop aguardando owner |
 | [orchestrator-protocol.md](orchestrator-protocol.md) | Paralelismo, workers |
 | [agent-routing-table.md](agent-routing-table.md) | Subagents Cursor |
 | [prompt-template.md](prompt-template.md) | Templates next_prompt |

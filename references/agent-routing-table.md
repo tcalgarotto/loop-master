@@ -148,6 +148,7 @@ Detalhe segurança: `security-audit-protocol.md`
 
 ## Anti-padrões de roteamento
 
+- Parent encerra com "subagent completed" — **obrigatório** sintetizar em `learned/multi-subagent-handoff-synthesis.md`
 - `explore` + `generalPurpose` no **mesmo arquivo** em paralelo.
 - Dois `generalPurpose` escrevendo o **mesmo arquivo**.
 - `bugbot` como implementer (é readonly).

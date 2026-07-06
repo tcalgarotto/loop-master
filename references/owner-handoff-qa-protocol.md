@@ -4,6 +4,8 @@
 
 **Objetivo:** Não encerrar sessão em silêncio. Rodar **quiz de decisão por rodadas**, usar **todo o contexto da sessão** (logs `.lucy/*`, diffs, `lucy-progress.json`, handoff doc) como fonte das perguntas, persistir respostas na memória, e **continuar executando** tudo que não depende do humano até `delivery_contract.complete`.
 
+**Pré-requisito (turnos com subagentes):** antes de iniciar rodadas QA, o coordinator deve entregar o handoff completo de 5 seções em `learned/multi-subagent-handoff-synthesis.md` (per-agent summary, estado, owner items, agent-next, checklist). Owner QA **complementa** a síntese — não a substitui.
+
 ---
 
 ## Gatilho (obrigatório)
@@ -103,6 +105,7 @@ Quando checklist owner OK:
 
 ## Anti-padrões
 
+- Encerrar com "subagent completed" ou pedir ao owner que leia transcripts — ver `learned/multi-subagent-handoff-synthesis.md`
 - Parar em `paused_owner` **sem** iniciar owner QA
 - Perguntas de init quiz (`r1_goal`, etc.) no handoff
 - Imprimir secrets ou colar `.env` no progress JSON

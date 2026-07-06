@@ -95,10 +95,12 @@ Máx 4 workers + 2 verifiers; 1–2 skills design por tick.
 
 ### 7. Fim do tick — handoff + próximo tick automático
 
+**Turnos com subagentes/workers:** resposta user-facing **e** JSON devem seguir `learned/multi-subagent-handoff-synthesis.md` (5 seções). Proibido "subagent completed" ou síntese só no transcript.
+
 Ao persistir JSON:
 
 1. `tick_count++`, `updated_at`, `overall_pct`
-2. `last_iteration.agent_summary` (3–8 frases)
+2. `last_iteration.agent_summary` (3–8 frases; espelha per-agent + working/broken se houve workers)
 3. **`brain-sync.sh capture`** + claude-mem `observation_add`
 4. `next_actions[]` (max 5, ordenadas)
 4. **`next_prompt`** — prompt completo copiável para o próximo tick (ver template abaixo)

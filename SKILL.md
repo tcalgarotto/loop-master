@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.34"
+version: "2.9.36"
 ---
-# Lucy v2.9.34 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.36 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -160,10 +160,11 @@ Design: rotear via `design-skills-routing-table.md` (design director–style)
 **Orquestração premium (v2.9.6+):** `premium-tool-orchestration.md` — usar taste + impeccable + GSAP + browser + Firecrawl conforme o momento; landing exige motion + visual-gate na URL final.
 
 ### Depois (handoff)
-1. **Docs sync** — se mudou comando/script/protocolo: `references/docs-sync-discipline.md` (grep → README/MANUAL/SKILL/CHANGELOG → bump patch)
-2. JSON + INDEX + **brain-sync capture** *(+ claude-mem observation_add se L2 ativo)*
-3. `next_prompt` completo
-4. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%` **e** `owner_qa.complete !== false` com rodadas pendentes
+1. **Subagentes** — se delegou 1+ `Task`: síntese completa em `references/learned/multi-subagent-handoff-synthesis.md` (5 seções); proibido "subagent completed"
+2. **Docs sync** — se mudou comando/script/protocolo: `references/docs-sync-discipline.md` (grep → README/MANUAL/SKILL/CHANGELOG → bump patch)
+3. JSON + INDEX + **brain-sync capture** *(+ claude-mem observation_add se L2 ativo)*
+4. `next_prompt` completo
+5. **Re-arm:** `arm-dynamic-loop.sh --seconds 45` se `< 100%` **e** `owner_qa.complete !== false` com rodadas pendentes
 
 ### `paused_owner` — QA antes de silêncio
 
@@ -279,6 +280,7 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/second-brain-protocol.md`
 - `references/learned/l2-knowledge-agent-protocol.md` — **L2b corpus Q&A vs search**
 - `references/owner-handoff-qa-protocol.md` — **quiz pós-loop aguardando owner; rodadas + memória**
+- `references/learned/multi-subagent-handoff-synthesis.md` — **síntese obrigatória após subagentes (5 seções)**
 
 ### Onboarding
 - `references/getting-started.md`
