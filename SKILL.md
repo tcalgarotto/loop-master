@@ -4,9 +4,9 @@ description: >-
   Autonomous AI orchestrator with Second Brain memory, premium design intelligence,
   and competitive analysis. Uses 100% of AI capacity: 6-round quiz, dynamic AGI
   workflows, design director routing, gap analysis. Commands: /lucy init, /lucy, /lucy analise.
-version: "2.9.33"
+version: "2.9.34"
 ---
-# Lucy v2.9.33 — 100% do cérebro + segundo cérebro + inteligência competitiva
+# Lucy v2.9.34 — 100% do cérebro + segundo cérebro + inteligência competitiva
 
 **Manual completo:** [MANUAL.md](MANUAL.md)  
 **Second Brain:** `references/second-brain-protocol.md`  
@@ -19,7 +19,7 @@ version: "2.9.33"
 A cada `/lucy` (tick ou chat):
 
 1. **HYDRATE** — `brain-sync.sh hydrate` + ler **`.cursor/lucy-brain/rules/*.md` (P0)** + protocolos do skill pack  
-   *(L2 claude-mem MCP — opcional; só se `LUCY_CLAUDE_MEM=1` + MCP cadastrado)*
+   *(L2 claude-mem MCP — opcional; só se `LUCY_CLAUDE_MEM=1` + MCP cadastrado; recall complexo → knowledge-agent)*
 2. **TRABALHAR** — com contexto acumulado
 3. **CAPTURE** — `brain-sync.sh capture` *(+ claude-mem observation_add se L2 ativo)*
 
@@ -141,7 +141,7 @@ Ver: `lucy-aprenda-protocol.md` · `lucy-regra-protocol.md`
 ## Modo autônomo — cada tick
 
 ### Antes (hidratação)
-1. **Second Brain HYDRATE** — `brain-sync.sh hydrate` *(+ claude-mem search se L2 ativo)*
+1. **Second Brain HYDRATE** — `brain-sync.sh hydrate` *(+ claude-mem search se L2 ativo; knowledge-agent se recall complexo)*
 2. L1 JSON + `next_prompt` + L0 dev-profile + project-mind
 3. INDEX sync emojis
 4. Scan `skills_installed[]`
@@ -199,10 +199,10 @@ Quando o agente atinge teto (~90–95%) aguardando humano:
 |--------|-------------|
 | L0 Brain | `.cursor/lucy-brain/` — **toda interação** |
 | L1 JSON | progress handoff |
-| L2 claude-mem | MCP search + observation_add — **opcional** (opt-in) |
+| L2 claude-mem | MCP search + knowledge-agent + observation_add — **opcional** (opt-in) |
 | L3 PLAN/INDEX | docs humanos |
 
-Ver `references/second-brain-protocol.md` + `memory-protocol.md`
+Ver `references/second-brain-protocol.md` + `memory-protocol.md` + `references/memory-architecture.md`
 
 ---
 
@@ -275,7 +275,9 @@ Enquanto incompleto: re-arm automático obrigatório.
 - `references/docs-sync-discipline.md` — **sync obrigatória após mudança (Hermes-style)**
 
 ### Memória
+- `references/memory-architecture.md` — **L0–L3 + L4/L5 comunidade + Vector DB**
 - `references/second-brain-protocol.md`
+- `references/learned/l2-knowledge-agent-protocol.md` — **L2b corpus Q&A vs search**
 - `references/owner-handoff-qa-protocol.md` — **quiz pós-loop aguardando owner; rodadas + memória**
 
 ### Onboarding

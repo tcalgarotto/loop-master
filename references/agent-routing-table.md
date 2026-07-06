@@ -11,6 +11,7 @@ Invocar via ferramenta **Task**; múltiplos Tasks na **mesma mensagem** quando p
 |-------------------|---------------|----------|----------------------|---------------|
 | Quiz / contexto | orchestrator | — | AskQuestion, quiz-protocol | `quiz_answers` |
 | Explorar codebase, mapear APIs | `explore` | true | claude-mem search | `backend/`, `frontend/` |
+| Recall cross-session / expertise acumulada | orchestrator | — | claude-mem knowledge-agent (`query_corpus`) ou search 3-layer | decisões passadas, padrões |
 | Implementar feature, fix bug | `generalPurpose` | false | loop-master | arquivos da task |
 | UI product novo | `generalPurpose` | false | impeccable craft, ui-ux-pro-max | `frontend/src/**` |
 | UI refino | `generalPurpose` | false | impeccable layout/typeset | superfície única |
@@ -40,7 +41,8 @@ Invocar via ferramenta **Task**; múltiplos Tasks na **mesma mensagem** quando p
 |--------------|-------------------|
 | Contexto incompleto | **AskQuestion** (quiz-protocol.md) |
 | Mapear área desconhecida | 1× `explore` readonly |
-| Histórico cross-session | claude-mem `search` |
+| Histórico cross-session (tick imediato) | claude-mem `search` → timeline → get_observations |
+| Retrospectiva / "o que decidimos sobre X?" | claude-mem knowledge-agent — `build_corpus` → `prime_corpus` → `query_corpus` (L2 ativo) |
 | Design system inexistente | ui-ux-pro-max `search.py --design-system` |
 
 ### `plan`

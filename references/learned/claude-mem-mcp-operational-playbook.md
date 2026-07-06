@@ -132,3 +132,6 @@ Teste agente: `search(query="nome-do-projeto")` deve retornar índice com IDs.
 | `bash scripts/mcp-setup-guide.sh --slug claude-mem` | Guia resumido |
 | MCP `search` | HYDRATE L2 |
 | MCP `observation_add` | CAPTURE L2 |
+| MCP `build_corpus` → `prime_corpus` → `query_corpus` | L2b knowledge-agent — retrospectiva (v2.9.34+) |
+
+Ver `learned/l2-knowledge-agent-protocol.md` · `memory-architecture.md`.

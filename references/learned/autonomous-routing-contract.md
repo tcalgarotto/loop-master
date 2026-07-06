@@ -84,6 +84,7 @@ Está **mapeado** nas tabelas; enforcement é o agente, não código. **Não per
 | FE alterado | Rodar `npx impeccable detect` no verify | Slop no gate |
 | Site externo | Firecrawl ou Playwright scrape (sem perguntar qual) | WebFetch em SPA falha |
 | claude-mem L2 | `search` no HYDRATE se MCP verde | Memória cross-session perdida |
+| claude-mem recall complexo | `build_corpus` → `prime_corpus` → `query_corpus` se retrospectiva | Perde padrões acumulados |
 | MCP indicado + cadastrado | `CallMcpTool` direto | Sub-utilização de capacidade |
 
 **GSAP:** em ticks autônomos o agente **declara** (1 linha) qual skill GSAP seguirá, **lê** o SKILL.md e **executa** — não depende de MCP nem de `/gsap-*` do owner. Ver `learned/proactive-orchestration-mandate.md`.

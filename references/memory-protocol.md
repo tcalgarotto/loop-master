@@ -2,7 +2,9 @@
 
 Loop-master usa **quatro camadas** de memória. O **Second Brain (L0)** é o diferencial v2.5.
 
-Ver protocolo completo: `references/second-brain-protocol.md`
+Ver protocolo completo: `references/second-brain-protocol.md`  
+Mapa L0–L5: `references/memory-architecture.md`  
+Knowledge-agent (L2b): `references/learned/l2-knowledge-agent-protocol.md`
 
 ## Camadas
 

@@ -61,6 +61,8 @@ Sem L2: `brain-sync.sh` não emite erros; agente **não** deve chamar MCP claude
 
 **MCP workflow (3 camadas):** `search` → `timeline(anchor=ID)` → `get_observations([IDs])`. Playbook: `references/learned/claude-mem-mcp-operational-playbook.md`.
 
+**Knowledge-agent (L2b, v2.9.34+):** para recall complexo / retrospectiva — `build_corpus` → `prime_corpus` → `query_corpus`. Ver `references/learned/l2-knowledge-agent-protocol.md` · mapa completo `references/memory-architecture.md`.
+
 ---
 
 ## Multi-sessão paralela — design / integração / security
@@ -111,6 +113,8 @@ bash .cursor/skills/lucy/scripts/brain-sync.sh hydrate
 3. timeline(anchor=<id>) — só se search retornar hit relevante
 4. get_observations([ids]) — só IDs filtrados
 ```
+
+**Recall complexo** (retrospectiva, "o que decidimos sobre X?", padrões cross-session): após passo 2, se search insuficiente e corpus existe → `query_corpus`; senão `build_corpus` + `prime_corpus` + `query_corpus`. Ver `learned/l2-knowledge-agent-protocol.md`. **Não** substituir search no HYDRATE padrão.
 
 Merge em `memory_refs[]` no progress JSON. **Não agir** sem hydrate L0.
 

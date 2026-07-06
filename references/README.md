@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.33 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.34 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -85,8 +85,10 @@
 
 | Doc | Conteúdo |
 |-----|----------|
+| [memory-architecture.md](memory-architecture.md) | **L0–L3 + L4/L5 comunidade** — Vector DB custom vs claude-mem |
 | [second-brain-protocol.md](second-brain-protocol.md) | Second Brain L0 + hooks |
 | [memory-protocol.md](memory-protocol.md) | L1/L2/L3 camadas |
+| [learned/l2-knowledge-agent-protocol.md](learned/l2-knowledge-agent-protocol.md) | **L2b knowledge-agent** — corpus Q&A vs search |
 | [context-schema.json](context-schema.json) | Schema progress JSON |
 
 ## Qualidade & entrega

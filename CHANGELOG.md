@@ -1,5 +1,15 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.34] — 2026-07-06
+
+### knowledge-agent L2b + arquitetura de memória (`/lucy aprenda`)
+
+- **`references/learned/l2-knowledge-agent-protocol.md`** — workflow 3 camadas: search (HYDRATE) vs corpus Q&A (retrospectiva); árvore de decisão; corpora HubFU sugeridos
+- **`references/memory-architecture.md`** — mapa L0–L3 Lucy + L4/L5 comunidade; Vector DB custom vs Chroma claude-mem; skills plugin (knowledge-agent, weekly-digests, timeline-report)
+- **`second-brain-protocol.md`** — HYDRATE: recall complexo → knowledge-agent ou search
+- **`agent-routing-table.md`** — row knowledge-agent + discover step retrospectiva
+- **`SKILL.md`** — v2.9.34; refs memory-architecture + l2-knowledge-agent
+
 ## [2.9.33] — 2026-07-06
 
 ### NVIDIA API keys — uma por usuário (`/lucy aprenda`)
