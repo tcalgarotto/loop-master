@@ -98,12 +98,14 @@ LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/init.sh --update-mode increme
 
 O script: copia `settings.json` + template `.env`, sincroniza **ambas** vars NVIDIA a partir de uma key existente, inicia worker, roda `doctor`.
 
-### 1. Obter API key (build.nvidia.com)
+### 1. Obter API key (build.nvidia.com) — uma por usuário
+
+> **Segurança (v2.9.33+):** `references/learned/nvidia-api-keys-per-user.md` · `references/credentials-policy.md`
 
 1. Acesse [build.nvidia.com](https://build.nvidia.com)
 2. Crie conta / faça login
 3. **Profile → API Keys → Generate Personal Key**
-4. Copie a key (`nvapi-...`) — **nunca commitar no repo**
+4. Cole a key (`nvapi-...`) **localmente** em `~/.claude-mem/.env` — agente **guia** estes passos; **nunca** pede a key no chat; **nunca** commitar no repo
 
 Modelos recomendados para extração de observações (baratos/rápidos no NIM):
 

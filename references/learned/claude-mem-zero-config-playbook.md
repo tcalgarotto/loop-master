@@ -22,10 +22,12 @@ L2 vale quando roda **2+ chats Cursor** no mesmo projeto e quer recall (“o que
 
 ## 3 passos (owner)
 
-### 1. Key NVIDIA — uma vez por máquina
+### 1. Key NVIDIA — uma por usuário (não compartilhar)
+
+> **Segurança (v2.9.33+):** cada pessoa gera **sua própria** key; agente só guia — nunca pede a key no chat. Ver `nvidia-api-keys-per-user.md`.
 
 1. [build.nvidia.com](https://build.nvidia.com) → Profile → API Keys → Generate Personal Key (`nvapi-...`)
-2. Cole **uma vez** em `~/.claude-mem/.env` (chmod 600)
+2. Cole **uma vez** em `~/.claude-mem/.env` (chmod 600) — **só localmente**, fora do repo e do chat
 
 O bootstrap copia o template e sincroniza **as duas** variáveis com o mesmo valor:
 
@@ -34,7 +36,7 @@ CLAUDE_MEM_OPENROUTER_API_KEY=nvapi-...
 OPENROUTER_API_KEY=nvapi-...   # obrigatório — worker só ativa NIM com esta var
 ```
 
-**Nunca** commitar a key no repo do app.
+**Nunca** commitar a key no repo do app. **Nunca** compartilhar key entre usuários ou máquinas.
 
 ### 2. Habilitar L2 no projeto
 

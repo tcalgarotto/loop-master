@@ -1,5 +1,13 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.33] — 2026-07-06
+
+### NVIDIA API keys — uma por usuário (`/lucy aprenda`)
+
+- **`references/learned/nvidia-api-keys-per-user.md`** — política global: key pessoal, sem compartilhamento, workflow guide-only (build.nvidia.com)
+- **`references/credentials-policy.md`** — política de credenciais do skill pack; cross-link `no-env-credentials`
+- **`claude-mem-zero-config-playbook.md`**, **`claude-mem-nvidia-setup.md`**, **`mcp-integrations-setup-guide.md`**, **`claude-mem-mcp-operational-playbook.md`** — seção segurança per-user; anti-padrões (não pedir key no chat)
+
 ## [2.9.32] — 2026-07-06
 
 ### claude-mem zero-config (`/lucy aprenda`)

@@ -90,7 +90,7 @@ Provider: `openrouter` apontando para `https://integrate.api.nvidia.com/v1`.
 | `mistralai/mistral-small-24b-instruct-2501` | VPS RAM apertada (~11 GB); indexação mais leve |
 | `nvidia/llama-3.1-nemotron-70b-instruct` | Reasoning pesado — **evitar** para indexação contínua (lento) |
 
-Key: [build.nvidia.com](https://build.nvidia.com) → Profile → API Keys → `nvapi-...` → `~/.claude-mem/.env` (chmod 600).
+Key: [build.nvidia.com](https://build.nvidia.com) → Profile → API Keys → `nvapi-...` → `~/.claude-mem/.env` (chmod 600). **Uma key por usuário** — ver `nvidia-api-keys-per-user.md`.
 
 Templates: `references/templates/claude-mem-settings.nvidia.json`, `claude-mem-nvidia.env.example`.
 
@@ -117,6 +117,8 @@ Teste agente: `search(query="nome-do-projeto")` deve retornar índice com IDs.
 - Assumir `mcp-setup-status.sh` claude-mem=false quando worker roda via `npx` (corrigido v2.9.28)
 - Buscar memória sem `search` primeiro
 - Colocar `nvapi-` no `.env` do app ou git
+- Pedir key NVIDIA no chat ou ecoar valor de `.env`
+- Compartilhar key entre usuários/máquinas
 - Três sessões editando `lucy-progress.json` (L1 single-writer)
 
 ---

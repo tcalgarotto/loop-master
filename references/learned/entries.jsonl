@@ -27,3 +27,4 @@
 {"ts":"2026-07-05T18:36:17Z","slug":"proactive-orchestration-mandate","summary":"Owner authorization: agente MUST ativar skills/MCPs quando protocolo indica; proibido pedir permiss\u00e3o; exce\u00e7\u00f5es destructive/credentials/deploy","scope":"global"}
 {"ts":"2026-07-05T21:20:45Z","slug":"proactive-migration-backend-restart","summary":"Owner: migrations (alembic upgrade head) + recreate backend sao proativos quando schema/backend muda; verify health + smoke; downgrade/drop exigem confirmacao","scope":"global"}
 {"ts":"2026-07-06T03:17:54Z","slug":"claude-mem-zero-config","summary":"L2 zero-config: bootstrap.sh idempotente, 3 passos owner, alias NVIDIA .env, init auto-call","scope":"global"}
+{"ts":"2026-07-06T03:24:48Z","slug":"nvidia-api-keys-per-user","summary":"Key NVIDIA pessoal; guide-only; sem echo no chat","scope":"global"}

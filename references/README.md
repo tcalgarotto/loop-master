@@ -1,6 +1,6 @@
 # Referências — Lucy
 
-Índice da documentação técnica da skill. **Versão atual:** v2.9.30 — ver [CHANGELOG.md](../CHANGELOG.md).
+Índice da documentação técnica da skill. **Versão atual:** v2.9.33 — ver [CHANGELOG.md](../CHANGELOG.md).
 
 ## Começar
 
@@ -18,6 +18,8 @@
 | [quiz-protocol.md](quiz-protocol.md) | Quiz 7 rodadas (init; Round 3 = MCP) |
 | [mcp-integrations-setup-guide.md](mcp-integrations-setup-guide.md) | **Guia cadastro MCP** — quiz + agente |
 | [claude-mem-nvidia-setup.md](claude-mem-nvidia-setup.md) | **L2 claude-mem** — NVIDIA NIM + multi-sessão |
+| [learned/nvidia-api-keys-per-user.md](learned/nvidia-api-keys-per-user.md) | **Segurança** — key NVIDIA pessoal; guide-only |
+| [credentials-policy.md](credentials-policy.md) | Política de credenciais (skill pack) |
 | [learned/claude-mem-mcp-operational-playbook.md](learned/claude-mem-mcp-operational-playbook.md) | **MCP claude-mem** — workflow 3-layer + checklist status |
 | [update-protocol.md](update-protocol.md) | `/lucy update` |
 | [multi-project-protocol.md](multi-project-protocol.md) | Vários loops no mesmo repo |

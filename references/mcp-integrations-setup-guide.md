@@ -141,9 +141,11 @@ Fallback sem key: Playwright + `browser-ai-scrape-protocol.md`
 **MCP Cursor:** plugin `plugin-claude-mem-mcp-search` (tools: `search`, `timeline`, `get_observations`, `observation_add`).  
 **Backend LLM:** NVIDIA NIM via `build.nvidia.com` — **não** é MCP separado; key em `~/.claude-mem/.env`.
 
+**Segurança (v2.9.33+):** cada usuário obtém **sua própria** key; sem compartilhamento; agente guia apenas — ver `learned/nvidia-api-keys-per-user.md` · `credentials-policy.md`.
+
 | Passo | Ação |
 |-------|------|
-| 1 | API key em [build.nvidia.com](https://build.nvidia.com) → colar **uma vez** em `~/.claude-mem/.env` (chmod 600) |
+| 1 | Owner: [build.nvidia.com](https://build.nvidia.com) → Profile → API Keys → colar **localmente** em `~/.claude-mem/.env` (chmod 600) — **não** no chat |
 | 2 | `LUCY_CLAUDE_MEM=1` no `.env` do projeto |
 | 3 | `LUCY_CLAUDE_MEM=1 bash .cursor/skills/lucy/scripts/claude-mem-bootstrap.sh` |
 | 4 | Cursor → Settings → Tools & MCPs → **claude-mem** verde |
@@ -209,6 +211,8 @@ Após Round 3:
 
 - Pular Round 3 quando há itens `FALTA` sem owner escolher "Depois"
 - Colocar tokens/API keys no repo ou `lucy-progress.json`
+- Pedir `nvapi-` no chat ou compartilhar key entre usuários/máquinas
+- `cat` / `grep` de `~/.claude-mem/.env` com output visível ao agente
 - Prometer Figma MCP para edição em loop
 - Avançar para implementação FE sem visual-gate configurado (se Next)
 
