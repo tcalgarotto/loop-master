@@ -7,3 +7,6 @@
 *.pid
 *.log
 .DS_Store
+
+# Lucy local runtime (gates, caches, captures)
+.lucy/
