@@ -29,7 +29,7 @@ bash scripts/html-preview-serve.sh
 | [editable-table.md](./editable-table.md) | **EditableTable** — HubfuSheet → useOptimistic + Server Action |
 | [snippets/optimistic-leads-table.tsx.example](./snippets/optimistic-leads-table.tsx.example) | Snippet Next.js (referência) |
 | [motion.md](./motion.md) | GSAP + CSS + **Framer Motion** (port Next.js) |
-| [motion-shadcn-guide.md](./motion-shadcn-guide.md) | **Guia completo** motion + shadcn mapping + audit v1.7 |
+| [motion-shadcn-guide.md](./motion-shadcn-guide.md) | **Guia completo** motion + shadcn mapping + audit v1.9 |
 
 ## Como usar
 
@@ -80,6 +80,7 @@ Ver: `references/html-first-design-protocol.md`, `references/design-editable-hyb
 
 | Versão | Data | Notas |
 |--------|------|-------|
+| 1.9 | 2026-07-07 | Workflow canvas Attio (`hubfu-workflow.js`): pan/zoom, drag-drop nós, paths Bézier; motion + shadcn specimens; integrações v2; dark mode fixes |
 | 1.7 | 2026-07-04 | Motion tokens, hubfu-motion.js, seções #motion expandida + #shadcn, Framer/shadcn mapping |
 | 1.5 | 2026-07-04 | Seção Integrações consolidada (carousel + grid v2 + v1 legado) |
 | 1.4 | 2026-07-04 | Chat layouts (`.hubfu-chat`), workflow whiteboard Attio, HubfuSheet Executar + toasts |

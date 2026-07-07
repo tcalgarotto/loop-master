@@ -1,5 +1,17 @@
 # Changelog — Lucy (loop-master)
 
+## [2.9.37] — 2026-07-07
+
+### HubFU Design System v1.9 + runtime policy (`/lucy aprenda`)
+
+- **`references/design-system/hubfu/`** — workflow whiteboard Attio (pan/zoom, drag-drop nós, canvas infinito), `hubfu-workflow.js`, motion (`hubfu-motion.js`), shadcn specimens, integrações v2 consolidadas; `motion-shadcn-guide.md` atualizado
+- **`preview/hubfu-design-system.html`** — seções `#workflow`, `#motion`, `#shadcn`, `#integracoes` alinhadas ao catálogo HTML-first
+- **`.gitignore`** — `.lucy/` runtime local (visual gates, caches, browser captures) — **não** publicar no skill pack
+- **`docs/LUCY-INDEX.md`**, **`docs/LUCY-PLAN.md`** — stubs L3 versionados no repo
+- **`learned/hubfu-design-system-v19.md`** — HTML-first → port: workflow canvas, motion pyramid, shadcn mapping
+- **`learned/lucy-runtime-gitignore.md`** — separação skill pack público vs `.lucy/` efêmero
+- **Docs sync:** README badge, MANUAL, `references/README.md`, `SKILL.md` → v2.9.37
+
 ## [2.9.36] — 2026-07-06
 
 ### Handoff completo após subagentes (`/lucy aprenda`)

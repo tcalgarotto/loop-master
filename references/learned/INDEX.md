@@ -5,6 +5,8 @@ Regras **por projeto** → `/lucy regra` → `.cursor/lucy-brain/rules/` (não l
 
 | Data | Slug | Resumo | Protocolo canônico |
 |------|------|--------|-------------------|
+| 2026-07-07 | `hubfu-design-system-v19` | HubFU DS v1.9: workflow canvas Attio (pan/zoom/drag), hubfu-motion.js, shadcn specimens, integrações v2; HTML-first → port obrigatório | `design-system/hubfu/INDEX.md`, `learned/hubfu-design-system-v19.md`, `html-first-design-protocol.md` |
+| 2026-07-07 | `lucy-runtime-gitignore` | `.lucy/` = runtime efêmero (gates, caches, captures); skill pack público ≠ runtime; nunca commitar `.lucy/` | `learned/lucy-runtime-gitignore.md`, `.gitignore`, `second-brain-protocol.md` |
 | 2026-07-06 | `multi-subagent-handoff-synthesis` | Parent MUST sintetizar 5 seções após workers (per-agent, estado, owner items, agent-next, checklist); proibido "subagent completed" | `learned/multi-subagent-handoff-synthesis.md`, `owner-handoff-qa-protocol.md`, `autonomous-orchestrator-protocol.md` |
 | 2026-07-06 | `l2-knowledge-agent` | L2b: build_corpus→prime→query vs search 3-layer; quando retrospectiva; corpora focados; L4 Vector DB ≠ claude-mem | `learned/l2-knowledge-agent-protocol.md`, `memory-architecture.md`, `second-brain-protocol.md` |
 | 2026-07-06 | `nvidia-api-keys-per-user` | Key NVIDIA pessoal por usuário; agente guia build.nvidia.com; proibido pedir/ecoar `nvapi-` no chat; storage só `~/.claude-mem/.env` ou `.env` gitignored | `learned/nvidia-api-keys-per-user.md`, `credentials-policy.md`, `claude-mem-zero-config-playbook.md` |
