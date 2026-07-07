@@ -101,10 +101,24 @@ L2 ativo? (LUCY_CLAUDE_MEM=1 + worker + MCP)
 
 | Corpus sugerido | Filtros |
 |-----------------|---------|
-| `hubfu-fiscal` | `project=hermes-crm`, `concepts=fiscal`, `types=decision,discovery` |
+| `hubfu-fiscal` | `project=<claude-mem-slug>` (ver abaixo), `types=discovery,decision,feature`, `limit=80` |
 | `hubfu-erp-native` | `files=backend/app/erp/`, `types=feature,refactor` |
 | `hubfu-design` | `concepts=design,impeccable`, `types=decision,change` |
 | `hubfu-migrations` | `query="alembic migration"`, `types=change,bugfix` |
+
+### Project slug (armadilha comum)
+
+`build_corpus(project="hermes-crm")` costuma retornar **0 obs** — o worker grava a maioria das observações com o **slug interno** do claude-mem (hash do workspace), não o nome da pasta.
+
+1. `curl -s http://127.0.0.1:37700/api/stats` → ver contagens  
+2. Ou inspecionar `SELECT DISTINCT project FROM observations` em `~/.claude-mem/claude-mem.db`  
+3. Usar esse slug em `build_corpus` + `rebuild_corpus`
+
+Filtro `query=` no build pode retornar 0 mesmo com obs no índice — preferir `project` + `types` + `limit`.
+
+### query_corpus — login Claude Code
+
+`prime_corpus` usa OpenRouter/NVIDIA ou `CLAUDE_CODE_PATH`. **`query_corpus` exige sessão autenticada do Claude Code** (`claude /login` no host). Sem login: resposta `"Not logged in · Please run /login"` — não contornar; owner faz login uma vez.
 
 ---
 
