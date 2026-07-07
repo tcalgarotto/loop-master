@@ -14,6 +14,7 @@
 | **A** | Carousel pills | Landing hero/social proof, marquee infinito | **8+** |
 | **B** | Marketplace sidebar | Página "Conecte seus dados", settings | 12+ |
 | **C** | Logo grid denso | Seção "Import data" / catálogo completo | 15+ |
+| **D** | MeetGeek grid v2 | Marketplace premium, OAuth settings | 6+ |
 
 **Regra:** com **≥8 integrações** na landing → preferir **Modelo A** (carousel). Com menos → grid compacto (Modelo C reduzido) ou cards 2×3.
 
@@ -87,6 +88,44 @@
 | Click | toggle conectado / abre detalhe |
 
 **Uso:** seção "Todas as integrações" ou documentação.
+
+---
+
+## Modelo D — MeetGeek marketplace grid v2 (ref. 2026-07-03)
+
+**Visual:** grid 3×3 de cards **brancos** em fundo cinza claro. Logo centralizado 48px, nome bold, descrição 2 linhas, estado no rodapé.
+
+```
+┌─────────────────────┐
+│              [grid] │
+│      [logo 48px]    │
+│    Service Name     │
+│  Short description  │
+│  two lines max      │
+│                     │
+│  ✓ Connected  OR    │
+│  [Connect btn]      │
+└─────────────────────┘
+```
+
+| Token | Valor |
+|-------|--------|
+| Fundo seção | `var(--hubfu-mp-surface)` · `#f5f5f7` |
+| Card | `#fff`, `border-radius: 14px`, `border: 1px solid rgba(29,29,31,.1)` |
+| Sombra | `var(--hubfu-int-card-shadow)` |
+| Connected | `var(--hubfu-success)` + checkmark SVG |
+| Connect | `var(--hubfu-action)` roxo `#7c3aed` + ícone user-plus |
+| Grid icon | 2×2 squares roxo, canto superior direito |
+| Grid | `repeat(3, 1fr)`, gap 16px |
+| Metadata | `.int-v2-meta` opcional — email, "Ver templates" |
+
+**Classes:** `.int-v2-card`, `.int-v2-grid`, `.int-v2-connected`, `.int-v2-connect`
+
+**HubFU:** `preview/hubfu-design-system.html#integracoes` · landing `#marketplace` · dados `hubfu-integrations-data.js`
+
+**Motion (Next.js):** Framer `whileHover` scale/shadow · `whileTap` no Connect · ver `motion.md`
+
+**Ref image:** `preview/assets/ref-integration-cards-meetgeek.png`
 
 ---
 

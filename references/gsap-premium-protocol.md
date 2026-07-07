@@ -195,8 +195,39 @@ useEffect(() => {
 | `layoutId` card → modal | Framer Motion |
 | Landing scroll storytelling 3+ acts | **GSAP ScrollTrigger** |
 | Botão hover lift | CSS `transition-transform` |
+| Integration card v2 hover/tap | **Framer** `whileHover` / `whileTap` |
+| Spreadsheet row stagger | **Framer** `staggerChildren` |
+| Workflow sidebar slide-in | **Framer** `motion.aside` x-axis |
 
 **Não duplicar:** mesmo elemento não deve ter GSAP + Framer + `transition-all` simultâneos.
+
+---
+
+## Framer Motion companion (HubFU Next.js)
+
+Mapeamento canônico para port do design system HTML → React. Tokens: `--hubfu-action` (roxo Connect/Run), `--hubfu-success` (verde Connected).
+
+| Componente HTML | Classe | Framer target |
+|-----------------|--------|---------------|
+| Integration card v2 | `.int-v2-card` | `whileHover` scale + shadow |
+| Connect CTA | `.int-v2-connect` | `whileTap={{ scale: 0.97 }}` |
+| Run workflow | `.ds-sheet-run` | `whileTap` + `whileHover` opacity |
+| Data table rows | `.ds-sheet-table tbody tr` | `staggerChildren` + `whileHover` bg |
+| Actions sidebar | `.ds-sheet-sidebar` | `initial/animate` x spring |
+| Tab panel swap | `.tab-scene` | `AnimatePresence mode="wait"` |
+
+Docs completos: `references/design-system/hubfu/motion.md` · showcase: `#motion-framer` em `preview/hubfu-design-system.html`.
+
+```tsx
+// Exemplo: Connect button (roxo accent, não verde primary)
+<motion.button
+  className="int-v2-connect"
+  whileTap={{ scale: 0.97 }}
+  whileHover={{ backgroundColor: 'var(--hubfu-action-hover)' }}
+>
+  Conectar
+</motion.button>
+```
 
 ---
 

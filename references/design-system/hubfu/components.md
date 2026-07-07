@@ -87,6 +87,8 @@ Prob fill gradient: `#0a7f5c → #34d399`.
 
 ## Integrações
 
+**Showcase:** `preview/hubfu-design-system.html#integracoes` (seção única com subseções A / D / v1)
+
 ### Carousel (`.integrations`)
 
 Faixa horizontal com `.int-carousel` + `.int-track` (CSS animation `intScroll 90s`).
@@ -128,6 +130,8 @@ Grid responsivo em superfície clara (`--hubfu-mp-surface`). **Canônico** para 
 | `.int-v2-foot-dual` | Footer Zapier — mesma altura de slot que `.int-v2-foot` |
 
 Tokens: `--hubfu-int-card-bg`, `--hubfu-int-card-border`, `--hubfu-int-card-shadow`.
+
+**Política P0 — cards sólidos (zero glass):** superfícies de card usam `#ffffff` opaco, borda `1px` `--hubfu-int-card-border`, sombra sólida leve. Proibido `backdrop-filter`, `rgba()` translúcido em fundo de card, gradientes tipo glass/frosted. Vale para `.int-v2-card`, nós `.hubfu-flow-node` e specimens `#motion` / `#shadcn`. Footer dual Zapier (`.int-v2-foot-dual`): botões empilhados full-width, fundo `#f4f4f5` sólido.
 
 ### Integration card v1 (`.int-card`) — legado dark
 
@@ -178,7 +182,8 @@ new HubfuSheet('#ds-sheet-specimen', {
 | Redimensionar | `mousedown` no handle → linha guia vertical → `mousemove` → largura em `<col>` |
 | Paginação | Botões ‹ › + indicador `página / total` no tab bar |
 | Dicas UX | Barra `.ds-sheet-hint` renderizada pelo `HubfuSheet` |
-| Export | Botão download gera CSV client-side |
+| Export | Botão download gera CSV client-side + toast success |
+| Executar | Botão `.ds-sheet-run` roxo — simula workflow (~1,4s) + toast success |
 | Toggles | Export (verde on) · Agendar (cinza off) |
 | Navegação | Tab e setas entre células editáveis |
 
@@ -218,6 +223,55 @@ Ver checklist completo em [`editable-table.md`](./editable-table.md).
 
 ---
 
+### Chat (`.hubfu-chat`)
+
+Catálogo: `preview/hubfu-design-system.html#chat` · estilos em `hubfu-design-tokens.css`.
+
+| Parte | Classe | Notas |
+|-------|--------|-------|
+| Shell | `.hubfu-chat` | Coluna flex, max-width 560px, tema semântico |
+| Header | `.hubfu-chat-header` | Avatar gradiente + nome + status online |
+| Thread | `.hubfu-chat-thread` | Scroll vertical, gap 16px |
+| Linha | `.hubfu-chat-row` / `.outgoing` | Avatar + bolha; outgoing alinha à direita |
+| Bolha | `.hubfu-chat-bubble` | Incoming: bg-alt; outgoing: tint emerald |
+| Meta | `.hubfu-chat-meta` | Timestamp + `.hubfu-chat-read` (check duplo = lida) |
+| Composer | `.hubfu-chat-compose` | Anexo + catálogo + emoji + input pill + send roxo |
+| Catálogo | `.hubfu-chat-catalog` | Drawer lateral · produtos demo · Enviar → bolha produto |
+| Device | `.hubfu-chat.device` | Variante escura dentro de `.tab-panel-mini` |
+
+Send button: `--hubfu-action` (roxo). Outgoing bubbles: emerald tint. Demo JS append outgoing + read receipt. Catálogo: `#hubfu-chat-catalog` drawer compartilhado; botão `.hubfu-chat-catalog-btn` em light e dark.
+
+---
+
+### Workflow whiteboard (`.hubfu-flow-board`)
+
+Catálogo: `preview/hubfu-design-system.html#workflow` · estilo Attio multi-branch.
+
+| Parte | Classe | Notas |
+|-------|--------|-------|
+| Board | `.hubfu-flow-board.hubfu-flow-board--premium-light` | **Sempre claro** — canvas `#FAFAFA`, dots 0.75px @ 16px (escala com zoom) |
+| Frame | `.hubfu-flow-light-frame` | Borda + label "Canvas claro · padrão Attio" em dark mode |
+| Viewport | `.hubfu-flow-viewport` | Pan drag · chrome `#ECECEE` · grade no `.hubfu-flow-canvas-inner` |
+| Canvas | `.hubfu-flow-canvas-inner` | 960×420 · transform scale · `transform-origin: 0 0` |
+| Conector | `.hubfu-flow-path` | Bézier · `.accent` verde · dots animados |
+| Label ramo | `.hubfu-flow-branch-label` | Score thresholds PT |
+| Nó | `.hubfu-flow-node` | Fundo `#fff` sólido · badge colorido · `.trigger` / `.switch` / `.action` |
+| Badge | `.hubfu-flow-node-badge` | Gatilho / Switch / Ação |
+| Zoom | `.hubfu-flow-zoom` | ± / reset · **50–150%** · **CTRL+scroll** (ou ⌘+scroll) zoom toward cursor |
+
+**Drag & drop (v1.8):** `preview/hubfu-workflow.js` — nós com `data-node-id`, pointer events (mouse + touch), snap 8px ao soltar. Conectores magnéticos: saída = centro da borda direita, entrada = centro da borda esquerda; paths Bézier recalculados em tempo real; dots `animateMotion` seguem o path.
+
+| Estado nó | Classe | Comportamento |
+|-----------|--------|---------------|
+| Selecionado | `.is-selected` | Ring roxo + scale 1.03 |
+| Arrastando | `.is-dragging` | Cursor grabbing · z-index 20 · conectores live |
+
+Workflow demo: Trigger → Switch → Upsell / Nurture / CRM → outcomes. Responsivo: scroll horizontal no viewport.
+
+**Dark mode (página DS):** canvas permanece claro (`.hubfu-flow-light-frame`); painéis `#motion`, `#motion-framer`, `#shadcn` usam `--hubfu-surface-ui` (#1c1c1e) — nunca `#fff` forçado. Cards v2 marketplace seguem `--hubfu-int-card-bg`; dual-foot Zapier usa `--hubfu-int-dual-bg` escurecido.
+
+---
+
 ## Tabs produto (`.tab-bar` + `.tab-panel`)
 
 | Elemento | Comportamento |
@@ -232,13 +286,15 @@ Ver checklist completo em [`editable-table.md`](./editable-table.md).
 
 Pill radius 980px · `.on` → emerald bg.
 
-### Chat (`.chat-ui`)
+### Chat (`.chat-ui`) — legado landing tab
 
 | Tipo | Estilo |
 |------|--------|
 | `.msg.user` | `rgba(10,127,92,.35)` |
 | `.msg.bot` | `rgba(255,255,255,.06)` |
 | `.action-chip` | outline; `.done` strikethrough emerald |
+
+**Canônico v1.4+:** usar `.hubfu-chat` no catálogo DS (avatares, read receipts, composer).
 
 ---
 
@@ -286,6 +342,49 @@ Accordion CSS grid `grid-template-rows: 0fr → 1fr` · icon `+` rotate 45° qua
 `.preview-tag` — fixed bottom-left, badge versão Lucy.
 
 `.theme-toggle` — alterna `data-theme`; ícone ☀/☾.
+
+---
+
+## Motion (v1.7+)
+
+Catálogo: `#motion` · Framer: `#motion-framer` · Controller: `preview/hubfu-motion.js`
+
+| Padrão | Implementação preview | Port Framer |
+|--------|----------------------|-------------|
+| Stagger entrance | GSAP + `.hubfu-animate-fade-up-stagger` | `staggerChildren` |
+| Button ripple | `.hubfu-btn-ripple` vanilla | `whileTap` |
+| Tab panel | GSAP indicator + fade | `AnimatePresence` |
+| Toast | `.hubfu-toast` keyframes | Sonner |
+| Cell save | `.cell-saved` flash | optional highlight |
+| Chat send | `.hubfu-chat-enter` | `motion.div` initial/animate |
+| Workflow node | `.hubfu-node-pulse` hover | `whileHover scale` |
+| Integration grid | `.hubfu-int-stagger` IO | `whileInView` |
+
+Tokens: `--hubfu-duration-*`, `--hubfu-ease-*` em `hubfu-design-tokens.css`.
+
+Guia completo: [motion-shadcn-guide.md](./motion-shadcn-guide.md)
+
+---
+
+## shadcn/ui mapping (v1.7+)
+
+Catálogo: `#shadcn` · Specimens HTML-first estilo Radix.
+
+| HubFU | shadcn | Demo DS |
+|-------|--------|---------|
+| `.link-btn` | Button | #botoes |
+| `.hubfu-dialog-specimen` | Dialog | #shadcn |
+| `.hubfu-chat-catalog` | Sheet | #chat |
+| `.hubfu-tabs-shadcn` | Tabs | #shadcn |
+| `.hubfu-sonner-toast` | Sonner | #shadcn |
+| `.hubfu-dropdown-menu` | DropdownMenu | #shadcn |
+| `.hubfu-command` | Command | #shadcn |
+| `.ds-sheet-table` | DataTable | #data-table |
+| `.badge` | Badge | #badges |
+| `.hubfu-avatar` | Avatar | #shadcn |
+| `.hubfu-scroll-area` | ScrollArea | #shadcn |
+
+Override tokens shadcn → `--hubfu-*` via `globals.css` (ver motion-shadcn-guide.md).
 
 ---
 

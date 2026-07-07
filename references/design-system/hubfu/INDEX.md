@@ -25,10 +25,11 @@ bash scripts/html-preview-serve.sh
 | Arquivo | Conteúdo |
 |---------|----------|
 | [tokens.md](./tokens.md) | Cores, tipografia, spacing, radii, shadows (light + dark) |
-| [components.md](./components.md) | Botões, nav, cards, kanban, integrações, tabs, pricing, planilha |
+| [components.md](./components.md) | Botões, nav, cards, kanban, integrações, tabs, chat, workflow, planilha |
 | [editable-table.md](./editable-table.md) | **EditableTable** — HubfuSheet → useOptimistic + Server Action |
 | [snippets/optimistic-leads-table.tsx.example](./snippets/optimistic-leads-table.tsx.example) | Snippet Next.js (referência) |
 | [motion.md](./motion.md) | GSAP + CSS + **Framer Motion** (port Next.js) |
+| [motion-shadcn-guide.md](./motion-shadcn-guide.md) | **Guia completo** motion + shadcn mapping + audit v1.7 |
 
 ## Como usar
 
@@ -79,6 +80,9 @@ Ver: `references/html-first-design-protocol.md`, `references/design-editable-hyb
 
 | Versão | Data | Notas |
 |--------|------|-------|
+| 1.7 | 2026-07-04 | Motion tokens, hubfu-motion.js, seções #motion expandida + #shadcn, Framer/shadcn mapping |
+| 1.5 | 2026-07-04 | Seção Integrações consolidada (carousel + grid v2 + v1 legado) |
+| 1.4 | 2026-07-04 | Chat layouts (`.hubfu-chat`), workflow whiteboard Attio, HubfuSheet Executar + toasts |
 | 1.3 | 2026-07-04 | EditableTable spec; HubfuSheet save otimista; snippet useOptimistic |
 | 1.2 | 2026-07-04 | Cards v2 MeetGeek, data-table spreadsheet, Framer mapping, green+purple balance |
 | 1.1 | 2026-07-04 | Catálogo HTML `hubfu-design-system.html` como referência visual canônica |

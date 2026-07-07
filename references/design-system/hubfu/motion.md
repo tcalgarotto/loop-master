@@ -126,6 +126,20 @@ gsap.from(grid.querySelectorAll(".int-card"), {
 
 ## CSS motion
 
+### Motion tokens (v1.7+)
+
+| Token | Default |
+|-------|---------|
+| `--hubfu-duration-instant` | 100ms |
+| `--hubfu-duration-fast` | 150ms |
+| `--hubfu-duration-normal` | 250ms |
+| `--hubfu-duration-slow` | 400ms |
+| `--hubfu-duration-slower` | 600ms |
+| `--hubfu-ease-out` | cubic-bezier(.25,.1,.25,1) |
+| `--hubfu-ease-spring` | cubic-bezier(.22,1,.36,1) |
+
+Controller: `preview/hubfu-motion.js` · Guia: [motion-shadcn-guide.md](./motion-shadcn-guide.md)
+
 ### Carousel (`.int-track`)
 
 ```css

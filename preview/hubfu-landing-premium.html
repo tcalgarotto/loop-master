@@ -4,25 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HubFU | CRM, ERP e IA para PMEs</title>
+  <link rel="stylesheet" href="hubfu-design-tokens.css" />
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #fbfbfb; --bg-alt: #f4f4f5; --fg: #1d1d1f;
-      --fg-secondary: rgba(29,29,31,.72); --fg-tertiary: rgba(29,29,31,.48);
-      --line: rgba(29,29,31,.08); --accent: #0a7f5c; --dark: #000; --dark-text: #f5f5f7;
-      --radius-device: 20px;
-      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-      --ease: cubic-bezier(.25, .1, .25, 1);
-    }
+    /* Tokens: preview/hubfu-design-tokens.css */
     html { scroll-behavior: smooth; }
     body { font-family: var(--font); background: var(--bg); color: var(--fg); line-height: 1.47; letter-spacing: -.022em; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; } }
     .wrap { width: min(1080px, 88vw); margin-inline: auto; }
     .wrap-wide { width: min(1280px, 94vw); margin-inline: auto; }
-    .nav { position: fixed; inset: 0 0 auto; z-index: 100; background: rgba(251,251,251,.72); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid transparent; transition: border-color .4s var(--ease); }
+    .nav { position: fixed; inset: 0 0 auto; z-index: 100; background: var(--hubfu-nav-bg); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid transparent; transition: border-color .4s var(--ease); }
     .nav.scrolled { border-color: var(--line); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 52px; max-width: 1080px; margin-inline: auto; padding-inline: 6vw; }
     .logo { font-size: 1.0625rem; font-weight: 600; text-decoration: none; color: inherit; letter-spacing: -.03em; }
@@ -128,27 +121,26 @@
     .logos { padding: 48px 0; border-block: 1px solid var(--line); text-align: center; }
     .logos p { font-size: .75rem; color: var(--fg-tertiary); margin-bottom: 20px; }
     .logos-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; font-size: .9375rem; font-weight: 500; color: var(--fg-tertiary); }
-    .integrations { padding: 56px 0; background: #f4f2f8; border-block: 1px solid var(--line); overflow: hidden; }
+    .integrations { padding: 56px 0; background: var(--hubfu-integrations-bg); border-block: 1px solid var(--line); overflow: hidden; }
     .integrations p { text-align: center; font-size: .75rem; color: var(--fg-tertiary); margin-bottom: 28px; text-transform: uppercase; letter-spacing: .06em; }
     .int-carousel { position: relative; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
     .int-track { display: flex; align-items: center; gap: 20px; width: max-content; animation: intScroll 90s linear infinite; will-change: transform; }
     .int-carousel:hover .int-track { animation-play-state: paused; }
     @keyframes intScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @media (prefers-reduced-motion: reduce) { .int-track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; max-width: 720px; margin-inline: auto; } .int-carousel { mask-image: none; } }
-    .int-pill { flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 14px rgba(0,0,0,.07); transition: transform .2s var(--ease), box-shadow .2s; text-decoration: none; }
-    .int-pill:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 28px rgba(0,0,0,.1); }
+    .int-pill { flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%; background: var(--hubfu-pill-bg); display: flex; align-items: center; justify-content: center; box-shadow: var(--hubfu-pill-shadow); transition: transform .2s var(--ease), box-shadow .2s; text-decoration: none; }
+    .int-pill:hover { transform: translateY(-3px) scale(1.04); box-shadow: var(--hubfu-pill-shadow-hover); }
     .int-pill img { width: 32px; height: 32px; object-fit: contain; display: block; }
-    :root { --violet: #7c3aed; --violet-soft: rgba(124,58,237,.15); }
     .int-marquee-wrap { margin-bottom: 0; }
     .int-marquee-label { text-align: center; font-size: .75rem; color: var(--fg-tertiary); margin-bottom: 28px; text-transform: uppercase; letter-spacing: .06em; }
-    .int-marketplace { background: linear-gradient(180deg, #0c0c0e 0%, #111114 100%); color: #f5f5f7; padding: 100px 0 120px; }
+    .int-marketplace { background: var(--hubfu-mp-surface); color: var(--hubfu-fg); padding: 100px 0 120px; border-block: 1px solid var(--line); }
     .int-mp-head { text-align: center; max-width: 640px; margin-inline: auto; margin-bottom: 48px; }
-    .int-mp-head h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 600; letter-spacing: -.03em; margin-bottom: 12px; }
-    .int-mp-head > p { color: rgba(245,245,247,.6); font-size: 1.0625rem; line-height: 1.5; margin-bottom: 28px; }
+    .int-mp-head h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 600; letter-spacing: -.03em; margin-bottom: 12px; color: var(--hubfu-fg); }
+    .int-mp-head > p { color: var(--hubfu-fg-secondary); font-size: 1.0625rem; line-height: 1.5; margin-bottom: 28px; }
     .int-mp-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
-    .int-mp-search { flex: 1; min-width: 220px; max-width: 360px; padding: 10px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: #fff; font-family: inherit; font-size: .875rem; }
-    .int-mp-search::placeholder { color: rgba(255,255,255,.35); }
-    .int-mp-count { font-size: .75rem; color: rgba(255,255,255,.45); padding: 8px 14px; border-radius: 980px; background: rgba(255,255,255,.06); }
+    .int-mp-search { flex: 1; min-width: 220px; max-width: 360px; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--hubfu-card-bg); color: var(--hubfu-fg); font-family: inherit; font-size: .875rem; }
+    .int-mp-search::placeholder { color: var(--hubfu-fg-tertiary); }
+    .int-mp-count { font-size: .75rem; color: var(--hubfu-fg-secondary); padding: 8px 14px; border-radius: 980px; background: var(--hubfu-card-bg); border: 1px solid var(--line); }
     .int-mp-layout { display: grid; gap: 28px; margin-top: 40px; }
     @media (min-width: 900px) { .int-mp-layout { grid-template-columns: 200px 1fr; gap: 32px; } }
     .int-mp-sidebar { display: flex; flex-direction: column; gap: 2px; max-height: 360px; overflow-y: auto; scrollbar-width: thin; }
@@ -159,15 +151,17 @@
     .int-mp-cat-details:not([open]) summary::after { content: " ▸"; opacity: .5; }
     .int-mp-cat-details .int-mp-cat { padding-left: 16px; }
     .int-mp-pagination { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 24px; }
-    .int-mp-page-btn { font-family: inherit; font-size: .8125rem; padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: rgba(255,255,255,.75); cursor: pointer; transition: background .2s, opacity .2s; }
-    .int-mp-page-btn:hover:not(:disabled) { background: rgba(255,255,255,.1); color: #fff; }
+    .int-mp-page-btn { font-family: inherit; font-size: .8125rem; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--hubfu-card-bg); color: var(--hubfu-fg-secondary); cursor: pointer; transition: background .2s, opacity .2s; }
+    .int-mp-page-btn:hover:not(:disabled) { background: var(--bg-alt); color: var(--fg); }
     .int-mp-page-btn:disabled { opacity: .35; cursor: not-allowed; }
-    .int-mp-page-info { font-size: .75rem; color: rgba(255,255,255,.45); }
-    .int-mp-cat { text-align: left; padding: 8px 12px; border-radius: 8px; border: none; background: transparent; color: rgba(255,255,255,.5); font-family: inherit; font-size: .8125rem; cursor: pointer; transition: background .2s, color .2s; }
-    .int-mp-cat:hover { color: rgba(255,255,255,.8); background: rgba(255,255,255,.04); }
-    .int-mp-cat.on { color: #fff; background: rgba(255,255,255,.08); font-weight: 500; }
-    .int-mp-cat-label { font-size: .625rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.3); padding: 12px 12px 6px; }
-    .int-mp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; align-content: start; }
+    .int-mp-page-info { font-size: .75rem; color: var(--fg-tertiary); }
+    .int-mp-cat { text-align: left; padding: 8px 12px; border-radius: 8px; border: none; background: transparent; color: var(--fg-secondary); font-family: inherit; font-size: .8125rem; cursor: pointer; transition: background .2s, color .2s; }
+    .int-mp-cat:hover { color: var(--fg); background: var(--bg-alt); }
+    .int-mp-cat.on { color: var(--accent); background: var(--hubfu-success-soft); font-weight: 500; }
+    .int-mp-cat-label { font-size: .625rem; text-transform: uppercase; letter-spacing: .08em; color: var(--fg-tertiary); padding: 12px 12px 6px; }
+    .int-mp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-content: start; }
+    @media (max-width: 900px) { .int-mp-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .int-mp-grid { grid-template-columns: 1fr; } }
     .int-card { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: transform .25s var(--ease), border-color .25s, box-shadow .25s; min-height: 200px; }
     .int-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.14); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
     .int-card.selected { border-color: var(--violet); box-shadow: 0 0 0 1px var(--violet), 0 16px 48px rgba(124,58,237,.2); }
@@ -205,9 +199,10 @@
     .int-action.conectar { background: var(--violet); color: #fff; }
     .int-action.conectar:hover { opacity: .9; }
     .int-action.soon { background: rgba(255,255,255,.06); color: rgba(255,255,255,.35); cursor: not-allowed; }
-    .int-empty { grid-column: 1 / -1; text-align: center; padding: 48px; color: rgba(255,255,255,.4); font-size: .875rem; }
+    .int-empty { grid-column: 1 / -1; text-align: center; padding: 48px; color: var(--fg-tertiary); font-size: .875rem; }
+    .crm-leads-mini { margin-top: 16px; }
 
-    .statement { background: var(--dark); color: var(--dark-text); padding: 120px 0; text-align: center; }
+    .statement { background: var(--hubfu-statement-bg); color: var(--hubfu-statement-fg); padding: 120px 0; text-align: center; }
     .statement h2 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; max-width: 20ch; margin-inline: auto; }
     .statement p { margin-top: 24px; font-size: 1.125rem; color: rgba(245,245,247,.64); max-width: 48ch; margin-inline: auto; line-height: 1.5; }
     .steps-section { padding: 100px 0; }
@@ -302,7 +297,7 @@
     .cap-item h3 { font-size: 1.0625rem; font-weight: 600; } .cap-item p { margin-top: 8px; font-size: .9375rem; color: var(--fg-secondary); line-height: 1.5; }
     .quotes-grid { padding: 100px 0; display: grid; gap: 32px; }
     @media (min-width: 768px) { .quotes-grid { grid-template-columns: 1fr 1fr; gap: 48px; } }
-    .quote-card { padding: 40px 32px; border-radius: 18px; background: #fff; border: 1px solid var(--line); }
+    .quote-card { padding: 40px 32px; border-radius: 18px; background: var(--hubfu-card-bg); border: 1px solid var(--line); }
     .quote-card blockquote { font-family: var(--serif); font-size: clamp(1.125rem, 2vw, 1.375rem); font-style: italic; line-height: 1.4; color: var(--fg); }
     .quote-card cite { display: block; margin-top: 20px; font-style: normal; font-size: .8125rem; color: var(--fg-tertiary); }
     .pricing { padding: 120px 0; } .pricing-head { text-align: center; margin-bottom: 56px; }
@@ -310,7 +305,7 @@
     .pricing-grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
     @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3,1fr); } }
     .plan { background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; }
-    .plan.featured { background: #fff; }
+    .plan.featured { background: var(--hubfu-card-elevated); }
     .plan h3 { font-size: .875rem; font-weight: 600; color: var(--fg-tertiary); }
     .plan-price { font-size: 2.5rem; font-weight: 600; letter-spacing: -.04em; margin: 12px 0 4px; }
     .plan-price span { font-size: 1rem; font-weight: 400; color: var(--fg-tertiary); }
@@ -334,7 +329,9 @@
     .cta .hero-actions { margin-top: 32px; }
     footer { padding: 40px 6vw 48px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; font-size: .75rem; color: var(--fg-tertiary); }
     footer a { color: inherit; text-decoration: none; margin-left: 20px; }
-    .preview-tag { position: fixed; bottom: 20px; left: 20px; z-index: 200; font-size: .6875rem; color: var(--fg-tertiary); background: rgba(255,255,255,.8); backdrop-filter: blur(12px); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); }
+    .preview-tag { position: fixed; bottom: 20px; left: 20px; z-index: 200; font-size: .6875rem; color: var(--fg-tertiary); background: var(--hubfu-tag-bg); backdrop-filter: blur(12px); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .theme-toggle { min-width: 36px; padding: 8px 12px; cursor: pointer; font-size: .875rem; line-height: 1; }
   </style>
 </head>
 <body>
@@ -343,7 +340,10 @@
     <div class="nav-inner">
       <a class="logo" href="#">HubFU</a>
       <nav class="nav-links"><a href="#integrations">Integrações</a><a href="#plataforma">Plataforma</a><a href="#produto">Produto</a><a href="#precos">Preços</a></nav>
-      <a class="link-btn" href="#cta">Agendar demo</a>
+      <div class="nav-actions">
+        <button type="button" class="link-btn outline theme-toggle" id="theme-toggle" aria-label="Alternar tema claro/escuro">☀</button>
+        <a class="link-btn" href="#cta">Agendar demo</a>
+      </div>
     </div>
   </header>
   <main>
@@ -472,7 +472,7 @@
         <div class="int-mp-layout">
           <aside class="int-mp-sidebar" id="int-sidebar" aria-label="Filtrar por categoria"></aside>
           <div>
-            <div class="int-mp-grid" id="int-grid" role="list"></div>
+            <div class="int-v2-grid int-mp-grid" id="int-grid" role="list"></div>
             <div class="int-mp-pagination" id="int-pagination" aria-label="Paginação"></div>
           </div>
         </div>
@@ -538,6 +538,7 @@
             </div>
           </div>
           <div class="panel-deal-detail" id="crm-detail"><h4>Clínica Aurora</h4><p>Proposta R$ 24k enviada. Validade 15 dias. Contato: Mariana.</p></div>
+          <div class="crm-leads-mini" id="crm-sheet-mini"></div>
         </div>
         <div class="tab-scene" data-scene="erp">
           <div class="stock-table">
@@ -611,9 +612,31 @@
     </div></div></section>
     <section class="cta" id="cta"><div class="wrap reveal"><h2>Veja o HubFU em ação.</h2><p>Demo de 20 minutos ou sandbox.</p><div class="hero-actions"><a class="link-btn" href="#">Agendar demo</a><a class="link-btn outline" href="#">Sandbox</a></div></div></section>
   </main>
-  <footer><span>© 2026 HubFU</span><div><a href="#">Privacidade</a><a href="#">Termos</a></div></footer>
+  <footer><span>© 2026 HubFU</span><div><a href="hubfu-design-system.html" style="opacity:.55">Design System</a><a href="#">Privacidade</a><a href="#">Termos</a></div></footer>
   <script src="hubfu-integrations-data.js"></script>
+  <script src="hubfu-sheet.js"></script>
   <script>
+    (function initHubfuTheme() {
+      const KEY = "hubfu-theme";
+      const root = document.documentElement;
+      const saved = localStorage.getItem(KEY);
+      const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = saved || (prefersDark ? "dark" : "light");
+      root.setAttribute("data-theme", theme);
+      const btn = document.getElementById("theme-toggle");
+      function syncIcon() {
+        if (!btn) return;
+        btn.textContent = root.getAttribute("data-theme") === "dark" ? "☾" : "☀";
+      }
+      syncIcon();
+      btn?.addEventListener("click", () => {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem(KEY, next);
+        syncIcon();
+      });
+    })();
+
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const INT_PAGE_SIZE = 9;
     const JSD = "https://cdn.jsdelivr.net/npm/simple-icons@13.0.0/icons/";
@@ -654,23 +677,40 @@
       return "conectar";
     }
 
+    const INT_V2_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+    const INT_V2_CONNECT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+    const INT_V2_GRID = '<span class="int-v2-grid-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>';
+
     function renderIntCard(item) {
       const logo = intLogoUrl(item);
       const initials = item.name.split(/[\s(]/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
       const logoHtml = logo
-        ? '<img src="' + logo.primary + '" data-fallback="' + logo.fallback + '" alt="" width="24" height="24" loading="lazy" onerror="' + intLogoOnError() + '" /><span class="int-logo-fallback" style="display:none">' + initials + '</span>'
-        : '<span class="int-logo-fallback">' + initials + '</span>';
-      const authCls = intAuthClass(item.auth);
-      const actCls = intActionClass(item.action, item.state);
+        ? '<img src="' + logo.primary + '" alt="" width="52" height="52" loading="lazy" onerror="' + intLogoOnError() + '" /><span class="int-v2-logo-fallback" style="display:none">' + initials + '</span>'
+        : '<span class="int-v2-logo-fallback">' + initials + '</span>';
+      const connected = item.state === "connected";
       const disabled = item.state === "soon" ? " disabled" : "";
-      return '<article class="int-card" role="listitem" data-id="' + item.id + '" data-category="' + item.category + '" data-state="' + item.state + '">' +
-        '<div class="int-card-top"><span class="int-status ' + item.state + '">' + intStatusLabel(item.state) + '</span><div class="int-logo">' + logoHtml + '</div></div>' +
-        '<h3 class="int-name">' + item.name + '</h3>' +
-        '<p class="int-cat">' + item.category + '</p>' +
-        '<div class="int-metrics"><span title="Conectores">⚡ ' + item.m1 + '</span><span title="Fluxos">⇄ ' + item.m2 + '</span></div>' +
-        '<p class="int-desc">' + item.desc + '</p>' +
-        '<div class="int-card-foot"><span class="int-auth ' + authCls + '">' + item.auth + '</span><span class="int-ver">v20260703</span>' +
-        '<button type="button" class="int-action ' + actCls + '"' + disabled + ' data-action="' + item.action + '">' + item.action + '</button></div></article>';
+      const isZapier = item.id === "zapier";
+      let metaHtml;
+      if (isZapier) metaHtml = '<a class="int-v2-meta int-v2-meta-link" href="#">Ver templates Zap</a>';
+      else if (connected && item.auth === "OAuth2") metaHtml = '<p class="int-v2-meta">Conta vinculada</p>';
+      else metaHtml = '<p class="int-v2-meta">&nbsp;</p>';
+      let footHtml;
+      if (isZapier) {
+        footHtml = '<div class="int-v2-foot int-v2-foot-dual">' +
+          '<button type="button" class="int-v2-dual-btn">' + INT_V2_CHECK + 'Copiar API Key</button>' +
+          '<button type="button" class="int-v2-dual-btn">' + INT_V2_CHECK + 'Regenerar API</button></div>';
+      } else if (connected) {
+        footHtml = '<div class="int-v2-foot"><span class="int-v2-connected">' + INT_V2_CHECK + 'Conectado</span></div>';
+      } else {
+        footHtml = '<div class="int-v2-foot"><button type="button" class="int-v2-connect"' + disabled + ' data-action="' + item.action + '">' + INT_V2_CONNECT + (item.state === "soon" ? "Em breve" : "Conectar") + '</button></div>';
+      }
+      const cardClass = "int-v2-card" + (isZapier ? " has-dual-foot" : "");
+      return '<article class="' + cardClass + '" role="listitem" data-id="' + item.id + '" data-category="' + item.category + '" data-state="' + item.state + '">' +
+        metaHtml + INT_V2_GRID +
+        '<div class="int-v2-logo">' + logoHtml + '</div>' +
+        '<h3 class="int-v2-name">' + item.name + '</h3>' +
+        '<p class="int-v2-desc">' + item.desc + '</p>' +
+        footHtml + '</article>';
     }
 
     function buildCarousel() {
@@ -748,13 +788,13 @@
     }
 
     function bindIntCards() {
-      document.querySelectorAll(".int-card").forEach(card => {
+      document.querySelectorAll(".int-v2-card").forEach(card => {
         card.addEventListener("click", e => {
-          if (e.target.closest(".int-action")) return;
-          document.querySelectorAll(".int-card").forEach(c => c.classList.remove("selected"));
+          if (e.target.closest(".int-v2-connect")) return;
+          document.querySelectorAll(".int-v2-card").forEach(c => c.classList.remove("selected"));
           card.classList.add("selected");
         });
-        const btn = card.querySelector(".int-action.conectar");
+        const btn = card.querySelector(".int-v2-connect");
         if (btn) {
           btn.addEventListener("click", e => {
             e.stopPropagation();
@@ -764,11 +804,8 @@
             item.state = "connected";
             item.action = "Ativo";
             card.dataset.state = "connected";
-            const st = card.querySelector(".int-status");
-            if (st) { st.className = "int-status connected"; st.textContent = "Conectado"; }
-            btn.className = "int-action ativo";
-            btn.textContent = "Ativo";
-            btn.disabled = true;
+            const foot = card.querySelector(".int-v2-foot");
+            if (foot) foot.innerHTML = '<span class="int-v2-connected">' + INT_V2_CHECK + 'Conectado</span>';
             buildCarousel();
           });
         }
@@ -794,7 +831,7 @@
       renderPagination(total);
       bindIntCards();
       if (!reduced && window.gsap) {
-        gsap.from(grid.querySelectorAll(".int-card"), { opacity: 0, y: 16, duration: 0.4, stagger: 0.04, ease: "power2.out", overwrite: true });
+        gsap.from(grid.querySelectorAll(".int-v2-card"), { opacity: 0, y: 16, duration: 0.4, stagger: 0.04, ease: "power2.out", overwrite: true });
       }
     }
 
@@ -1059,6 +1096,10 @@
     });
 
     requestAnimationFrame(() => moveTabIndicator(0));
+
+    if (typeof HubfuSheet !== 'undefined' && document.getElementById('crm-sheet-mini')) {
+      new HubfuSheet('#crm-sheet-mini', { variant: 'mini' });
+    }
 
     const pipelineEl = document.getElementById("hero-pipeline");
     const pipelineValues = [284, 291, 278, 296];

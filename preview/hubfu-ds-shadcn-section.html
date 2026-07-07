@@ -1,0 +1,97 @@
+<p class="ds-subhead">Tabela de mapeamento</p>
+<table class="hubfu-shadcn-table ds-card" style="display:block;overflow-x:auto;padding:0;margin-bottom:28px">
+  <thead><tr><th>HubFU</th><th>shadcn primitive</th><th>Notas</th></tr></thead>
+  <tbody>
+    <tr><td><code>.link-btn</code></td><td><code>Button</code></td><td>default / outline / ghost</td></tr>
+    <tr><td><code>.hubfu-dialog-specimen</code></td><td><code>Dialog</code></td><td>dialog nativo quando possível</td></tr>
+    <tr><td><code>.hubfu-chat-catalog</code></td><td><code>Sheet</code></td><td>Drawer lateral</td></tr>
+    <tr><td><code>.tab-bar</code></td><td><code>Tabs</code></td><td>Indicador + painéis</td></tr>
+    <tr><td><code>.hubfu-toast</code></td><td><code>Sonner</code></td><td>Stack bottom-right</td></tr>
+    <tr><td><code>.hubfu-dropdown-menu</code></td><td><code>DropdownMenu</code></td><td>Menu contextual</td></tr>
+    <tr><td><code>.hubfu-command</code></td><td><code>Command</code></td><td>Palette ⌘K</td></tr>
+    <tr><td><code>.ds-sheet-table</code></td><td><code>DataTable</code></td><td>EditableTable port</td></tr>
+    <tr><td><code>.badge</code></td><td><code>Badge</code></td><td>OK / warn / beta</td></tr>
+    <tr><td><code>.hubfu-avatar</code></td><td><code>Avatar</code></td><td>Chat + kanban</td></tr>
+    <tr><td><code>.hubfu-scroll-area</code></td><td><code>ScrollArea</code></td><td>Listas densas</td></tr>
+  </tbody>
+</table>
+
+<p class="ds-subhead">Token overrides (globals.css)</p>
+<pre class="hubfu-code-block hubfu-token-snippet" style="margin-bottom:28px"></pre>
+
+<p class="ds-subhead">Dialog · demo interativo</p>
+<div class="ds-row" style="margin-bottom:12px">
+  <button type="button" class="link-btn" data-dialog-open="hubfu-shadcn-dialog">Novo negócio</button>
+</div>
+<dialog class="hubfu-dialog-specimen" id="hubfu-shadcn-dialog">
+  <div class="hubfu-dialog-head">
+    <h3>Criar negócio</h3>
+    <p>Preencha os dados do lead qualificado.</p>
+  </div>
+  <div class="hubfu-dialog-body">
+    <div class="form-field"><label class="form-label">Empresa</label><input type="text" class="form-input" placeholder="Acme Corp" style="max-width:100%" /></div>
+    <div class="form-field" style="margin-bottom:0"><label class="form-label">Valor estimado</label><input type="text" class="form-input" placeholder="R$ 48.000" style="max-width:100%" /></div>
+  </div>
+  <div class="hubfu-dialog-foot">
+    <button type="button" class="link-btn outline" data-dialog-close="hubfu-shadcn-dialog">Cancelar</button>
+    <button type="button" class="link-btn" data-dialog-close="hubfu-shadcn-dialog">Salvar</button>
+  </div>
+</dialog>
+
+<p class="ds-subhead">DropdownMenu · demo</p>
+<div class="hubfu-dropdown-wrap" data-dropdown style="margin-bottom:24px">
+  <button type="button" class="link-btn outline" data-dropdown-trigger aria-haspopup="true">Ações do negócio ▾</button>
+  <div class="hubfu-dropdown-menu" role="menu">
+    <button type="button" class="hubfu-dropdown-item" role="menuitem">Editar negócio</button>
+    <button type="button" class="hubfu-dropdown-item" role="menuitem">Avançar etapa</button>
+    <div class="hubfu-dropdown-sep"></div>
+    <button type="button" class="hubfu-dropdown-item" role="menuitem" style="color:#dc2626">Arquivar</button>
+  </div>
+</div>
+
+<p class="ds-subhead">Tabs · estilo shadcn</p>
+<div data-shadcn-tabs style="margin-bottom:24px">
+  <div class="hubfu-tabs-shadcn-list" role="tablist">
+    <button type="button" class="hubfu-tabs-shadcn-trigger is-active" role="tab">Visão geral</button>
+    <button type="button" class="hubfu-tabs-shadcn-trigger" role="tab">Atividade</button>
+    <button type="button" class="hubfu-tabs-shadcn-trigger" role="tab">Notas</button>
+  </div>
+  <div class="hubfu-tabs-shadcn-panel" role="tabpanel">Pipeline R$ 284k · 12 negócios abertos.</div>
+  <div class="hubfu-tabs-shadcn-panel" role="tabpanel" hidden>Última interação: e-mail há 2h.</div>
+  <div class="hubfu-tabs-shadcn-panel" role="tabpanel" hidden>Nota: desconto 8% na renovação.</div>
+</div>
+
+<p class="ds-subhead">Command palette · mock ⌘K</p>
+<div class="hubfu-command" id="hubfu-command-demo" style="margin-bottom:24px">
+  <div class="hubfu-command-input-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="search" class="hubfu-command-input" placeholder="Buscar negócios, contatos, ações…" autocomplete="off" />
+  </div>
+  <div class="hubfu-command-list">
+    <p class="hubfu-command-group-label">Negócios</p>
+    <button type="button" class="hubfu-command-item is-highlighted" data-label="Acme Corp Proposta"><span>Acme Corp · Proposta</span><kbd>↵</kbd></button>
+    <button type="button" class="hubfu-command-item" data-label="TechParts Qualificação"><span>TechParts · Qualificação</span></button>
+    <p class="hubfu-command-group-label">Ações</p>
+    <button type="button" class="hubfu-command-item" data-label="Novo negócio"><span>Novo negócio</span><kbd>⌘N</kbd></button>
+    <button type="button" class="hubfu-command-item" data-label="Exportar CSV"><span>Exportar CSV</span></button>
+  </div>
+</div>
+
+<p class="ds-subhead">Sonner · toast stack</p>
+<button type="button" class="link-btn" id="hubfu-sonner-demo-btn">Disparar toasts Sonner-style</button>
+<p class="ds-specimen-caption" style="margin-top:8px">Stack bottom-right com slide-in da direita.</p>
+
+<p class="ds-subhead">Avatar + ScrollArea</p>
+<div class="ds-row" style="align-items:flex-start;gap:24px;margin-top:12px">
+  <div class="hubfu-avatar-stack">
+    <div class="hubfu-avatar" style="background:#7c3aed">MC</div>
+    <div class="hubfu-avatar" style="background:#0a7f5c">TM</div>
+    <div class="hubfu-avatar" style="background:#6366f1">VR</div>
+  </div>
+  <div class="hubfu-scroll-area" style="flex:1;max-width:240px">
+    <p style="margin-bottom:8px">Linha 1 · Acme Corp</p>
+    <p style="margin-bottom:8px">Linha 2 · TechParts</p>
+    <p style="margin-bottom:8px">Linha 3 · Varejo+</p>
+    <p>Linha 4 · Distrib. Lima</p>
+  </div>
+</div>

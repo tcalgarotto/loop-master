@@ -168,10 +168,12 @@
     @media (min-width: 640px) { .motion-framer-demo { grid-template-columns: 1fr 1fr; } }
     .motion-framer-card { will-change: transform; }
     .motion-framer-tap:active { transform: scale(0.97); }
+    .hubfu-card-lift-demo { transition: transform var(--hubfu-duration-normal) var(--hubfu-ease), box-shadow var(--hubfu-duration-normal) var(--hubfu-ease); }
+    .hubfu-card-lift-demo:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.08); }
   </style>
 </head>
 <body>
-  <span class="preview-tag">Design System v1.2 · <a href="hubfu-landing-premium.html">Landing</a></span>
+  <span class="preview-tag">Design System v1.7 · <a href="hubfu-landing-premium.html">Landing</a></span>
   <div class="ds-shell">
     <aside class="ds-sidebar" aria-label="Navegação do design system">
       <div class="ds-sidebar-brand">HubFU DS<span>Catálogo visual canônico</span></div>
@@ -182,9 +184,15 @@
         <li class="ds-nav-group">Componentes</li>
         <li><a href="#botoes">Botões</a></li><li><a href="#navegacao">Navegação</a></li><li><a href="#cards">Cards</a></li><li><a href="#tabs">Tabs</a></li>
         <li><a href="#kanban">Kanban</a></li>
-        <li><a href="#integracoes">Integrações</a></li><li><a href="#integracoes-v2">Cards v2</a></li><li><a href="#data-table">Tabela dados</a></li>
+        <li><a href="#integracoes">Integrações</a></li>
+        <li><a href="#data-table">Tabela dados</a></li>
+        <li><a href="#chat">Chat</a></li>
+        <li><a href="#workflow">Workflow</a></li>
         <li><a href="#faq">FAQ</a></li><li><a href="#badges">Badges &amp; Chips</a></li><li><a href="#formularios">Formulários</a></li>
-        <li class="ds-nav-group">Motion</li><li><a href="#motion">Animações</a></li><li><a href="#motion-framer">Framer target</a></li>
+        <li class="ds-nav-group">Motion</li>
+        <li><a href="#motion">Animações</a></li>
+        <li><a href="#motion-framer">Framer Motion</a></li>
+        <li><a href="#shadcn">shadcn/ui</a></li>
       </ul></nav>
     </aside>
     <div class="ds-main">
@@ -247,12 +255,14 @@
         </section>
         <section class="ds-section" id="botoes">
           <div class="ds-section-head"><h2>Botões</h2><p>Classe <code>.link-btn</code>: pill radius, estados hover/active.</p></div>
-          <div class="ds-row">
+          <div class="ds-row" style="margin-bottom:16px">
             <button type="button" class="link-btn">Primary</button>
             <button type="button" class="link-btn outline">Secondary</button>
             <button type="button" class="link-btn ghost">Ghost</button>
             <button type="button" class="link-btn accent">Accent</button>
+            <button type="button" class="link-btn hubfu-btn-ripple" id="btn-ripple-demo">Ripple</button>
           </div>
+          <p class="ds-specimen-caption">Ripple: micro-interação no clique (CSS + vanilla). Hover/active nos demais via <code>transition</code>.</p>
         </section>
         <section class="ds-section" id="navegacao">
           <div class="ds-section-head"><h2>Navegação</h2><p>Nav fixa com blur, links secundários e CTA.</p></div>
@@ -263,7 +273,7 @@
           </div>
         </section>
         <section class="ds-section" id="cards">
-          <div class="ds-section-head"><h2>Cards</h2><p>Quote, pricing e integração marketplace.</p></div>
+          <div class="ds-section-head"><h2>Cards</h2><p>Quote e pricing tiers.</p></div>
           <p class="ds-subhead">Quote card</p>
           <div class="quote-card" style="max-width:480px;margin-bottom:24px"><blockquote>"Deixamos três ferramentas em seis semanas. O time finalmente usa um só painel."</blockquote><cite>Ricardo Mendes · TechParts</cite></div>
           <p class="ds-subhead">Pricing grid</p>
@@ -271,19 +281,6 @@
             <article class="plan"><h3>Starter</h3><div class="plan-price">R$ 149<span>/mês</span></div><p class="plan-desc">Até 3 usuários</p></article>
             <article class="plan featured"><h3>Business</h3><div class="plan-price">R$ 349<span>/mês</span></div><p class="plan-desc">Até 15 usuários</p></article>
             <article class="plan"><h3>Enterprise</h3><div class="plan-price">Sob consulta</div><p class="plan-desc">SLA dedicado</p></article>
-          </div>
-          <p class="ds-subhead">Integration card v2 (MeetGeek · light marketplace)</p>
-          <p class="ds-specimen-caption">Padrão MeetGeek — replicado em HTML</p>
-          <div class="int-v2-surface" style="margin-bottom:24px">
-            <div class="int-v2-grid" id="int-v2-demo"></div>
-          </div>
-          <p class="ds-subhead">Integration card v1 (dark marketplace — legado)</p>
-          <div class="int-marketplace-bg" style="max-width:320px">
-            <div class="int-card">
-              <div class="int-card-top"><span class="int-status connected">Conectado</span><div class="int-logo">SL</div></div>
-              <div class="int-name">Slack</div><p class="int-desc">Notificações de negócios e alertas de estoque no canal do time.</p>
-              <button type="button" class="int-action">Gerenciar</button>
-            </div>
           </div>
         </section>
         <section class="ds-section" id="tabs">
@@ -308,53 +305,222 @@
           </div></div>
         </section>
         <section class="ds-section" id="integracoes">
-          <div class="ds-section-head"><h2>Integrações</h2><p>Carousel pill + filter pills em UI escura.</p></div>
-          <p class="ds-subhead">Carousel pill</p>
-          <div class="ds-row" style="margin-bottom:24px"><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div></div>
-          <p class="ds-subhead">Filter pills (tab panel)</p>
+          <div class="ds-section-head"><h2>Integrações</h2><p>Três padrões canônicos: carousel (Modelo A), marketplace grid v2 MeetGeek (Modelo D) e card legado dark (v1).</p></div>
+          <p class="ds-subhead">Modelo A · Carousel pill</p>
+          <p class="ds-specimen-caption">Faixa horizontal, logos em círculos brancos, scroll infinito — pausa no hover</p>
+          <div class="motion-carousel ds-card" style="padding:16px 0;margin-bottom:20px" id="int-carousel-demo">
+            <div class="motion-track">
+              <div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div>
+            </div>
+          </div>
+          <div class="ds-row" style="margin-bottom:32px"><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div></div>
+          <p class="ds-subhead">Modelo D · Marketplace grid v2 (canônico)</p>
+          <p class="ds-specimen-caption">MeetGeek: grid responsivo, cards uniformes (<code>grid-auto-rows: 1fr</code>), stagger na entrada via scroll</p>
+          <div class="int-v2-surface" style="margin-bottom:32px"><div class="int-v2-grid" id="int-v2-showcase"></div></div>
+          <p class="ds-subhead">Modelo v1 · Card marketplace (legado dark)</p>
+          <p class="ds-specimen-caption">Superfície escura, referência histórica. Preferir Modelo D em novos fluxos.</p>
+          <div class="ds-dark-specimen-frame" style="max-width:360px;margin-bottom:32px">
+            <div class="ds-dark-specimen-frame-label">Preview escuro · legado v1</div>
+            <div class="int-marketplace-bg" style="border-radius:0">
+            <div class="int-card">
+              <div class="int-card-top"><span class="int-status connected">Conectado</span><div class="int-logo">SL</div></div>
+              <div class="int-name">Slack</div><p class="int-desc">Notificações de negócios e alertas de estoque no canal do time.</p>
+              <button type="button" class="int-action">Gerenciar</button>
+            </div>
+          </div>
+          </div>
+          <p class="ds-subhead">Filtros (tab panel)</p>
+          <p class="ds-specimen-caption">Pills de categoria no marketplace / kanban</p>
           <div class="tab-panel-mini" style="min-height:auto"><div class="ds-row">
             <button type="button" class="filter-pill on">Todos</button><button type="button" class="filter-pill">Abertos</button><button type="button" class="filter-pill">Ganhos</button><button type="button" class="filter-pill">Perdidos</button>
           </div></div>
-        </section>
-        <section class="ds-section" id="integracoes-v2">
-          <div class="ds-section-head"><h2>Integrações v2</h2><p>Grid 3×3 estilo MeetGeek — cards brancos, logo centralizado, Conectado verde ou Conectar roxo.</p></div>
-          <div class="int-v2-surface"><div class="int-v2-grid" id="int-v2-showcase"></div></div>
         </section>
         <section class="ds-section" id="data-table">
           <div class="ds-section-head"><h2>Tabela / planilha</h2><p>Workflow de leads com header, barra de dicas, tabela numerada editável, redimensionamento de colunas, sidebar Ações e toggles.</p></div>
           <p class="ds-specimen-caption">Planilha interativa estilo Excel — <code>HubfuSheet</code> vanilla JS · save otimista (dot syncing + toast em erro ~5%)</p>
           <div id="ds-sheet-specimen"></div>
         </section>
-        <section class="ds-section" id="motion-framer">
-          <div class="ds-section-head"><h2>Framer Motion (port Next.js)</h2><p>Aproximações CSS no preview; alvo real é Framer no app React. Ver <code>references/design-system/hubfu/motion.md</code>.</p></div>
-          <div class="motion-framer-demo">
-            <div class="ds-card motion-demo">
-              <p class="ds-subhead" style="margin-top:0">Card hover · whileHover</p>
-              <div class="int-v2-surface" style="padding:12px">
-                <article class="int-v2-card motion-framer-card" style="max-width:200px;margin:0 auto">
-                  <span class="int-v2-grid-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-                  <div class="int-v2-logo"><span class="int-v2-logo-fallback">SL</span></div>
-                  <h3 class="int-v2-name">Slack</h3>
-                  <p class="int-v2-desc">Notificações de negócios no canal do time.</p>
-                  <div class="int-v2-foot"><span class="int-v2-connected"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Conectado</span></div>
-                </article>
+        <section class="ds-section" id="chat">
+          <div class="ds-section-head"><h2>Chat</h2><p>Conversas CRM/WhatsApp e Copilot IA: bolhas, avatares, timestamps, confirmação de leitura e composer com anexos.</p></div>
+          <p class="ds-subhead">Painel claro (tema atual)</p>
+          <p class="ds-specimen-caption">Layout responsivo · tokens semânticos light/dark · composer funcional (demo)</p>
+          <div class="hubfu-chat" id="hubfu-chat-light">
+            <header class="hubfu-chat-header">
+              <div class="hubfu-chat-header-avatar" aria-hidden="true">MC</div>
+              <div class="hubfu-chat-header-info">
+                <div class="hubfu-chat-header-name">Mariana Costa · Clínica Aurora</div>
+                <div class="hubfu-chat-header-status">Online agora</div>
               </div>
-              <p class="motion-framer-note">Framer: motion.article whileHover={{ scale: 1.02, boxShadow: "..." }}</p>
+            </header>
+            <div class="hubfu-chat-thread" role="log" aria-label="Mensagens">
+              <div class="hubfu-chat-row">
+                <div class="hubfu-chat-avatar" aria-hidden="true">MC</div>
+                <div class="hubfu-chat-bubble-wrap">
+                  <div class="hubfu-chat-bubble">Bom dia! Recebi a proposta de R$ 24k. Podemos alinhar validade e forma de pagamento?</div>
+                  <div class="hubfu-chat-meta"><time datetime="2026-07-03T09:12">09:12</time></div>
+                </div>
+              </div>
+              <div class="hubfu-chat-row outgoing">
+                <div class="hubfu-chat-avatar" aria-hidden="true">EU</div>
+                <div class="hubfu-chat-bubble-wrap">
+                  <div class="hubfu-chat-bubble">Claro, Mariana. Validade 15 dias e parcelamento em 3x sem juros. Envio o PDF atualizado agora.</div>
+                  <div class="hubfu-chat-meta">
+                    <time datetime="2026-07-03T09:14">09:14</time>
+                    <span class="hubfu-chat-read" aria-label="Lida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/><path d="M4 12l5 5 11-11"/></svg></span>
+                  </div>
+                </div>
+              </div>
+              <div class="hubfu-chat-row">
+                <div class="hubfu-chat-avatar" aria-hidden="true">MC</div>
+                <div class="hubfu-chat-bubble-wrap">
+                  <div class="hubfu-chat-bubble">Perfeito. Aguardo o PDF para encaminhar ao financeiro.</div>
+                  <div class="hubfu-chat-meta"><time datetime="2026-07-03T09:15">09:15</time></div>
+                </div>
+              </div>
             </div>
+            <form class="hubfu-chat-compose" id="hubfu-chat-form-light" aria-label="Enviar mensagem">
+              <div class="hubfu-chat-compose-actions">
+                <button type="button" class="hubfu-chat-icon-btn" aria-label="Anexar arquivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+                <button type="button" class="hubfu-chat-icon-btn hubfu-chat-catalog-btn" data-chat-catalog="light" aria-label="Catálogo de produtos" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+                <button type="button" class="hubfu-chat-icon-btn" aria-label="Emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg></button>
+              </div>
+              <label class="hubfu-chat-input-wrap">
+                <span class="visually-hidden">Mensagem</span>
+                <input type="text" class="hubfu-chat-input" placeholder="Escreva uma mensagem…" autocomplete="off" />
+              </label>
+              <button type="submit" class="hubfu-chat-send" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
+            </form>
+          </div>
+          <p class="ds-subhead">Painel escuro (device / tab IA)</p>
+          <div class="tab-panel-mini" style="padding:16px;min-height:auto">
+            <div class="hubfu-chat device" style="max-width:100%">
+              <header class="hubfu-chat-header">
+                <div class="hubfu-chat-header-avatar" aria-hidden="true">IA</div>
+                <div class="hubfu-chat-header-info">
+                  <div class="hubfu-chat-header-name">Copilot HubFU</div>
+                  <div class="hubfu-chat-header-status">Responde em segundos</div>
+                </div>
+              </header>
+              <div class="hubfu-chat-thread">
+                <div class="hubfu-chat-row outgoing">
+                  <div class="hubfu-chat-avatar" aria-hidden="true">EU</div>
+                  <div class="hubfu-chat-bubble-wrap">
+                    <div class="hubfu-chat-bubble">Quais negócios priorizar hoje?</div>
+                    <div class="hubfu-chat-meta"><time>08:41</time><span class="hubfu-chat-read" aria-label="Lida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/><path d="M4 12l5 5 11-11"/></svg></span></div>
+                  </div>
+                </div>
+                <div class="hubfu-chat-row">
+                  <div class="hubfu-chat-avatar" aria-hidden="true">IA</div>
+                  <div class="hubfu-chat-bubble-wrap">
+                    <div class="hubfu-chat-bubble">3 oportunidades em Proposta há 5+ dias. Maior valor: Distrib. Lima (R$ 56k). Sugiro contato até 14h.</div>
+                    <div class="hubfu-chat-meta"><time>08:41</time></div>
+                  </div>
+                </div>
+              </div>
+              <form class="hubfu-chat-compose" id="hubfu-chat-form-dark" aria-label="Perguntar ao Copilot">
+                <div class="hubfu-chat-compose-actions">
+                  <button type="button" class="hubfu-chat-icon-btn" aria-label="Anexar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+                  <button type="button" class="hubfu-chat-icon-btn hubfu-chat-catalog-btn" data-chat-catalog="dark" aria-label="Catálogo de produtos" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+                  <button type="button" class="hubfu-chat-icon-btn" aria-label="Emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></button>
+                </div>
+                <label class="hubfu-chat-input-wrap"><input type="text" class="hubfu-chat-input" placeholder="Pergunte ao Copilot…" /></label>
+                <button type="submit" class="hubfu-chat-send" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/></svg></button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <section class="ds-section" id="workflow">
+          <div class="ds-section-head"><h2>Workflow whiteboard</h2><p>Plano infinito estilo n8n: grade pontilhada no vazio, nós com badges, conectores Bézier animados e ramificações em português.</p></div>
+          <p class="ds-specimen-caption">Plano infinito · arraste para navegar · HTML-first · drag/drop nos nós · conectores magnéticos · CTRL+scroll zoom</p>
+          <div class="hubfu-flow-board hubfu-flow-board--premium-light hubfu-flow-board--infinite" id="hubfu-flow-board">
+            <div class="hubfu-flow-viewport" id="hubfu-flow-viewport">
+              <div class="hubfu-flow-canvas-inner" id="hubfu-flow-canvas-inner">
+                <svg class="hubfu-flow-svg" viewBox="0 0 2400 1200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs>
+                    <marker id="flow-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                      <path d="M0,0 L8,4 L0,8 Z" fill="var(--hubfu-fg-tertiary)" opacity="0.5"/>
+                    </marker>
+                  </defs>
+                </svg>
+                <div class="hubfu-flow-nodes hubfu-flow-nodes--branch">
+                  <article class="hubfu-flow-node trigger" data-node-id="trigger" style="--flow-x:70px;--flow-y:170px" tabindex="0">
+                    <span class="hubfu-flow-node-badge">Gatilho</span>
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <div class="hubfu-flow-node-label">Lead qualificado</div>
+                    <p class="hubfu-flow-node-desc">Formulário + enriquecimento OK</p>
+                  </article>
+                  <article class="hubfu-flow-node switch" data-node-id="switch" style="--flow-x:290px;--flow-y:170px" tabindex="0">
+                    <span class="hubfu-flow-node-badge">Switch</span>
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></div>
+                    <div class="hubfu-flow-node-label">Segmentar score</div>
+                    <p class="hubfu-flow-node-desc">3 caminhos por fit comercial</p>
+                  </article>
+                  <article class="hubfu-flow-node action" data-node-id="upsell" style="--flow-x:550px;--flow-y:80px" tabindex="0">
+                    <span class="hubfu-flow-node-badge">Ação</span>
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                    <div class="hubfu-flow-node-label">Upsell premium</div>
+                    <p class="hubfu-flow-node-desc">Proposta Business + demo AO</p>
+                  </article>
+                  <article class="hubfu-flow-node action" data-node-id="nurture" style="--flow-x:550px;--flow-y:170px" tabindex="0">
+                    <span class="hubfu-flow-node-badge">Ação</span>
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg></div>
+                    <div class="hubfu-flow-node-label">Nurture e-mail</div>
+                    <p class="hubfu-flow-node-desc">Sequência 5 touchpoints · 14 dias</p>
+                  </article>
+                  <article class="hubfu-flow-node action" data-node-id="crm" style="--flow-x:550px;--flow-y:260px" tabindex="0">
+                    <span class="hubfu-flow-node-badge">Ação</span>
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                    <div class="hubfu-flow-node-label">CRM · requalificar</div>
+                    <p class="hubfu-flow-node-desc">Mover para lista fria + tarefa SDR</p>
+                  </article>
+                  <article class="hubfu-flow-node action hubfu-flow-node--outcome" data-node-id="outcome-deal" style="--flow-x:810px;--flow-y:80px" tabindex="0">
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
+                    <div class="hubfu-flow-node-label">Negócio criado</div>
+                    <p class="hubfu-flow-node-desc">Pipeline · Proposta</p>
+                  </article>
+                  <article class="hubfu-flow-node action hubfu-flow-node--outcome" data-node-id="outcome-campaign" style="--flow-x:810px;--flow-y:170px" tabindex="0">
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
+                    <div class="hubfu-flow-node-label">Campanha ativa</div>
+                    <p class="hubfu-flow-node-desc">Automação · Nurture</p>
+                  </article>
+                  <article class="hubfu-flow-node action hubfu-flow-node--outcome" data-node-id="outcome-archived" style="--flow-x:810px;--flow-y:260px" tabindex="0">
+                    <div class="hubfu-flow-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
+                    <div class="hubfu-flow-node-label">Lead arquivado</div>
+                    <p class="hubfu-flow-node-desc">Revisão em 90 dias</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+            <div class="hubfu-flow-toolbar hubfu-flow-toolbar--float">
+              <div class="hubfu-flow-toolbar-left">
+                <span class="hubfu-flow-toolbar-title">Pós-qualificação · score inbound</span>
+                <span class="hubfu-flow-toolbar-meta">7 etapas · rascunho</span>
+              </div>
+              <div class="hubfu-flow-zoom" role="group" aria-label="Zoom do canvas">
+                <button type="button" class="hubfu-flow-zoom-btn" data-zoom="out" aria-label="Diminuir zoom">−</button>
+                <span class="hubfu-flow-zoom-level" aria-live="polite">100%</span>
+                <button type="button" class="hubfu-flow-zoom-btn" data-zoom="in" aria-label="Aumentar zoom">+</button>
+                <button type="button" class="hubfu-flow-zoom-btn hubfu-flow-zoom-reset" data-zoom="reset" aria-label="Resetar zoom">⊙</button>
+              </div>
+            </div>
+            <div class="hubfu-flow-legend hubfu-flow-legend--float">
+              <span><i class="green"></i> Gatilho / fluxo principal</span>
+              <span><i class="purple"></i> Switch / decisão</span>
+              <span><i class="white"></i> Ação / resultado</span>
+              <span>Grade 16px · CTRL+scroll 50–150%</span>
+            </div>
+          </div>
+        </section>
+        <section class="ds-section" id="motion-framer">
+          <div class="ds-section-head"><h2>Framer Motion (port Next.js)</h2><p>Comparação HTML/CSS vs React/TSX. Ver <code>references/design-system/hubfu/motion-shadcn-guide.md</code>.</p></div>
+          <div class="motion-framer-demo">
             <div class="ds-card motion-demo">
               <p class="ds-subhead" style="margin-top:0">Connect tap · whileTap</p>
               <button type="button" class="int-v2-connect motion-framer-tap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
                 Conectar
               </button>
-              <p class="motion-framer-note">Framer: motion.button whileTap={{ scale: 0.97 }}</p>
-            </div>
-            <div class="ds-card motion-demo">
-              <p class="ds-subhead" style="margin-top:0">Sidebar slide · motion.div x</p>
-              <div style="overflow:hidden;border-radius:var(--hubfu-radius-chip);border:1px solid var(--hubfu-line);height:80px;position:relative;background:var(--hubfu-bg-alt)">
-                <div class="motion-framer-sidebar" style="position:absolute;right:0;top:0;bottom:0;width:40%;background:var(--hubfu-card-bg);border-left:1px solid var(--hubfu-line);padding:12px;font-size:.6875rem;font-weight:600">Actions</div>
-              </div>
-              <p class="motion-framer-note">Framer: initial={{ x: 220 }} animate={{ x: 0 }} transition spring</p>
+              <p class="motion-framer-note">Framer: motion.button whileTap scale 0.97</p>
             </div>
             <div class="ds-card motion-demo">
               <p class="ds-subhead" style="margin-top:0">Row stagger · staggerChildren</p>
@@ -362,9 +528,14 @@
                 <div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div>
               </div>
               <button type="button" class="link-btn outline" id="motion-framer-replay" style="margin-top:12px">Replay stagger</button>
-              <p class="motion-framer-note">Framer: variants container/child + staggerChildren: 0.06</p>
+              <p class="motion-framer-note">Framer: staggerChildren 0.06 no tbody</p>
             </div>
           </div>
+          <div id="hubfu-framer-extra"></div>
+        </section>
+        <section class="ds-section" id="shadcn">
+          <div class="ds-section-head"><h2>shadcn/ui mapping</h2><p>Specimens HTML-first com visual Radix/shadcn + tokens HubFU.</p></div>
+          <div id="hubfu-shadcn-content"></div>
         </section>
         <section class="ds-section" id="faq">
           <div class="ds-section-head"><h2>FAQ accordion</h2><p>Grid rows 0fr to 1fr + rotação do ícone +.</p></div>
@@ -386,18 +557,80 @@
           </div>
         </section>
         <section class="ds-section" id="motion">
-          <div class="ds-section-head"><h2>Motion</h2><p>GSAP + CSS. Ver motion.md para inventário completo.</p></div>
-          <p class="ds-subhead">GSAP stagger (clique para replay)</p>
+          <div class="ds-section-head"><h2>Motion: animações nativas</h2><p>CSS + GSAP + vanilla JS no preview HTML. Tokens <code>--hubfu-duration-*</code> e <code>--hubfu-ease-*</code>. Respeita <code>prefers-reduced-motion</code>.</p></div>
+
+          <p class="ds-subhead">Entrada de seção · stagger fade-up</p>
+          <div class="ds-card motion-demo hubfu-animate-fade-up-stagger" data-motion-entrance>
+            <div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div>
+          </div>
+          <p class="ds-specimen-caption">Cards surgem em cascata ao carregar. GSAP replay abaixo.</p>
+
+          <p class="ds-subhead">GSAP stagger (replay)</p>
           <div class="ds-card motion-demo"><div class="ds-row" id="motion-stagger"><div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div><div class="motion-box"></div></div><button type="button" class="link-btn outline" id="motion-replay" style="margin-top:16px">Replay stagger</button></div>
-          <p class="ds-subhead">CSS pulse dot</p><div class="ds-card motion-demo"><div class="pulse-dot"></div></div>
-          <p class="ds-subhead">CSS carousel (intScroll)</p>
-          <div class="motion-carousel ds-card" style="padding:16px 0"><div class="motion-track"><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div></div></div>
+
+          <p class="ds-subhead">Card hover · lift + sombra</p>
+          <div class="ds-row">
+            <article class="quote-card hubfu-card-lift-demo" style="max-width:200px;cursor:default">
+              <blockquote style="font-size:.875rem">Card lift demo</blockquote>
+            </article>
+            <div class="int-pill">Hover pill</div>
+          </div>
+
+          <p class="ds-subhead">Tabs · indicador GSAP + fade painel</p>
+          <p class="ds-specimen-caption">Ver seção <a href="#tabs">Tabs produto</a>: transição ao trocar CRM/ERP/IA/FIN.</p>
+
+          <p class="ds-subhead">Toast slide-in</p>
+          <div class="ds-card motion-demo">
+            <div class="hubfu-toast hubfu-toast--success" style="position:relative;animation:hubfu-toast-in var(--hubfu-duration-normal) ease-out">Planilha exportada · CSV baixado</div>
+            <p class="ds-specimen-caption" style="margin-top:12px">HubfuSheet dispara toasts reais ao Executar/CSV. Estilo Sonner no port: <a href="#shadcn">shadcn</a>.</p>
+          </div>
+
+          <p class="ds-subhead">Planilha · flash ao salvar célula</p>
+          <p class="ds-specimen-caption">Edite uma célula na <a href="#data-table">planilha</a>. Flash verde em save otimista OK (~95%).</p>
+
+          <p class="ds-subhead">Chat · bolha slide-in ao enviar</p>
+          <p class="ds-specimen-caption">Envie mensagem no <a href="#chat">chat demo</a>. Classe <code>.hubfu-chat-enter</code>.</p>
+
+          <p class="ds-subhead">Workflow · pulse no hover + drag nos nós</p>
+          <p class="ds-specimen-caption">Arraste os cards no <a href="#workflow">whiteboard</a>. Conectores magnéticos seguem as bordas; ring roxo ao selecionar.</p>
+
+          <p class="ds-subhead">Integrações · carousel + stagger grid</p>
+          <div class="motion-carousel ds-card" style="padding:16px 0;margin-bottom:12px"><div class="motion-track"><div class="int-pill">📊</div><div class="int-pill">💬</div><div class="int-pill">📧</div><div class="int-pill">🔗</div><div class="int-pill">⚡</div><div class="int-pill">📊</div><div class="int-pill">💬</div></div></div>
+
+          <p class="ds-subhead">Dialog nativo · &lt;dialog&gt;</p>
+          <div class="ds-row">
+            <button type="button" class="link-btn" data-dialog-open="hubfu-shadcn-dialog">Abrir dialog</button>
+          </div>
+          <p class="ds-specimen-caption">API nativa + animação CSS. Demo completo em <a href="#shadcn">shadcn/ui</a>.</p>
+
+          <p class="ds-subhead">Skeleton shimmer</p>
+          <div class="ds-card" style="max-width:280px">
+            <div class="hubfu-skeleton hubfu-skeleton-line"></div>
+            <div class="hubfu-skeleton hubfu-skeleton-line"></div>
+            <div class="hubfu-skeleton hubfu-skeleton-line"></div>
+          </div>
+
+          <p class="ds-subhead">Accordion · expand/collapse</p>
+          <p class="ds-specimen-caption">FAQ abaixo usa <code>grid-template-rows: 0fr → 1fr</code> + rotação do ícone +.</p>
+
+          <p class="ds-subhead">CSS pulse dot</p>
+          <div class="ds-card motion-demo"><div class="pulse-dot"></div></div>
         </section>
       </div>
     </div>
   </div>
+  <div class="hubfu-chat-catalog-backdrop" id="hubfu-chat-catalog-backdrop" hidden aria-hidden="true"></div>
+  <aside class="hubfu-chat-catalog" id="hubfu-chat-catalog" role="dialog" aria-labelledby="hubfu-catalog-title" aria-modal="true" hidden>
+    <header class="hubfu-chat-catalog-head">
+      <h3 id="hubfu-catalog-title">Catálogo de produtos</h3>
+      <button type="button" class="hubfu-chat-catalog-close" id="hubfu-catalog-close" aria-label="Fechar catálogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </header>
+    <div class="hubfu-chat-catalog-list" id="hubfu-catalog-list"></div>
+  </aside>
   <script src="hubfu-integrations-data.js"></script>
   <script src="hubfu-sheet.js"></script>
+  <script src="hubfu-motion.js"></script>
+  <script src="hubfu-workflow.js"></script>
   <script>
     (function initHubfuTheme(){const KEY="hubfu-theme",root=document.documentElement,saved=localStorage.getItem(KEY),prefersDark=matchMedia("(prefers-color-scheme: dark)").matches,theme=saved||(prefersDark?"dark":"light");root.setAttribute("data-theme",theme);document.querySelectorAll(".theme-toggle").forEach(btn=>{function syncIcon(){btn.textContent=root.getAttribute("data-theme")==="dark"?"☾":"☀";}syncIcon();btn.addEventListener("click",()=>{const next=root.getAttribute("data-theme")==="dark"?"light":"dark";root.setAttribute("data-theme",next);localStorage.setItem(KEY,next);syncIcon();});});})();
     function swatch(name,token,extra){const label=token.replace(/^--/,"");return `<div class="swatch"><div class="swatch-color" style="background:var(${token})${extra||""}"></div><div class="swatch-meta"><div class="swatch-name">${name}</div><div class="swatch-token">${label}</div></div></div>`;}
@@ -411,14 +644,20 @@
     document.getElementById("radius-row").innerHTML=radii.map(([l,v,t])=>`<div><div class="radius-box" style="border-radius:var(${v})">${t}</div><p class="ds-label">${l}</p></div>`).join("");
     document.querySelectorAll(".faq-q").forEach(btn=>{btn.addEventListener("click",()=>{const item=btn.parentElement,open=item.classList.contains("open");item.closest(".faq-list").querySelectorAll(".faq-item").forEach(i=>i.classList.remove("open"));if(!open)item.classList.add("open");});});
     document.querySelectorAll(".filter-pill").forEach(pill=>{pill.addEventListener("click",()=>{pill.closest(".ds-row, .tab-panel-mini")?.querySelectorAll(".filter-pill").forEach(p=>p.classList.remove("on"));pill.classList.add("on");});});
-    const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches,tabBtns=document.querySelectorAll(".tab-btn"),indicator=document.getElementById("tab-indicator"),tabPanel=document.getElementById("tab-panel"),tabLabels=["Pipeline kanban com filtros e cards arrastáveis.","Tabela de estoque com badges OK/warn.","Chat IA com action chips.","Gráfico de barras financeiro."];
-    function moveIndicator(idx){if(!indicator)return;const w=100/tabBtns.length;if(reduced){indicator.style.transform=`translateX(${idx*100}%) scaleX(1)`;indicator.style.width=w+"%";}else if(typeof gsap!=="undefined"){gsap.to(indicator,{x:idx*(indicator.parentElement.offsetWidth/tabBtns.length),scaleX:1,duration:0.45,ease:"power2.out",overwrite:true});}}
-    tabBtns.forEach((btn,i)=>{btn.addEventListener("click",()=>{tabBtns.forEach(b=>b.classList.remove("active"));btn.classList.add("active");if(tabPanel)tabPanel.textContent=tabLabels[i];moveIndicator(i);});});
-    if(indicator&&tabBtns.length)indicator.style.width=(100/tabBtns.length)+"%";
-    function replayStagger(){if(reduced||typeof gsap==="undefined")return;gsap.fromTo("#motion-stagger .motion-box",{opacity:0,y:16,scale:0.9},{opacity:1,y:0,scale:1,duration:0.6,stagger:0.08,ease:"power3.out"});}
-    document.getElementById("motion-replay")?.addEventListener("click",replayStagger);replayStagger();
-    function replayFramerStagger(){if(reduced||typeof gsap==="undefined")return;gsap.fromTo("#motion-framer-stagger .motion-box",{opacity:0,y:12,scale:0.92},{opacity:1,y:0,scale:1,duration:0.45,stagger:0.06,ease:"power2.out"});}
-    document.getElementById("motion-framer-replay")?.addEventListener("click",replayFramerStagger);replayFramerStagger();
+    function loadSectionFragment(url,targetId,after){
+      var el=document.getElementById(targetId);
+      if(!el)return Promise.resolve();
+      return fetch(url).then(r=>r.text()).then(html=>{
+        el.innerHTML=html;
+        if(after)after(el);
+      }).catch(()=>{});
+    }
+    loadSectionFragment("hubfu-ds-framer-section.html","hubfu-framer-extra");
+    loadSectionFragment("hubfu-ds-shadcn-section.html","hubfu-shadcn-content",function(){
+      var snip=document.querySelector(".hubfu-token-snippet");
+      if(snip)snip.textContent="@import '../preview/hubfu-design-tokens.css';\n\n:root {\n  --background: var(--hubfu-bg);\n  --foreground: var(--hubfu-fg);\n  --primary: var(--hubfu-action);\n  --border: var(--hubfu-line);\n  --ring: var(--hubfu-action);\n}";
+      if(typeof HubfuMotion!=="undefined"){HubfuMotion.initShadcnDemos();HubfuMotion.initSonnerHost();var b=document.getElementById("hubfu-sonner-demo-btn");if(b&&!b._wired){b._wired=1;b.addEventListener("click",function(){HubfuMotion.showSonnerToast("Integração conectada","Slack sincronizado.","success");setTimeout(function(){HubfuMotion.showSonnerToast("Exportação concluída","CSV baixado.","success");},400);});}}
+    });
     const CHECK_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
     const CONNECT_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
     const GRID_ICON='<span class="int-v2-grid-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>';
@@ -438,11 +677,96 @@
     function intV2Meta(cfg){if(cfg.metaLink)return '<a class="int-v2-meta int-v2-meta-link" href="#">'+cfg.metaLink+'</a>';if(cfg.meta)return '<p class="int-v2-meta">'+cfg.meta+'</p>';return '<p class="int-v2-meta">&nbsp;</p>';}
     function intV2Foot(item,cfg){if(cfg.variant==="dual")return '<div class="int-v2-foot int-v2-foot-dual"><button type="button" class="int-v2-dual-btn">'+CHECK_SVG+'Copiar API Key</button><button type="button" class="int-v2-dual-btn">'+CHECK_SVG+'Regenerar API</button></div>';const connected=(cfg.state||item.state)==="connected";return '<div class="int-v2-foot">'+(connected?'<span class="int-v2-connected">'+CHECK_SVG+'Conectado</span>':'<button type="button" class="int-v2-connect">'+CONNECT_SVG+'Conectar</button>')+'</div>';}
     function intV2Card(item,cfg){cfg=cfg||{};const cardClass="int-v2-card"+(cfg.variant==="dual"?" has-dual-foot":"");const desc=cfg.desc||item.desc;return '<article class="'+cardClass+'">'+intV2Meta(cfg)+GRID_ICON+'<div class="int-v2-logo">'+intV2Logo(item)+'</div><h3 class="int-v2-name">'+item.name+'</h3><p class="int-v2-desc">'+desc+'</p>'+intV2Foot(item,cfg)+'</article>';}
-    function renderIntV2Grids(){if(typeof HUBFU_INTEGRATIONS==="undefined")return;const cards=INT_V2_DEMO.map(cfg=>{const item=HUBFU_INTEGRATIONS.find(i=>i.id===cfg.id);return item?intV2Card(item,cfg):null;}).filter(Boolean);const html=cards.join("");document.getElementById("int-v2-showcase")&&(document.getElementById("int-v2-showcase").innerHTML=html);document.getElementById("int-v2-demo")&&(document.getElementById("int-v2-demo").innerHTML=html);}
+    function renderIntV2Grids(){if(typeof HUBFU_INTEGRATIONS==="undefined")return;const cards=INT_V2_DEMO.map(cfg=>{const item=HUBFU_INTEGRATIONS.find(i=>i.id===cfg.id);return item?intV2Card(item,cfg):null;}).filter(Boolean);const html=cards.join("");const showcase=document.getElementById("int-v2-showcase");if(showcase)showcase.innerHTML=html;}
     renderIntV2Grids();
     if (typeof HubfuSheet !== 'undefined') {
       new HubfuSheet('#ds-sheet-specimen', { variant: 'full' });
     }
+    (function initChatDemo(){
+      const form=document.getElementById("hubfu-chat-form-light");
+      const formDark=document.getElementById("hubfu-chat-form-dark");
+      function bindChatForm(formEl){
+        if(!formEl)return;
+        const thread=formEl.closest(".hubfu-chat")?.querySelector(".hubfu-chat-thread");
+        const input=formEl.querySelector(".hubfu-chat-input");
+        formEl.addEventListener("submit",e=>{
+          e.preventDefault();
+          const text=(input?.value||"").trim();
+          if(!text||!thread)return;
+          appendChatBubble(thread,text,true);
+          input.value="";
+        });
+      }
+      function appendChatBubble(thread,text,outgoing,isProduct){
+        const now=new Date();
+        const time=now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+        const row=document.createElement("div");
+        row.className="hubfu-chat-row"+(outgoing?" outgoing":"");
+        if(isProduct){
+          row.innerHTML='<div class="hubfu-chat-avatar" aria-hidden="true">EU</div><div class="hubfu-chat-bubble-wrap"><div class="hubfu-chat-bubble hubfu-chat-bubble--product"></div><div class="hubfu-chat-meta"><time>'+time+'</time><span class="hubfu-chat-read" aria-label="Enviada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></span></div></div>';
+          row.querySelector(".hubfu-chat-bubble").innerHTML=text;
+        }else{
+          row.innerHTML='<div class="hubfu-chat-avatar" aria-hidden="true">EU</div><div class="hubfu-chat-bubble-wrap"><div class="hubfu-chat-bubble"></div><div class="hubfu-chat-meta"><time>'+time+'</time><span class="hubfu-chat-read" aria-label="Enviada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></span></div></div>';
+          row.querySelector(".hubfu-chat-bubble").textContent=text;
+        }
+        thread.appendChild(row);
+        thread.scrollTop=thread.scrollHeight;
+        if(outgoing)setTimeout(()=>{
+          const read=row.querySelector(".hubfu-chat-read");
+          if(read){read.setAttribute("aria-label","Lida");read.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/><path d="M4 12l5 5 11-11"/></svg>';}
+        },900);
+      }
+      bindChatForm(form);
+      bindChatForm(formDark);
+      window._hubfuAppendChatBubble=appendChatBubble;
+    })();
+    (function initChatCatalog(){
+      const PRODUCTS=[
+        {id:"biz",name:"HubFU Business",price:"R$ 349/mês",desc:"Até 15 usuários · CRM + ERP + IA",color:"#7c3aed"},
+        {id:"starter",name:"HubFU Starter",price:"R$ 149/mês",desc:"Até 3 usuários · essencial",color:"#0a7f5c"},
+        {id:"impl",name:"Implantação premium",price:"R$ 2.400",desc:"Onboarding guiado · 4 semanas",color:"#6366f1"},
+        {id:"copilot",name:"Copilot IA add-on",price:"R$ 89/mês",desc:"Priorização de negócios + resumos",color:"#0891b2"}
+      ];
+      const backdrop=document.getElementById("hubfu-chat-catalog-backdrop");
+      const panel=document.getElementById("hubfu-chat-catalog");
+      const list=document.getElementById("hubfu-catalog-list");
+      const closeBtn=document.getElementById("hubfu-catalog-close");
+      let activeChat=null;
+      if(!panel||!list)return;
+      list.innerHTML=PRODUCTS.map(p=>'<article class="hubfu-catalog-item" data-id="'+p.id+'"><div class="hubfu-catalog-thumb" style="--cat-color:'+p.color+'" aria-hidden="true"></div><div class="hubfu-catalog-info"><strong>'+p.name+'</strong><span class="hubfu-catalog-price">'+p.price+'</span><p>'+p.desc+'</p></div><button type="button" class="hubfu-catalog-send" data-product="'+p.id+'">Enviar</button></article>').join("");
+      function productHtml(p){
+        return '<div class="hubfu-product-card"><div class="hubfu-product-thumb" style="--cat-color:'+p.color+'"></div><div><strong>'+p.name+'</strong><span class="hubfu-product-price">'+p.price+'</span><p class="hubfu-product-desc">'+p.desc+'</p></div></div>';
+      }
+      function openCatalog(chatEl){
+        activeChat=chatEl;
+        panel.hidden=false;backdrop.hidden=false;
+        panel.classList.add("is-open");backdrop.classList.add("is-open");
+        document.body.style.overflow="hidden";
+        panel.querySelector(".hubfu-catalog-send")?.focus();
+      }
+      function closeCatalog(){
+        panel.classList.remove("is-open");backdrop.classList.remove("is-open");
+        setTimeout(()=>{panel.hidden=true;backdrop.hidden=true;document.body.style.overflow="";},220);
+        activeChat=null;
+      }
+      document.querySelectorAll(".hubfu-chat-catalog-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>openCatalog(btn.closest(".hubfu-chat")));
+      });
+      closeBtn?.addEventListener("click",closeCatalog);
+      backdrop?.addEventListener("click",closeCatalog);
+      document.addEventListener("keydown",e=>{if(e.key==="Escape"&&panel.classList.contains("is-open"))closeCatalog();});
+      list.addEventListener("click",e=>{
+        const sendBtn=e.target.closest(".hubfu-catalog-send");
+        if(!sendBtn||!activeChat)return;
+        const prod=PRODUCTS.find(p=>p.id===sendBtn.dataset.product);
+        if(!prod)return;
+        const thread=activeChat.querySelector(".hubfu-chat-thread");
+        if(thread&&window._hubfuAppendChatBubble){
+          window._hubfuAppendChatBubble(thread,productHtml(prod),true,true);
+        }
+        closeCatalog();
+      });
+    })();
     const navLinks=document.querySelectorAll(".ds-nav a"),sections=[...navLinks].map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
     const navObs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)navLinks.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+entry.target.id));});},{rootMargin:"-20% 0px -60% 0px"});
     sections.forEach(s=>navObs.observe(s));

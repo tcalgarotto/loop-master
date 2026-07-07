@@ -1,0 +1,35 @@
+<div class="hubfu-motion-compare" style="margin-bottom:28px">
+  <div>
+    <p class="hubfu-motion-compare-label">HTML / CSS demo</p>
+    <div class="ds-card motion-demo">
+      <article class="int-v2-card motion-framer-card" style="max-width:200px;margin:0 auto">
+        <span class="int-v2-grid-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <div class="int-v2-logo"><span class="int-v2-logo-fallback">SL</span></div>
+        <h3 class="int-v2-name">Slack</h3>
+        <p class="int-v2-desc">Hover lift via CSS transition.</p>
+        <div class="int-v2-foot"><span class="int-v2-connected"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Conectado</span></div>
+      </article>
+    </div>
+  </div>
+  <div>
+    <p class="hubfu-motion-compare-label">Framer Motion equivalente</p>
+    <pre class="hubfu-code-block">&lt;motion.article className="int-v2-card"
+  whileHover={{ scale: 1.02, y: -2 }}
+  transition={{ type: 'spring', stiffness: 400 }}
+  style={{ boxShadow: 'var(--hubfu-int-card-shadow)' }}
+/&gt;</pre>
+  </div>
+</div>
+<table class="hubfu-shadcn-table ds-card" style="display:block;overflow-x:auto;padding:0;margin-top:24px">
+  <thead><tr><th>Componente HubFU</th><th>Framer API</th><th>Uso</th></tr></thead>
+  <tbody>
+    <tr><td><code>.int-v2-card</code></td><td><code>whileHover</code></td><td>Marketplace cards</td></tr>
+    <tr><td><code>.int-v2-connect</code></td><td><code>whileTap</code></td><td>CTA Connect/Run</td></tr>
+    <tr><td><code>.tab-panel</code></td><td><code>AnimatePresence</code></td><td>Troca CRM/ERP/IA/FIN</td></tr>
+    <tr><td><code>.ds-sheet-sidebar</code></td><td><code>motion.aside</code></td><td>Sidebar Ações</td></tr>
+    <tr><td><code>.ds-sheet-table tbody</code></td><td><code>staggerChildren</code></td><td>Linhas workflow</td></tr>
+    <tr><td><code>.hubfu-chat-row</code></td><td><code>initial/animate</code></td><td>Bolha ao enviar</td></tr>
+    <tr><td><code>.filter-pill</code></td><td><code>layoutId</code></td><td>Indicador pill</td></tr>
+    <tr><td><code>.hubfu-flow-node</code></td><td><code>whileHover scale</code></td><td>Whiteboard</td></tr>
+  </tbody>
+</table>
